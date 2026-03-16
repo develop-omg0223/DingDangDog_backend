@@ -2,28 +2,219 @@
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="user">
 	<!-- 회원가입 -->
-	<!-- 일반회원 회원가입 -->
-	<!-- 보호소회원 회원가입 -->
+	<insert id="insertUser" parameterType="UserDTO">
+		<selectKey keyProperty="userNumber" resultType="int"
+			order="BEFORE">
+			<choose>
+				<when test="userType == 'C'">
+					SELECT seq_common_user.NEXTVAL FROM DUAL
+				</when>
+				<when test="userType == 'S'">
+					SELECT seq_shelter_user.NEXTVAL FROM DUAL
+				</when>
+			</choose>
+		</selectKey>
+		INSERT INTO ddd_user (
+		user_number, user_type, user_id, user_password,
+		user_name,
+		user_nickname, user_gender, user_birth, user_phone,
+		user_email
+		) VALUES (
+		#{userNumber}, #{userType}, #{userId},
+		#{userPassword}, #{userName},
+		#{userNickname}, #{userGender},
+		#{userBirth}, #{userPhone},
+		#{userEmail}
+		)
+	</insert>
+	<!-- 일반회원 회원가입 추가정보 -->
+	<insert id="insertCommonUser">
+		INSERT INTO ddd_user_common (user_number) VALUES
+		(#{userNumber})
+	</insert>
+	<!-- 보호소회원 회원가입 추가정보 -->
+	<insert id="insertUserShelter" parameterType="UserDTO">
+		INSERT INTO
+		ddd_user_shelter (user_number, shelter_name,
+		shelter_business_number,
+		shelter_address)
+		VALUES (#{userNumber}, #{shelterName},
+		#{shelterBusinessNumber},
+		#{shelterAddress})
+	</insert>
 
 	<!-- 로그인 -->
 	<select id="login" parameterType="UserDTO" resultType="UserDTO">
-		SELECT user_number, user_nickname, user_type
+		SELECT
+		user_number, user_nickname, user_type
 		FROM ddd_user
-		WHERE user_id = #{userId} AND user_password = #{userPassword}
-		AND user_type = #{userType} AND user_status= 'kind'
+		WHERE user_id =
+		#{userId} AND user_password = #{userPassword}
+		AND user_type =
+		#{userType} AND user_status= 'kind'
 	</select>
+
 	<!-- id 중복검사 -->
 	<select id="checkId" parameterType="String" resultType="int">
 		select
 		count(user_number) from ddd_user
 		where user_id = #{userId}
 	</select>
+
 	<!-- 닉네임 중복검사 -->
-	<select id="checkNickName" parameterType="String" resultType="int">
+	<select id="checkNickName" parameterType="String"
+		resultType="int">
 		select
 		count(user_number) from ddd_user
-		where user_nickname = #{userNickname}
+		where user_nickname =
+		#{userNickname}
 	</select>
-	
-	
+
+	<!-- 이메일 중복검사 -->
+	<select id="checkEmail" parameterType="String" resultType="int">
+		select
+		count(user_number) from ddd_user
+		where user_email =
+		#{userEmail}
+	</select>
+
+
+	<!-- 마이페이지 내정보조회/변경 -->
+	<!-- 조회 -->
+	<select id="selectMyPageInfo" resultType="UserDTO">
+		SELECT
+		user_id,
+		user_name, user_birth, user_nickname,
+		user_email, user_phone,
+		user_gender
+		FROM ddd_user
+		WHERE user_number = #{userNumber}
+	</select>
+
+	<!-- 변경 -->
+	<update id="updateMyPageInfo">
+		UPDATE ddd_user
+		SET
+		user_nickname = #{userNickname}
+		<if test="userPassword != null and userPassword != ''">
+			, user_password = #{userPassword}
+		</if>
+		WHERE user_number = #{userNumber}
+		AND user_password =
+		#{currentPassword}
+	</update>
+	<!-- 보호소용 파일 추가 쿼리 필요 -->
+
+	<!-- 탈퇴 -->
+	<!-- 비밀번호 확인 -->
+	<select id="checkPassword" resultType="int">
+		SELECT COUNT(user_number)
+		FROM ddd_user
+		WHERE user_number = #{userNumber}
+		AND user_password =
+		#{userPassword}
+	</select>
+	<!-- 탈퇴상태로 변경 -->
+	<update id="updateToWithdraw">
+		UPDATE ddd_user
+		SET user_status = 'withdraw'
+		WHERE user_number = #{userNumber}
+	</update>
+
+
+	<!-- 관리자 회원관리 -->
+	<!-- 전체 일반회원 -->
+	<select id="getTotalCommon" resultType="int">
+		SELECT COUNT(user_number)
+		FROM ddd_user WHERE user_type = 'C'
+	</select>
+
+	<!-- 일반회원 전체조회 -->
+	<select id="selectCommonList" parameterType="map"
+		resultType="UserDTO">
+<![CDATA[
+    SELECT * FROM (
+        SELECT ROWNUM AS rnum, subquery.* FROM (
+            SELECT 
+                user_number, user_id, user_name, user_nickname, user_phone, user_email
+            FROM ddd_user
+            WHERE user_type = 'C'
+            ORDER BY user_number DESC
+        ) subquery
+    ) 
+    WHERE rnum BETWEEN #{startRow} AND #{endRow}
+]]>
+	</select>
+
+	<!-- 일반회원 전체조회 + 검색 (아이디 닉네임) -->
+
+	<!-- 일반회원 상세 -->
+	<select id="selectCommonDetail" parameterType="int"
+		resultType="UserDTO">
+		SELECT
+		u.user_id, u.user_nickname, u.user_name,
+		u.user_phone,u.user_birth,u.user_email, c.common_report_count
+		FROM
+		ddd_user u
+		JOIN
+		ddd_user_common c ON
+		u.user_number = c.user_number
+		WHERE
+		u.user_number
+		= #{userNumber}
+	</select>
+
+	<!-- 전체 보호소회원 -->
+	<select id="getTotalShelter" resultType="int">
+		SELECT
+		COUNT(user_number) FROM ddd_user WHERE user_type = 'S'
+	</select>
+
+	<!-- 보호소회원 전체조회 -->
+	<select id="selectShelterList" parameterType="map"
+		resultType="UserDTO">
+<![CDATA[
+    SELECT * FROM (
+        SELECT ROWNUM AS rnum, subquery.* FROM (
+            SELECT 
+                u.user_number, u.user_id, s.shelter_name, u.user_phone, 
+                u.user_email, s.shelter_certification
+            FROM ddd_user u
+            JOIN ddd_user_shelter s ON u.user_number = s.user_number
+            WHERE u.user_type = 'S'
+            ORDER BY s.shelter_certification ASC, u.user_number DESC
+        ) subquery
+    ) 
+    WHERE rnum BETWEEN #{startRow} AND #{endRow}
+]]>
+	</select>
+
+	<!-- 보호소회원 전체조회 + 검색 (아이디 닉네임) -->
+
+	<!-- 보호소회원 상세 -->
+	<select id="selectShelterDetail" parameterType="int"
+		resultType="UserDTO">
+		<!-- 파일 추가 필요 -->
+		<!-- SELECT u.user_id, s.shelter_name, u.user_nickname, s.shelter_address, 
+			s.shelter_business_number, s.shelter_certification, f.file_name FROM ddd_user 
+			u JOIN ddd_user_shelter s ON u.user_number = s.user_number LEFT JOIN ddd_file 
+			f ON u.user_number = f.user_number WHERE u.user_number = #{userNumber} -->
+		SELECT
+		u.user_id, s.shelter_name, u.user_nickname,
+		s.shelter_address,
+		s.shelter_business_number, s.shelter_certification
+		FROM ddd_user u
+		JOIN ddd_user_shelter s ON u.user_number = s.user_number
+		WHERE
+		u.user_number = #{userNumber}
+	</select>
+
+	<!-- 보호소회원 인증 업데이트 -->
+	<update id="updateShelterCertification">
+		UPDATE ddd_user_shelter
+		SET shelter_certification =
+		'Y'
+		WHERE user_number = #{userNumber}
+	</update>
+
 </mapper>
