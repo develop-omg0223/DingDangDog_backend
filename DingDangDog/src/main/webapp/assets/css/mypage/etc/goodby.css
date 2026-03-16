@@ -1,0 +1,115 @@
+*{ margin:0; padding:0;box-sizing:border-box;}
+
+@font-face {
+  font-family: "HannaPro";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_seven@1.0/BMHANNAPro.woff")
+    format("woff");
+  font-weight: normal;
+  font-display: swap;
+}
+
+body {
+  /* width:1440px; */
+  width: 100%;
+  /* margin:0 auto; */
+  margin: 0 auto;
+  /* background:#fff; */
+  font-family: "HannaPro", sans-serif;
+}
+
+header {
+  /* background-color: #F47C2A; */
+  /* width: 1440px; */
+  width: 100%;
+  /* height: 110px; */
+  height: 100%;
+}
+
+footer {
+  /* background-color: black; */
+  /* width: 1440px; */
+  width: 100%;
+  /* height: 110px; */
+  height: 100%;
+}
+
+
+
+.container{
+  width: 100%;
+  height:804px;
+  margin: 0 auto;
+  padding:0 auto;
+  display:flex;
+  flex-direction: column;
+  gap:40px;
+  align-items:center;
+  font-family: "BM HANNA_TTF";
+  margin: 0 auto;
+}
+
+.container-header{
+    width: 1340px;
+    height: 112px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.title{
+    width:252px;
+    height: 112px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap:10px;
+}
+
+.title-name{
+    font-size: 23px;
+    color:#F47C2A;
+    font-weight: 800;
+}
+
+
+.container-body{
+    width: 1340px;
+    height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.goodby{
+    width: 1340px;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+}
+
+.backtomain{
+    width: 160px;
+    height: 60px;
+    background-color: #F47C2A;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 23px;
+    border-radius: 10px;
+}
+
+.backtomain a{
+    color: white;
+    text-decoration: none;
+    font-weight: 800;
+}
+
+hr{
+  width: 200px;
+  border: 0px;
+  background-color: #F47C2A;
+  color: #F47C2A;
+  height: 3px;
+}

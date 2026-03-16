@@ -1,0 +1,27 @@
+.main-container {
+  height: 100vh;
+}
+
+.admin-main-content{
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 4px 4px 10px ;
+}
+
+.admin-dogarchaive-list-row,
+.admin-dogarchaive-list-header {
+  display: grid;
+  grid-template-columns: 100px 1fr 1fr 1fr 1fr 1fr 1fr;
+  border-bottom: 1px solid #F0F0F0;
+  padding-left: 10px;
+  line-height: 35px;
+}
+
+.admin-dogarchaive-list-header {
+  height: 40px;
+  font-weight: bold;
+}
+
+.admin-dogarchaive-list-row{
+  height: 35px;
+}

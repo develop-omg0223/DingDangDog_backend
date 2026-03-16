@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <!-- header-login -->
 <!-- 로그인 상태 = 로그아웃 버튼이 보이는 header -->
 <!DOCTYPE html>

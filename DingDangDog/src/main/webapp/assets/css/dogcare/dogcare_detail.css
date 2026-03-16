@@ -1,0 +1,131 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  width: 1440px;
+  height: 110px;
+}
+footer {
+  height: 210px;
+}
+.dogcare-main-container{
+  margin: 34px 50px;
+}
+.dogcare-detail-container{
+  width:100%;
+
+  background:white;
+  border-radius:5px;
+  box-shadow:2px 2px 5px #b6b6b6;
+}
+
+
+/* 제목 */
+.main-container-header{
+  display: flex;
+  justify-content: space-between;
+}
+.main-header-title {
+  font-size: 32px;
+  color: #f47c2a;
+  border-bottom: 2px solid #f47c2a;
+  padding: 20px 20px 15px 20px;
+  margin: 37px 27px 37px 0;
+  text-align: center;
+}
+.detail-title{
+  height:60px;
+  padding:0 50px;
+  line-height:60px;
+  border-bottom:2px solid #b6b6b6;
+  font-weight:bold;
+}
+
+
+/* 작성자 정보 */
+
+.detail-info-container{
+  padding:0 50px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  height:60px;
+  border-bottom:2px solid #b6b6b6;
+}
+
+.info-right{
+  display:flex;
+  gap:30px;
+}
+
+
+/* 본문 */
+
+.detail-main-container{
+  padding:40px;
+}
+
+.detail-main-post{
+  width:100%;
+}
+
+/* footer */
+
+.detail-footer-container{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:20px 50px;
+}
+
+/* 오른쪽 버튼 그룹 */
+
+.footer-right{
+  display:flex;
+  gap:10px;
+}
+
+/* 신청현황 */
+
+.apply-status{
+  width:130px;
+  height:45px;
+  border:2px solid #f47c2a;
+  border-radius:5px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:14px;
+}
+
+/* 신청 버튼 */
+
+.btn-apply{
+  width:120px;
+  height:45px;
+  background:#f47c2a;
+  color:white;
+  border:none;
+  border-radius:5px;
+  cursor:pointer;
+}
+
+.btn-apply:disabled{
+  background:#b6b6b6;
+  cursor:not-allowed;
+}
+
+
+/* 목록 버튼 */
+
+.btn-list{
+  width:100px;
+  height:45px;
+  background:#f47c2a;
+  color:white;
+  border:none;
+  border-radius:5px;
+  cursor:pointer;
+}

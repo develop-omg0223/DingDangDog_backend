@@ -1,0 +1,249 @@
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+header{
+  background-color:#F47C2A;
+  width:1440px;
+  height:110px;
+}
+
+footer{
+  background-color:black;
+  width:1440px;
+  height:110px;
+}
+
+@font-face {
+  font-family: "HannaPro";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_seven@1.0/BMHANNAPro.woff")
+    format("woff");
+  font-weight: normal;
+  font-display: swap;
+}
+
+body{
+  width:1440px;
+  margin:0 auto;
+  background:#fff;
+  font-family:"HannaPro", sans-serif;
+}
+
+.mypage-shelter{
+  width:1440px;
+  height:804px;
+  background:#fff;
+}
+
+.container{
+  width:1440px;
+  height:804px;
+  padding:0 50px;
+  display:flex;
+  gap:40px;
+  align-items:flex-start;
+}
+
+hr{
+  border:0;
+  background-color:#F47C2A;
+  color:#F47C2A;
+  height:1px;
+}
+
+.sidebar{
+  width:350px;
+  height:804px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.side-menu{
+  width:100%;
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+}
+
+.btn-side-link{
+  display:block;
+  height:72px;
+  line-height:72px;
+  text-align:center;
+  text-decoration:none;
+  color:#F47C2A;
+  font-weight:700;
+  font-size:24px;
+  border-radius:23px;
+  background-color:#fff;
+  border:2px solid #fff;
+}
+
+.btn-side-link:hover{
+  background-color:#F47C2A;
+  color:#fff;
+}
+
+.content{
+  width:1000px;
+  height:804px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.content-box{
+  width:1000px;
+  height:760px;
+  display:flex;
+  gap:20px;
+  background:#fff;
+  margin:0;
+}
+
+.panel{
+  width:100%;
+  height:760px;
+  background:#fff;
+  display:flex;
+  flex-direction:column;
+}
+
+.panel-center{
+  width:100%;
+}
+
+.panel-head{
+  height:70px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:#FDE5D4;
+  border:2px solid #F47C2A;
+}
+
+.panel-title{
+  font-size:24px;
+  font-weight:800;
+  color:#111;
+}
+
+.panel-body{
+  flex:1;
+  padding:22px 24px;
+  display:flex;
+  flex-direction:column;
+  border-left:2px solid #F47C2A;
+  border-right:2px solid #F47C2A;
+}
+
+.panel-left .panel-body{
+  justify-content:center;
+  align-items:flex-start;
+}
+
+.archive-list{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:flex-start;
+  gap:20px;
+  width:100%;
+  list-style:none;
+  padding:0;
+  margin:0;
+}
+
+.archive-card{
+  width:220px;
+  height:250px;
+  flex:0 0 220px;
+  border:2px solid #b7b7b7;
+  border-radius:30px;
+  overflow:hidden;
+  background:#fff;
+  box-shadow:0 2px 4px #161616;
+}
+
+.archive-card-link{
+  display:block;
+  width:100%;
+  height:100%;
+  text-decoration:none;
+}
+
+.archive-card-img{
+  width:100%;
+  height:190px;
+  background:#fff;
+  border-bottom:2px solid black;
+}
+
+.archive-card-info{
+  width:100%;
+  height:60px;
+  padding-left:3px;
+  background:#fff;
+  color:black;
+}
+
+.panel-footer{
+  margin-top:auto;
+  display:flex;
+  justify-content:center;
+  border-left:2px solid #F47C2A;
+  border-right:2px solid #F47C2A;
+  border-bottom:2px solid #F47C2A;
+}
+
+
+
+
+.page-list {
+  list-style: none;
+  margin: 20px 0px 20px;
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+}
+.page-list button {
+  width: 30px;
+  height: 30px;
+  margin: 2px 0;
+
+  box-shadow: 2px 2px 5px #b6b6b6;
+}
+.page-list button {
+  cursor: pointer;
+}
+
+.prev-btn,
+.next-btn {
+  background-color: white;
+  border: 1px solid #f47c2a;
+}
+
+.prev-btn span,
+.next-btn span {
+  color: #f47c2a;
+}
+.page-item {
+  background-color: white;
+  border-style: none;
+  border-radius: 5px;
+}
+.current-page {
+  background-color: #f47c2a !important;
+  color: white;
+}
+
+.prev-btn {
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+.next-btn {
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}

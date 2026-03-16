@@ -1,0 +1,117 @@
+.admin-main-content {
+  background-color: white;
+  border-radius: 5px;
+}
+
+.inquiry-row {
+  display: flex;
+  align-items: center;
+  padding: 20px 45px;
+  border-bottom: 1px solid #b6b6b6;
+}
+
+.inquiry-title {
+  flex: 5;
+  font-weight: bold;
+}
+
+.inquiry-response {
+  flex: 0.4;
+  text-align: right;
+}
+
+.response-wait {
+  color: red;
+  font-weight: bold;
+}
+
+.inquiry-nickname {
+  flex: 1;
+}
+
+.inquiry-date {
+  flex: 1;
+  text-align: right;
+  font-size: 14px;
+}
+
+.inquiry-content-section {
+  margin-top: 30px;
+  padding: 0 45px;
+  border-bottom: 1px solid #b6b6b6;
+}
+
+.inquiry-content {
+  min-height: 200px;
+  line-height: 1.6;
+  white-space: pre-wrap;
+}
+
+.inquiry-answer-section {
+  padding: 20px 45px;
+}
+
+.answer-container {
+  display: flex;
+  align-items: stretch;
+}
+
+.answer-container textarea {
+  width: 100%;
+  height: 80px;
+  border: 1px solid #b6b6b6;
+  padding: 15px;
+  resize: none;
+  outline: none;
+  font-size: 14px;
+  margin-right: 10px;
+  border-radius: 5px;
+}
+
+.answer-submit-btn {
+  background-color: #f47c2a;
+  border: none;
+  color: white;
+  border-radius: 5px;
+  width: 80px;
+  height: 100%;
+  cursor: pointer;
+}
+
+.answer-complete {
+  display: none;
+  flex-direction: column;
+}
+
+.answer-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.answer-admin-answer {
+  font-weight: bold;
+}
+.answer-date {
+  font-size: 14px;
+}
+.answer-content-box {
+  padding: 15px 0;
+}
+
+.btn-container {
+  padding-top: 40px;
+  max-width: 550px;
+  display: flex;
+  justify-content: flex-start;
+}
+.return-btn {
+  background-color: #f47c2a;
+  border: none;
+  color: white;
+  border-radius: 5px;
+  width: 110px;
+  height: 40px;
+  cursor: pointer;
+}

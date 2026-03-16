@@ -1,0 +1,57 @@
+.admin-main-content {
+  background-color: white;
+  border-radius: 5px;
+}
+
+.admin-list-row,
+.admin-list-header {
+  display: grid;
+  grid-template-columns: 120px 1fr 250px 300px 300px 300px;
+  padding-left: 10px;
+  line-height: 35px;
+  text-align: center;
+}
+
+.admin-list-header {
+  height: 40px;
+  font-weight: bold;
+}
+
+.admin-list-row {
+  border-top: 1px solid #f0f0f0;
+  height: 35px;
+}
+
+.admin-main-section-header {
+  height: auto;
+  padding-bottom: 20px;
+}
+
+.section-header-btns {
+  display: flex;
+
+  font-family: "HannaPro";
+}
+.section-header-btns button:first-child {
+  margin-right: 10px;
+}
+.section-header-btns button {
+  cursor: pointer;
+  background-color: white;
+  color: #f47c2a;
+  border: 1px solid #f47c2a;
+  font-size: 14px;
+  border-radius: 5px;
+  width: 75px;
+  height: 35px;
+}
+
+.section-header-btns button.selected {
+  background-color: #f47c2a;
+  color: white;
+}
+
+.confirm-wait {
+  color: red;
+  font-weight: bold;
+}

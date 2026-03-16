@@ -1,0 +1,104 @@
+.btn-register{
+  padding:10px 16px;
+  background:#ff7a2f;
+  border:none;
+  color:white;
+  border-radius:6px;
+  cursor:pointer;
+}
+
+.btn-apply{
+  display: none;
+}
+
+.apply-status:hover{
+  cursor: pointer;
+}
+
+/* 모달 배경 */
+.modal{
+  display:none;
+  position:fixed;
+  left:0;
+  top:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.4);
+}
+
+/* 모달 박스 */
+.modal-content{
+  width:1000px;
+  background:white;
+  margin:120px auto;
+  border-radius:5px;
+  overflow:hidden;
+}
+
+/* 헤더 */
+.modal-header{
+  background:#f47c2a;
+  color:white;
+  padding:12px 20px;
+  display:flex;
+  justify-content:space-between;
+}
+
+.modal-close{
+  border:none;
+  background:none;
+  color:white;
+  font-size:16px;
+  cursor:pointer;
+}
+
+/* body */
+.modal-body{
+  padding:20px;
+}
+
+/* 헤더 */
+.apply-header{
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr 3fr 1fr;
+  font-weight:bold;
+  border-bottom:1px solid #ddd;
+  padding:10px 0;
+}
+
+
+/* row */
+.apply-row{
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr 3fr 1fr;
+  padding:10px 0;
+  border-bottom:1px solid #eee;
+}
+
+/* 라디오 */
+.report-reason{
+  display:flex;
+  gap:5px;
+}
+
+.etc-input{
+  width:120px;
+  height:21px;
+  padding:4px;
+  border:1px solid #ccc;
+  border-radius:4px;
+}
+
+.etc-input:disabled{
+  background:#f3f3f3;
+}
+
+/* 신고버튼 */
+.report-btn{
+  background:#ff4d4d;
+  border:none;
+  color:white;
+  padding:6px 10px;
+  border-radius:4px;
+  cursor:pointer;
+}

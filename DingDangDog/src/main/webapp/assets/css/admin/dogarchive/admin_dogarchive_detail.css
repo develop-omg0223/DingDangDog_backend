@@ -1,0 +1,54 @@
+.admin-main-content {
+  background-color: white;
+  border-radius: 5px;
+  max-width: 550px;
+  margin: auto;
+}
+.admin-detail-row {
+  display: flex;
+  line-height: 45px;
+  width: 100%;
+  border-bottom: 1px solid #f1f1f1;
+}
+.admin-detail-row:last-child {
+  border: none;
+}
+.admin-detail-title {
+  text-align: left;
+  padding-left: 20px;
+  font-weight: bold;
+  border-right: 1px solid #f1f1f1;
+  width: 150px;
+  min-width: 150px;
+}
+.admin-detail-info {
+  padding: 0 30px;
+  text-align: left;
+  flex-grow: 1;
+}
+
+.info-img {
+  width: 100%;
+  height: 100%;
+}
+
+.black-reason {
+  max-width: 100%;
+  word-break: break-all;
+}
+.btn-container {
+  padding-top: 40px;
+  max-width: 550px;
+  display: flex;
+  margin: auto;
+  justify-content: space-between;
+}
+.btn-backlist,
+.btn-remove {
+  background-color: #f47c2a;
+  border: none;
+  color: white;
+  border-radius: 5px;
+  width: 110px;
+  height: 40px;
+}

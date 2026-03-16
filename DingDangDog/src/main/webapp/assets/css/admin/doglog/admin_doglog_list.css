@@ -1,0 +1,28 @@
+
+.main-container {
+  height: 100vh;
+}
+
+.admin-main-content{
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 4px 4px 10px ;
+}
+
+.admin-doglog-list-row,
+.admin-doglog-list-header {
+  display: grid;
+  grid-template-columns: 100px 1fr 150px 150px 150px;
+  border-bottom: 1px solid #F0F0F0;
+  padding-left: 10px;
+  line-height: 35px;
+}
+
+.admin-doglog-list-header {
+  height: 40px;
+  font-weight: bold;
+}
+
+.admin-doglog-list-row{
+  height: 35px;
+}

@@ -1,0 +1,469 @@
+* {
+  margin: 0;
+  padding: 0;
+  /* border: none; */
+  box-sizing: border-box;
+}
+
+header {
+  width: 100%;
+  height: 110px;
+  border: 1px solid black;;
+}
+
+footer {
+  width:100%;
+  height: 200px;
+  border: 1px solid black;
+}
+
+main {
+  width:100%;
+  height: 1500px;
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; 
+}
+
+.main-common-title {
+    margin-top:33px;
+    height:100px;
+    width: 300px;
+    border:1px solid black;
+    text-align: center;
+    line-height: 100px;
+    font-weight: bold;
+    border-radius: 10px;
+    background-color: #F47C2A;
+    color: white;
+    font-size: 35px;
+
+
+}
+
+.main-common-container{
+    margin:33px 20px 60px;
+    height:1000px;
+    width:900px;
+    border: 1px solid black;
+    border-radius: 10px;
+   
+}
+
+.main-form-common-id {
+
+    height: 90px;
+    width: 900px;
+    /* border: 1px solid black; */
+    margin-top: 33px;
+   
+}
+
+.main-container-common-id {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+ 
+}
+
+.main-input-common-id{
+  display: flex;
+}
+
+.main-input-id-common-writing {
+  width: 190px;
+  height: 60px;
+  border: 1px solid black;
+  font-size : 20px;
+  text-align: center;
+  line-height: 60px;
+  font-weight: bold;
+}
+
+#user-common-id  {
+  width: 400px;
+  height: 60px;
+  font-size: 20px;
+}
+
+.id-common-btn button{
+  width: 150px;
+  height: 60px;
+  font-size: 20px;
+  margin-left:10px;
+  border-radius: 10px;
+  background-color: #F47C2A;
+  color: white;
+  font-weight: bold;
+}
+
+.main-form-id-common-message {
+  display:none;
+  color: red;
+  font-weight: bold;
+  margin-left:73px;
+}
+
+
+
+.main-form-common-pw {
+
+    height: 90px;
+    width: 900px;
+    /* border: 1px solid black; */
+
+}
+
+.main-input-common-pw {
+    display:flex;
+    margin-left: 73px;
+}
+
+.main-input-pw-common-writing {
+  width: 190px;
+  height: 60px;
+  border: 1px solid black;
+  font-size : 20px;
+  text-align: center;
+  line-height: 60px;
+  font-weight: bold;
+
+}
+
+#user-common-pw {
+  width: 400px;
+  height: 60px;
+  font-size: 20px;
+
+}
+
+.main-form-pw-common-message {
+  color:gray;
+  font-weight: bold;
+  display:flex;
+  justify-content: center;
+}
+
+.main-form-common-checkpw {
+    height: 90px;
+    width: 900px;
+    /* border: 1px solid black; */
+}
+
+.main-input-common-checkpw {
+  display: flex;
+  margin-left: 73px;
+
+}
+
+
+
+.main-input-checkpw-common-writing {
+  width: 190px;
+  height: 60px;
+  border: 1px solid black;
+  font-size : 20px;
+  text-align: center;
+  line-height: 60px;
+  font-weight: bold;
+}
+#user-pw-common-check{
+  width: 400px;
+  height: 60px;
+  font-size: 20px;
+}
+
+.main-form-checkpw-common-message {
+  display:none;
+  color: red;
+  font-weight: bold;
+  text-align: center;
+}
+
+.main-form-common-nickname {
+    height: 90px;
+    width: 900px;
+    /* border: 1px solid black; */
+
+}
+.main-container-common-nickname {
+  display:flex;
+  margin-left: 73px;
+
+}
+
+.main-input-common-nickname {
+  display: flex;
+}
+
+.main-input-nickname-common-writing {
+  width: 190px;
+  height: 60px;
+  border: 1px solid black;
+  font-size : 20px;
+  text-align: center;
+  line-height: 60px;
+  font-weight: bold;
+}
+
+.nickname-common-btn button{
+  width: 150px;
+  height: 60px;
+  font-size: 20px;
+  margin-left:10px;
+  border-radius: 10px;
+  background-color: #F47C2A;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+#user-common-nickname {
+  width: 400px;
+  height: 60px;
+  font-size: 20px;
+}
+
+.main-form-nickname-common-message {
+  display:none;
+  color: red;
+  font-weight: bold;
+  text-align: center;
+}
+
+
+
+.main-form-common-name {
+    height: 90px;
+    width: 900px;
+    /* border: 1px solid black; */
+    display: flex;
+}
+
+.main-container-common-name {
+  display: flex;
+  margin-left: 73px;
+  
+}
+.main-name-common-writing {
+  width: 190px;
+  height: 60px;
+  border: 1px solid black;
+  font-size : 20px;
+  text-align: center;
+  line-height: 60px;
+  font-weight: bold;
+}
+
+#user-common-name {
+  width: 400px;
+  height: 60px;
+  font-size: 20px;
+
+}
+
+.user-gender-common-container {
+  display: flex;
+  align-items: center;
+  gap:20px;
+  font-size: 20px;
+  margin-left: 10px;
+}
+
+.user-gender-container-common-male,
+.user-gender-container-common-female {
+  display: flex;
+  align-items: center;  
+  gap: 5px;
+}
+
+
+
+#user-common-male {
+  height:20px;
+  width: 20px;
+  cursor: pointer;
+}
+
+#user-common-female{
+  height:20px;
+  width: 20px;
+  cursor: pointer;
+}
+
+.main-form-common-birth {
+    height: 90px;
+    width: 900px;
+    /* border: 1px solid black; */
+}
+
+.main-form-common-container {
+  display: flex;
+  margin-left: 73px;
+}
+
+.main-birth-common-writing{
+  width: 190px;
+  height: 60px;
+  border: 1px solid black;
+  font-size : 20px;
+  text-align: center;
+  line-height: 60px;
+  font-weight: bold;
+
+}
+
+#user-common-birth {
+  width: 400px;
+  height: 60px;
+  font-size: 20px;
+}
+
+.main-birth-common-message {
+  text-align: center;
+  color: gray;
+  font-weight: bold;
+}
+
+.main-form-common-phone{
+    height: 90px;
+    width: 900px;
+    /* border: 1px solid black; */
+    
+}
+
+.main-container-common-phone {
+  display:flex;
+  margin-left: 73px;
+
+}
+
+.main-phone-common-writing{
+  width: 190px;
+  height: 60px;
+  border: 1px solid black;
+  font-size : 20px;
+  text-align: center;
+  line-height: 60px;
+  font-weight: bold;
+}
+
+#user-common-phone {
+  width: 400px;
+  height: 60px;
+  font-size: 20px;
+
+}
+
+.phone-common-btn button{
+  width: 150px;
+  height: 60px;
+  font-size: 20px;
+  margin-left:10px;
+  border-radius: 10px;
+  background-color: #F47C2A;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.main-phone-common-message{
+  text-align: center;
+  color: red;
+  font-weight: bold;
+  display: none;
+}
+
+.main-form-common-verification{
+  height: 90px;
+  width: 900px;
+  /* border: 1px solid black; */
+
+}
+
+.main-container-common-verification{
+  display: flex;
+  margin-left: 73px;
+}
+
+.main-input-common-verification {
+  display: flex;
+}
+
+.main-verification-common-writing{
+  width: 190px;
+  height: 60px;
+  border: 1px solid black;
+  font-size : 20px;
+  text-align: center;
+  line-height: 60px;
+  font-weight: bold;
+}
+#user-common-verification{
+  width: 400px;
+  height: 60px;
+  font-size: 20px;
+}
+
+.main-verification-common-message{
+  text-align: center;
+  color: red;
+  font-weight: bold;
+  display: none;
+}
+
+.verification-common-btn button {
+  width: 150px;
+  height: 60px;
+  font-size: 20px;
+  margin-left:10px;
+  border-radius: 10px;
+  background-color: #F47C2A;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.main-form-common-emailAddress{
+  height: 90px;
+  width: 900px;
+  /* border: 1px solid black; */
+}
+.main-container-common-emailAddress{
+  display: flex;
+  margin-left: 73px;
+}
+
+.main-emailAddress-common-writing {
+  width: 190px;
+  height: 60px;
+  border: 1px solid black;
+  font-size : 20px;
+  text-align: center;
+  line-height: 60px;
+  font-weight: bold;
+}
+
+#email-common-user {
+  width: 400px;
+  height: 60px;
+  font-size: 20px;
+}
+
+.signup-common-btn {
+  display:flex;
+  justify-content: center;
+}
+.signup-common-btn button{
+  width: 200px;
+  height: 80px;
+  font-size: 20px;
+  margin-left:10px;
+  border-radius: 10px;
+  background-color: #F47C2A;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+
+}

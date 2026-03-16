@@ -1,1 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<mapper namespace="Care">
+<!-- 멍! 케어 리스트 조회 -->
+<select id="selectCareList" resultType="CareDTO">
+	SELECT c.care_number, c.care_title, c.care_date, u.user_nickname, c.care_write_date
+	FROM DDD_CARE c
+	JOIN ddd_user u ON c.user_number = u.user_number
+	WHERE c.care_status 'open' || 'close'
+	
+	ORDER BY c.care_date DESC;
+</select>
+</mapper>

@@ -1,0 +1,217 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+header {
+  width: 100%;
+  height: 110px;
+  border: 1px solid black;;
+}
+
+footer {
+  width:100%;
+  height: 200px;
+  border: 1px solid black;
+}
+
+main {
+  width:100%;
+  height: 3000px;
+  border: 1px solid black;
+
+  
+}
+
+.main-permisson{
+    display: flex;
+    justify-content: center;
+}
+.form-permisson{
+    width: 1200px;
+    height: 2800px;
+    border: 1px solid black;
+    margin-top: 90px;
+    padding:40px 60px;
+    border-radius: 10px;
+}
+
+.main-container-permisson-part1 {
+    width:100%;
+    height:600px;
+    /* border:1px solid black; */
+
+}
+
+.main-container-permisson-part2 {
+    width:100%;
+    height:600px;
+    /* border:1px solid black; */
+}
+
+.main-container-permisson-part3 {
+    width:100%;
+    height:600px;
+    /* border:1px solid black; */
+
+}
+.main-container-permisson-part4 {
+    width:100%;
+    height:600px;
+    /* border:1px solid black; */
+
+}
+
+.main-container-permission-all{
+    width: 100%;
+    height: 100px;
+    /* border: 1px solid black; */
+    text-align: center;
+    font-size:20px;
+
+}
+
+.main-container-permisson-btn{
+
+    width:100%;
+    height:100px;
+    border:1px solid black;
+}
+
+
+.permission-text1 {
+
+    width:100%;
+    height:500px;
+    border: 1px solid black;
+    font-size: 30px;
+    overflow-y: scroll;
+
+}
+
+.permission-check-btn1 {
+    display: flex;
+    justify-content: end;
+}
+
+.permission-container-writing1 {
+   font-size: 30px;
+   font-weight: bold;
+
+}
+#user-permission-box1 {
+    width: 30px;
+    height: 25px;
+
+}
+
+.permission-text2 {
+
+    width:100%;
+    height:500px;
+    border: 1px solid black;
+    font-size: 30px;
+    overflow-y: scroll;
+
+}
+
+.permission-check-btn2 {
+    display: flex;
+    justify-content: end;
+}
+
+.permission-container-writing2 {
+   font-size: 30px; 
+   font-weight: bold;
+}
+#user-permission-box2 {
+    width: 30px;
+    height: 25px;
+
+}
+
+
+.permission-text3 {
+
+    width:100%;
+    height:500px;
+    border: 1px solid black;
+    font-size: 30px;
+    overflow-y: scroll;
+
+}
+
+.permission-check-btn3 {
+    display: flex;
+    justify-content: end;
+}
+
+.permission-container-writing3 {
+   font-size: 30px;
+   font-weight: bold;
+}
+#user-permission-box3 {
+    width: 30px;
+    height: 25px;
+
+}
+
+.permission-text4{
+
+    width:100%;
+    height:500px;
+    border: 1px solid black;
+    font-size: 30px;
+    overflow-y: scroll;
+
+}
+
+.permission-check-btn4{
+    display: flex;
+    justify-content: end;
+}
+
+.permission-container-writing4{
+   font-size: 30px;
+   font-weight: bold;
+}
+#user-permission-box4{
+    width: 30px;
+    height: 25px;
+
+}
+
+.permission-container-writing-all{
+   font-size: 30px;
+   color: red;
+   font-weight: bold;
+   margin-top: 20px;
+}
+#user-permission-box-all{
+     width: 30px;
+    height: 25px;
+
+}
+
+.main-container-permission-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+
+}
+
+.main-container-permission-btn input{
+    width: 300px;
+    height: 100px;
+    font-size: 40px;
+    background-color:#F47C2A;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+    border-radius:10px;
+}
+
+

@@ -1,0 +1,295 @@
+
+*{ margin:0; padding:0;box-sizing:border-box;}
+
+header{
+  background-color: #F47C2A;
+  width: 1440px;
+  height: 110px;
+}
+footer{
+  background-color: black;
+  width: 1440px;
+  height: 110px;
+}
+
+@font-face {
+  font-family: "HannaPro";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_seven@1.0/BMHANNAPro.woff")
+    format("woff");
+  font-weight: normal;
+  font-display: swap;
+}
+
+body{
+  width:1440px;
+  margin:0 auto;
+  background:#fff;
+  font-family:"HannaPro", sans-serif;
+}
+
+
+
+.mypage-shelter{
+  width:1440px;
+  height:804px;
+  background:#ffff;
+}
+
+
+.container{
+  width:1440px;
+  height:804px;
+  padding:0 50px;
+  display:flex;
+  gap:40px;
+  align-items:flex-start;
+}
+
+hr{
+  border: 0px;
+  background-color: #F47C2A;
+  color: #F47C2A;
+  height: 1px;
+}
+
+
+.sidebar{
+  width:350px;
+  height:804px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.side-menu{
+  width:100%;
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+  
+}
+
+.btn-side-link{
+  display:block;
+  height:72px;
+  line-height:72px;
+  text-align:center;
+  text-decoration:none;
+  color:#F47C2A;
+  font-weight:700;
+  font-size:24px;
+  border-radius: 23px;
+  background-color:#ffff;
+  border-color: #F47C2A;
+  border:2px solid #ffff;
+}
+
+.btn-side-link:hover{
+  background-color: #F47C2A;
+  color:#ffff;
+}
+
+
+
+.content{
+  width:1000px;
+  height:804px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+
+.content-box{
+  width:1000px;
+  height:760px;
+  display:flex;
+  gap:20px;
+  background:#fff;
+
+
+  margin:0;
+}
+
+
+.panel{
+  height:760px;
+  background:#fff;
+  display:flex;
+  flex-direction:column;
+}
+
+.panel-left{
+  width:580px;
+  /* border-right:2px solid #F47C2A; */
+}
+
+.panel-right{
+  width:390px;
+}
+
+
+.panel-head{
+  height:70px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:#FDE5D4;
+  border:2px solid #F47C2A;
+}
+
+.panel-title{
+  font-size:24px;
+  font-weight:800;
+  color:#111;
+}
+
+
+.panel-body{
+  flex:1;
+  padding:22px 24px;
+  display:flex;
+  flex-direction:column;
+  height: 650px;
+  border-left: 2px solid #F47C2A;
+  border-right: 2px solid #F47C2A;
+  border-bottom: 2px solid #F47C2A;
+}
+
+.panel-left .panel-body{
+  justify-content:center;
+  align-items:center;
+}
+
+.archive-list{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:20px;
+  width:460px;
+  list-style:none;
+  padding:0;  
+}
+
+.archive-list{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:20px;
+  width:460px;
+  list-style:none;
+  padding:0;
+  margin:0;
+}
+
+.archive-card{
+  width:220px;
+  height:250px;
+  flex:0 0 220px;
+  border:2px solid #b7b7b7;
+  border-radius:30px;
+  overflow:hidden;
+  background:#fff;
+  box-shadow: 0 2px 4px #161616;
+}
+
+.archive-card-link{
+  text-decoration:none;
+}
+
+.archive-card-img{
+  width:100%;
+  height:190px;
+  background:#fff;
+  border-bottom:2px solid black;
+}
+
+.archive-card-info{
+  width:100%;
+  height:60px;
+  margin : 0 0 0 3px;
+  background:#fff;
+  color: black;
+}
+
+
+
+.info-table{
+  display:flex;
+  flex-direction:column;
+  gap:25px;
+  margin-top:150px;
+  margin-bottom: 105px;
+}
+
+
+
+.info-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  min-height:30px;
+}
+
+.info-row dt{
+  width:46%;
+  font-size: 23px;
+  font-weight:800;
+  color:#111;
+}
+
+.info-row dd{
+  width:54%;
+  font-size: 18px;
+  font-weight:700;
+  color:#111;
+}
+
+
+.panel-footer{
+  margin-top:auto;
+  display:flex;
+  justify-content:flex-end;
+}
+
+.btn-outline{
+  width:150px;
+  height:56px;
+  border:2px solid #F47C2A;
+  background:#fff;
+  color:#F47C2A;
+  font-weight:800;
+  font-size: 15px;
+  border-radius:10px;
+  cursor:pointer;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  text-decoration:none;
+}
+
+.btn-outline:hover{
+background-color: #F47C2A;
+color: #fff;
+}
+
+.archive-card-empty .empty-card {
+  pointer-events: none;
+}
+
+.archive-card-empty .archive-card-link{
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  pointer-events: none;
+}
+
+.archive-card-empty .archive-card-img,
+.archive-card-empty .archive-card-info{
+  visibility: hidden;
+}
+
+.archive-card-empty{
+  border: none;
+  box-shadow: none;
+}

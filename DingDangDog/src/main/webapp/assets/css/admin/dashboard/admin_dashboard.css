@@ -1,0 +1,191 @@
+.admin-main-section-header {
+  height: 90px;
+}
+
+.admin-main-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.dashboard-row {
+  display: flex;
+  padding: 0;
+  margin: 0;
+  margin-bottom: 40px;
+  gap: 40px;
+}
+
+.dashboard-row li {
+  flex: 1;
+}
+
+.dashboard-box {
+  background-color: white;
+  border-radius: 5px;
+  padding: 10px;
+  /* 나중에 수정 */
+  min-height: 250px;
+  display: flex;
+  flex-direction: column;
+}
+
+.box-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.box-title {
+  font-family: "HannaPro";
+  font-size: 16px;
+}
+.link-btn {
+  width: 20px;
+  height: 20px;
+  background-color: #f47c2a;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.box-content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.dashboard-list-row {
+  display: flex;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid #b6b6b6;
+  font-size: 13px;
+  text-align: center;
+}
+
+.dashboard-list-row:first-child {
+  font-weight: bold;
+}
+
+.dashboard-list-row:last-child {
+  border-bottom: none;
+}
+
+/* 회원목록 */
+.userlist > .user-number {
+  flex: 0.5;
+}
+.userlist > .user-id {
+  flex: 1.1;
+}
+.userlist > .user-name {
+  flex: 1;
+}
+.userlist > .user-nickname {
+  flex: 1.1;
+}
+
+/* 블랙리스트 */
+.blacklist > .black-user-number {
+  flex: 0.5;
+}
+.blacklist > .black-user-id {
+  flex: 1;
+}
+.blacklist > .black-user-name {
+  flex: 1;
+}
+.blacklist > .black-user-nickname {
+  flex: 1;
+}
+.blacklist > .black-reason {
+  flex: 1.5;
+}
+/* 멍!카이브 */
+
+.dogarchive > .dogarchive-number {
+  flex: 0.5;
+}
+.dogarchive > .dogarchive-name {
+  flex: 1;
+}
+.dogarchive > .dogarchive-age {
+  flex: 0.5;
+}
+.dogarchive > .dogarchive-type {
+  flex: 1;
+}
+.dogarchive > .dogarchaive-shelter {
+  flex: 1.5;
+}
+.dogarchive > .dogarchaive-date {
+  flex: 1.5;
+}
+/* 멍!케어 */
+.dogcare > .dogcare-number {
+  flex: 0.5;
+}
+.dogcare > .dogcare-title {
+  flex: 3;
+}
+.dogcare > .dogcare-id {
+  flex: 1.5;
+}
+.dogcare > .dogcare-nickname {
+  flex: 0.8;
+}
+.dogcare > .dogcare-date {
+  flex: 1.5;
+}
+/* 멍!로그 */
+.doglog > .doglog-number {
+  flex: 0.5;
+}
+.doglog > .doglog-title {
+  flex: 3;
+}
+.doglog > .doglog-nickname {
+  flex: 0.8;
+}
+.doglog > .doglog-date {
+  flex: 1.5;
+}
+/* 문의사항 */
+.inquiry > .inquiry-number {
+  flex: 0.5;
+}
+.inquiry > .inquiry-title {
+  flex: 3;
+}
+.inquiry > .inquiry-nickname {
+  flex: 0.8;
+}
+.inquiry > .inquiry-response {
+  flex: 0.8;
+}
+
+.response-wait {
+  color: red;
+  font-weight: bold;
+}
+
+.response-complete {
+  border: 1px solid #f47c2a;
+  border-radius: 5px;
+  padding: 2px;
+}
+
+/* 제목 자르기 / 정렬*/
+
+.first-row {
+  text-align: center !important;
+}
+.dogcare-title,
+.doglog-title,
+.inquiry-title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: left;
+}

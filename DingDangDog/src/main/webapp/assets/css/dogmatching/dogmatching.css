@@ -1,0 +1,133 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+@font-face {
+  font-family: "HannaPro";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_seven@1.0/BMHANNAPro.woff")
+    format("woff");
+  font-weight: normal;
+  font-display: swap;
+}
+
+header {
+  width: 1440px;
+  height: 110px;
+}
+footer {
+  height: 210px;
+}
+.dogmatching-main-container {
+  margin: 33px 50px 0 50px;
+}
+
+.main-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.main-header-title {
+  font-family: "HannaPro";
+  font-size: 32px;
+  color: #f47c2a;
+  border-bottom: 2px solid #f47c2a;
+  margin: 37px 0;
+  padding: 20px 20px 15px 20px;
+  text-align: center;
+}
+
+.page-notification {
+  margin: 37px 0;
+  padding: 20px 20px 15px 20px;
+  text-align: center;
+  font-family: "HannaPro";
+  font-size: 23px;
+  color: #999999;
+}
+
+.survey-items {
+  width: 100%;
+  height: 200px;
+  background-color: #fde5d4;
+  margin-bottom: 80px;
+  border-radius: 10px;
+  /*나중에 해제 */
+  /* overflow: hidden; */
+  /* box-shadow: 2px 2px 5px #b6b6b6; */
+}
+
+.survey-items-header {
+  padding: 0 30px;
+  height: 60px;
+  background-color: #f47c2a;
+  font-family: "HannaPro";
+  font-size: 18px;
+  color: white;
+  display: flex;
+  align-items: center;
+}
+
+.survey-items-response {
+  align-items: center;
+  padding: 0 30px;
+  height: 140px;
+  justify-content: space-between;
+  display: flex;
+}
+
+.survey-text {
+  font-family: "HannaPro";
+  font-size: 20px;
+}
+
+.circles-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-grow: 1;
+  margin: 0 40px;
+}
+
+.circle {
+  display: block;
+  box-sizing: border-box;
+  padding: 0;
+  width: 85px;
+  height: 85px;
+  border: 5px solid #f47c2a;
+  border-radius: 50%;
+  background-color: white;
+}
+
+.circle:hover {
+  background-color: #f47c2a;
+}
+.active {
+  background-color: #f47c2a;
+}
+.circle:nth-child(2),
+.circle:nth-child(4) {
+  width: 60px;
+  height: 60px;
+}
+
+.circle:nth-child(3) {
+  width: 45px;
+  height: 45px;
+}
+.submit-btn-container {
+  display: flex;
+  justify-content: center;
+}
+.dogmatching-submit-btn {
+  font-size: 18px;
+  font-family: "HannaPro";
+  width: 120px;
+  height: 45px;
+  border-radius: 10px;
+  background-color: #f47c2a;
+  color: white;
+  border: none;
+  margin-bottom: 50px;
+}

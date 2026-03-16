@@ -1,0 +1,244 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+@font-face {
+  font-family: "HannaPro";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_seven@1.0/BMHANNAPro.woff") format("woff");
+  font-weight: normal;
+  font-display: swap;
+}
+
+body {
+  width: 1440px;
+  margin: 0 auto;
+  background: #fff;
+  font-family: "HannaPro", sans-serif;
+}
+
+body {
+  /* width:1440px; */
+  width: 100%;
+  /* margin:0 auto; */
+  margin: 0;
+  /* background:#fff; */
+  font-family: "HannaPro", sans-serif;
+}
+
+header {
+  /* background-color: #F47C2A; */
+  /* width: 1440px; */
+  width: 100%;
+  /* height: 110px; */
+  height: 100%;
+}
+
+footer {
+  /* background-color: black; */
+  /* width: 1440px; */
+  width: 100%;
+  /* height: 110px; */
+  height: 100%;
+}
+
+
+.support-write-common {
+  margin: 0 auto;     /* 철민 코드 추가 */
+  width: 1440px;
+  height: 0 auto;
+  background: #ffff;
+}
+
+
+.container {
+  width: 1440px;
+  height: 804px;
+  padding: 0 50px;
+  display: flex;
+  gap: 40px;
+  align-items: flex-start;
+}
+
+
+.sidebar {
+  width: 350px;
+  height: 804px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.side-menu {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+}
+
+.btn-side-link {
+  display: block;
+  height: 72px;
+  line-height: 72px;
+  text-align: center;
+  text-decoration: none;
+  color: #F47C2A;
+  font-weight: 700;
+  font-size: 24px;
+  border-radius: 23px;
+  background-color: #ffff;
+  border-color: #F47C2A;
+  border: 2px solid #ffff;
+}
+
+.btn-side-link:hover {
+  background-color: #F47C2A;
+  color: #ffff;
+}
+
+hr {
+  border: 0px;
+  background-color: #F47C2A;
+  color: #F47C2A;
+  height: 1px;
+}
+
+
+
+.content {
+  width: 1000px;
+  height: 804px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.content-box {
+  width: 1000px;
+  height: 760px;
+  display: flex;
+  gap: 20px;
+  background: #fff;
+  margin: 0;
+}
+
+
+
+
+.panel {
+  height: 760px;
+  width: 1000px;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+}
+
+
+
+.panel-head {
+  height: 80px;
+  width: 1000px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #FDE5D4;
+  border: 2px solid #F47C2A;
+}
+
+.panel-title {
+  font-size: 32px;
+  font-weight: 800;
+  color: #111;
+}
+
+
+.panel-body {
+  padding: 22px 24px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  border-left: 2px solid #F47C2A;
+  border-right: 2px solid #F47C2A;
+  border-bottom: 2px solid #F47C2A;
+}
+
+
+.panel-footer {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+
+.input-title {
+  height: 115px;
+  display: flex;
+  align-items: center;
+  padding: 45px;
+  gap: 20px;
+
+
+}
+
+.input-title h2 {
+  font-size: 23px;
+}
+
+
+.input-title input {
+  height: 44px;
+  width: 716px;
+  font-size: 23px;
+  font-weight: 800px;
+}
+
+.info {
+  display: flex;
+  height: 60px;
+  align-items: center;
+  padding: 45px;
+
+}
+
+.info h2 {
+  font-size: 23px;
+}
+
+.input-main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 350px;
+}
+
+.input-main textarea {
+  height: 290px;
+  width: 950px;
+  font-size: 23px;
+  font-weight: 800px;
+}
+
+
+.btn-back,
+.btn-add {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  width: 120px;
+  height: 42px;
+  border-radius: 10px;
+  font-size: 18px;
+  font-weight: 700;
+  background: #F47C2A;
+  color: #fff;
+  border: 2px solid #F47C2A;
+}
+
