@@ -33,7 +33,6 @@
 			<div class="admin-main-content admin-box-shadow">
 				<!-- 테이블등 정보 -->
 				<c:choose>
-					<!-- 일반회원 -->
 					<c:when test="${userType == 'C'}">
 						<div class="admin-list-header">
 							<div class="user-number">회원번호</div>
@@ -60,7 +59,6 @@
 						</c:forEach>
 					</c:when>
 
-					<!-- 보호소회원   -->
 					<c:when test="${userType == 'S'}">
 						<div class="admin-list-header">
 							<div class="user-number">회원번호</div>

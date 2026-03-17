@@ -57,14 +57,14 @@ public class UserFrontController extends HttpServlet {
 		case "/user/signup.us":
 			System.out.println("회원가입 페이지 요청");
 			result = new Result();
-			result.setPath("/apps/signup_choice.jsp");
+			result.setPath("/app/signup_choice.jsp");
 			result.setRedirect(false);
 			System.out.println("회원가입 페이지 이동");
 			break;
 		case "/user/signupCommon.us":
 			System.out.println("일반 회원가입 페이지 요청");
 			result = new Result();
-			result.setPath("/apps/signup_common.jsp");
+			result.setPath("/app/signup_common.jsp");
 			result.setRedirect(false);
 			System.out.println("일반 회원가입 페이지 이동");
 			break;
@@ -86,14 +86,14 @@ public class UserFrontController extends HttpServlet {
 		case "/user/signupShelter.us":
 			System.out.println("보호소 회원가입 페이지 요청");
 			result = new Result();
-			result.setPath("/apps/signup_common.jsp");
+			result.setPath("/app/signup_common.jsp");
 			result.setRedirect(false);
 			System.out.println("보호소 회원가입 페이지 이동");
 			break;
 		case "/user/login.us":
 			System.out.println("로그인 페이지 요청");
 			result = new Result();
-			result.setPath("/apps/login/login.jsp");
+			result.setPath("/app/login/login.jsp");
 			result.setRedirect(false);
 			System.out.println("로그인 페이지 이동");
 			break;

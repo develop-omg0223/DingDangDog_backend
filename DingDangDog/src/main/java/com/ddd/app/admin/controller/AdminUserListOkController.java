@@ -89,7 +89,7 @@ public class AdminUserListOkController implements Execute {
 				"startPage : " + startPage + ", endPage : " + endPage + ", prev : " + prev + ", next : " + next);
 		System.out.println("=========================");
 
-		result.setPath("/apps/admin/userlist/admin_user_list_common.jsp");
+		result.setPath("/app/admin/userlist/admin_user_list.jsp");
 		result.setRedirect(false);
 
 		return result;

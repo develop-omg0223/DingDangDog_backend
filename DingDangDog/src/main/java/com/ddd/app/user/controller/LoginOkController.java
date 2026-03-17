@@ -27,6 +27,9 @@ public class LoginOkController implements Execute {
 		String userPassword = request.getParameter("userPassword");
 		String userType = request.getParameter("userType");
 
+		System.out.println(userId);
+		System.out.println(userPassword);
+		System.out.println(userType);
 		String path = null;
 
 		HttpSession session = request.getSession();
