@@ -84,7 +84,7 @@ AND (SELECT COUNT(*) FROM ddd_care_apply a WHERE a.care_number = c.care_number) 
 </update>
 
 <!-- 신청회원 목록 조회-->
-<select id="getApplyUsers" parameterType="int" resultType="ApplyDTO">
+<select id="getApplyUsers" parameterType="int" resultType="CareApplyDTO">
 SELECT a.apply_number, u.user_number, u.user_name, u.user_nickname, u.user_phone
 FROM ddd_care_apply a
 JOIN ddd_user u ON a.user_number = u.user_number

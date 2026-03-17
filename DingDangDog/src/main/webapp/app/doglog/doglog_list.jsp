@@ -1,12 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.util.List" %>
-<%@ page import="com.ddd.app.doglog.dto.LogDTO" %>
-
-<%
-    List<LogDTO> logList = (List<LogDTO>) request.getAttribute("logList");
-    String contextPath = request.getContextPath();
-%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -14,12 +8,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>멍! 로그 전체목록</title>
-  <link rel="stylesheet" href="<%= contextPath %>/assets/css/doglog/doglog_list.css">
-  <script defer src="<%= contextPath %>/assets/js/doglog/doglog_list.js"></script>
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/doglog/doglog_list.css">
+  <script defer src="${pageContext.request.contextPath}/assets/js/doglog/doglog_list.js"></script>
 </head>
 
 <body>
-  <!-- header -->
   <div id="header-container"></div>
 
   <main>
@@ -28,61 +21,68 @@
         <div class="main-header-title">멍! 로그</div>
       </div>
 
-      <!-- 카드 리스트 -->
       <div class="doglog-list">
-        <%
-          if (logList != null && !logList.isEmpty()) {
-            for (LogDTO log : logList) {
-        %>
-          <div class="doglog-card">
-            <a href="<%= contextPath %>/log/detail.lo?logNumber=<%= log.getLogNumber() %>" class="doglog-link">
-              <div class="doglog-image">
-                <%
-                  if (log.getRepresentativeImgPath() != null && !log.getRepresentativeImgPath().trim().isEmpty()) {
-                %>
-                  <img src="<%= contextPath + log.getRepresentativeImgPath() %>" alt="멍로그 대표 이미지">
-                <%
-                  } else {
-                %>
-                  이미지
-                <%
-                  }
-                %>
+        <c:choose>
+          <c:when test="${not empty logList}">
+            <c:forEach var="log" items="${logList}">
+              <div class="doglog-card">
+                <a href="${pageContext.request.contextPath}/log/detail.lo?logNumber=${log.logNumber}" class="doglog-link">
+                  <div class="doglog-image">
+                    <c:choose>
+                      <c:when test="${not empty log.representativeImgPath}">
+                        <img src="${pageContext.request.contextPath}${log.representativeImgPath}" alt="멍로그 대표 이미지">
+                      </c:when>
+                      <c:otherwise>
+                        이미지
+                      </c:otherwise>
+                    </c:choose>
+                  </div>
+
+                  <div class="doglog-content">
+                    <div class="doglog-post-title">
+                      <c:choose>
+                        <c:when test="${not empty log.logTitle}">
+                          ${log.logTitle}
+                        </c:when>
+                        <c:otherwise>
+                          제목 없음
+                        </c:otherwise>
+                      </c:choose>
+                    </div>
+
+                    <div class="doglog-meta">
+                      <span class="doglog-writer">
+                        <c:choose>
+                          <c:when test="${not empty log.userNickname}">
+                            ${log.userNickname}
+                          </c:when>
+                          <c:otherwise>
+                            작성자명
+                          </c:otherwise>
+                        </c:choose>
+                      </span>
+
+                      <span class="doglog-date">
+                        <c:if test="${not empty log.logDate}">
+                          ${log.logDate}
+                        </c:if>
+                      </span>
+                    </div>
+                  </div>
+                </a>
               </div>
+            </c:forEach>
+          </c:when>
 
-              <div class="doglog-content">
-                <div class="doglog-post-title">
-                  <%= log.getLogTitle() != null ? log.getLogTitle() : "제목 없음" %>
-                </div>
-
-                <div class="doglog-meta">
-                  <span class="doglog-writer">
-                    <%= (log.getUserNickname() != null && !log.getUserNickname().trim().isEmpty())
-                          ? log.getUserNickname()
-                          : "작성자명" %>
-                  </span>
-
-                  <span class="doglog-date">
-                    <%= log.getLogDate() != null ? log.getLogDate() : "" %>
-                  </span>
-                </div>
-              </div>
-            </a>
-          </div>
-        <%
-            }
-          } else {
-        %>
-          <div class="empty-box">
-            등록된 멍! 로그가 없습니다.
-          </div>
-        <%
-          }
-        %>
+          <c:otherwise>
+            <div class="empty-box">
+              등록된 멍! 로그가 없습니다.
+            </div>
+          </c:otherwise>
+        </c:choose>
       </div>
 
-      <!-- 검색 -->
-      <form class="search-box" action="<%= contextPath %>/log/list.lo" method="get">
+      <form class="search-box" action="${pageContext.request.contextPath}/log/list.lo" method="get">
         <select class="search-select" name="searchType">
           <option value="writer">작성자명</option>
           <option value="title">제목</option>
@@ -92,9 +92,7 @@
       </form>
     </div>
 
-    <!-- 하단 검색 + 글 작성 -->
     <div class="main-container-footer">
-      <!-- 페이지네이션 -->
       <div class="pagination">
         <ul class="page-list">
           <li>
@@ -126,16 +124,14 @@
       </div>
 
       <button type="button" class="btn-write"
-              onclick="location.href='<%= contextPath %>/log/write.lo'">
+              onclick="location.href='${pageContext.request.contextPath}/log/write.lo'">
         글 작성하기
       </button>
     </div>
   </main>
 
-  <!-- footer -->
   <div id="footer-container"></div>
 
-  <!-- js -->
-  <script src="<%= contextPath %>/assets/js/header-footer.js"></script>
+  <script src="${pageContext.request.contextPath}/assets/js/header-footer.js"></script>
 </body>
 </html>

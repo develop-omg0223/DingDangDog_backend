@@ -65,10 +65,10 @@
 	<mappers>
 		<mapper resource="com/ddd/mapper/UserMapper.xml" />
 		<mapper resource="com/ddd/mapper/LogMapper.xml" />
-		<mapper resource="com/ddd/mapper/AdminUserMapper.xml" />
-		<mapper resource="com/ddd/mapper/CareMapper.xml" />
+<!-- 		<mapper resource="com/ddd/mapper/AdminUserMapper.xml" />
+ 		<mapper resource="com/ddd/mapper/CareMapper.xml" />
 		<mapper resource="com/ddd/mapper/ArchaiveMapper.xml" />
-		<mapper resource="com/ddd/mapper/MatchingMapper.xml" />
+		<mapper resource="com/ddd/mapper/MatchingMapper.xml" /> -->
 	</mappers>
 	
 

@@ -1,13 +1,17 @@
 package com.ddd.app.doglog.controller;
 
+import java.io.File;
 import java.io.IOException;
+import java.util.Collection;
 import java.util.List;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 
 import com.ddd.app.doglog.dao.LogCommentDAO;
 import com.ddd.app.doglog.dao.LogDAO;
@@ -15,17 +19,12 @@ import com.ddd.app.doglog.dao.LogImgDAO;
 import com.ddd.app.doglog.dto.LogCommentDTO;
 import com.ddd.app.doglog.dto.LogDTO;
 import com.ddd.app.doglog.dto.LogImgDTO;
-import java.io.File;
-import java.util.Collection;
-import javax.servlet.annotation.MultipartConfig;
-import javax.servlet.http.Part;
 
 @MultipartConfig(
 	fileSizeThreshold = 1024 * 1024,
 	maxFileSize = 1024 * 1024 * 10,
 	maxRequestSize = 1024 * 1024 * 50
 )
-
 public class LogController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -54,18 +53,23 @@ public class LogController extends HttpServlet {
 
 		String target = request.getRequestURI().substring(request.getContextPath().length());
 		System.out.println("LogController 요청 : " + target);
-		int userNumber = 10001; // 하드코딩용 세션 유저넘버
+
+		// 테스트용 하드코딩 세션
+		request.getSession().setAttribute("userNumber", 10001);
+
 		switch (target) {
 
-		case "/log/list.lo":{
+		case "/log/list.lo": {
 			System.out.println("멍! 로그 목록");
+
 			LogDAO logDAO = new LogDAO();
 			List<LogDTO> logList = logDAO.selectAll();
 			System.out.println("조회된 logList 개수 : " + logList.size());
 
 			request.setAttribute("logList", logList);
-			request.getRequestDispatcher("/apps/doglog/doglog_list.jsp").forward(request, response);
-			break;}
+			request.getRequestDispatcher("/app/doglog/doglog_list.jsp").forward(request, response);
+			break;
+		}
 
 		case "/log/detail.lo": {
 			System.out.println("멍! 로그 상세");
@@ -84,36 +88,32 @@ public class LogController extends HttpServlet {
 			request.setAttribute("imageList", imageList);
 			request.setAttribute("commentList", commentList);
 
-			request.getRequestDispatcher("/apps/doglog/doglog_detail.jsp").forward(request, response);
+			request.getRequestDispatcher("/app/doglog/doglog_detail.jsp").forward(request, response);
 			break;
 		}
-			
-
 
 		case "/log/write.lo":
 			System.out.println("멍! 로그 작성 페이지");
-			request.getRequestDispatcher("/apps/doglog/doglog_write.jsp").forward(request, response);
+			request.getRequestDispatcher("/app/doglog/doglog_write.jsp").forward(request, response);
 			break;
 
 		case "/log/writeOk.lo": {
 			System.out.println("멍! 로그 작성 완료 진입");
 
+			HttpSession session = request.getSession();
+			Object userNumberObj = session.getAttribute("userNumber");
 
-//			HttpSession session = request.getSession();
-//			Object userNumberObj = session.getAttribute("userNumber");
-//
-//			if (userNumberObj == null) {
-//				response.sendRedirect(request.getContextPath() + "/member/login.me");
-//				return;
-//			}
-//
-//			int userNumber = (Integer) userNumberObj; 세션에서 받아오기
+			if (userNumberObj == null) {
+				response.sendRedirect(request.getContextPath() + "/member/login.me");
+				return;
+			}
+
+			int userNumber = (Integer) userNumberObj;
 			String logTitle = request.getParameter("logTitle");
 			String logPost = request.getParameter("logPost");
-			
 
-			if (logTitle == null || logTitle.trim().isEmpty() ||
-				logPost == null || logPost.trim().isEmpty()) {
+			if (logTitle == null || logTitle.trim().isEmpty()
+					|| logPost == null || logPost.trim().isEmpty()) {
 				response.sendRedirect(request.getContextPath() + "/log/write.lo");
 				return;
 			}
@@ -127,7 +127,6 @@ public class LogController extends HttpServlet {
 			LogDAO logDAO = new LogDAO();
 			logDAO.insert(logDTO);
 
-			// insert 후 DTO 안에 logNumber 세팅
 			int logNumber = logDTO.getLogNumber();
 
 			// 2. 이미지 저장
@@ -152,18 +151,14 @@ public class LogController extends HttpServlet {
 				String savedFileName = System.currentTimeMillis() + "_" + submittedFileName;
 				File saveFile = new File(uploadDir, savedFileName);
 				part.write(saveFile.getAbsolutePath());
-				
-			
 
 				LogImgDTO logImgDTO = new LogImgDTO();
 				logImgDTO.setLogNumber(logNumber);
-				logImgDTO.setLogImgName(savedFileName);
 				logImgDTO.setLogImgPath("/upload/doglog/" + savedFileName);
 
 				logImgDAO.insertImage(logImgDTO);
 			}
 
-			// 3. 방금 작성한 상세페이지로 이동
 			response.sendRedirect(request.getContextPath() + "/log/detail.lo?logNumber=" + logNumber);
 			break;
 		}
@@ -171,34 +166,67 @@ public class LogController extends HttpServlet {
 		case "/log/edit.lo": {
 			System.out.println("멍! 로그 수정 페이지");
 
+			Integer loginUserNumber = (Integer) request.getSession().getAttribute("userNumber");
+			if (loginUserNumber == null) {
+				response.sendRedirect(request.getContextPath() + "/member/login.me");
+				return;
+			}
+
 			int editLogNumber = Integer.parseInt(request.getParameter("logNumber"));
 			LogDAO editDAO = new LogDAO();
 			LogDTO editLog = editDAO.selectDetail(editLogNumber);
+
+			if (editLog == null) {
+				response.sendError(HttpServletResponse.SC_NOT_FOUND);
+				return;
+			}
+
+			if (editLog.getUserNumber() != loginUserNumber) {
+				response.sendError(HttpServletResponse.SC_FORBIDDEN);
+				return;
+			}
 
 			LogImgDAO editImgDAO = new LogImgDAO();
 			List<LogImgDTO> imageList = editImgDAO.selectImageList(editLogNumber);
 
 			request.setAttribute("log", editLog);
 			request.setAttribute("imageList", imageList);
-			request.getRequestDispatcher("/apps/doglog/doglog_edit.jsp").forward(request, response);
+			request.getRequestDispatcher("/app/doglog/doglog_edit.jsp").forward(request, response);
 			break;
 		}
 
 		case "/log/editOk.lo": {
 			System.out.println("멍! 로그 수정 완료 진입");
 
+			Integer loginUserNumber = (Integer) request.getSession().getAttribute("userNumber");
+			if (loginUserNumber == null) {
+				response.sendRedirect(request.getContextPath() + "/member/login.me");
+				return;
+			}
+
 			int logNumber = Integer.parseInt(request.getParameter("logNumber"));
 			String logTitle = request.getParameter("logTitle");
 			String logPost = request.getParameter("logPost");
 			String deleteImageIds = request.getParameter("deleteImageIds");
+
+			LogDAO updateDAO = new LogDAO();
+			LogDTO originLog = updateDAO.select(logNumber);
+
+			if (originLog == null) {
+				response.sendError(HttpServletResponse.SC_NOT_FOUND);
+				return;
+			}
+
+			if (originLog.getUserNumber() != loginUserNumber) {
+				response.sendError(HttpServletResponse.SC_FORBIDDEN);
+				return;
+			}
 
 			// 1. 게시글 수정
 			LogDTO updateLog = new LogDTO();
 			updateLog.setLogNumber(logNumber);
 			updateLog.setLogTitle(logTitle);
 			updateLog.setLogPost(logPost);
-
-			LogDAO updateDAO = new LogDAO();
 			updateDAO.update(updateLog);
 
 			LogImgDAO logImgDAO = new LogImgDAO();
@@ -237,7 +265,6 @@ public class LogController extends HttpServlet {
 
 				LogImgDTO logImgDTO = new LogImgDTO();
 				logImgDTO.setLogNumber(logNumber);
-				logImgDTO.setLogImgName(savedFileName);
 				logImgDTO.setLogImgPath("/upload/doglog/" + savedFileName);
 				logImgDAO.insertImage(logImgDTO);
 			}
@@ -246,17 +273,18 @@ public class LogController extends HttpServlet {
 			break;
 		}
 
-		case "/log/deleteOk.lo":{
+		case "/log/deleteOk.lo": {
 			System.out.println("멍! 로그 삭제 완료");
-//			HttpSession session = request.getSession();
-//			Object userNumberObj = session.getAttribute("userNumber");
-//
-//			if (userNumberObj == null) {
-//				response.sendRedirect(request.getContextPath() + "/member/login.me");
-//				return;
-//			}
-//
-//			int userNumber = (Integer) userNumberObj; 세션에서 받아오기
+
+			HttpSession session = request.getSession();
+			Object userNumberObj = session.getAttribute("userNumber");
+
+			if (userNumberObj == null) {
+				response.sendRedirect(request.getContextPath() + "/member/login.me");
+				return;
+			}
+
+			int userNumber = (Integer) userNumberObj;
 			int logNumber = Integer.parseInt(request.getParameter("logNumber"));
 
 			LogDAO logDAO = new LogDAO();
@@ -265,24 +293,24 @@ public class LogController extends HttpServlet {
 
 			LogDTO log = logDAO.select(logNumber);
 
-			// 게시글이 없을 때
 			if (log == null) {
+				response.sendError(HttpServletResponse.SC_NOT_FOUND);
 				return;
 			}
 
-			// 작성자 본인인지 확인
 			if (log.getUserNumber() != userNumber) {
+				response.sendError(HttpServletResponse.SC_FORBIDDEN);
 				return;
 			}
-			// 본인일 때만 삭제
+
 			logImgDAO.deleteImageByLogNumber(logNumber);
 			logCommentDAO.deleteByLogNumber(logNumber);
 			logDAO.delete(logNumber);
 
 			response.sendRedirect(request.getContextPath() + "/log/list.lo");
-			break;	
+			break;
 		}
-		// 댓글 작성 완료
+
 		case "/comment/writeOk.lc":
 			System.out.println("댓글 작성 완료");
 
@@ -307,9 +335,8 @@ public class LogController extends HttpServlet {
 			response.sendRedirect(request.getContextPath() + "/log/detail.lo?logNumber=" + writeLogNumber);
 			break;
 
-		// 댓글 수정 페이지
 		case "/comment/edit.lc":
-			System.out.println("수정 페이지");
+			System.out.println("댓글 수정 페이지");
 
 			int editCommentNumber = Integer.parseInt(request.getParameter("commentNumber"));
 			int editLogNumber = Integer.parseInt(request.getParameter("logNumber"));
@@ -336,10 +363,9 @@ public class LogController extends HttpServlet {
 
 			request.setAttribute("comment", editComment);
 			request.setAttribute("logNumber", editLogNumber);
-			request.getRequestDispatcher("/apps/doglog/doglog_comment_edit.jsp").forward(request, response);
+			request.getRequestDispatcher("/app/doglog/doglog_comment_edit.jsp").forward(request, response);
 			break;
 
-		// 댓글 수정 완료
 		case "/comment/editOk.lc":
 			System.out.println("댓글 수정 완료");
 
@@ -378,7 +404,6 @@ public class LogController extends HttpServlet {
 			response.sendRedirect(request.getContextPath() + "/log/detail.lo?logNumber=" + updateLogNumber);
 			break;
 
-		// 댓글 삭제 완료
 		case "/comment/deleteOk.lc":
 			System.out.println("댓글 삭제 완료");
 
@@ -412,8 +437,8 @@ public class LogController extends HttpServlet {
 			deleteCommentDAO.deleteComment(deleteCommentDTO);
 
 			response.sendRedirect(request.getContextPath() + "/log/detail.lo?logNumber=" + deleteLogNumber);
-			break;		
-		
+			break;
+
 		default:
 			System.out.println("잘못된 요청");
 			break;
