@@ -24,6 +24,7 @@
 		<url-pattern>*.us</url-pattern>
 	</servlet-mapping>
 
+
 	<!-- 멍로그 매핑 -->
 	<servlet>
 		<servlet-name>log</servlet-name>
@@ -53,4 +54,5 @@
 		<servlet-name>admin</servlet-name>
 		<url-pattern>*.ad</url-pattern>
 	</servlet-mapping>
+	
 </web-app>

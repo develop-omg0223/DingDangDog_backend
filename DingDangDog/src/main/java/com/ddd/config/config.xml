@@ -11,10 +11,9 @@
 		<!-- 쿼리에 보내는 파라미터가 null인 경우 오류가 발생하는 것을 방지 설정 -->
 		<setting name="jdbcTypeForNull" value="NULL"></setting>
 	</settings>
-
 	<!-- DTO 별칭 설정 -->
 	<typeAliases>
-		<typeAlias type="com.ddd.app.user.dto.UserDTO"
+		<typeAlias type="com.ddd.app.user.dto.UserDTO" 
 			alias="UserDTO" />
 		<typeAlias type="com.ddd.app.user.dto.UserCommonDTO"
 			alias="UserCommonDTO" />
@@ -65,10 +64,10 @@
 	<!-- Mapper.xml 등록 추후 필요 -->
 	<mappers>
 		<mapper resource="com/ddd/mapper/UserMapper.xml" />
+		<mapper resource="com/ddd/mapper/LogMapper.xml" />
 		<mapper resource="com/ddd/mapper/AdminUserMapper.xml" />
 		<mapper resource="com/ddd/mapper/CareMapper.xml" />
 		<mapper resource="com/ddd/mapper/ArchaiveMapper.xml" />
-		<mapper resource="com/ddd/mapper/LogMapper.xml" />
 		<mapper resource="com/ddd/mapper/MatchingMapper.xml" />
 	</mappers>
 	

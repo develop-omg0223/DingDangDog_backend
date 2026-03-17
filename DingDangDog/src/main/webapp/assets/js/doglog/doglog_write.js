@@ -1,19 +1,36 @@
+const form = document.getElementById("doglogWriteForm");
 const imageUpload = document.getElementById("imageUpload");
 const thumbnailPreview = document.getElementById("thumbnailPreview");
 const writeContentEditor = document.getElementById("writeContentEditor");
 const imgPlaceholder = document.querySelector(".img-placeholder");
 const titleInput = document.querySelector(".write-title input");
-const btnSave = document.querySelector(".btn-save");
+const hiddenPostInput = document.getElementById("logPostHidden");
 
 let uploadedImages = [];
 
-if (!imageUpload || !thumbnailPreview || !writeContentEditor || !imgPlaceholder || !titleInput || !btnSave) {
+if (
+  !form ||
+  !imageUpload ||
+  !thumbnailPreview ||
+  !writeContentEditor ||
+  !imgPlaceholder ||
+  !titleInput ||
+  !hiddenPostInput
+) {
   throw new Error("필요한 요소를 찾을 수 없습니다.");
 }
 
-imageUpload.addEventListener("change", handleImageUpload);
-writeContentEditor.addEventListener("click", handleEditorClick);
-btnSave.addEventListener("click", handleSubmit);
+init();
+
+function init() {
+  bindEvents();
+  syncEditorToHidden();
+}
+
+function bindEvents() {
+  imageUpload.addEventListener("change", handleImageUpload);
+  form.addEventListener("submit", handleSubmit);
+}
 
 function handleImageUpload(event) {
   const files = Array.from(event.target.files || []);
@@ -25,6 +42,8 @@ function handleImageUpload(event) {
     return;
   }
 
+  uploadedImages = [];
+
   let loadedCount = 0;
 
   imageFiles.forEach((file) => {
@@ -33,77 +52,20 @@ function handleImageUpload(event) {
     reader.onload = (e) => {
       uploadedImages.push({
         id: Date.now() + Math.random(),
-        src: e.target.result
+        src: e.target.result,
+        file: file
       });
 
       loadedCount += 1;
 
       if (loadedCount === imageFiles.length) {
         renderThumbnail();
-        appendImagesToEditor(imageFiles.length);
+        syncEditorToHidden();
       }
     };
 
     reader.readAsDataURL(file);
   });
-
-  imageUpload.value = "";
-}
-
-function appendImagesToEditor(newImageCount) {
-  const newImages = uploadedImages.slice(-newImageCount);
-
-  newImages.forEach((image) => {
-    const wrapper = createImageWrapper(image);
-    writeContentEditor.appendChild(wrapper);
-    writeContentEditor.appendChild(document.createElement("br"));
-  });
-}
-
-function createImageWrapper(image) {
-  const wrapper = document.createElement("div");
-  wrapper.className = "editor-image-item";
-  wrapper.dataset.imageId = image.id;
-  wrapper.contentEditable = "false";
-
-  const deleteButton = document.createElement("button");
-  deleteButton.type = "button";
-  deleteButton.className = "btn-editor-image-delete";
-  deleteButton.dataset.action = "delete-image";
-  deleteButton.textContent = "×";
-
-  const img = document.createElement("img");
-  img.src = image.src;
-  img.alt = "첨부 이미지";
-
-  wrapper.appendChild(deleteButton);
-  wrapper.appendChild(img);
-
-  return wrapper;
-}
-
-function handleEditorClick(event) {
-  const deleteButton = event.target.closest('[data-action="delete-image"]');
-  if (!deleteButton) return;
-
-  const imageItem = deleteButton.closest(".editor-image-item");
-  if (!imageItem) return;
-
-  const imageId = Number(imageItem.dataset.imageId);
-  removeImage(imageId, imageItem);
-}
-
-function removeImage(imageId, imageElement) {
-  uploadedImages = uploadedImages.filter((image) => image.id !== imageId);
-
-  const nextNode = imageElement.nextSibling;
-  imageElement.remove();
-
-  if (nextNode && nextNode.nodeName === "BR") {
-    nextNode.remove();
-  }
-
-  renderThumbnail();
 }
 
 function renderThumbnail() {
@@ -120,28 +82,41 @@ function renderThumbnail() {
 }
 
 function handleSubmit(event) {
-  event.preventDefault();
-
   const titleValue = titleInput.value.trim();
+  const contentText = writeContentEditor.innerText.trim();
+
+  syncEditorToHidden();
 
   if (!uploadedImages.length) {
+    event.preventDefault();
     alert("이미지는 최소 1장 이상 첨부해야 합니다.");
     return;
   }
 
   if (!titleValue) {
+    event.preventDefault();
     alert("제목을 입력해주세요.");
     titleInput.focus();
+    return;
+  }
+
+  if (!contentText) {
+    event.preventDefault();
+    alert("내용을 입력해주세요.");
+    writeContentEditor.focus();
     return;
   }
 
   const submitData = {
     title: titleValue,
     thumbnail: uploadedImages[0]?.src || "",
-    content: writeContentEditor.innerHTML,
+    content: hiddenPostInput.value,
     imageCount: uploadedImages.length
   };
 
   console.log("등록 데이터", submitData);
-  alert("저장 가능 상태입니다.");
+}
+
+function syncEditorToHidden() {
+  hiddenPostInput.value = writeContentEditor.innerText.trim();
 }
