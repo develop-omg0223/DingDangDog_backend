@@ -29,7 +29,6 @@ function init() {
 
 function bindEvents() {
   imageUpload.addEventListener("change", handleImageUpload);
-  writeContentEditor.addEventListener("click", handleEditorClick);
   form.addEventListener("submit", handleSubmit);
 }
 
@@ -42,6 +41,8 @@ function handleImageUpload(event) {
     imageUpload.value = "";
     return;
   }
+
+  uploadedImages = [];
 
   let loadedCount = 0;
 
@@ -59,73 +60,12 @@ function handleImageUpload(event) {
 
       if (loadedCount === imageFiles.length) {
         renderThumbnail();
-        appendImagesToEditor(imageFiles.length);
+        syncEditorToHidden();
       }
     };
 
     reader.readAsDataURL(file);
   });
-
-  imageUpload.value = "";
-}
-
-function appendImagesToEditor(newImageCount) {
-  const newImages = uploadedImages.slice(-newImageCount);
-
-  newImages.forEach((image) => {
-    const wrapper = createImageWrapper(image);
-    writeContentEditor.appendChild(wrapper);
-    writeContentEditor.appendChild(document.createElement("br"));
-  });
-
-  syncEditorToHidden();
-}
-
-function createImageWrapper(image) {
-  const wrapper = document.createElement("div");
-  wrapper.className = "editor-image-item";
-  wrapper.dataset.imageId = image.id;
-  wrapper.contentEditable = "false";
-
-  const deleteButton = document.createElement("button");
-  deleteButton.type = "button";
-  deleteButton.className = "btn-editor-image-delete";
-  deleteButton.dataset.action = "delete-image";
-  deleteButton.textContent = "×";
-
-  const img = document.createElement("img");
-  img.src = image.src;
-  img.alt = "첨부 이미지";
-
-  wrapper.appendChild(deleteButton);
-  wrapper.appendChild(img);
-
-  return wrapper;
-}
-
-function handleEditorClick(event) {
-  const deleteButton = event.target.closest('[data-action="delete-image"]');
-  if (!deleteButton) return;
-
-  const imageItem = deleteButton.closest(".editor-image-item");
-  if (!imageItem) return;
-
-  const imageId = Number(imageItem.dataset.imageId);
-  removeImage(imageId, imageItem);
-}
-
-function removeImage(imageId, imageElement) {
-  uploadedImages = uploadedImages.filter((image) => image.id !== imageId);
-
-  const nextNode = imageElement.nextSibling;
-  imageElement.remove();
-
-  if (nextNode && nextNode.nodeName === "BR") {
-    nextNode.remove();
-  }
-
-  renderThumbnail();
-  syncEditorToHidden();
 }
 
 function renderThumbnail() {
@@ -143,7 +83,7 @@ function renderThumbnail() {
 
 function handleSubmit(event) {
   const titleValue = titleInput.value.trim();
-  const contentText = writeContentEditor.textContent.trim();
+  const contentText = writeContentEditor.innerText.trim();
 
   syncEditorToHidden();
 
@@ -170,7 +110,7 @@ function handleSubmit(event) {
   const submitData = {
     title: titleValue,
     thumbnail: uploadedImages[0]?.src || "",
-    content: writeContentEditor.innerHTML,
+    content: hiddenPostInput.value,
     imageCount: uploadedImages.length
   };
 
@@ -178,5 +118,5 @@ function handleSubmit(event) {
 }
 
 function syncEditorToHidden() {
-  hiddenPostInput.value = writeContentEditor.innerHTML.trim();
+  hiddenPostInput.value = writeContentEditor.innerText.trim();
 }

@@ -25,17 +25,22 @@ public class LogCommentDAO {
 	}
 
 	// 댓글 등록
-	public void insertComment(LogCommentDTO logCommentDTO) {
-		sqlSession.insert("log.insertComment", logCommentDTO);
+	public int insertComment(LogCommentDTO logCommentDTO) {
+		return sqlSession.insert("log.insertComment", logCommentDTO);
 	}
 
 	// 댓글 수정
-	public void updateComment(LogCommentDTO logCommentDTO) {
-		sqlSession.update("log.updateComment", logCommentDTO);
+	public int updateComment(LogCommentDTO logCommentDTO) {
+		return sqlSession.update("log.updateComment", logCommentDTO);
 	}
 
 	// 댓글 삭제
-	public void deleteComment(LogCommentDTO logCommentDTO) {
-		sqlSession.delete("log.deleteComment", logCommentDTO);
+	public int deleteComment(LogCommentDTO logCommentDTO) {
+		return sqlSession.delete("log.deleteComment", logCommentDTO);
+	}
+
+	// 게시글 기준 댓글 전체 삭제
+	public int deleteByLogNumber(int logNumber) {
+		return sqlSession.delete("log.deleteCommentsByLogNumber", logNumber);
 	}
 }

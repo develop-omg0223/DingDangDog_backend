@@ -159,33 +159,22 @@ footer{
 
 /* 내용 */
 
-.detail-main-post{
-  min-height:360px;
+.detail-main-post,
+.edit-content{
+  width:920px;
+  height:480px;
+  min-width:920px;
+  min-height:480px;
+  max-width:920px;
+  max-height:480px;
   border:1px solid #b6b6b6;
   border-radius:5px;
   padding:20px;
-  flex:1;
-  margin-left:20px;
   font-size:20px;
-  color:#333;
   line-height:1.6;
   white-space:pre-wrap;
   word-break:break-word;
-}
-
-/* edit textarea */
-
-.edit-content{
-  min-height:360px;
-  border:1px solid #b6b6b6;
-  border-radius:5px;
-  padding:20px;
-  flex:1;
-  margin-left:20px;
-  font-size:20px;
-  line-height:1.6;
-  resize:none;
-  outline:none;
+  overflow-y:auto;
   font-family:"HannaPro", sans-serif;
 }
 

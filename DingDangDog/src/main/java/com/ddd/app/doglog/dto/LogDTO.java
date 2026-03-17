@@ -11,6 +11,8 @@ public class LogDTO {
 	private Date logModifyDate;
 	private String userNickname;
 	private String representativeImgPath;
+	
+	
 
 	public LogDTO() {
 	}

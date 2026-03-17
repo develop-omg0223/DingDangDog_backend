@@ -218,6 +218,6 @@ function handleSubmit(event) {
     return;
   }
 
-  alert("수정 가능합니다.");
+  alert("수정 완료되었습니다.");
   form.submit();
 }

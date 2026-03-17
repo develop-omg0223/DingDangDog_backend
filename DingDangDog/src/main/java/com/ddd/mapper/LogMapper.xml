@@ -64,17 +64,22 @@
 
 	<!-- 게시글 등록 -->
 	<insert id="insert" parameterType="LogDTO">
+		<selectKey keyProperty="logNumber" resultType="int" order="BEFORE">
+			SELECT seq_log.NEXTVAL FROM dual
+		</selectKey>
 		INSERT INTO ddd_log (
 			log_number,
 			user_number,
 			log_title,
 			log_post,
-			log_date
+			log_date,
+			log_modify_date
 		) VALUES (
-			seq_log.NEXTVAL,
+			#{logNumber},
 			#{userNumber},
 			#{logTitle},
 			#{logPost},
+			SYSDATE,
 			SYSDATE
 		)
 	</insert>
@@ -190,7 +195,7 @@
 	</update>
 
 	<!-- 댓글 삭제 -->
-	<delete id="deleteComment" parameterType="LogCommentDTO">
+	<delete id="deleteCommentsByLogNumber" parameterType="LogCommentDTO">
 		DELETE FROM ddd_log_comment
 		WHERE comment_number = #{commentNumber}
 		  AND user_number = #{userNumber}
@@ -228,14 +233,16 @@
 	</select>
 
 	<!-- 이미지 등록 -->
-	<insert id="insertImage" parameterType="LogImgDTO">
+	<insert id="insertImage" parameterType="com.ddd.app.doglog.dto.LogImgDTO">
 		INSERT INTO ddd_log_img (
-			log_img_number,	
+			log_img_number,
 			log_number,
+			log_img_name,
 			log_img_path
 		) VALUES (
 			seq_log_img.NEXTVAL,
 			#{logNumber},
+			#{logImgName},
 			#{logImgPath}
 		)
 	</insert>

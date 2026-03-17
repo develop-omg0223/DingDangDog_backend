@@ -3,14 +3,16 @@ package com.ddd.app.doglog.dto;
 public class LogImgDTO {
 	private int logImgNumber;
 	private int logNumber;
+	private String logImgName;
 	private String logImgPath;
 
 	public LogImgDTO() {
 	}
 
-	public LogImgDTO(int logImgNumber, int logNumber, String logImgPath) {
+	public LogImgDTO(int logImgNumber, int logNumber, String logImgName, String logImgPath) {
 		this.logImgNumber = logImgNumber;
 		this.logNumber = logNumber;
+		this.logImgName = logImgName;
 		this.logImgPath = logImgPath;
 	}
 
@@ -30,6 +32,14 @@ public class LogImgDTO {
 		this.logNumber = logNumber;
 	}
 
+	public String getLogImgName() {
+		return logImgName;
+	}
+
+	public void setLogImgName(String logImgName) {
+		this.logImgName = logImgName;
+	}
+
 	public String getLogImgPath() {
 		return logImgPath;
 	}
@@ -40,7 +50,7 @@ public class LogImgDTO {
 
 	@Override
 	public String toString() {
-		return "LogImgDTO [logImgNumber=" + logImgNumber + ", logNumber=" + logNumber + ", logImgPath=" + logImgPath
-				+ "]";
+		return "LogImgDTO [logImgNumber=" + logImgNumber + ", logNumber=" + logNumber
+				+ ", logImgName=" + logImgName + ", logImgPath=" + logImgPath + "]";
 	}
 }

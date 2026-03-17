@@ -10,6 +10,7 @@
 	List<LogImgDTO> imageList = (List<LogImgDTO>) request.getAttribute("imageList");
 	List<LogCommentDTO> commentList = (List<LogCommentDTO>) request.getAttribute("commentList");
 	String contextPath = request.getContextPath();
+	Integer loginUserNumber = (Integer) session.getAttribute("userNumber");
 %>
 
 <!DOCTYPE html>
@@ -69,9 +70,7 @@
               %>
             </div>
 
-            <div class="detail-main-post" id="detailMainPost">
-              <%= log != null && log.getLogPost() != null ? log.getLogPost() : "내용 없음" %>
-            </div>
+            <div class="detail-main-post" id="detailMainPost"><%= log != null && log.getLogPost() != null ? log.getLogPost() : "내용 없음" %></div>
           </div>
 
           <hr />
@@ -97,18 +96,21 @@
                     <%= comment.getCommentPost() != null ? comment.getCommentPost() : "" %>
                   </div>
 
-                  <div class="comment-btn-wrap">
-                    <a href="<%= contextPath %>/comment/edit.lc?commentNumber=<%= comment.getCommentNumber() %>&logNumber=<%= log != null ? log.getLogNumber() : 0 %>"
-                       class="btn btn-comment-edit">
-                      수정
-                    </a>
-
-                    <a href="<%= contextPath %>/comment/deleteOk.lc?commentNumber=<%= comment.getCommentNumber() %>&logNumber=<%= log != null ? log.getLogNumber() : 0 %>"
-                       class="btn btn-comment-delete"
-                       data-action="delete-comment">
-                      삭제
-                    </a>
-                  </div>
+				<% if (loginUserNumber != null && comment.getUserNumber() == loginUserNumber) { %>
+				  <div class="comment-btn-wrap">
+				    <a href="<%= contextPath %>/comment/edit.lc?commentNumber=<%= comment.getCommentNumber() %>&logNumber=<%= log != null ? log.getLogNumber() : 0 %>"
+				       class="btn btn-comment-edit">
+				      수정
+				    </a>
+				
+				    <a href="<%= contextPath %>/comment/deleteOk.lc?commentNumber=<%= comment.getCommentNumber() %>&logNumber=<%= log != null ? log.getLogNumber() : 0 %>"
+				       class="btn btn-comment-delete"
+				       data-action="delete-comment"
+				       onclick="return confirm('댓글을 삭제하시겠습니까?');">
+				      삭제
+				    </a>
+				  </div>
+				<% } %>
                 </div>
               </div>
             <%
