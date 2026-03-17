@@ -75,11 +75,10 @@
 								<div class="user-id">${user.userId}</div>
 								<div class="user-shelter-name">${user.shelterName}</div>
 								<div class="user-phone">${user.userPhone}</div>
-								<div class="user-email">${user.userEmail}</div>
-								<c:if test="${user.shelterCertification == 'N'}">
+								<div class="user-email">${user.userEmail}</div> <c:if
+									test="${user.shelterCertification == 'N'}">
 									<div class="user-confirm-check confirm-wait">인증대기</div>
-								</c:if>
-								<c:if test="${user.shelterCertification == 'Y'}">
+								</c:if> <c:if test="${user.shelterCertification == 'Y'}">
 									<div class="user-confirm-check">인증완료</div>
 								</c:if>
 							</a>
@@ -101,7 +100,7 @@
 
 				<!-- 페이지네이션 -->
 				<!-- 페이지네이션 정리 -->
-
+				<!-- 
 				<div class="pagination">
 					<ul class="page-list">
 						<li>
@@ -129,6 +128,40 @@
 								<span>&gt;</span>
 							</button>
 						</li>
+					</ul>
+				</div> -->
+
+				<div class="pagination">
+					<ul>
+						<c:if test="${prev}">
+							<li><a
+								href="${pageContext.request.contextPath}/admin/userListOk.ad?page=${startPage - 1}&userType=${userType}"
+								class="prev">&lt;</a></li>
+						</c:if>
+
+						<c:set var="realStartPage"
+							value="${startPage < 0 ? 0 : startPage}" />
+
+						<c:forEach var="i" begin="${realStartPage}" end="${endPage}">
+							<c:choose>
+								<c:when test="${!(i == page)}">
+									<li><a
+										href="${pageContext.request.contextPath}/admin/userListOk.ad?page=${i}&userType=${userType}">
+											<c:out value="${i}" />
+									</a></li>
+								</c:when>
+								<c:otherwise>
+									<li><a href="#" class="active"> <c:out value="${i}" />
+									</a></li>
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>
+
+						<c:if test="${next}">
+							<li><a
+								href="${pageContext.request.contextPath}/admin/userListOk.ad?page=${endPage + 1}&userType=${userType}"
+								class="next">&gt;</a></li>
+						</c:if>
 					</ul>
 				</div>
 
