@@ -28,16 +28,62 @@ public class AdminDAO {
 		return sqlSession.selectOne("admin.getTotalShelter");
 	}
 
+	// 일반회원 검색후 인원수 조회
+	public int getTotalCommonSearch(String searchType, String keyword) {
+		System.out.println("일반회원 검색후 인원수 조회");
+		if ("id".equals(searchType)) {
+			return sqlSession.selectOne("admin.getTotalCommonByUserId", keyword);
+		} else if ("nickname".equals(searchType)) {
+			return sqlSession.selectOne("admin.getTotalCommonByUserNickname", keyword);
+		}
+		return getTotalCommon();
+	}
+
+	// 보호소회원 검색후 인원수 조회
+	public int getTotalShelterSearch(String searchType, String keyword) {
+		System.out.println("보호소회원 검색후 인원수 조회");
+		if ("id".equals(searchType)) {
+			return sqlSession.selectOne("admin.getTotalShelterByUserId", keyword);
+		} else if ("nickname".equals(searchType)) {
+			return sqlSession.selectOne("admin.getTotalShelterByUserNickname", keyword);
+		}
+		return getTotalShelter();
+	}
+
 	// 일반회원 전체 목록 조회
 	public List<AdminUserDTO> selectCommonList(Map<String, Integer> pageMap) {
 		System.out.println("일반회원 전체 목록 조회");
 		return sqlSession.selectList("admin.selectCommonList", pageMap);
 	}
 
+	// 일반회원 검색 목록 조회
+	public List<AdminUserDTO> selectCommonSearchList(Map<String, Object> searchMap) {
+		System.out.println("일반회원 검색 목록 조회");
+		String searchType = (String) searchMap.get("searchType");
+		if ("id".equals(searchType)) {
+			return sqlSession.selectList("admin.selectCommonListByUserId", searchMap);
+		} else if ("nickname".equals(searchType)) {
+			return sqlSession.selectList("admin.selectCommonListByUserNickname", searchMap);
+		}
+		return sqlSession.selectList("admin.selectCommonList", searchMap);
+	}
+
 	// 보호소회원 전체 목록 조회
 	public List<AdminUserDTO> selectShelterList(Map<String, Integer> pageMap) {
 		System.out.println("보호손회원 전체 목록 조회");
 		return sqlSession.selectList("admin.selectShelterList", pageMap);
+	}
+
+	// 보호소회원 검색 목록 조회
+	public List<AdminUserDTO> selectShelterSearchList(Map<String, Object> searchMap) {
+		System.out.println("보호소회원 검색 목록 조회");
+		String searchType = (String) searchMap.get("searchType");
+		if ("id".equals(searchType)) {
+			return sqlSession.selectList("admin.selectShelterListByUserId", searchMap);
+		} else if ("nickname".equals(searchType)) {
+			return sqlSession.selectList("admin.selectShelterListByUserNickname", searchMap);
+		}
+		return sqlSession.selectList("admin.selectShelterList", searchMap);
 	}
 
 	// 일반회원 상세 조회

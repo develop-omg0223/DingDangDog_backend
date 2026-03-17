@@ -9,6 +9,20 @@
 		SELECT COUNT(user_number)
 		FROM ddd_user WHERE user_type = 'C'
 	</select>
+	<!-- 아이디 검색 총회원 -->
+	<select id="getTotalCommonByUserId" parameterType="string"
+		resultType="int">
+		SELECT COUNT(user_number) FROM ddd_user
+		WHERE user_type =
+		'C' AND user_id LIKE '%' || #{keyword} || '%'
+	</select>
+	<!-- 닉네임 검색 총회원 -->
+	<select id="getTotalCommonByUserNickname" parameterType="string"
+		resultType="int">
+		SELECT COUNT(user_number) FROM ddd_user
+		WHERE user_type =
+		'C' AND user_nickname LIKE '%' || #{keyword} || '%'
+	</select>
 
 	<!-- 일반회원 전체조회 -->
 	<select id="selectCommonList" parameterType="map"
@@ -26,8 +40,37 @@
     WHERE rnum BETWEEN #{startRow} AND #{endRow}
 ]]>
 	</select>
+	<!-- 일반회원 전체조회 + 아이ㅣ디검색 -->
+	<select id="selectCommonListByUserId" parameterType="map"
+		resultType="AdminUserDTO">
+<![CDATA[
+    SELECT * FROM (
+        SELECT ROWNUM AS rnum, subquery.* FROM (
+            SELECT user_number, user_id, user_name, user_nickname, user_phone, user_email
+            FROM ddd_user
+            WHERE user_type = 'C' AND user_id LIKE '%' || #{keyword} || '%'
+            ORDER BY user_number DESC
+        ) subquery
+    ) WHERE rnum BETWEEN #{startRow} AND #{endRow}
+]]>
+	</select>
+	<!-- 일반회원 전체조회 + 닉네임검색 -->
+	<select id="selectCommonListByUserNickname" parameterType="map"
+		resultType="AdminUserDTO">
+<![CDATA[
+    SELECT * FROM (
+        SELECT ROWNUM AS rnum, subquery.* FROM (
+            SELECT user_number, user_id, user_name, user_nickname, user_phone, user_email
+            FROM ddd_user
+            WHERE user_type = 'C' AND user_nickname LIKE '%' || #{keyword} || '%'
+            ORDER BY user_number DESC
+        ) subquery
+    ) WHERE rnum BETWEEN #{startRow} AND #{endRow}
+]]>
+	</select>
 
-	<!-- 일반회원 전체조회 + 검색 (아이디 닉네임) -->
+
+
 
 	<!-- 일반회원 상세 -->
 	<select id="selectCommonDetail" parameterType="int"
@@ -50,6 +93,22 @@
 		SELECT
 		COUNT(user_number) FROM ddd_user WHERE user_type = 'S'
 	</select>
+	<select id="getTotalShelterByUserId" parameterType="string"
+		resultType="int">
+		SELECT COUNT(user_number)
+		FROM ddd_user
+		WHERE user_type = 'S'
+		AND user_id LIKE '%' || #{keyword} || '%'
+	</select>
+	<select id="getTotalShelterByUserNickname"
+		parameterType="string" resultType="int">
+		SELECT COUNT(user_number)
+		FROM
+		ddd_user
+		WHERE user_type = 'S'
+		AND user_nickname LIKE '%' || #{keyword}
+		|| '%'
+	</select>
 
 	<!-- 보호소회원 전체조회 -->
 	<select id="selectShelterList" parameterType="map"
@@ -69,6 +128,35 @@
     WHERE rnum BETWEEN #{startRow} AND #{endRow}
 ]]>
 	</select>
+	<select id="selectShelterListByUserId" parameterType="map"
+		resultType="AdminUserDTO">
+<![CDATA[
+    SELECT * FROM (
+        SELECT ROWNUM AS rnum, subquery.* FROM (
+            SELECT u.user_number, u.user_id, s.shelter_name, u.user_phone, u.user_email, s.shelter_certification
+            FROM ddd_user u
+            JOIN ddd_user_shelter s ON u.user_number = s.user_number
+            WHERE u.user_type = 'S' AND u.user_id LIKE '%' || #{keyword} || '%'
+            ORDER BY s.shelter_certification ASC, u.user_number DESC
+        ) subquery
+    ) WHERE rnum BETWEEN #{startRow} AND #{endRow}
+]]>
+	</select>
+
+	<select id="selectShelterListByUserNickname" parameterType="map"
+		resultType="AdminUserDTO">
+<![CDATA[
+    SELECT * FROM (
+        SELECT ROWNUM AS rnum, subquery.* FROM (
+            SELECT u.user_number, u.user_id, s.shelter_name, u.user_phone, u.user_email, s.shelter_certification
+            FROM ddd_user u
+            JOIN ddd_user_shelter s ON u.user_number = s.user_number
+            WHERE u.user_type = 'S' AND u.user_nickname LIKE '%' || #{keyword} || '%'
+            ORDER BY s.shelter_certification ASC, u.user_number DESC
+        ) subquery
+    ) WHERE rnum BETWEEN #{startRow} AND #{endRow}
+]]>
+	</select>
 
 	<!-- 보호소회원 전체조회 + 검색 (아이디 닉네임) -->
 
@@ -81,7 +169,7 @@
 			u JOIN ddd_user_shelter s ON u.user_number = s.user_number LEFT JOIN ddd_file 
 			f ON u.user_number = f.user_number WHERE u.user_number = #{userNumber} -->
 		SELECT
-		u.user_id, s.shelter_name, u.user_nickname,
+		u.user_number, u.user_id, s.shelter_name, u.user_nickname,
 		s.shelter_address,
 		s.shelter_business_number, s.shelter_certification
 		FROM ddd_user u

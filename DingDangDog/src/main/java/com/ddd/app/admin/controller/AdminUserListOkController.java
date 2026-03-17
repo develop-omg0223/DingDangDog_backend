@@ -29,6 +29,10 @@ public class AdminUserListOkController implements Execute {
 			userType = "C";
 		}
 
+		String searchType = request.getParameter("searchType");
+		String keyword = request.getParameter("keyword");
+		boolean isSearch = keyword != null && !keyword.trim().isEmpty();
+
 		// 페이징 처리
 		String temp = request.getParameter("page");
 		int page = (temp == null) ? 1 : Integer.valueOf(temp); // 페이지 번호 기본값을 1로 설정하겠다
@@ -40,21 +44,44 @@ public class AdminUserListOkController implements Execute {
 		int startRow = (page - 1) * rowCount + 1; // 시작행(1, 11, 21, ..)
 		int endRow = startRow + rowCount - 1; // 끝행(10, 20, 30, ..)
 
-		Map<String, Integer> pageMap = new HashMap<>();
+		Map<String, Object> pageMap = new HashMap<>();
 		pageMap.put("startRow", startRow);
 		pageMap.put("endRow", endRow);
+
+		if (isSearch) {
+			pageMap.put("searchType", searchType);
+			pageMap.put("keyword", keyword);
+		}
 
 		// 회원 목록 조회
 
 		List<AdminUserDTO> userList = null;
 		int total = 0;
 
+//		if ("C".equals(userType)) {
+//			userList = adminDAO.selectCommonList(pageMap);
+//			total = adminDAO.getTotalCommon();
+//		} else if ("S".equals(userType)) {
+//			userList = adminDAO.selectShelterList(pageMap);
+//			total = adminDAO.getTotalShelter();
+//		}
+
 		if ("C".equals(userType)) {
-			userList = adminDAO.selectCommonList(pageMap);
-			total = adminDAO.getTotalCommon();
+			if (isSearch) {
+				userList = adminDAO.selectCommonSearchList(pageMap);
+				total = adminDAO.getTotalCommonSearch(searchType, keyword);
+			} else {
+				userList = adminDAO.selectCommonSearchList(pageMap);
+				total = adminDAO.getTotalCommon();
+			}
 		} else if ("S".equals(userType)) {
-			userList = adminDAO.selectShelterList(pageMap);
-			total = adminDAO.getTotalShelter();
+			if (isSearch) {
+				userList = adminDAO.selectShelterSearchList(pageMap);
+				total = adminDAO.getTotalShelterSearch(searchType, keyword);
+			} else {
+				userList = adminDAO.selectShelterSearchList(pageMap);
+				total = adminDAO.getTotalShelter();
+			}
 		}
 
 		// 페이징 정보 설정
@@ -75,6 +102,8 @@ public class AdminUserListOkController implements Execute {
 
 		request.setAttribute("userList", userList);
 		request.setAttribute("userType", userType);
+		request.setAttribute("searchType", searchType);
+		request.setAttribute("keyword", keyword);
 		request.setAttribute("total", total);
 		request.setAttribute("page", page);
 		request.setAttribute("startPage", startPage);
@@ -87,6 +116,9 @@ public class AdminUserListOkController implements Execute {
 		System.out.println("userList : " + userList);
 		System.out.println(
 				"startPage : " + startPage + ", endPage : " + endPage + ", prev : " + prev + ", next : " + next);
+		System.out.println("searchType : " + searchType);
+		System.out.println("keyword : " + keyword);
+		System.out.println("isSearch: " + isSearch);
 		System.out.println("=========================");
 
 		result.setPath("/app/admin/userlist/admin_user_list.jsp");

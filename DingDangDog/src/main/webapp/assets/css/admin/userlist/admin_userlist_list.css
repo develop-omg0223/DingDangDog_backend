@@ -4,11 +4,13 @@
 }
 
 .admin-list-row, .admin-list-header {
-	display: grid;
-	grid-template-columns: 120px 1fr 250px 300px 300px 300px;
+	/* 	display: grid;
+	grid-template-columns: 120px 1fr 250px 300px 300px 300px; */
+	display: flex;
 	padding-left: 10px;
 	line-height: 35px;
 	text-align: center;
+	padding-left: 10px;
 }
 
 .admin-list-header {
@@ -20,6 +22,38 @@
 	border-top: 1px solid #f0f0f0;
 	height: 35px;
 	color: black;
+}
+
+.user-number {
+	flex: 0.5;
+}
+
+.user-id {
+	flex: 1.2;
+}
+
+.user-name {
+	flex: 1;
+}
+
+.user-nickname {
+	flex: 1.2;
+}
+
+.user-phone {
+	flex: 1;
+}
+
+.user-email {
+	flex: 1.5;
+}
+
+.user-shelter-name {
+	flex: 2;
+}
+
+.user-confirm-check {
+	flex: 1;
 }
 
 .admin-main-section-header {

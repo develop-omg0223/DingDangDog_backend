@@ -16,7 +16,7 @@
 	<!-- 전체화면 -->
 	<main class="admin-main-container">
 		<!-- 사이드바 -->
-		<aside class="admin-sidebar"></aside>
+		<%@ include file="/app/admin/admin_sidebar.jsp" %>
 		<!-- 메인 화면 -->
 		<section class="admin-main-section">
 			<!-- 페이지 상단 (제목, 버튼) -->
@@ -45,7 +45,7 @@
 
 						<c:forEach var="user" items="${userList}">
 							<a
-								href="${pageContext.request.contextPath}/admin/userDetailOk.ad?userNumber=${user.userNumber}&userType=C"
+								href="${pageContext.request.contextPath}/admin/userCDetailOk.ad?userNumber=${user.userNumber}"
 								class="admin-list-row">
 								<div class="user-number">${user.userNumber}</div>
 								<div class="user-id">${user.userId}</div>
@@ -69,7 +69,7 @@
 
 						<c:forEach var="user" items="${userList}">
 							<a
-								href="${pageContext.request.contextPath}/admin/userDetailOk.ad?userNumber=${user.userNumber}&userType=S"
+								href="${pageContext.request.contextPath}/admin/userSDetailOk.ad?userNumber=${user.userNumber}"
 								class="admin-list-row">
 								<div class="user-number">${user.userNumber}</div>
 								<div class="user-id">${user.userId}</div>
@@ -90,13 +90,24 @@
 
 			<!-- 페이지 하단 (검색, 페이지네이션) -->
 			<div class="admin-main-section-footer">
-				<div class="search-box">
-					<select class="search-select admin-box-shadow">
-						<option>아이디</option>
-						<option>닉네임</option>
-					</select> <input type="text" class="search-input admin-box-shadow" />
-					<button class="btn-search admin-box-shadow">검색</button>
-				</div>
+				<form
+					action="${pageContext.request.contextPath}/admin/userListOk.ad"
+					method="get">
+
+					<input type="hidden" name="userType" value="${userType}">
+
+					<div class="search-box">
+						<select name="searchType" class="search-select admin-box-shadow">
+							<option value="id" ${searchType == 'id' ? 'selected' : ''}>아이디</option>
+							<option value="nickname"
+								${searchType == 'nickname' ? 'selected' : ''}>닉네임</option>
+						</select> <input type="text" name="keyword"
+							class="search-input admin-box-shadow" value="${keyword}" />
+
+
+						<button type="submit" class="btn-search admin-box-shadow">검색</button>
+					</div>
+				</form>
 
 				<!-- 페이지네이션 -->
 				<!-- 페이지네이션 정리 -->
@@ -132,35 +143,46 @@
 				</div> -->
 
 				<div class="pagination">
-					<ul>
+					<ul class="page-list">
+
 						<c:if test="${prev}">
-							<li><a
-								href="${pageContext.request.contextPath}/admin/userListOk.ad?page=${startPage - 1}&userType=${userType}"
-								class="prev">&lt;</a></li>
+							<li>
+								<button class="prev-btn"
+									onclick="location.href='${pageContext.request.contextPath}/admin/userListOk.ad?page=${startPage - 1}&userType=${userType}'">
+									<span>&lt;</span>
+								</button>
+							</li>
 						</c:if>
 
 						<c:set var="realStartPage"
 							value="${startPage < 0 ? 0 : startPage}" />
-
 						<c:forEach var="i" begin="${realStartPage}" end="${endPage}">
 							<c:choose>
 								<c:when test="${!(i == page)}">
-									<li><a
-										href="${pageContext.request.contextPath}/admin/userListOk.ad?page=${i}&userType=${userType}">
+									<li>
+										<button class="page-item"
+											onclick="location.href='${pageContext.request.contextPath}/admin/userListOk.ad?page=${i}&userType=${userType}'">
 											<c:out value="${i}" />
-									</a></li>
+										</button>
+									</li>
 								</c:when>
 								<c:otherwise>
-									<li><a href="#" class="active"> <c:out value="${i}" />
-									</a></li>
+									<li>
+										<button class="page-item current-page">
+											<c:out value="${i}" />
+										</button>
+									</li>
 								</c:otherwise>
 							</c:choose>
 						</c:forEach>
 
 						<c:if test="${next}">
-							<li><a
-								href="${pageContext.request.contextPath}/admin/userListOk.ad?page=${endPage + 1}&userType=${userType}"
-								class="next">&gt;</a></li>
+							<li>
+								<button class="next-btn"
+									onclick="location.href='${pageContext.request.contextPath}/admin/userListOk.ad?page=${endPage + 1}&userType=${userType}'">
+									<span>&gt;</span>
+								</button>
+							</li>
 						</c:if>
 					</ul>
 				</div>
