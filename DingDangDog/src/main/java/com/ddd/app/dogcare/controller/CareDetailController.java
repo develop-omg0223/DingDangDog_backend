@@ -27,7 +27,7 @@ public class CareDetailController implements Execute{
 		request.setAttribute("care", detail);
 
 		Result result = new Result();
-		result.setPath("/app/care/care-detail.jsp");
+		result.setPath("/app/care/care_detail_common.jsp");
 		result.setRedirect(false);
 
 		return result;

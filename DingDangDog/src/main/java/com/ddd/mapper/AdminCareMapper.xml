@@ -1,4 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="adminCare">
+
+	<!-- 1. 멍케어 목록 + 검색 -->
+	<select id="selectCareList" parameterType="String"
+		resultType="AdminCareDTO">
+		SELECT c.care_number, c.care_title, c.care_date,
+		u.user_nickname, c.care_write_date
+		FROM ddd_care c
+		JOIN ddd_user u
+		ON c.user_number = u.user_number
+		WHERE c.care_status = 'open'
+		AND (
+		c.care_title LIKE '%' || #{keyword} || '%'
+		OR u.user_nickname LIKE '%' || #{keyword} || '%'
+		)
+		ORDER BY c.care_date ASC
+	</select>
+
+
+	<!-- 2. 상세정보 -->
+	<select id="selectCareDetail" parameterType="int"
+		resultType="AdminCareDTO">
+		SELECT c.care_number, c.care_title, c.care_date,
+		u.user_nickname, c.care_write_date, c.care_post
+		FROM ddd_care c
+		JOIN ddd_user u
+		ON c.user_number = u.user_number
+		WHERE c.care_number = #{care_number}
+	</select>
+
+
+	<!-- 3. 신청자 현황 -->
+	<select id="selectApplyStatus" parameterType="int"
+		resultType="AdminCareDTO">
+		SELECT
+		COUNT(a.apply_number) || '/' || c.care_recruit AS apply_status
+		FROM ddd_care c
+		LEFT JOIN ddd_care_apply a
+		ON c.care_number = a.care_number
+		WHERE c.care_number = #{care_number}
+		GROUP BY c.care_recruit
+	</select>
+
+
+	<!-- 4. 신청자 목록 -->
+	<select id="selectApplyList" parameterType="int"
+		resultType="AdminCareDTO">
+		SELECT c.apply_number, u.user_number,
+		u.user_name, u.user_nickname, u.user_phone
+		FROM ddd_care_apply c
+		JOIN ddd_user u
+		ON c.user_number = u.user_number
+		WHERE c.care_number = #{care_number}
+	</select>
+
+
+	<!-- 5. 삭제 (상태 변경) -->
+	<update id="deleteCare" parameterType="int">
+		UPDATE ddd_care
+		SET care_status = 'deleted'
+		WHERE care_number = #{care_number}
+	</update>
+
 </mapper>

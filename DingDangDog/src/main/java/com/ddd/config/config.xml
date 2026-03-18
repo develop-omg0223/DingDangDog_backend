@@ -47,6 +47,34 @@
 			alias="CareDTO" />
 		<typeAlias type="com.ddd.app.dogcare.dto.CareListDTO"
 			alias="CareListDTO" />
+		<typeAlias type="com.ddd.app.admin.dto.AdminArchiveDTO"
+			alias="AdminArchiveDTO" />
+		<typeAlias type="com.ddd.app.admin.dto.AdminCareDTO"
+			alias="AdminCareDTO" />
+		<typeAlias type="com.ddd.app.admin.dto.AdminLogDTO"
+			alias="AdminLogDTO" />
+		<typeAlias type="com.ddd.app.inquiry.dto.InquiryListDTO"
+			alias="InquiryListDTO" />
+		<typeAlias type="com.ddd.app.inquiry.dto.InquiryDetailDTO"
+			alias="InquiryDetailDTO" />
+		<typeAlias type="com.ddd.app.inquiry.dto.InquiryWritingDTO"
+			alias="InquiryWritingDTO" />
+		<typeAlias type="com.ddd.app.mypage.dto.mypageCcareDTO"
+			alias="mypageCcareDTO" />
+		<typeAlias type="com.ddd.app.mypage.dto.mypageScareDTO"
+			alias="mypageScareDTO" />
+		<typeAlias type="com.ddd.app.mypage.dto.MyPageDogMatchingDTO"
+			alias="MyPageDogMatchingDTO" />
+		<typeAlias type="com.ddd.app.mypage.dto.MypageSInfoDTO"
+			alias="MypageSDTO" />
+		<typeAlias type="com.ddd.app.mypage.dto.mypageLogDTO"
+			alias="LogDTO" />
+		<typeAlias type="com.ddd.app.main.dto.mainCareDTO"
+			alias="mainCareDTO" />
+		<typeAlias type="com.ddd.app.main.dto.mainArchiveDTO"
+			alias="mainArchiveDTO" />
+		<typeAlias type="com.ddd.app.report.dto.ReportDTO"
+			alias="ReportDTO" />
 	</typeAliases>
 
 	<environments default="oracle">
@@ -70,6 +98,18 @@
 		<mapper resource="com/ddd/mapper/CareMapper.xml" />
 		<mapper resource="com/ddd/mapper/ArchaiveMapper.xml" />
 		<mapper resource="com/ddd/mapper/MatchingMapper.xml" />
+		<mapper resource="com/ddd/mapper/AdminArchiveMapper.xml" />
+		<mapper resource="com/ddd/mapper/AdminLogMapper.xml" />
+		<mapper resource="com/ddd/mapper/AdminCareMapper.xml" />
+		<mapper resource="com/ddd/mapper/MypageSCareMapper.xml" />
+		<mapper resource="com/ddd/mapper/MypageCCareMapper.xml" />
+		<mapper resource="com/ddd/mapper/MypageMatchingResultMapper.xml" />
+		<mapper resource="com/ddd/mapper/MypageCInfoMapper.xml" />
+		<mapper resource="com/ddd/mapper/MypageSInfoMapper.xml" />
+		<mapper resource="com/ddd/mapper/MypageLogMapper.xml" />
+		<mapper resource="com/ddd/mapper/InquiryMapper.xml" />
+		<mapper resource="com/ddd/mapper/mainMapper.xml" />
+		<mapper resource="com/ddd/mapper/ReportMapper.xml" />
 	</mappers>
 	
 

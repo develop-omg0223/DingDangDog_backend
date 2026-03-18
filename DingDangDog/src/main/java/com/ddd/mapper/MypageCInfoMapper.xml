@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="MPCInfo">
+
+	<!-- 조회 -->
+	<select id="selectMyPageInfo" resultType="UserDTO">
+		SELECT
+		user_id,
+		user_name, user_birth, user_nickname,
+		user_email, user_phone,
+		user_gender
+		FROM ddd_user
+		WHERE user_number = #{userNumber}
+	</select>
+
+	<!-- 변경 -->
+	<update id="updateMyPageInfo">
+		UPDATE ddd_user
+		SET
+		user_nickname = #{userNickname}
+		<if test="newPassword != null and newPassword != ''">
+			, user_password = #{newPassword}
+		</if>
+		WHERE user_number = #{userNumber}
+		AND user_password =
+		#{currentPassword}
+	</update>
+
+	<!-- 닉네임 중복검사 -->
+	<select id="checkNickName" parameterType="String"
+		resultType="int">
+		select
+		count(user_number) from ddd_user
+		where user_nickname =
+		#{userNickname} AND user_number != #{userNumber}
+	</select>
+
+
+	<!-- 탈퇴 -->
+	<!-- 비밀번호 확인 -->
+	<select id="checkPassword" resultType="int">
+		SELECT COUNT(user_number)
+		FROM ddd_user
+		WHERE user_number = #{userNumber}
+		AND user_password =
+		#{userPassword}
+	</select>
+
+	<!-- 탈퇴상태로 변경 -->
+	<update id="updateToWithdraw">
+		UPDATE ddd_user
+		SET user_status = 'withdraw'
+		WHERE
+		user_number = #{userNumber}
+	</update>
+
+</mapper>
+

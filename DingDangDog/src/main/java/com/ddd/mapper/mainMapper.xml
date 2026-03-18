@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 메인페이지 멍카이브 목록 조회 -->
+<select id="selectMainArchiveList" resultType="com.ddd.app.main.dto.mainArchiveDTO">
+	SELECT *
+	FROM (
+		SELECT
+			a.dog_number,
+			a.dog_name,
+			a.dog_breed,
+			CASE
+				WHEN a.dog_gender = 'M' THEN '수컷'
+				WHEN a.dog_gender = 'F' THEN '암컷'
+			END AS dog_gender,
+			a.dog_age,
+			(
+				SELECT ai.archive_img_path
+				FROM ddd_archive_img ai
+				WHERE ai.dog_number = a.dog_number
+				  AND ai.archive_img_number = (
+						SELECT MIN(ai2.archive_img_number)
+						FROM ddd_archive_img ai2
+						WHERE ai2.dog_number = a.dog_number
+				  )
+			) AS archive_img_path
+		FROM ddd_archive a
+		ORDER BY a.dog_archive_date DESC
+	)
+	WHERE ROWNUM <= 8
+</select>
+
+
+<!-- 메인페이지 봉사글 목록 조회 -->
+<select id="selectMainCareList" resultType="com.ddd.app.main.dto.mainCareDTO">
+	SELECT *
+	FROM (
+		SELECT
+			c.care_number,
+			c.care_title,
+			c.care_date
+		FROM ddd_care c
+		ORDER BY c.care_date DESC
+	)
+	WHERE ROWNUM <= 5
+</select>

@@ -2,46 +2,72 @@
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="adminLog">
 
-<!-- 멍! 로그 전체 목록 조회 -->
-<select id="selectLogList" resultType="AdminArchiveDTO">
-SELECT c.care_number, c.care_title, c.care_date, 
-    	u.user_nickname, c.care_write_date
-FROM ddd_care c 
-JOIN ddd_user u ON c.user_number = u.user_number
-WHERE c.care_status = 'open'
-ORDER BY c.care_date asc;
-</select>
+	<!-- 멍! 로그 전체 목록 조회 -->
+	<select id="selectLogList" parameterType="String"
+		resultType="AdminLogDTO">
+		SELECT c.care_number, c.care_title, c.care_date,
+		u.user_nickname, c.care_write_date
+		FROM ddd_care c
+		JOIN ddd_user u ON
+		c.user_number = u.user_number
+		WHERE c.care_status = 'open'
+		AND (
+		u.user_id LIKE '%' || #{keyword} || '%'
+		OR u.user_nickname LIKE '%' ||
+		#{keyword} || '%'
+		)
+		ORDER BY c.care_date ASC
+	</select>
 
-<!-- 상세정보 -->
-<select id="selectLogDetail">
-SELECT c.care_number, c.care_title, c.care_date, 
-    	u.user_nickname, c.care_write_date, c.care_post
-FROM ddd_care c JOIN ddd_user u 
-ON c.user_number = u.user_number
-where c.care_number = #{care_number}; 
-</select>
+	<!-- 상세정보 -->
+	<select id="selectLogDetail" parameterType="int"
+		resultType="AdminLogDTO">
+		SELECT l.log_number, l.log_title, l.log_content,
+		l.log_date, u.user_nickname, li.log_img_path
+		FROM ddd_log l
+		JOIN
+		ddd_user u ON l.user_number = u.user_number
+		LEFT JOIN ddd_log_img li ON
+		l.log_number = li.log_number
+		AND li.log_img_number = (
+		SELECT
+		MIN(li2.log_img_number)
+		FROM ddd_log_img li2
+		WHERE li2.log_number =
+		l.log_number
+		)
+		WHERE
+		l.log_number = #{log_number}
+	</select>
 
-<!-- 신청자 현황 -->
-<select id="selectApplyStatus">
-SELECT COUNT(a.apply_number) || '/' || c.care_recruit AS apply_status
-FROM ddd_care c
-LEFT JOIN ddd_care_apply a ON c.care_number = a.care_number
-WHERE c.care_number = #{care_number}
-GROUP BY c.care_recruit;
-</select>
+	<!-- 신청자 현황 -->
+	<select id="selectApplyStatus" parameterType="int" resultType="AdminLogDTO">
+		SELECT
+		COUNT(a.apply_number) || '/' || c.care_recruit AS apply_status
+		FROM
+		ddd_care c
+		LEFT JOIN ddd_care_apply a ON c.care_number = a.care_number
+		WHERE c.care_number = #{care_number}
+		GROUP BY c.care_recruit;
+	</select>
 
-<!-- 멍! 로그 신청자 목록 -->
-<select id="selectApplyList">
-SELECT c.apply_number, u.user_number, u.user_name, u.user_nickname, u.user_phone
-FROM ddd_care_apply c
-JOIN ddd_user u ON c.user_number = u.user_number
-WHERE c.care_number = #{care_number};
-</select>
+	<!-- 멍! 로그 신청자 목록 -->
+	<select id="selectApplyList" parameterType="int" resultType="AdminLogDTO">
+		SELECT c.apply_number,
+		u.user_number, u.user_name, u.user_nickname,
+		u.user_phone
+		FROM
+		ddd_care_apply c
+		JOIN ddd_user u ON c.user_number = u.user_number
+		WHERE
+		c.care_number = #{care_number};
+	</select>
 
-<!-- 멍! 로그 삭제 -->
-<update id="deleteLog">
-UPDATE FROM ddd_care
-set care_status = 'deleted'
-WHERE care_number = #{care_number};
-</update>
+	<!-- 멍! 로그 삭제 -->
+	<update id="deleteLog" parameterType="int">
+		UPDATE ddd_care
+		SET
+		care_status = 'deleted'
+		WHERE care_number = #{care_number}
+	</update>
 </mapper>

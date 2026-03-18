@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="myPage">
+
+	<select id="selectMatchingList" parameterType="int"
+		resultType="com.ddd.app.mypage.dto.MyPageDogMatchingDTO">
+		SELECT *
+		FROM (
+		SELECT
+		result_number AS resultNumber,
+		user_number AS userNumber,
+		TO_CHAR(result_created_date, 'YYYY.MM.DD HH24:MI') AS resultCreatedDate
+		FROM ddd_match_result
+		WHERE user_number = #{userNumber}
+		ORDER BY result_created_date DESC
+		)
+		WHERE ROWNUM &lt;= 5
+	</select>
+
+</mapper>

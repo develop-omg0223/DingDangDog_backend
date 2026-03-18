@@ -2,7 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="archive">
 
-	<select id="selectDetail" parameterType="int" resultType="ArchiveDTO">
+	<select id="selectDetail" parameterType="int"
+		resultType="ArchiveReadDTO">
+
+		--dogarchive_detail
+
 		SELECT
 		A.DOG_NUMBER,
 		A.USER_NUMBER,
@@ -22,24 +26,41 @@
 		S.DOG_BARKING,
 		S.DOG_GROOMING,
 		AI.ARCHIVE_IMG_PATH
-		FROM DDD_ARCHIVE A, DDD_ARCHIVE_SCORE S, DDD_ARCHIVE_IMG AI
-		WHERE A.DOG_NUMBER = S.DOG_NUMBER(+)
-		AND A.DOG_NUMBER = AI.DOG_NUMBER(+)
-		AND A.DOG_NUMBER = #{dogNumber}
-		AND AI.ARCHIVE_IMG_NUMBER(+) = (
-		SELECT MIN(AI2.ARCHIVE_IMG_NUMBER)
+		FROM DDD_ARCHIVE A
+		LEFT JOIN DDD_ARCHIVE_SCORE S
+		ON A.DOG_NUMBER = S.DOG_NUMBER
+		LEFT JOIN DDD_ARCHIVE_IMG AI
+		ON A.DOG_NUMBER = AI.DOG_NUMBER
+		AND AI.ARCHIVE_IMG_NUMBER = (
+		SELECT
+		MIN(AI2.ARCHIVE_IMG_NUMBER)
 		FROM DDD_ARCHIVE_IMG AI2
 		WHERE AI2.DOG_NUMBER = A.DOG_NUMBER
 		)
+		WHERE A.DOG_NUMBER = #{dogNumber};
+
+
 	</select>
 
-	<delete id="deleteArchive" parameterType="map">
+	<delete id="deleteArchive"
+		parameterType="ArchiveDeleteDTO">
+
+		--삭제
+
 		DELETE FROM DDD_ARCHIVE
 		WHERE DOG_NUMBER = #{dogNumber}
-		AND (USER_NUMBER = #{userNumber} OR #{adminNumber} IS NOT NULL)
+		AND (USER_NUMBER = #{userNumber} OR #{adminNumber} IS NOT NULL);
+
 	</delete>
 
-	<select id="selectEditInfo" parameterType="map" resultType="ArchiveDTO">
+	<select id="selectEditInfo"
+		parameterType="ArchiveUpdateDTO"
+		resultType="ArchiveReadDTO">
+
+		--dogarchive_edit
+
+		--정보 불러오기
+
 		SELECT
 		A.DOG_NUMBER,
 		A.USER_NUMBER,
@@ -56,19 +77,25 @@
 		S.DOG_BARKING,
 		S.DOG_GROOMING,
 		AI.ARCHIVE_IMG_PATH
-		FROM DDD_ARCHIVE A, DDD_ARCHIVE_SCORE S, DDD_ARCHIVE_IMG AI
-		WHERE A.DOG_NUMBER = S.DOG_NUMBER(+)
-		AND A.DOG_NUMBER = AI.DOG_NUMBER(+)
-		AND A.DOG_NUMBER = #{dogNumber}
-		AND (A.USER_NUMBER = #{userNumber} OR #{adminNumber} IS NOT NULL)
-		AND AI.ARCHIVE_IMG_NUMBER(+) = (
+		FROM DDD_ARCHIVE A
+		LEFT JOIN DDD_ARCHIVE_SCORE S ON A.DOG_NUMBER = S.DOG_NUMBER
+		LEFT JOIN DDD_ARCHIVE_IMG AI ON A.DOG_NUMBER = AI.DOG_NUMBER
+		AND AI.ARCHIVE_IMG_NUMBER = (
 		SELECT MIN(AI2.ARCHIVE_IMG_NUMBER)
 		FROM DDD_ARCHIVE_IMG AI2
 		WHERE AI2.DOG_NUMBER = A.DOG_NUMBER
 		)
+		WHERE A.DOG_NUMBER = #{dogNumber}
+		AND (A.USER_NUMBER = #{userNumber} OR #{adminNumber} IS NOT NULL);
+
+
 	</select>
 
-	<update id="updateArchive" parameterType="map">
+	<update id="updateArchive"
+		parameterType="ArchiveUpdateDTO">
+		---------아래는 저장될때 한번에 동작할 쿼리
+
+		--기본정보란 수정
 		UPDATE DDD_ARCHIVE
 		SET DOG_NAME = #{dogName},
 		DOG_BREED = #{dogBreed},
@@ -79,25 +106,30 @@
 		DOG_DETAIL = #{dogDetail},
 		ARCHIVE_MODIFY_DATE = SYSDATE
 		WHERE DOG_NUMBER = #{dogNumber}
-		AND (USER_NUMBER = #{userNumber} OR #{adminNumber} IS NOT NULL)
+		AND (USER_NUMBER = #{userNumber} OR #{adminNumber} IS NOT NULL);
 	</update>
 
-	<update id="updateScore" parameterType="ArchiveScoreDTO">
+	<update id="updateScore"
+		parameterType="ArchiveUpdateDTO">
+		--점수 수정
 		UPDATE DDD_ARCHIVE_SCORE
 		SET DOG_ACTIVITY = #{dogActivity},
 		DOG_SOCIALITY = #{dogSociality},
 		DOG_INDEPENDENCE = #{dogIndependence},
 		DOG_BARKING = #{dogBarking},
 		DOG_GROOMING = #{dogGrooming}
-		WHERE DOG_NUMBER = #{dogNumber}
+		WHERE DOG_NUMBER = #{dogNumber};
 	</update>
 
 	<delete id="deleteImages" parameterType="int">
+		--기존 이미지 삭제
 		DELETE FROM DDD_ARCHIVE_IMG
-		WHERE DOG_NUMBER = #{dogNumber}
+		WHERE DOG_NUMBER = #{dogNumber};
 	</delete>
 
-	<insert id="insertImage" parameterType="ArchiveImgDTO">
+	<insert id="insertImage"
+		parameterType="ArchiveWriteDTO">
+		--새 이미지 등록
 		INSERT INTO DDD_ARCHIVE_IMG (
 		ARCHIVE_IMG_NUMBER,
 		DOG_NUMBER,
@@ -108,69 +140,92 @@
 		#{dogNumber},
 		#{archiveImgName},
 		#{archiveImgPath}
-		)
+		);
 	</insert>
 
-	<select id="selectAll" resultType="ArchiveDTO">
+	<select id="selectAll"
+		resultType="ArchiveListDTO">
+		--dogarchive_list
+
+		--전체 목록 조회
+		--전체 목록 조회
 		SELECT
 		A.DOG_NUMBER,
 		A.DOG_NAME,
 		A.DOG_BREED,
 		US.SHELTER_NAME,
-		TO_CHAR(A.DOG_ARCHIVE_DATE, 'YYYY.MM.DD') AS DOG_ARCHIVE_DATE,
+		TO_CHAR(A.DOG_SAFE_DATE, 'YYYY.MM.DD') AS DOG_SAFE_DATE,
 		AI.ARCHIVE_IMG_PATH
-		FROM DDD_ARCHIVE A, DDD_USER_SHELTER US, DDD_ARCHIVE_IMG AI
-		WHERE A.USER_NUMBER = US.USER_NUMBER
-		AND A.DOG_NUMBER = AI.DOG_NUMBER(+)
-		AND AI.ARCHIVE_IMG_NUMBER(+) = (
+		FROM
+		DDD_ARCHIVE A
+		JOIN
+		DDD_USER_SHELTER US ON A.USER_NUMBER = US.USER_NUMBER
+		LEFT JOIN
+		DDD_ARCHIVE_IMG AI ON A.DOG_NUMBER = AI.DOG_NUMBER
+		AND AI.ARCHIVE_IMG_NUMBER = (
 		SELECT MIN(AI2.ARCHIVE_IMG_NUMBER)
 		FROM DDD_ARCHIVE_IMG AI2
 		WHERE AI2.DOG_NUMBER = A.DOG_NUMBER
 		)
-		ORDER BY A.DOG_NUMBER DESC
+		ORDER BY
+		A.DOG_NUMBER DESC;
 	</select>
 
-	<select id="selectByShelter" parameterType="string" resultType="ArchiveDTO">
+	<select id="selectByShelter" parameterType="string"
+		resultType="ArchiveListDTO">
+		--보호소명 검색
 		SELECT
 		A.DOG_NUMBER,
 		A.DOG_NAME,
 		A.DOG_BREED,
 		US.SHELTER_NAME,
-		TO_CHAR(A.DOG_ARCHIVE_DATE, 'YYYY.MM.DD') AS DOG_ARCHIVE_DATE,
+		TO_CHAR(A.DOG_SAFE_DATE, 'YYYY.MM.DD') AS DOG_SAFE_DATE,
 		AI.ARCHIVE_IMG_PATH
-		FROM DDD_ARCHIVE A, DDD_USER_SHELTER US, DDD_ARCHIVE_IMG AI
-		WHERE A.USER_NUMBER = US.USER_NUMBER
-		AND A.DOG_NUMBER = AI.DOG_NUMBER(+)
-		AND US.SHELTER_NAME LIKE '%' || #{shelterName} || '%'
-		AND AI.ARCHIVE_IMG_NUMBER(+) = (
+		FROM
+		DDD_ARCHIVE A
+		JOIN
+		DDD_USER_SHELTER US ON A.USER_NUMBER = US.USER_NUMBER
+		LEFT JOIN
+		DDD_ARCHIVE_IMG AI ON A.DOG_NUMBER = AI.DOG_NUMBER
+		AND AI.ARCHIVE_IMG_NUMBER = (
 		SELECT MIN(AI2.ARCHIVE_IMG_NUMBER)
 		FROM DDD_ARCHIVE_IMG AI2
 		WHERE AI2.DOG_NUMBER = A.DOG_NUMBER
 		)
-		ORDER BY A.DOG_NUMBER DESC
+		WHERE
+		US.SHELTER_NAME LIKE '%' || #{shelterName} || '%'
+		ORDER BY
+		A.DOG_NUMBER DESC;
 	</select>
 
-	<select id="selectByBreed" parameterType="string" resultType="ArchiveDTO">
+	<select id="selectByBreed" parameterType="string"
+		resultType="ArchiveListDTO">
+		--견종 검색
 		SELECT
 		A.DOG_NUMBER,
 		A.DOG_NAME,
 		A.DOG_BREED,
 		US.SHELTER_NAME,
-		TO_CHAR(A.DOG_ARCHIVE_DATE, 'YYYY.MM.DD') AS DOG_ARCHIVE_DATE,
+		TO_CHAR(A.DOG_SAFE_DATE, 'YYYY.MM.DD') AS DOG_SAFE_DATE,
 		AI.ARCHIVE_IMG_PATH
-		FROM DDD_ARCHIVE A, DDD_USER_SHELTER US, DDD_ARCHIVE_IMG AI
-		WHERE A.USER_NUMBER = US.USER_NUMBER
-		AND A.DOG_NUMBER = AI.DOG_NUMBER(+)
-		AND A.DOG_BREED LIKE '%' || #{dogBreed} || '%'
-		AND AI.ARCHIVE_IMG_NUMBER(+) = (
+		FROM DDD_ARCHIVE A
+		JOIN DDD_USER_SHELTER US ON A.USER_NUMBER = US.USER_NUMBER
+		LEFT JOIN DDD_ARCHIVE_IMG AI ON A.DOG_NUMBER = AI.DOG_NUMBER
+		AND AI.ARCHIVE_IMG_NUMBER = (
 		SELECT MIN(AI2.ARCHIVE_IMG_NUMBER)
 		FROM DDD_ARCHIVE_IMG AI2
 		WHERE AI2.DOG_NUMBER = A.DOG_NUMBER
 		)
-		ORDER BY A.DOG_NUMBER DESC
+		WHERE A.DOG_BREED LIKE '%' || #{dogBreed} || '%'
+		ORDER BY A.DOG_NUMBER DESC;
+
 	</select>
 
-	<insert id="insertArchive" parameterType="ArchiveDTO">
+	<insert id="insertArchive"
+		parameterType="ArchiveWriteDTO">
+		--archive_write
+
+		--기본정보등록
 		INSERT INTO DDD_ARCHIVE (
 		DOG_NUMBER,
 		USER_NUMBER,
@@ -182,7 +237,8 @@
 		DOG_SAFE_DATE,
 		DOG_ARCHIVE_DATE,
 		DOG_DETAIL
-		) VALUES (
+		)
+		VALUES (
 		SEQ_DDD_ARCHIVE.NEXTVAL,
 		#{userNumber},
 		#{dogName},
@@ -193,15 +249,19 @@
 		TO_DATE(#{dogSafeDate}, 'YYYY-MM-DD'),
 		SYSDATE,
 		#{dogDetail}
-		)
+		);
+
 	</insert>
 
 	<select id="getCurrSeq" resultType="int">
+		--강아지번호 조회
 		SELECT SEQ_DDD_ARCHIVE.CURRVAL
-		FROM DUAL
+		FROM DUAL;
 	</select>
 
-	<insert id="insertScore" parameterType="ArchiveScoreDTO">
+	<insert id="insertScore"
+		parameterType="ArchiveWriteDTO">
+		--점수 등록
 		INSERT INTO DDD_ARCHIVE_SCORE (
 		DOG_NUMBER,
 		DOG_ACTIVITY,
@@ -209,20 +269,23 @@
 		DOG_INDEPENDENCE,
 		DOG_BARKING,
 		DOG_GROOMING
-		) VALUES (
+		)
+		VALUES (
 		#{dogNumber},
 		#{dogActivity},
 		#{dogSociality},
 		#{dogIndependence},
 		#{dogBarking},
 		#{dogGrooming}
-		)
+		);
 	</insert>
 
-	<insert id="insertImageWrite" parameterType="ArchiveImgDTO">
+	<insert id="insertImageWrite"
+		parameterType="ArchiveWriteDTO">
+		--이미지 등록
 		INSERT INTO DDD_ARCHIVE_IMG (
 		ARCHIVE_IMG_NUMBER,
-		DOG_NUMBER,
+		DOG_NUMBER,ÏÏ
 		ARCHIVE_IMG_NAME,
 		ARCHIVE_IMG_PATH
 		) VALUES (
@@ -230,7 +293,7 @@
 		#{dogNumber},
 		#{archiveImgName},
 		#{archiveImgPath}
-		)
+		);
 	</insert>
 
 </mapper>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="report">
+
+    <!-- 신고 등록 -->
+    <insert id="insertReport" parameterType="com.ddd.app.report.dto.ReportDTO">
+        INSERT INTO DDD_REPORT
+        (report_number, reporter_user_number, reported_user_number, apply_number, report_reason, report_date)
+        VALUES
+        (SEQ_REPORT.NEXTVAL,
+         #{reporterUserNumber},
+         #{reportedUserNumber},
+         #{applyNumber},
+         #{reportReason},
+         SYSDATE)
+    </insert>
+
+    <!-- 신고 횟수 증가 -->
+    <update id="reportCount" parameterType="int">
+        UPDATE DDD_USER
+        SET REPORT_COUNT = REPORT_COUNT + 1
+        WHERE USER_NUMBER = #{userNumber}
+    </update>
+
+    <!-- 블랙리스트 처리 (3회 이상) -->
+    <update id="updateBlacklist" parameterType="int">
+        UPDATE DDD_USER
+        SET USER_STATUS = 'BLACK'
+        WHERE USER_NUMBER = #{userNumber}
+          AND REPORT_COUNT >= 3
+    </update>
+
+</mapper>

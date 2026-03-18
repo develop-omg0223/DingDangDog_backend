@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 내 게시글 목록 조회 -->
+<select id="selectMyLogs" parameterType="int" resultType="LogDTO">
+	SELECT
+		l.log_number,
+		l.user_number,
+		u.user_nickname,
+		l.log_title,
+		l.log_post,
+		l.log_date,
+		l.log_modify_date,
+		(
+			SELECT li.log_img_path
+			FROM ddd_log_img li
+			WHERE li.log_number = l.log_number
+			  AND li.log_img_number = (
+					SELECT MIN(li2.log_img_number)
+					FROM ddd_log_img li2
+					WHERE li2.log_number = l.log_number
+			  )
+		) AS representative_img_path
+	FROM ddd_log l
+	JOIN ddd_user u ON l.user_number = u.user_number
+	WHERE l.user_number = #{userNumber}
+	ORDER BY l.log_date DESC
+</select>

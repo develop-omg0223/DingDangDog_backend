@@ -40,6 +40,7 @@ public class CareListController implements Execute {
 		System.out.println("페이징 확인 : " + pageMap);
 
 		List<CareListDTO> careList = careDAO.selectCareList(pageMap);
+		request.setAttribute("careList", careList);
 
 		// 페이징 정보 설정
 		// 실제 마지막 페이지 번호(realEndPage)를 계산함
@@ -71,9 +72,9 @@ public class CareListController implements Execute {
 				.println("startPage : " + startPage + "endPage : " + endPage + ", prev : " + prev + ", next : " + next);
 		System.out.println("=====================");
 
-		result.setPath("/app/dogcare/dogcareListCommon.jsp");
+		result.setPath("/app/dogcare/dogcare_list_common.jsp");
 		result.setRedirect(false);
-		return null;
+		return result;
 	}
 
 }
