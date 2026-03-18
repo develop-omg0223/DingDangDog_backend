@@ -2,6 +2,15 @@
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="MPCInfo">
 
+	<!-- 진입시 비밀번호 확인 -->
+	<select id="checkPassword" parameterType="UserDTO" resultType="int">
+		SELECT COUNT(user_number)
+		FROM ddd_user
+		WHERE user_number = #{userNumber}
+		AND user_password =
+		#{userPassword}
+	</select>
+
 	<!-- 조회 -->
 	<select id="selectMyPageInfo" resultType="UserDTO">
 		SELECT
@@ -33,17 +42,6 @@
 		count(user_number) from ddd_user
 		where user_nickname =
 		#{userNickname} AND user_number != #{userNumber}
-	</select>
-
-
-	<!-- 탈퇴 -->
-	<!-- 비밀번호 확인 -->
-	<select id="checkPassword" resultType="int">
-		SELECT COUNT(user_number)
-		FROM ddd_user
-		WHERE user_number = #{userNumber}
-		AND user_password =
-		#{userPassword}
 	</select>
 
 	<!-- 탈퇴상태로 변경 -->

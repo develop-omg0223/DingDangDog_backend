@@ -34,8 +34,8 @@ const passwordCheckError = document.getElementById("password-check-error");
 // =========================
 // 상태값
 // =========================
-const usedNicknames = ["admin", "test123", "guest", "lucas1144", "manager"]; //이미 존재하는 닉네임들 하드코딩
-const verificationCode = "12345"; // 인증번호 하드코딩
+/*const usedNicknames = ["admin", "test123", "guest", "lucas1144", "manager"]; //이미 존재하는 닉네임들 하드코딩
+const verificationCode = "12345"; // 인증번호 하드코딩*/
 const withdrawConfirmText = "네 탈퇴하겠습니다"; // 탈퇴 확인 문구 고정
 const correctPassword = "1234"; // 현재 비밀번호 하드코딩
 
@@ -211,7 +211,7 @@ if (nicknameCheckBtn) {
 // =========================
 // 휴대폰 인증
 // =========================
-if (phoneInput) {
+/*if (phoneInput) {
   phoneInput.addEventListener("input", () => {
     resetPhoneVerifyState();
     isCodeSent = false;
@@ -253,7 +253,7 @@ if (verifyCodeBtn) {
       setGuideState(verifyMessage, "인증 번호가 일치하지 않습니다.", "error");
     }
   });
-}
+}*/
 
 
 

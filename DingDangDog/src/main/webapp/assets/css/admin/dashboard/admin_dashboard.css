@@ -81,11 +81,11 @@
 .userlist > .user-id {
   flex: 1.1;
 }
-.userlist > .user-name {
-  flex: 1;
+.userlist > .user-shelter-name {
+  flex: 1.5;
 }
-.userlist > .user-nickname {
-  flex: 1.1;
+.userlist > .user-confirm-check {
+  flex: 1.2;
 }
 
 /* 블랙리스트 */

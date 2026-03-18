@@ -75,4 +75,14 @@
 		<url-pattern>*.he</url-pattern>
 	</servlet-mapping>
 	
+	<!-- 마이페이지 매핑 -->
+	<servlet>
+		<servlet-name>myPage</servlet-name>
+		<servlet-class>com.ddd.app.mypage.controller.MypageFrontController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>myPage</servlet-name>
+		<url-pattern>*.mp</url-pattern>
+	</servlet-mapping>
+	
 </web-app>

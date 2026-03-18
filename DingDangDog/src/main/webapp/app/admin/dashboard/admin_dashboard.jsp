@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!doctype html>
 <html lang="ko">
 <head>
@@ -37,11 +38,24 @@
 								<div class="dashboard-list-row userlist">
 									<div class="user-number">번호</div>
 									<div class="user-id">아이디</div>
-									<div class="user-name">이름</div>
-									<div class="user-nickname">닉네임</div>
+									<div class="user-shelter-name">보호소명</div>
+									<div class="user-confirm-check">인증상태</div>
 								</div>
+								<c:forEach var="user" items="${userList}">
+									<div class="dashboard-list-row userlist">
+										<div class="user-number">${user.userNumber}</div>
+										<div class="user-id">${user.userId}</div>
+										<div class="user-name">${user.shelterName}</div>
+										<c:if test="${user.shelterCertification == 'N'}">
+											<div class="user-confirm-check confirm-wait">인증대기</div>
+										</c:if>
+										<c:if test="${user.shelterCertification == 'Y'}">
+											<div class="user-confirm-check">인증완료</div>
+										</c:if>
+									</div>
+								</c:forEach>
 
-								<div class="dashboard-list-row userlist">
+								<!-- <div class="dashboard-list-row userlist">
 									<div class="user-number">50</div>
 									<div class="user-id">Zzang12</div>
 									<div class="user-name">짱구</div>
@@ -74,7 +88,7 @@
 									<div class="user-id">Zzang12</div>
 									<div class="user-name">짱구</div>
 									<div class="user-nickname">z123z</div>
-								</div>
+								</div> -->
 							</div>
 						</article>
 					</li>

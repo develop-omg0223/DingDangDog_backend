@@ -8,14 +8,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>내 정보 변경</title>
 <link rel="stylesheet"
-	href="./../../../assets/css/mypage/common/profile_edit_common.css" />
-<script defer
-	src="./../../../assets/js/mypage/common/profile_edit_common.js"></script>
+	href="${pageContext.request.contextPath}/assets/css/mypage/common/profile_edit_common.css" />
+<%-- <script defer
+	src="${pageContext.request.contextPath}/assets/js/mypage/common/profile_edit_common.js"></script> --%>
 </head>
 
 <body>
 	<!-- header -->
-	<div id="header-container"></div>
+	<%-- <%@ include file="/app/header_login.jsp"%> --%>
 	<main class="profile-edit">
 		<div class="container">
 			<aside class="sidebar">
@@ -164,7 +164,7 @@
 				</div>
 			</div>
 		</div>
-		<div id="password-check-modal" class="modal-overlay show">
+		<!-- <div id="password-check-modal" class="modal-overlay show">
 			<div class="password-check-modal-box">
 				<div class="password-check-modal-head">
 					<button type="button" id="password-check-close-btn"
@@ -185,7 +185,7 @@
 						틀렸습니다</p>
 				</div>
 			</div>
-		</div>
+		</div> -->
 	</main>
 	<!-- footer -->
 	<div id="footer-container"></div>

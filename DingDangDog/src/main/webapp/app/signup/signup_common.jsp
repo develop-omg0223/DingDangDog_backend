@@ -114,6 +114,7 @@
 						<input type="text" id="user-common-birth" name="userBirth"
 							placeholder="생년월일 8자를 입력해주세요 - 예) 20000101" maxlength="10"
 							required>
+							<input type="date">
 					</div>
 					<!-- <div class="main-birth-common-message">ex&#41;2000-00-00</div> -->
 				</div>

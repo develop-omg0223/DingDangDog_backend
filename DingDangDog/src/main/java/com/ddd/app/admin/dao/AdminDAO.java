@@ -23,6 +23,12 @@ public class AdminDAO {
 		return sqlSession.selectOne("adminUser.adminLogin", adminDTO);
 	}
 
+	// 대시보드용 유저리스트
+	public List<AdminUserDTO> getDashboardUserList() {
+		System.out.println("대시보드용 유저리스트 호출");
+		return sqlSession.selectList("adminUser.getDashboardUserList");
+	}
+
 	// 일반회원 총 인원수 조회
 	public int getTotalCommon() {
 		System.out.println("일반회원 총 인원수 조회");
