@@ -44,9 +44,11 @@
   height: 20px;
   background-color: #f47c2a;
   color: white;
-  border: none;
   border-radius: 50%;
   cursor: pointer;
+  text-align: center;
+  line-height: 1;
+  font-weight: bold;
 }
 
 .box-content {

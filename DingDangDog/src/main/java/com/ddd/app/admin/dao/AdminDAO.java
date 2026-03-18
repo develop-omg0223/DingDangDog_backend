@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
+import com.ddd.app.admin.dto.AdminDTO;
 import com.ddd.app.admin.dto.AdminUserDTO;
 import com.ddd.config.MyBatisConfig;
 
@@ -16,25 +17,31 @@ public class AdminDAO {
 		sqlSession = MyBatisConfig.getSqlSessionFactory().openSession(true);
 	}
 
+	// 관리자 로그인
+	public AdminDTO adminLogin(AdminDTO adminDTO) {
+		System.out.println("관리자 로그인");
+		return sqlSession.selectOne("adminUser.adminLogin", adminDTO);
+	}
+
 	// 일반회원 총 인원수 조회
 	public int getTotalCommon() {
 		System.out.println("일반회원 총 인원수 조회");
-		return sqlSession.selectOne("admin.getTotalCommon");
+		return sqlSession.selectOne("adminUser.getTotalCommon");
 	}
 
 	// 보호소회원 총 인원수 조회
 	public int getTotalShelter() {
 		System.out.println("보호소회원 총 인원수 조회");
-		return sqlSession.selectOne("admin.getTotalShelter");
+		return sqlSession.selectOne("adminUser.getTotalShelter");
 	}
 
 	// 일반회원 검색후 인원수 조회
 	public int getTotalCommonSearch(String searchType, String keyword) {
 		System.out.println("일반회원 검색후 인원수 조회");
 		if ("id".equals(searchType)) {
-			return sqlSession.selectOne("admin.getTotalCommonByUserId", keyword);
+			return sqlSession.selectOne("adminUser.getTotalCommonByUserId", keyword);
 		} else if ("nickname".equals(searchType)) {
-			return sqlSession.selectOne("admin.getTotalCommonByUserNickname", keyword);
+			return sqlSession.selectOne("adminUser.getTotalCommonByUserNickname", keyword);
 		}
 		return getTotalCommon();
 	}
@@ -43,9 +50,9 @@ public class AdminDAO {
 	public int getTotalShelterSearch(String searchType, String keyword) {
 		System.out.println("보호소회원 검색후 인원수 조회");
 		if ("id".equals(searchType)) {
-			return sqlSession.selectOne("admin.getTotalShelterByUserId", keyword);
+			return sqlSession.selectOne("adminUser.getTotalShelterByUserId", keyword);
 		} else if ("nickname".equals(searchType)) {
-			return sqlSession.selectOne("admin.getTotalShelterByUserNickname", keyword);
+			return sqlSession.selectOne("adminUser.getTotalShelterByUserNickname", keyword);
 		}
 		return getTotalShelter();
 	}
@@ -53,7 +60,7 @@ public class AdminDAO {
 	// 일반회원 전체 목록 조회
 	public List<AdminUserDTO> selectCommonList(Map<String, Integer> pageMap) {
 		System.out.println("일반회원 전체 목록 조회");
-		return sqlSession.selectList("admin.selectCommonList", pageMap);
+		return sqlSession.selectList("adminUser.selectCommonList", pageMap);
 	}
 
 	// 일반회원 검색 목록 조회
@@ -61,17 +68,17 @@ public class AdminDAO {
 		System.out.println("일반회원 검색 목록 조회");
 		String searchType = (String) searchMap.get("searchType");
 		if ("id".equals(searchType)) {
-			return sqlSession.selectList("admin.selectCommonListByUserId", searchMap);
+			return sqlSession.selectList("adminUser.selectCommonListByUserId", searchMap);
 		} else if ("nickname".equals(searchType)) {
-			return sqlSession.selectList("admin.selectCommonListByUserNickname", searchMap);
+			return sqlSession.selectList("adminUser.selectCommonListByUserNickname", searchMap);
 		}
-		return sqlSession.selectList("admin.selectCommonList", searchMap);
+		return sqlSession.selectList("adminUser.selectCommonList", searchMap);
 	}
 
 	// 보호소회원 전체 목록 조회
 	public List<AdminUserDTO> selectShelterList(Map<String, Integer> pageMap) {
 		System.out.println("보호손회원 전체 목록 조회");
-		return sqlSession.selectList("admin.selectShelterList", pageMap);
+		return sqlSession.selectList("adminUser.selectShelterList", pageMap);
 	}
 
 	// 보호소회원 검색 목록 조회
@@ -79,29 +86,29 @@ public class AdminDAO {
 		System.out.println("보호소회원 검색 목록 조회");
 		String searchType = (String) searchMap.get("searchType");
 		if ("id".equals(searchType)) {
-			return sqlSession.selectList("admin.selectShelterListByUserId", searchMap);
+			return sqlSession.selectList("adminUser.selectShelterListByUserId", searchMap);
 		} else if ("nickname".equals(searchType)) {
-			return sqlSession.selectList("admin.selectShelterListByUserNickname", searchMap);
+			return sqlSession.selectList("adminUser.selectShelterListByUserNickname", searchMap);
 		}
-		return sqlSession.selectList("admin.selectShelterList", searchMap);
+		return sqlSession.selectList("adminUser.selectShelterList", searchMap);
 	}
 
 	// 일반회원 상세 조회
 	public AdminUserDTO selectCommonDetail(int userNumber) {
 		System.out.println("일반회원 상세 조회 실행 : " + userNumber);
-		return sqlSession.selectOne("admin.selectCommonDetail", userNumber);
+		return sqlSession.selectOne("adminUser.selectCommonDetail", userNumber);
 	}
 
 	// 보호소회원 상세 조회
 	public AdminUserDTO selectShelterDetail(int userNumber) {
 		System.out.println("보호소회원 상세 조회 실행 : " + userNumber);
-		return sqlSession.selectOne("admin.selectShelterDetail", userNumber);
+		return sqlSession.selectOne("adminUser.selectShelterDetail", userNumber);
 	}
 
 	// 보호소 승인 업데이트
 	public void updateShelterCertification(int userNumber) {
 		System.out.println("보호소 승인 업데이트");
-		sqlSession.update("admin.updateShelterCertification", userNumber);
+		sqlSession.update("adminUser.updateShelterCertification", userNumber);
 	}
 
 }

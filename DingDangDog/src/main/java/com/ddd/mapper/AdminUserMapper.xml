@@ -1,7 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="admin">
+<mapper namespace="adminUser">
 
+	<!-- 관리자 로그인 -->
+	<select id="adminLogin" parameterType="AdminDTO"
+		resultType="AdminDTO">
+		SELECT admin_number, admin_id FROM ddd_admin
+		WHERE admin_id
+		= #{adminId}
+		AND admin_password = #{adminPassword}
+	</select>
+
+	<!-- 대시보드용 회원 조회 -->
+	<select id="getDashboardUserList" resultType="AdminUserDTO">
+	<![CDATA[
+   SELECT * FROM
+	(SELECT u.user_number, u.user_id,s.shelter_name,s.shelter_certification
+	FROM ddd_user u JOIN ddd_user_shelter s ON u.user_number = s.user_number
+	WHERE u.user_type = 'S'
+	ORDER BY s.shelter_certification ASC)
+WHERE rownum <= 5 ;
+]]>
+
+	</select>
 
 	<!-- 관리자 회원관리 -->
 	<!-- 전체 일반회원 -->
