@@ -12,8 +12,6 @@ import com.ddd.app.Result;
 import com.ddd.app.mypage.dao.MypageDAO;
 import com.ddd.app.user.dto.UserDTO;
 
-import jdk.javadoc.internal.doclets.toolkit.taglets.UserTaglet;
-
 public class CheckPasswordController implements Execute {
 
 	@Override
@@ -23,36 +21,46 @@ public class CheckPasswordController implements Execute {
 		System.out.println("===CheckPasswordController 실행===");
 
 		HttpSession session = request.getSession();
+		System.out.println("1");
+		if(session == null) {
+			System.out.println("못받아옴");
+		} else {
+			System.out.println("받아옴?");
+		}
 		UserDTO userDTO = new UserDTO();
+		System.out.println("2");
 		MypageDAO mypageDAO = new MypageDAO();
+		System.out.println("3");
 		Result result = new Result();
+		System.out.println("4");
 		int loginUserNumber = (Integer) session.getAttribute("userNumber");
+		System.out.println("5");
 		String loginUserType = (String) session.getAttribute("userType");
-		String InputPassword = request.getParameter("checkPassword");
+		System.out.println("6");
+		String inputPassword = request.getParameter("checkPassword");
 		String path = null;
 
 		System.out.println(loginUserNumber);
 		System.out.println(loginUserType);
-		System.out.println(InputPassword);
+		System.out.println(inputPassword);
 
 		userDTO.setUserNumber(loginUserNumber);
-		;
-		userDTO.setUserPassword(InputPassword);
+		userDTO.setUserPassword(inputPassword);
 
 		int test = mypageDAO.checkPassword(userDTO);
 
 		if (test == 1) {
-			if(loginUserType == "C") {
+			if (loginUserType.equals("C")) {
 				path = request.getContextPath() + "/mypage/profileEditC.mp";
-			} else if (loginUserType == "S") {
+			} else if (loginUserType.equals("S")) {
 				path = request.getContextPath() + "/mypage/profileEditS.mp";
 			}
-			
+
 		} else {
 			path = request.getContextPath() + "/mypage/checkPw.mp?checkPw=fail";
 		}
 
-		result.setRedirect(true); // 세션에 저장된 값은 유지
+		result.setRedirect(true); 
 		result.setPath(path);
 
 		return result;
