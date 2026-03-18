@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
-import com.ddd.app.dogarchive.dto.ArchiveDTO;
+import com.ddd.app.dogarchive.dto.ArchiveReadDTO;
 import com.ddd.app.dogmatching.dto.MatchingResultDTO;
 import com.ddd.config.MyBatisConfig;
 
@@ -22,7 +22,7 @@ public class MatchingResultDAO {
 	}
 
 	// 추천 결과 조회 - 거리순 가까운 8마리
-	public List<ArchiveDTO> selectTop8RecommendedDogs(int userNumber) {
+	public List<ArchiveReadDTO> selectTop8RecommendedDogs(int userNumber) {
 		return sqlSession.selectList("matching.selectTop8", userNumber);
 	}
 
