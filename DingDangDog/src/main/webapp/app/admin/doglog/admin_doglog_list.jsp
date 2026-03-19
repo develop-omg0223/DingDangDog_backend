@@ -1,3 +1,7 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <!doctype html>
 <html lang="en">
   <head>
@@ -6,17 +10,17 @@
     <title>멍! 로그 리스트</title>
     <link
       rel="stylesheet"
-      href="/assets/css/admin/doglog/admin_doglog_list.css"
+      href="${contextPath}/assets/css/admin/doglog/admin_doglog_list.css"
     />
-    <link rel="stylesheet" href="../../../assets/css/admin/admin.css" />
-    <script defer src="../../../assets/js/admin/admin_doglog_list.js"></script>
+    <link rel="stylesheet" href="${contextPath}/assets/css/admin/admin.css" />
+    <script defer src="${contextPath}/assets/js/admin/admin_doglog_list.js"></script>
   </head>
 
   <body>
     <!-- 전체화면 -->
     <main class="admin-main-container">
       <!-- 사이드바 -->
-      <aside class="admin-sidebar"></aside>
+      <aside class="admin-sidebar"><jsp:include page="/app/admin/admin_sidebar.jsp" /></aside>
       <!-- 메인 화면 -->
       <section class="admin-main-section">
         <!-- 페이지 상단 (제목, 버튼) -->
@@ -33,125 +37,14 @@
             <div class="doglog-nickname">닉네임</div>
             <div class="doglog-date">작성 일자</div>
           </div>
-          <div class="admin-doglog-list-row">
+          <div id="reviewTableBody"></div>
+<!--           <div class="admin-doglog-list-row">
             <div class="doglog-number">1</div>
             <div class="doglog-title"><a href="/html/admin/doglog/admin_doglog_detail.html">제목</a></div>
             <div class="doglog-id">아이디</div>
             <div class="doglog-nickname">닉네임</div>
             <div class="doglog-date">2026-03-06</div>
-          </div>
-          <div class="admin-doglog-list-row">
-            <div class="doglog-number">2</div>
-            <div class="doglog-title"><a href="/html/admin/doglog/admin_doglog_detail.html">제목</a></div>
-            <div class="doglog-id">아이디</div>
-            <div class="doglog-nickname">닉네임</div>
-            <div class="doglog-date">2026-03-06</div>
-          </div>
-          <div class="admin-doglog-list-row">
-            <div class="doglog-number">3</div>
-            <div class="doglog-title"><a href="/html/admin/doglog/admin_doglog_detail.html">제목</a></div>
-            <div class="doglog-id">아이디</div>
-            <div class="doglog-nickname">닉네임</div>
-            <div class="doglog-date">2026-03-06</div>
-          </div>
-          <div class="admin-doglog-list-row">
-            <div class="doglog-number">4</div>
-            <div class="doglog-title"><a href="/html/admin/doglog/admin_doglog_detail.html">제목</a></div>
-            <div class="doglog-id">아이디</div>
-            <div class="doglog-nickname">닉네임</div>
-            <div class="doglog-date">2026-03-06</div>
-          </div>
-          <div class="admin-doglog-list-row">
-            <div class="doglog-number">5</div>
-            <div class="doglog-title"><a href="/html/admin/doglog/admin_doglog_detail.html">제목</a></div>
-            <div class="doglog-id">아이디</div>
-            <div class="doglog-nickname">닉네임</div>
-            <div class="doglog-date">2026-03-06</div>
-          </div>
-          <div class="admin-doglog-list-row">
-            <div class="doglog-number">6</div>
-            <div class="doglog-title"><a href="/html/admin/doglog/admin_doglog_detail.html">제목</a></div>
-            <div class="doglog-id">아이디</div>
-            <div class="doglog-nickname">닉네임</div>
-            <div class="doglog-date">2026-03-06</div>
-          </div>
-          <div class="admin-doglog-list-row">
-            <div class="doglog-number">7</div>
-            <div class="doglog-title"><a href="/html/admin/doglog/admin_doglog_detail.html">제목</a></div>
-            <div class="doglog-id">아이디</div>
-            <div class="doglog-nickname">닉네임</div>
-            <div class="doglog-date">2026-03-06</div>
-          </div>
-          <div class="admin-doglog-list-row">
-            <div class="doglog-number">8</div>
-            <div class="doglog-title"><a href="/html/admin/doglog/admin_doglog_detail.html">제목</a></div>
-            <div class="doglog-id">아이디</div>
-            <div class="doglog-nickname">닉네임</div>
-            <div class="doglog-date">2026-03-06</div>
-          </div>
-          <div class="admin-doglog-list-row">
-            <div class="doglog-number">9</div>
-            <div class="doglog-title"><a href="/html/admin/doglog/admin_doglog_detail.html">제목</a></div>
-            <div class="doglog-id">아이디</div>
-            <div class="doglog-nickname">닉네임</div>
-            <div class="doglog-date">2026-03-06</div>
-          </div>
-          <div class="admin-doglog-list-row">
-            <div class="doglog-number">10</div>
-            <div class="doglog-title"><a href="/html/admin/doglog/admin_doglog_detail.html">제목</a></div>
-            <div class="doglog-id">아이디</div>
-            <div class="doglog-nickname">닉네임</div>
-            <div class="doglog-date">2026-03-06</div>
-          </div>
-          <div class="admin-doglog-list-row">
-            <div class="doglog-number">11</div>
-            <div class="doglog-title"><a href="/html/admin/doglog/admin_doglog_detail.html">제목</a></div>
-            <div class="doglog-id">아이디</div>
-            <div class="doglog-nickname">닉네임</div>
-            <div class="doglog-date">2026-03-06</div>
-          </div>
-          <div class="admin-doglog-list-row">
-            <div class="doglog-number">12</div>
-            <div class="doglog-title"><a href="/html/admin/doglog/admin_doglog_detail.html">제목</a></div>
-            <div class="doglog-id">아이디</div>
-            <div class="doglog-nickname">닉네임</div>
-            <div class="doglog-date">2026-03-06</div>
-          </div>
-          <div class="admin-doglog-list-row">
-            <div class="doglog-number">13</div>
-            <div class="doglog-title"><a href="/html/admin/doglog/admin_doglog_detail.html">제목</a></div>
-            <div class="doglog-id">아이디</div>
-            <div class="doglog-nickname">닉네임</div>
-            <div class="doglog-date">2026-03-06</div>
-          </div>
-          <div class="admin-doglog-list-row">
-            <div class="doglog-number">14</div>
-            <div class="doglog-title"><a href="/html/admin/doglog/admin_doglog_detail.html">제목</a></div>
-            <div class="doglog-id">아이디</div>
-            <div class="doglog-nickname">닉네임</div>
-            <div class="doglog-date">2026-03-06</div>
-          </div>
-          <div class="admin-doglog-list-row">
-            <div class="doglog-number">15</div>
-            <div class="doglog-title"><a href="/html/admin/doglog/admin_doglog_detail.html">제목</a></div>
-            <div class="doglog-id">아이디</div>
-            <div class="doglog-nickname">닉네임</div>
-            <div class="doglog-date">2026-03-06</div>
-          </div>
-          <div class="admin-doglog-list-row">
-            <div class="doglog-number">15</div>
-            <div class="doglog-title"><a href="/html/admin/doglog/admin_doglog_detail.html">제목</a></div>
-            <div class="doglog-id">아이디</div>
-            <div class="doglog-nickname">닉네임</div>
-            <div class="doglog-date">2026-03-06</div>
-          </div>
-          <div class="admin-doglog-list-row">
-            <div class="doglog-number">15</div>
-            <div class="doglog-title"><a href="/html/admin/doglog/admin_doglog_detail.html">제목</a></div>
-            <div class="doglog-id">아이디</div>
-            <div class="doglog-nickname">닉네임</div>
-            <div class="doglog-date">2026-03-06</div>
-          </div>
+          </div> -->
         </div>
         <!-- 페이지 하단 (검색, 페이지네이션) -->
         <div class="admin-main-section-footer">
