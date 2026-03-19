@@ -58,9 +58,9 @@
 		<typeAlias type="com.ddd.app.inquiry.dto.InquiryDetailDTO"
 			alias="InquiryDetailDTO" />
 		<typeAlias type="com.ddd.app.inquiry.dto.InquiryWritingDTO"
-			alias="InquiryWritingDTO" />  -->
+			alias="InquiryWritingDTO" />
 		<typeAlias type="com.ddd.app.mypage.dto.MypageCcareDTO"
-			alias="MypageCcareDTO" />
+			alias="MypageCcareDTO" />  -->
 		<typeAlias type="com.ddd.app.mypage.dto.MypageScareDTO"
 			alias="MypageScareDTO" />
 		<typeAlias type="com.ddd.app.mypage.dto.MyPageDogMatchingDTO"
@@ -99,7 +99,7 @@
 		<mapper resource="com/ddd/mapper/AdminLogMapper.xml" />
 		<mapper resource="com/ddd/mapper/AdminCareMapper.xml" />
 		<!-- <mapper resource="com/ddd/mapper/MypageSCareMapper.xml" /> -->
-		<mapper resource="com/ddd/mapper/MypageCCareMapper.xml" />
+		<!-- <mapper resource="com/ddd/mapper/MypageCCareMapper.xml" /> -->
 		<!-- <mapper resource="com/ddd/mapper/MypageMatchingResultMapper.xml" /> -->
 		<mapper resource="com/ddd/mapper/MypageCInfoMapper.xml" />
 		<mapper resource="com/ddd/mapper/MypageSInfoMapper.xml" />

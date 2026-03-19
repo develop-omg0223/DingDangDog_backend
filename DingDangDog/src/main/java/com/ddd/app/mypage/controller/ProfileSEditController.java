@@ -10,27 +10,25 @@ import javax.servlet.http.HttpSession;
 import com.ddd.app.Execute;
 import com.ddd.app.Result;
 import com.ddd.app.mypage.dao.MypageDAO;
-import com.ddd.app.user.dto.UserDTO;
+import com.ddd.app.mypage.dto.MypageSInfoDTO;
 
-public class ProfileCEditController implements Execute {
+public class ProfileSEditController implements Execute {
 
 	@Override
 	public Result execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
 		HttpSession session = request.getSession();
 		MypageDAO mypageDAO = new MypageDAO();
 		Result result = new Result();
-		UserDTO userDTO = new UserDTO();
+		MypageSInfoDTO mpSDTO = new MypageSInfoDTO();
 
 		Integer userNumber = (Integer) session.getAttribute("userNumber");
 
-		userDTO = mypageDAO.selectMyPageInfo(userNumber);
+		mpSDTO = mypageDAO.selectMyPageInfoS(userNumber);
 
-		request.setAttribute("user", userDTO);
-
+		request.setAttribute("user", mpSDTO);
 		result.setRedirect(false);
-		result.setPath("/app/mypage/common/profile_edit_common.jsp");
+		result.setPath("/app/mypage/shelter/profile_edit_shelter.jsp");
 
 		return result;
 	}

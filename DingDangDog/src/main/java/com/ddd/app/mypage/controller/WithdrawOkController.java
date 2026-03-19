@@ -10,9 +10,8 @@ import javax.servlet.http.HttpSession;
 import com.ddd.app.Execute;
 import com.ddd.app.Result;
 import com.ddd.app.mypage.dao.MypageDAO;
-import com.ddd.app.user.dto.UserDTO;
 
-public class ProfileCEditController implements Execute {
+public class WithdrawOkController implements Execute {
 
 	@Override
 	public Result execute(HttpServletRequest request, HttpServletResponse response)
@@ -21,16 +20,18 @@ public class ProfileCEditController implements Execute {
 		HttpSession session = request.getSession();
 		MypageDAO mypageDAO = new MypageDAO();
 		Result result = new Result();
-		UserDTO userDTO = new UserDTO();
 
-		Integer userNumber = (Integer) session.getAttribute("userNumber");
+		int userNumber = (Integer) session.getAttribute("userNumber");
 
-		userDTO = mypageDAO.selectMyPageInfo(userNumber);
+		System.out.println(userNumber + " 탈퇴 시작");
 
-		request.setAttribute("user", userDTO);
+		mypageDAO.updateToWithdraw(userNumber);
 
-		result.setRedirect(false);
-		result.setPath("/app/mypage/common/profile_edit_common.jsp");
+		session.invalidate();
+		System.out.println("탈퇴완료");
+
+		result.setRedirect(true);
+		result.setPath(request.getContextPath() + "/app/mypage/etc/goodby.jsp");
 
 		return result;
 	}

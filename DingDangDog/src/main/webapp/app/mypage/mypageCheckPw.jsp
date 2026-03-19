@@ -67,18 +67,6 @@
 											</form>
 										</div>
 
-										<%
-										session.setAttribute("userNumber", "10002");
-										session.setAttribute("userType", "C");
-										%>
-										<div>
-											테스트용 세션 "userNumber" :
-											<%=session.getAttribute("userNumber")%>
-											<br /> "userType" :
-											<%=session.getAttribute("userType")%>
-										</div>
-
-
 										<c:if test="${param.checkPw == 'fail'}">
 											<p id="password-check-error" class="password-check-error">비밀번호가
 												틀렸습니다</p>
