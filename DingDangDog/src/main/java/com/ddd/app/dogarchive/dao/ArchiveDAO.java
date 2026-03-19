@@ -34,6 +34,8 @@ public class ArchiveDAO {
 		sqlSession.update("archiveUpdate.updateArchive", updateDTO);
 		// 2. 성향 점수 수정
 		sqlSession.update("archiveUpdate.updateScore", updateDTO);
+		// 3. 이미지 수정
+		sqlSession.update("archiveUpdate.updateImg", updateDTO);
 	}
 
 	// ===== 정보 삭제 =====

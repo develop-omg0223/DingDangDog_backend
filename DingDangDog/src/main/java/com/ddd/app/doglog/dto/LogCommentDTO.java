@@ -1,6 +1,7 @@
 package com.ddd.app.doglog.dto;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class LogCommentDTO {
 	private int commentNumber;
@@ -8,7 +9,6 @@ public class LogCommentDTO {
 	private int userNumber;
 	private String commentPost;
 	private LocalDateTime commentDate;
-
 	private String userNickname;
 
 	public LogCommentDTO() {
@@ -56,8 +56,11 @@ public class LogCommentDTO {
 		this.commentPost = commentPost;
 	}
 
-	public LocalDateTime getCommentDate() {
-		return commentDate;
+	public String getCommentDate() {
+		if (commentDate == null) {
+			return "";
+		}
+		return commentDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 	}
 
 	public void setCommentDate(LocalDateTime commentDate) {
@@ -79,4 +82,3 @@ public class LogCommentDTO {
 				+ userNickname + "]";
 	}
 }
-

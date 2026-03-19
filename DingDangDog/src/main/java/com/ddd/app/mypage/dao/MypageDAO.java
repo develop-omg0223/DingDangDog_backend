@@ -5,7 +5,6 @@ import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
-import com.ddd.app.mypage.dto.MyPageDogMatchingDTO;
 import com.ddd.app.mypage.dto.MypageSInfoDTO;
 import com.ddd.app.user.dto.UserDTO;
 import com.ddd.config.MyBatisConfig;
@@ -23,27 +22,7 @@ public class MypageDAO {
 		System.out.println("비밀번호 체크");
 		return sqlSession.selectOne("MPCInfo.checkPassword", userDTO);
 	}
-
-	// ===== 매칭 결과 저장 =====
-	public void insertMatchingResult(MyPageDogMatchingDTO matchingDTO) {
-		sqlSession.insert("myPageMatching.insertMatchingResult", matchingDTO);
-	}
-
-	// ===== userNumber 매칭 이력 전체 조회 =====
-	public List<MyPageDogMatchingDTO> selectMatchingList(int userNumber) {
-		return sqlSession.selectList("myPageMatching.selectMatchingList", userNumber);
-	}
-
-	// ===== userNumber 현재 저장된 매칭 이력 개수 확인 =====
-	public int countSavedResults(int userNumber) {
-		return sqlSession.selectOne("myPageMatching.countSavedResults", userNumber);
-	}
-
-	// ===== 가장 오래된 결과 삭제 =====
-	public void deleteOldestResult(int userNumber) {
-		sqlSession.delete("myPageMatching.deleteOldestResult", userNumber);
-	}
-
+	
 	// 정보변경페이지용 일반회원 정보 조회
 	public UserDTO selectMyPageInfo(int UserNumber) {
 		System.out.println("일반회원 마이페이지 정보 조회");

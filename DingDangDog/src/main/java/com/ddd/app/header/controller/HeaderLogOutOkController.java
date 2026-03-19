@@ -24,7 +24,7 @@ public class HeaderLogOutOkController implements Execute {
 		}
 
 		Result result = new Result();
-		result.setPath(request.getContextPath() + "/main.ma");
+		result.setPath(request.getContextPath() + "/mainpage/Main.main");
 		result.setRedirect(true);
 		
 		return result;

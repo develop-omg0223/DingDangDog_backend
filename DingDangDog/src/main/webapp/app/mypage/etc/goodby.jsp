@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,11 +10,24 @@
 <title>Document</title>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/assets/css/mypage/etc/goodby.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/assets/css/header.css" />
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/assets/css/footer.css" />
 </head>
 
 <body>
 	<!-- header -->
-	<div id="header-container"></div>
+	<div id="header-container">
+		<c:choose>
+			<c:when test="${not empty sessionScope.userNumber}">
+				<jsp:include page="/app/header_login.jsp" />
+			</c:when>
+			<c:otherwise>
+				<jsp:include page="/app/header_logout.jsp" />
+			</c:otherwise>
+		</c:choose>
+	</div>
 	<main class="goodby-main">
 		<div class="container">
 			<div class="container-header">
@@ -32,15 +45,16 @@
 				</div>
 
 				<div class="backtomain">
-					<a href="./../../main.html">메인으로 가기</a>
+					<a href="${pageContext.request.contextPath}/main.html">메인으로 가기</a>
 				</div>
 			</div>
 		</div>
 	</main>
 	<!-- footer -->
-	<div id="footer-container"></div>
-	<!-- js -->
-	<script src="/assets/js/header-footer.js"></script>
+	<div id="footer-container">
+		<%@ include file="/app/footer.jsp"%>
+	</div>
+
 </body>
 
 </html>

@@ -20,7 +20,6 @@
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/footer.css" />
 </head>
 
-<body>
 	<!-- 유저 번호 확인 존재시 로그인 헤더 -->
 	<c:choose>
 	  <c:when test="${not empty sessionScope.userNumber}">
@@ -30,6 +29,8 @@
 	    <jsp:include page="/app/header_logout.jsp" />
 	  </c:otherwise>
 	</c:choose>
+<body>
+
 
 
   <main class="doglog-detail">

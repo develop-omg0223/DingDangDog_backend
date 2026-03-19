@@ -7,8 +7,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>멍! 매칭</title>
-  <link rel="stylesheet" href="${pageContext.request.contextPath}../../assets/css/dogmatching/dogmatching.css" />
-  <script defer src="../../assets/js/dogmatching/dogmatching.js"></script>
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/dogmatching/dogmatching.css" />
+  <script defer src="/assets/js/dogmatching/dogmatching.js"></script>
 </head>
 
 <body>

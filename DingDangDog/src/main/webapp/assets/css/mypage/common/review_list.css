@@ -51,51 +51,6 @@ footer {
 }
 
 
-.sidebar{
-  width:350px;
-  height:804px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-
-.side-menu{
-  width:100%;
-  display:flex;
-  flex-direction:column;
-  gap:20px;
-  
-}
-
-.btn-side-link{
-  display:block;
-  height:72px;
-  line-height:72px;
-  text-align:center;
-  text-decoration:none;
-  color:#F47C2A;
-  font-weight:700;
-  font-size:24px;
-  border-radius: 23px;
-  background-color:#ffff;
-  border-color: #F47C2A;
-  border:2px solid #ffff;
-}
-
-.btn-side-link:hover{
-  background-color: #F47C2A;
-  color:#ffff;
-}
-
-hr{
-  border: 0px;
-  background-color: #F47C2A;
-  color: #F47C2A;
-  height: 1px;
-}
-
-
-
 .content{
   width:1000px;
   height:804px;

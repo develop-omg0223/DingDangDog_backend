@@ -20,6 +20,9 @@ public class MypageLogListController implements Execute {
 	        throws ServletException, IOException {
 
 	    System.out.println("내가 작성한 멍! 로그 목록");
+	    
+	    
+
 
 	    
 	    HttpSession session = request.getSession();

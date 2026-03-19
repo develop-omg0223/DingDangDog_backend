@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
 	
 	    const imagePath = dog.archiveImgPath && dog.archiveImgPath.trim() !== ""
 	      ? `${contextPath}${dog.archiveImgPath}`
-	      : `${contextPath}/assets/img/1.png`;
+	      : `${contextPath}/assets/img/1.png`; //디폴트 이미지
 	
 	    card.innerHTML = `
 	      <a href="${contextPath}/archive/detail.ar?dogNumber=${dog.dogNumber}">

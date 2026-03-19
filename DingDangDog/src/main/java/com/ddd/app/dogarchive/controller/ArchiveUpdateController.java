@@ -2,6 +2,7 @@ package com.ddd.app.dogarchive.controller;
 
 //===== 멍 카이브 수정 ===== 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -10,14 +11,18 @@ import com.ddd.app.Execute;
 import com.ddd.app.Result;
 import com.ddd.app.dogarchive.dao.ArchiveDAO;
 import com.ddd.app.dogarchive.dto.ArchiveReadDTO;
+import com.ddd.app.dogarchive.dto.ArchiveUpdateDTO;
 
 public class ArchiveUpdateController implements Execute {
 
 	@Override
 	public Result execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		ArchiveDAO dao = new ArchiveDAO();
+		
+		// ===== 객체 =====
 		Result result = new Result();
+		ArchiveDAO dao = new ArchiveDAO();
+		ArchiveUpdateDTO updateDTO = new ArchiveUpdateDTO();
 
 		// ===== 수정할 dogNumber =====
 		int dogNumber = Integer.parseInt(request.getParameter("dogNumber"));

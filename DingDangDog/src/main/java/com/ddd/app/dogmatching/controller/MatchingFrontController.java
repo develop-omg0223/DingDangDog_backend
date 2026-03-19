@@ -43,7 +43,7 @@ public class MatchingFrontController extends HttpServlet {
 
 		// ===== 매칭 제출 =====
 		case "/matching/matchingOk.matching": // 설문 저장 로직 실행
-			result = new MatchingOkController().execute(request, response);
+			result = new MatchingResultOkController().execute(request, response);
 			break;
 
 		// ===== 매칭 결과 =====

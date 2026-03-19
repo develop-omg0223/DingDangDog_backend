@@ -1,13 +1,16 @@
 package com.ddd.app.mypage.dto;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class MypageLogDTO {
 	private int logNumber;
 	private int userNumber;
 	private String userNickname;
 	private String logTitle;
 	private String logPost;
-	private String logDate;
-	private String logModifyDate;
+	private LocalDateTime logDate;
+	private LocalDateTime logModifyDate;
 	private String representativeImgPath;
 
 
@@ -52,18 +55,24 @@ public class MypageLogDTO {
 	}
 
 	public String getLogDate() {
-		return logDate;
+	    if (logDate == null) {
+	        return "";
+	    }
+	    return logDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 	}
 
-	public void setLogDate(String logDate) {
-		this.logDate = logDate;
+	public void setLogDate(LocalDateTime logDate) {
+	    this.logDate = logDate;
 	}
 
 	public String getLogModifyDate() {
-		return logModifyDate;
+		if (logModifyDate==null) {
+			return "";
+		}
+		return logModifyDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 	}
 
-	public void setLogModifyDate(String logModifyDate) {
+	public void setLogModifyDate(LocalDateTime logModifyDate) {
 		this.logModifyDate = logModifyDate;
 	}
 

@@ -14,6 +14,8 @@
   	<!--헤더 푸터용 css  -->
   	<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/header.css" />
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/footer.css" />
+	<!-- 사이드바용 css  -->
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/mypage/sidebar.css" />
 </head>
 
 <body>
@@ -29,18 +31,8 @@
 
   <main class="review-list">
     <div class="container">
-      <aside class="sidebar">
-        <nav class="side-menu">
-          <a class="btn-side-link" href="${pageContext.request.contextPath}/mypage/profileEdit.my">내 정보 변경</a>
-          <hr>
-          <a class="btn-side-link" href="${pageContext.request.contextPath}/mypage/volunteerStatus.my">멍! 케어 신청 확인</a>
-          <hr>
-          <a class="btn-side-link" href="${pageContext.request.contextPath}/mypage/reviewList.my">내가 작성한 멍! 로그 목록</a>
-          <hr>
-          <a class="btn-side-link" href="${pageContext.request.contextPath}/mypage/supportList.my">1 : 1 문의</a>
-        </nav>
-      </aside>
-
+    	<!-- 사이드바 -->
+      <jsp:include page="/app/mypage/sidebar.jsp" />
       <section class="content">
         <div class="content-box">
           <div class="panel">

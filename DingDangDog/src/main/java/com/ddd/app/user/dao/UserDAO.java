@@ -19,6 +19,11 @@ public class UserDAO {
 		return sqlSession.selectOne("user.login", userDTO);
 	}
 
+	// 비밀번호변경(조회)
+	public int findPw(UserDTO userDTO) {
+		return sqlSession.selectOne("user.findPw", userDTO);
+	}
+
 	// 아이디 중복확인
 	public boolean checkId(String userId) {
 		return (Integer) (sqlSession.selectOne("user.checkId", userId)) < 1;

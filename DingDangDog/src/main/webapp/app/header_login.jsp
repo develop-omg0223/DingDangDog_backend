@@ -4,7 +4,7 @@
 <header class="header">
   <div class="h-container">
     <div class="h-left-menu">
-      <a href="${pageContext.request.contextPath}/main.ma" class="h-logo-link">
+      <a href="${pageContext.request.contextPath}/mainpage/Main.main" class="h-logo-link">
         <img src="${pageContext.request.contextPath}/assets/img/header, footer_logo.svg" alt="DingDongDOG! logo" class="h-logo-img">
       </a>
 
@@ -16,8 +16,8 @@
     <nav class="h-centent-menu">
       <ul>
         <li><a href="#" class="h-centent-menu-item">소개</a></li>
-        <li><a href="${pageContext.request.contextPath}/dogmatching/list.dm" class="h-centent-menu-item">멍! 매칭</a></li>
-        <li><a href="${pageContext.request.contextPath}/log/list.lo" class="h-centent-menu-item">멍! 로그</a></li>
+        <li><a href="${pageContext.request.contextPath}/matching/test.matching" class="h-centent-menu-item">멍! 매칭</a></li>
+        <li><a href="${pageContext.request.contextPath}/log/listSearch.lo" class="h-centent-menu-item">멍! 로그</a></li>
         <li><a href="${pageContext.request.contextPath}/care/list.ca" class="h-centent-menu-item">멍! 케어</a></li>
         <li><a href="${pageContext.request.contextPath}/archive/list.ar" class="h-centent-menu-item">멍! 카이브</a></li>
       </ul>

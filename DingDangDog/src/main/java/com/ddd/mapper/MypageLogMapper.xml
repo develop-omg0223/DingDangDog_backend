@@ -3,7 +3,7 @@
 <mapper namespace="mypagelog">
 
 <!-- 내 게시글 목록 조회 -->
-<select id="selectMyLogs" parameterType="int" resultType="LogDTO">
+<select id="selectMyLogs" parameterType="int" resultType="MypageLogDTO">
 	SELECT
 		l.log_number,
 		l.user_number,

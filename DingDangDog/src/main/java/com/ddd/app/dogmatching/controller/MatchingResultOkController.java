@@ -2,14 +2,19 @@ package com.ddd.app.dogmatching.controller;
 
 // ===== 멍! 매칭 데이터 저장 ===== 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.ddd.app.Execute;
 import com.ddd.app.Result;
 import com.ddd.app.dogmatching.dao.MatchingResultDAO;
 import com.ddd.app.dogmatching.dto.MatchingResultDTO;
 
-public class MatchingOkController {
+public class MatchingResultOkController implements Execute {
+
+	@Override
 	public Result execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -38,7 +43,7 @@ public class MatchingOkController {
 		dao.insertResult(dto);
 
 		// ===== 결과 화면 =====
-		result.setPath(request.getContextPath() + "/matching/result.matching");
+		result.setPath(request.getContextPath() + "/matching/result.ma");
 		result.setRedirect(true);
 		return result;
 	}

@@ -7,19 +7,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.ddd.app.Result;
-import com.ddd.app.main.controller.mainController;
 
 /**
  * Servlet implementation class headerController
  */
 
-public class mainFrontController extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+public class headerController extends HttpServlet {
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public mainFrontController() {
+    public headerController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -45,7 +43,7 @@ public class mainFrontController extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
 
-		System.out.println("LogFrontController 실행!!");
+		System.out.println("headerController 실행!!");
 
 		String target = request.getRequestURI().substring(request.getContextPath().length());
 		System.out.println("현재 경로 : " + target);
@@ -65,12 +63,8 @@ public class mainFrontController extends HttpServlet {
 //			break;
 		
 		
-		case "/header/Main.he":
-			System.out.println("메인 페이지 요청");
-			result = new mainController().execute(request, response);
-			break;
 			
-		case "/header/logOut.he":
+		case "/header/logoutOk.he":
 			System.out.println("로그 아웃 요청");
 			result = new HeaderLogOutOkController().execute(request, response);
 			break;

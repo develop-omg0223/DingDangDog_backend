@@ -11,22 +11,22 @@
     <title>메인페이지</title>
 
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/main.css" />
-<%--     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/header.css" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/footer.css" /> --%>
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/header.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/footer.css" />
 
-    <%-- <script defer src="${pageContext.request.contextPath}/assets/js/main.js"></script> --%>
+    <script defer src="${pageContext.request.contextPath}/assets/js/main.js"></script>
 </head>
 
 <body>
     <!-- header -->
-<%--     <c:choose>
+	<c:choose>
         <c:when test="${not empty sessionScope.userNumber}">
             <jsp:include page="/app/header_login.jsp" />
         </c:when>
         <c:otherwise>
             <jsp:include page="/app/header_logout.jsp" />
         </c:otherwise>
-    </c:choose> --%>
+    </c:choose>
 
     <main>
         <!-- 최상단 배너 -->
@@ -80,7 +80,7 @@
     </main>
 
     <!-- footer -->
-<%--     <jsp:include page="/app/footer.jsp" /> --%>
+	<jsp:include page="/app/footer.jsp" />
 
     <!-- 서버 데이터 -> JS -->
     <script>

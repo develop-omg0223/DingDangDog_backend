@@ -1,6 +1,7 @@
 package com.ddd.app.doglog.dto;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class LogDTO {
 	private int logNumber;
@@ -62,16 +63,22 @@ public class LogDTO {
 		this.logPost = logPost;
 	}
 
-	public LocalDateTime getLogDate() {
-		return logDate;
+	public String getLogDate() {
+	    if (logDate == null) {
+	        return "";
+	    }
+	    return logDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 	}
 
 	public void setLogDate(LocalDateTime logDate) {
-		this.logDate = logDate;
+	    this.logDate = logDate;
 	}
 
-	public LocalDateTime getLogModifyDate() {
-		return logModifyDate;
+	public String getLogModifyDate() {
+		if (logModifyDate==null) {
+			return "";
+		}
+		return logModifyDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 	}
 
 	public void setLogModifyDate(LocalDateTime logModifyDate) {
