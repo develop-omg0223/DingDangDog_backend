@@ -23,17 +23,34 @@
 		<servlet-name>User</servlet-name>
 		<url-pattern>*.us</url-pattern>
 	</servlet-mapping>
-	
-	
-	
-	 	 <!-- 멍로그 매핑 -->
-	<servlet>
-	    <servlet-name>log</servlet-name>
-	    <servlet-class>com.ddd.app.log.controller.LogController</servlet-class>
-	</servlet>
 
+	<!-- 멍로그 매핑 -->
+	<servlet>
+		<servlet-name>log</servlet-name>
+		<servlet-class>com.ddd.app.doglog.controller.LogController</servlet-class>
+	</servlet>
 	<servlet-mapping>
-	    <servlet-name>log</servlet-name>
-	    <url-pattern>*.lo</url-pattern>
+		<servlet-name>log</servlet-name>
+		<url-pattern>*.lo</url-pattern>
+	</servlet-mapping>
+
+	<!-- 멍! 케어 매핑 -->
+	<servlet>
+		<servlet-name>care</servlet-name>
+		<servlet-class>com.ddd.app.dogcare.controller.CareFrontController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>care</servlet-name>
+		<url-pattern>*.care</url-pattern>
+	</servlet-mapping>
+
+	<!-- 관리자 매핑 -->
+	<servlet>
+		<servlet-name>admin</servlet-name>
+		<servlet-class>com.ddd.app.admin.controller.AdminFrontController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>admin</servlet-name>
+		<url-pattern>*.ad</url-pattern>
 	</servlet-mapping>
 </web-app>

@@ -3,7 +3,6 @@ package com.ddd.app.user.controller;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,7 +12,6 @@ import com.ddd.app.Result;
 /**
  * Servlet implementation class userFrontController
  */
-@WebServlet("/userFrontController")
 public class UserFrontController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -79,6 +77,11 @@ public class UserFrontController extends HttpServlet {
 			System.out.println("닉네임 중복확인 요청");
 			result = new CheckNicknameOkController().execute(request, response);
 			System.out.println("닉네임 중복확인 완료");
+			break;
+		case "/user/checkEmailOk.us":
+			System.out.println("이메일 중복확인 요청");
+			result = new CheckEmailOkController().execute(request, response);
+			System.out.println("이메일 중복확인 완료");
 			break;
 		case "/user/signupShelter.us":
 			System.out.println("보호소 회원가입 페이지 요청");

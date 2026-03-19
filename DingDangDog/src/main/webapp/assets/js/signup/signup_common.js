@@ -10,7 +10,10 @@ document.addEventListener("DOMContentLoaded", function() {
 	const nickBtn = document.querySelector(".nickname-common-btn button");
 	const nickMsg = document.querySelector(".main-form-nickname-common-message p");
 	let isNickChecked = false;
-
+	const emailInput = document.getElementById("email-common-user");
+	const emailBtn = document.querySelector(".email-common-btn button");
+	const emailMsg = document.querySelector(".main-form-email-common-message p");
+	let isEmailChecked = false;
 
 	/*----------------------아이디 중복확인----------------------*/
 	idInput.addEventListener("input", function() {
@@ -117,6 +120,62 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 
+	/*----------------------이메일 중복확인----------------------*/
+	emailInput.addEventListener("input", function() {
+		isEmailChecked = false;
+		emailMsg.textContent = "중복 확인을 해주세요";
+		emailMsg.style.color = "red";
+	});
+
+	emailInput.addEventListener("blur", function() {
+		if (!isEmailChecked && emailInput.value.trim() !== "") {
+			emailMsg.textContent = "중복 확인을 해주세요";
+			emailMsg.style.color = "red";
+		}
+	});
+
+	emailBtn.addEventListener("click", function() {
+		const userEmail = emailInput.value.trim();
+
+		if (!userEmail) {
+			emailMsg.textContent = "이메일을 입력해주세요";
+			emailMsg.style.color = "red";
+			return;
+		}
+
+		const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+		if (!emailPattern.test(userEmail)) {
+			emailMsg.textContent = "올바른 형식이 아닙니다";
+			emailMsg.style.color = "red";
+			return;
+		}
+
+		fetch(`${base}/user/checkEmailOk.us?userEmail=${encodeURIComponent(userEmail)}`, {
+			headers: { "Accept": "application/json" }
+		})
+			.then(r => {
+				if (!r.ok) {
+					throw new Error(r.status);
+				}
+				return r.json();
+			})
+			.then(data => {
+				if (data.available) {
+					emailMsg.textContent = "사용 가능한 이메일입니다";
+					emailMsg.style.color = "green";
+					isEmailChecked = true;
+				} else {
+					emailMsg.textContent = "이미 등록된 이메일입니다";
+					emailMsg.style.color = "red";
+					isEmailChecked = false;
+				}
+			})
+			.catch(error => {
+				console.error("Error:", error);
+				emailMsg.textContent = "중복 확인 중 오류 발생";
+				emailMsg.style.color = "red";
+			});
+	});
 
 
 

@@ -444,3 +444,59 @@ main {
 	font-weight: bold;
 	cursor: pointer;
 }
+
+/* 이메일 섹션 레이아웃 수정 */
+.main-form-common-emailAddress {
+	height: 90px;
+	width: 900px;
+	/* margin-bottom 등 필요시 조정 */
+}
+
+.main-container-common-emailAddress {
+	display: flex;
+	margin-left: 73px;
+	align-items: center;
+}
+
+.main-input-common-emailAddress {
+	display: flex;
+}
+
+.main-emailAddress-common-writing {
+	width: 190px;
+	height: 60px;
+	border: 1px solid black;
+	font-size: 20px;
+	text-align: center;
+	line-height: 60px;
+	font-weight: bold;
+}
+
+#email-common-user {
+	width: 400px;
+	height: 60px;
+	font-size: 20px;
+}
+
+/* 이메일 중복확인 버튼 스타일 */
+.email-common-btn button {
+	width: 150px;
+	height: 60px;
+	font-size: 20px;
+	margin-left: 10px;
+	border-radius: 10px;
+	background-color: #F47C2A;
+	color: white;
+	font-weight: bold;
+	cursor: pointer;
+	border: none;
+}
+
+/* 이메일 결과 메시지 스타일 */
+.main-form-email-common-message {
+	color: red;
+	font-weight: bold;
+	margin-left: 263px; /* 아이디/닉네임 메시지와 위치 통일 */
+	text-align: left;
+	min-height: 20px;
+}

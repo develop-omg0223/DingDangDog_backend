@@ -1,4 +1,4 @@
-package com.ddd.app.dogcare.controller;
+package com.ddd.app.admin.controller;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -11,17 +11,23 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.ddd.app.Execute;
 import com.ddd.app.Result;
-import com.ddd.app.dogcare.dao.CareDAO;
-import com.ddd.app.dogcare.dto.CareListDTO;
+import com.ddd.app.admin.dao.AdminDAO;
+import com.ddd.app.admin.dto.AdminUserDTO;
 
-public class CareListController implements Execute {
+public class AdminUserListOkController implements Execute {
 
 	@Override
 	public Result execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		System.out.println("=== CareListController 실행 ===");
-		CareDAO careDAO = new CareDAO();
+
+		System.out.println("===AdminUserListOkController 실행===");
+		AdminDAO adminDAO = new AdminDAO();
 		Result result = new Result();
+
+		String userType = request.getParameter("userType");
+		if (userType == null) {
+			userType = "C";
+		}
 
 		// 페이징 처리
 		String temp = request.getParameter("page");
@@ -37,13 +43,22 @@ public class CareListController implements Execute {
 		Map<String, Integer> pageMap = new HashMap<>();
 		pageMap.put("startRow", startRow);
 		pageMap.put("endRow", endRow);
-		System.out.println("페이징 확인 : " + pageMap);
 
-		List<CareListDTO> careList = careDAO.selectCareList(pageMap);
+		// 회원 목록 조회
+
+		List<AdminUserDTO> userList = null;
+		int total = 0;
+
+		if ("C".equals(userType)) {
+			userList = adminDAO.selectCommonList(pageMap);
+			total = adminDAO.getTotalCommon();
+		} else if ("S".equals(userType)) {
+			userList = adminDAO.selectShelterList(pageMap);
+			total = adminDAO.getTotalShelter();
+		}
 
 		// 페이징 정보 설정
 		// 실제 마지막 페이지 번호(realEndPage)를 계산함
-		int total = careDAO.getTotal();
 		// 실제 마지막 페이지(전체 게시글 기준으로 계산)
 		int realEndPage = (int) (Math.ceil(total / (double) rowCount));
 		// 현재 페이지 그룹에서의 마지막 페이지
@@ -54,26 +69,31 @@ public class CareListController implements Execute {
 		// endPage가 실제 존재하는 마지막 페이지보다 크면 조정
 		endPage = Math.min(endPage, realEndPage);
 
-		// prev, next 버튼 활성화 여부 확인
+		// prev, next 버튼 활성화여부 확인
 		boolean prev = startPage > 1;
 		boolean next = endPage < realEndPage;
 
+		request.setAttribute("userList", userList);
+		request.setAttribute("userType", userType);
+		request.setAttribute("total", total);
 		request.setAttribute("page", page);
-		request.setAttribute("startpage", startPage);
-		request.setAttribute("endpage", endPage);
+		request.setAttribute("startPage", startPage);
+		request.setAttribute("endPage", endPage);
 		request.setAttribute("prev", prev);
 		request.setAttribute("next", next);
 
-		System.out.println("======== 페이징 정보 확인 =========");
+		System.out.println("======페이징 정보 확인======");
 		System.out.println("pageMap : " + pageMap);
-		System.out.println("boardList : " + careList);
-		System.out
-				.println("startPage : " + startPage + "endPage : " + endPage + ", prev : " + prev + ", next : " + next);
-		System.out.println("=====================");
+		System.out.println("userList : " + userList);
+		System.out.println(
+				"startPage : " + startPage + ", endPage : " + endPage + ", prev : " + prev + ", next : " + next);
+		System.out.println("=========================");
 
-		result.setPath("/app/dogcare/dogcareListCommon.jsp");
+		result.setPath("/apps/admin/userlist/admin_user_list_common.jsp");
 		result.setRedirect(false);
-		return null;
+
+		return result;
+
 	}
 
 }

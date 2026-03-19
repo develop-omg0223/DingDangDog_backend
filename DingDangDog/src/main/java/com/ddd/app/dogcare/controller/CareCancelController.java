@@ -8,19 +8,14 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.ddd.app.Execute;
 import com.ddd.app.Result;
-import com.ddd.app.dogcare.dao.CareDAO;
 
-public class CareDetailController implements Execute{
+public class CareCancelController implements Execute{
 
 	@Override
 	public Result execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		System.out.println("게시글 상세페이지 처리 완료");
-		CareDAO careDAO = new CareDAO();
-		
-		
+		// TODO Auto-generated method stub
 		return null;
 	}
-	
 
 }

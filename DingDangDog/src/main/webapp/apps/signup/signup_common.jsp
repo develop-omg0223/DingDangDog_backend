@@ -43,7 +43,8 @@
 							<div class="main-input-pw-common-writing">
 								<label for="user-common-pw">비밀번호</label>
 							</div>
-							<input type="password" id="user-common-pw" name="userPassword" required>
+							<input type="password" id="user-common-pw" name="userPassword"
+								required>
 						</div>
 						<div class="main-form-pw-common-message">
 							<p>영문,숫자,특수문자 포함 8자리이상 입력</p>
@@ -73,7 +74,8 @@
 							<div class="main-input-nickname-common-writing">
 								<label for="user-common-nickname">닉네임</label>
 							</div>
-							<input type="text" id="user-common-nickname" name="userNickname" required>
+							<input type="text" id="user-common-nickname" name="userNickname"
+								required>
 						</div>
 						<div class="nickname-common-btn">
 							<button type="button">중복확인</button>
@@ -94,7 +96,8 @@
 					<div class="user-gender-common-container">
 						<div class="user-gender-container-common-male">
 							<span class="user-gender-common-male">남</span> <input
-								type="radio" id="user-common-male" name="userGender" value="남" checked="checked">
+								type="radio" id="user-common-male" name="userGender" value="남"
+								checked="checked">
 						</div>
 						<div class="user-gender-container-common-female">
 							<label for="user-common-female">여</label> <input type="radio"
@@ -109,7 +112,8 @@
 							<label for="user-common-birth">생년월일</label>
 						</div>
 						<input type="text" id="user-common-birth" name="userBirth"
-							placeholder="예) 20000101" maxlength="10" required>
+							placeholder="생년월일 8자를 입력해주세요 - 예) 20000101" maxlength="10"
+							required>
 					</div>
 					<!-- <div class="main-birth-common-message">ex&#41;2000-00-00</div> -->
 				</div>
@@ -119,7 +123,8 @@
 						<div class="main-phone-common-writing">
 							<label for="user-common-phone">휴대폰 번호</label>
 						</div>
-						<input type="text" id="user-common-phone" name="userPhone" required>
+						<input type="text" id="user-common-phone" name="userPhone"
+							required>
 						<div class="phone-common-btn">
 							<button type="button">인증번호 전송</button>
 						</div>
@@ -149,10 +154,19 @@
 
 				<div class="main-form-common-emailAddress">
 					<div class="main-container-common-emailAddress">
-						<div class="main-emailAddress-common-writing">
-							<label for="email-common-user">이메일 주소</label>
+						<div class="main-input-common-emailAddress">
+							<div class="main-emailAddress-common-writing">
+								<label for="email-common-user">이메일 주소</label>
+							</div>
+							<input type="text" id="email-common-user" name="userEmail"
+								required>
 						</div>
-						<input type="text" id="email-common-user" name="userEmail" required>
+						<div class="email-common-btn">
+							<button type="button">중복확인</button>
+						</div>
+					</div>
+					<div class="main-form-email-common-message">
+						<p></p>
 					</div>
 				</div>
 

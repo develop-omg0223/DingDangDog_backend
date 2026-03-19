@@ -11,7 +11,7 @@ import com.ddd.app.Execute;
 import com.ddd.app.Result;
 import com.ddd.app.user.dao.UserDAO;
 
-public class CheckIdOkController implements Execute {
+public class CheckEmailOkController implements Execute {
 
 	@Override
 	public Result execute(HttpServletRequest request, HttpServletResponse response)
@@ -19,10 +19,10 @@ public class CheckIdOkController implements Execute {
 
 		UserDAO userDAO = new UserDAO();
 		Result result = new Result();
-
-		String userId = request.getParameter("userId");
-		System.out.println(userId);
-		boolean isAvailable = userDAO.checkId(userId);
+		
+		String userEmail = request.getParameter("userEmail");
+		System.out.println(userEmail);
+		boolean isAvailable = userDAO.checkEmail(userEmail);
 		System.out.println(isAvailable);
 
 		response.setContentType("application/json");
@@ -37,7 +37,6 @@ public class CheckIdOkController implements Execute {
 		result.setPath(null); // 페이지 이동이 없음을 명시
 		result.setRedirect(false); // 리다이렉트 설정 false로 유지
 		return result;
-
 	}
-
+	
 }

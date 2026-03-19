@@ -1,12 +1,103 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mapper namespace="Care">
-<!-- 멍! 케어 리스트 조회 -->
-<select id="selectCareList" resultType="CareDTO">
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="care">
+<!-- 멍! 케어 전체 목록 조회 -->
+<select id="selectCareList" resultType="CareListDTO">
 	SELECT c.care_number, c.care_title, c.care_date, u.user_nickname, c.care_write_date
 	FROM DDD_CARE c
 	JOIN ddd_user u ON c.user_number = u.user_number
-	WHERE c.care_status 'open' || 'close'
+	WHERE c.care_status IN ('open','close')
 	
 	ORDER BY c.care_date DESC;
 </select>
+
+<!-- 멍! 케어 상세페이지 조회 -->
+<select id="getDetail" parameterType="int" resultType="CareDetailDTO">
+SELECT c.care_number, c.care_title, c.care_post, c.care_date, c.care_recruit, u.user_nickname, c.care_write_date,
+       COUNT(a.apply_number) AS apply_count
+FROM DDD_CARE c
+JOIN DDD_USER u ON c.user_number = u.user_number
+LEFT JOIN DDD_CARE_APPLY a ON c.care_number = a.care_number
+WHERE c.care_number = #{careNumber}
+AND c.care_status IN ('open','close')
+GROUP BY c.care_number, c.care_title, c.care_post, c.care_date, c.care_recruit, u.user_nickname, c.care_write_date
+</select>
+
+<!-- 멍! 케어 등록 -->
+<insert id="insertCare" parameterType="CareDTO">
+INSERT INTO DDD_CARE(care_number, user_number, care_title, care_post, care_date, care_recruit, care_write_date, care_status)
+VALUES(seq_care.NEXTVAL, #{userNumber}, #{careTitle}, #{carePost}, #{careDate}, #{careRecruit}, SYSDATE, 'open')
+</insert>
+
+<!-- 멍! 케어 수정 -->
+<update id="updateCare" parameterType="CareDTO">
+UPDATE DDD_CARE
+SET care_title = #{careTitle}, care_post = #{carePost}, care_date = #{careDate}, care_recruit = #{careRecruit}
+WHERE care_number = #{careNumber} AND user_number = #{userNumber}
+</update>
+
+<!-- 멍! 케어 삭제 (soft delete) -->
+<update id="deleteCare" parameterType="int">
+UPDATE DDD_CARE
+SET care_status = 'deleted'
+WHERE care_number = #{careNumber} AND user_number = #{userNumber}
+</update>
+
+<!-- 멍! 케어 신청 -->
+<insert id="applyCare" parameterType="CareApplyDTO">
+<![CDATA[
+INSERT INTO ddd_care_apply(apply_number, care_number, user_number, apply_date)
+SELECT SEQ_CARE_APPLY.NEXTVAL, #{careNumber}, #{userNumber}, SYSDATE
+FROM DDD_CARE c
+WHERE c.care_number = #{careNumber}
+AND (SELECT COUNT(*)
+     FROM ddd_care_apply
+     WHERE care_number = c.care_number) < c.care_recruit
+AND c.care_status = 'open'
+]]>
+</insert>
+
+<!-- 멍! 케어 자동 마감 -->
+<update id="closeCare" parameterType="int">
+UPDATE ddd_care c
+SET c.care_status = 'close'
+WHERE c.care_number = #{careNumber}
+AND (SELECT COUNT(*)
+     FROM ddd_care_apply a
+     WHERE a.care_number = c.care_number) >= c.care_recruit
+</update>
+
+<!-- 신청취소 -->
+<delete id="cancelApply" parameterType="map">
+DELETE FROM ddd_care_apply
+WHERE care_number = #{careNumber} AND user_number = #{userNumber}
+</delete>
+
+<!-- 재오픈 -->
+<update id="reopenCare" parameterType="int">
+<![CDATA[
+UPDATE DDD_CARE c
+SET c.care_status = 'open'
+WHERE c.care_number = #{careNumber}
+AND (SELECT COUNT(*) FROM ddd_care_apply a WHERE a.care_number = c.care_number) < c.care_recruit;
+]]>
+</update>
+
+<!-- 신청회원 목록 조회-->
+<select id="getApplyUsers" parameterType="int" resultType="ApplyDTO">
+SELECT a.apply_number, u.user_number, u.user_name, u.user_nickname, u.user_phone
+FROM ddd_care_apply a
+JOIN ddd_user u ON a.user_number = u.user_number
+WHERE a.care_number = #{careNumber}
+</select>
+
+<!-- 신청현황 -->
+<select id="getApplyStatus" parameterType="int" resultType="String">
+SELECT COUNT(a.apply_number) || '/' || c.care_recruit AS apply_status
+FROM ddd_care c
+LEFT JOIN ddd_care_apply a ON c.care_number = a.care_number
+WHERE c.care_number = #{careNumber}
+GROUP BY c.care_recruit;
+</select>
+
 </mapper>

@@ -20,9 +20,33 @@
 			alias="UserCommonDTO" />
 		<typeAlias type="com.ddd.app.user.dto.UserShelterDTO"
 			alias="UserShelterDTO" />
-		<typeAlias type="com.ddd.app.log.dto.LogDTO" alias="LogDTO"/>
-		<typeAlias type="com.ddd.app.log.dto.LogImgDTO" alias="LogImgDTO"/>
-		<typeAlias type="com.ddd.app.log.dto.LogCommentDTO" alias="LogCommentDTO"/>
+		<typeAlias type="com.ddd.app.doglog.dto.LogDTO" alias="LogDTO" />
+		<typeAlias type="com.ddd.app.doglog.dto.LogImgDTO"
+			alias="LogImgDTO" />
+		<typeAlias type="com.ddd.app.doglog.dto.LogCommentDTO"
+			alias="LogCommentDTO" />
+		<typeAlias type="com.ddd.app.admin.dto.AdminDTO"
+			alias="AdminDTO" />
+		<typeAlias type="com.ddd.app.admin.dto.AdminUserDTO"
+			alias="AdminUserDTO" />
+		<typeAlias type="com.ddd.app.dogarchive.dto.ArchiveDeleteDTO"
+			alias="ArchiveDeleteDTO" />
+		<typeAlias type="com.ddd.app.dogarchive.dto.ArchiveListDTO"
+			alias="ArchiveListDTO" />
+		<typeAlias type="com.ddd.app.dogarchive.dto.ArchiveReadDTO"
+			alias="ArchiveReadDTO" />
+		<typeAlias type="com.ddd.app.dogarchive.dto.ArchiveUpdateDTO"
+			alias="ArchiveUpdateDTO" />
+		<typeAlias type="com.ddd.app.dogarchive.dto.ArchiveWriteDTO"
+			alias="ArchiveWriteDTO" />
+		<typeAlias type="com.ddd.app.dogcare.dto.CareApplyDTO"
+			alias="CareApplyDTO" />
+		<typeAlias type="com.ddd.app.dogcare.dto.CareDetailDTO"
+			alias="CareDetailDTO" />
+		<typeAlias type="com.ddd.app.dogcare.dto.CareDTO"
+			alias="CareDTO" />
+		<typeAlias type="com.ddd.app.dogcare.dto.CareListDTO"
+			alias="CareListDTO" />
 	</typeAliases>
 
 	<environments default="oracle">
@@ -41,7 +65,13 @@
 	<!-- Mapper.xml 등록 추후 필요 -->
 	<mappers>
 		<mapper resource="com/ddd/mapper/UserMapper.xml" />
+		<mapper resource="com/ddd/mapper/AdminUserMapper.xml" />
+		<mapper resource="com/ddd/mapper/CareMapper.xml" />
+		<mapper resource="com/ddd/mapper/ArchaiveMapper.xml" />
+		<mapper resource="com/ddd/mapper/LogMapper.xml" />
+		<mapper resource="com/ddd/mapper/MatchingMapper.xml" />
 	</mappers>
+	
 
 
 </configuration>
