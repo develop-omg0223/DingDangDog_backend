@@ -80,48 +80,37 @@
 	</select>
 
 
+	<!-- 비밀번호변경 -->
+	<!-- 회원번호 받아오기 -->
+	<select id="findPw" parameterType="UserDTO" resultType="int">
+		SELECT
+		user_number FROM ddd_user
+		WHERE user_id = #{userId}
+		AND user_phone =
+		#{userPhone}
+	</select>
+
+	<!-- 비밀번호 변경 -->
+	<update id="resetPw">
+		UPDATE ddd_user
+		SET USER_PASSWORD = #{userPassword}
+		WHERE USER_NUMBER = #{userNumber};
+	</update>
+
+
 	<!-- 마이페이지 내정보조회/변경 -->
 	<!-- 조회 -->
-	<select id="selectMyPageInfo" resultType="UserDTO">
-		SELECT
-		user_id,
-		user_name, user_birth, user_nickname,
-		user_email, user_phone,
-		user_gender
-		FROM ddd_user
-		WHERE user_number = #{userNumber}
-	</select>
-
-	<!-- 변경 -->
-	<update id="updateMyPageInfo">
-		UPDATE ddd_user
-		SET
-		user_nickname = #{userNickname}
-		<if test="userPassword != null and userPassword != ''">
-			, user_password = #{userPassword}
-		</if>
-		WHERE user_number = #{userNumber}
-		AND user_password =
-		#{currentPassword}
-	</update>
-	<!-- 보호소용 파일 추가 쿼리 필요 -->
-
-	<!-- 탈퇴 -->
-	<!-- 비밀번호 확인 -->
-	<select id="checkPassword" resultType="int">
-		SELECT COUNT(user_number)
-		FROM ddd_user
-		WHERE user_number = #{userNumber}
-		AND user_password =
-		#{userPassword}
-	</select>
-	<!-- 탈퇴상태로 변경 -->
-	<update id="updateToWithdraw">
-		UPDATE ddd_user
-		SET user_status = 'withdraw'
-		WHERE
-		user_number = #{userNumber}
-	</update>
+	<!-- <select id="selectMyPageInfo" resultType="UserDTO"> SELECT user_id, 
+		user_name, user_birth, user_nickname, user_email, user_phone, user_gender 
+		FROM ddd_user WHERE user_number = #{userNumber} </select> 변경 <update id="updateMyPageInfo"> 
+		UPDATE ddd_user SET user_nickname = #{userNickname} <if test="userPassword 
+		!= null and userPassword != ''"> , user_password = #{userPassword} </if> 
+		WHERE user_number = #{userNumber} AND user_password = #{currentPassword} 
+		</update> 보호소용 파일 추가 쿼리 필요 탈퇴 비밀번호 확인 <select id="checkPassword" resultType="int"> 
+		SELECT COUNT(user_number) FROM ddd_user WHERE user_number = #{userNumber} 
+		AND user_password = #{userPassword} </select> 탈퇴상태로 변경 <update id="updateToWithdraw"> 
+		UPDATE ddd_user SET user_status = 'withdraw' WHERE user_number = #{userNumber} 
+		</update> -->
 
 
 </mapper>

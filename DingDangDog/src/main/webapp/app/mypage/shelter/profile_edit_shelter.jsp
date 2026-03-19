@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -9,13 +10,27 @@
 <title>내 정보 변경</title>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/assets/css/mypage/common/profile_edit_common.css" />
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/assets/css/header.css" />
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/assets/css/footer.css" />
 <script defer
 	src="${pageContext.request.contextPath}/assets/js/mypage/common/profile_edit_common.js"></script>
 </head>
 
 <body>
 	<!-- header -->
-	<%-- <%@ include file="/app/header_login.jsp"%> --%>
+	<div id="header-container">
+		<c:choose>
+			<c:when test="${not empty sessionScope.userNumber}">
+				<jsp:include page="/app/header_login.jsp" />
+			</c:when>
+			<c:otherwise>
+				<jsp:include page="/app/header_logout.jsp" />
+			</c:otherwise>
+		</c:choose>
+
+	</div>
 	<main class="profile-edit">
 		<div class="container">
 			<aside class="sidebar">
@@ -153,9 +168,9 @@
 		</div>
 	</main>
 	<!-- footer -->
-	<div id="footer-container"></div>
-	<!-- js -->
-	<script src="/assets/js/header-footer.js"></script>
+	<div id="footer-container">
+		<jsp:include page="/app/footer.jsp" />
+	</div>
 </body>
 
 </html>

@@ -10,6 +10,10 @@
 <title>내 정보 변경</title>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/assets/css/mypage/common/profile_edit_common.css" />
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/assets/css/header.css" />
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/assets/css/footer.css" />
 <style type="text/css">
 .edit-form {
 	margin-top: 200px;
@@ -23,7 +27,17 @@
 
 <body>
 	<!-- header -->
-	<%-- <%@ include file="/app/header_login.jsp"%> --%>
+	<div id="header-container">
+		<c:choose>
+			<c:when test="${not empty sessionScope.userNumber}">
+				<jsp:include page="/app/header_login.jsp" />
+			</c:when>
+			<c:otherwise>
+				<jsp:include page="/app/header_logout.jsp" />
+			</c:otherwise>
+		</c:choose>
+
+	</div>
 	<main class="profile-edit">
 		<div class="container">
 			<aside class="sidebar">
@@ -87,9 +101,9 @@
 
 	</main>
 	<!-- footer -->
-	<div id="footer-container"></div>
-	<!-- js -->
-	<script src="/assets/js/header-footer.js"></script>
+	<div id="footer-container">
+		<jsp:include page="/app/footer.jsp" />
+	</div>
 </body>
 
 </html>

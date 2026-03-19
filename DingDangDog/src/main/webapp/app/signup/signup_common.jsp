@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!doctype html>
 <html lang="en">
 <head>
@@ -7,12 +8,23 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>회원가입</title>
 <link rel="stylesheet"
+	href="${pageContext.request.contextPath}/assets/css/header.css" />
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/assets/css/footer.css" />
+<link rel="stylesheet"
 	href="${pageContext.request.contextPath}/assets/css/signup/signup_common.css">
 <script defer
 	src="${pageContext.request.contextPath}/assets/js/signup/signup_common.js"></script>
 </head>
 <body>
-	<header></header>
+	<c:choose>
+		<c:when test="${not empty sessionScope.userNumber}">
+			<jsp:include page="/app/header_login.jsp" />
+		</c:when>
+		<c:otherwise>
+			<jsp:include page="/app/header_logout.jsp" />
+		</c:otherwise>
+	</c:choose>
 	<main>
 		<div class="main-common-title">일반회원</div>
 		<form
@@ -113,8 +125,7 @@
 						</div>
 						<input type="text" id="user-common-birth" name="userBirth"
 							placeholder="생년월일 8자를 입력해주세요 - 예) 20000101" maxlength="10"
-							required>
-							<input type="date">
+							required> <input type="date">
 					</div>
 					<!-- <div class="main-birth-common-message">ex&#41;2000-00-00</div> -->
 				</div>
@@ -177,6 +188,7 @@
 			</div>
 		</form>
 	</main>
-	<footer></footer>
+
+	<%@ include file="/app/footer.jsp"%>
 </body>
 </html>

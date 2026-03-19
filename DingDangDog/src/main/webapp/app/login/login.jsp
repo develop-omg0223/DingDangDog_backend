@@ -8,13 +8,25 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>로그인</title>
 <link rel="stylesheet"
+	href="${pageContext.request.contextPath}/assets/css/header.css" />
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/assets/css/footer.css" />
+<link rel="stylesheet"
 	href="${pageContext.request.contextPath}/assets/css/login/login.css" />
-<script defer src="${pageContext.request.contextPath}/assets/js/login/login.js"></script>
+<script defer
+	src="${pageContext.request.contextPath}/assets/js/login/login.js"></script>
 </head>
 
 <body>
 	<!-- header -->
-	<div id="header-container"></div>
+	<c:choose>
+		<c:when test="${not empty sessionScope.userNumber}">
+			<jsp:include page="/app/header_login.jsp" />
+		</c:when>
+		<c:otherwise>
+			<jsp:include page="/app/header_logout.jsp" />
+		</c:otherwise>
+	</c:choose>
 
 	<main>
 		<section>
@@ -23,7 +35,8 @@
 				<div class="login-main">
 					<div class="login-main-title">로그인</div>
 					<div class="form-container">
-						<form action="${pageContext.request.contextPath}/user/loginOk.us" method="post">
+						<form action="${pageContext.request.contextPath}/user/loginOk.us"
+							method="post">
 							<div class="login-main-member">
 								<div class="login-main-common-choice" id="commonLogin">일반
 									회원</div>
@@ -32,15 +45,15 @@
 							</div>
 							<div class="login-main-container-input">
 								<div class="login-main-container-id">
-									<input type="hidden" id="userType" name="userType" value="C"> <label
-										for="user-id" class="login-main-idwriting">아이디</label> <input
+									<input type="hidden" id="userType" name="userType" value="C">
+									<label for="user-id" class="login-main-idwriting">아이디</label> <input
 										type="text" id="user-id" name="userId" placeholder="아이디" />
 								</div>
 								<div class="login-main-container-password">
 									<label for="user-pw" class="login-main-passwordwriting">비밀번호</label>
 									<div class="login-main-input-password">
 										<input type="password" id="user-pw" name="userPassword"
-											placeholder="비밀번호" /> <span>눈</span>
+											placeholder="비밀번호" />
 									</div>
 								</div>
 								<div class="login-main-input-msg">
@@ -56,10 +69,12 @@
 					</div>
 					<div class="login-footer">
 						<div class="signup-btn">
-							<input type="submit" value="회원가입" />
+							<input type="submit" value="회원가입"
+								onclick="window.location.href='${pageContext.request.contextPath}/user/signupChoice.us'" />
 						</div>
 						<div class="find-pw">
-							<input type="submit" value="비밀번호 찾기" />
+							<input type="submit" value="비밀번호 찾기"
+								onclick="window.location.href='${pageContext.request.contextPath}/user/findPw.us'" />
 						</div>
 					</div>
 				</div>
@@ -67,8 +82,6 @@
 		</section>
 	</main>
 	<!-- footer -->
-	<div id="footer-container"></div>
-	<!-- js -->
-	<script src="/assets/js/header-footer.js"></script>
+	<%@ include file="/app/footer.jsp"%>
 </body>
 </html>
