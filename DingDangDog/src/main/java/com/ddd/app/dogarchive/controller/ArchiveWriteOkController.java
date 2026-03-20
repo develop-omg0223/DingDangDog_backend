@@ -28,8 +28,10 @@ public class ArchiveWriteOkController implements Execute {
 			writeDTO.setDogGender(request.getParameter("dogGender"));
 			writeDTO.setDogAge(request.getParameter("dogAge"));
 			writeDTO.setDogWeight(Integer.parseInt(request.getParameter("dogWeight")));
-			writeDTO.setDogSafeDate(request.getParameter("dogSafeDate"));
+//			writeDTO.setDogSafeDate(request.getParameter("dogSafeDate"));
 			writeDTO.setDogDetail(request.getParameter("dogDetail"));
+
+			String DogSafeDateStr = request.getParameter("DogSafeDate");
 
 			// ===== 성향 점수 =====
 			writeDTO.setDogActivity(Integer.parseInt(request.getParameter("dogActivity")));

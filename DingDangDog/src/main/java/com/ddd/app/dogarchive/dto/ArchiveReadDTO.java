@@ -1,11 +1,14 @@
 package com.ddd.app.dogarchive.dto;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 // ===== 멍! 카이브 조회 DTO ===== 
 public class ArchiveReadDTO {
 	/**
 	 * @author 윤철민
 	 * 
-	 * 유기견 점수 수정, 이미지 수정
+	 *         유기견 점수 수정, 이미지 수정
 	 */
 
 //	   dog_number NUMBER,	// int
@@ -30,27 +33,27 @@ public class ArchiveReadDTO {
 
 	// ===== 필드 =====
 	// 기본 정보
-	private int dogNumber; // A.DOG_NUMBER
-	private int userNumber; // A.USER_NUMBER (작성자: 이 번호와 로그인 세션이 같으면 삭제 가능)
-	private Integer adminNumber; // (관리자 테이블 JOIN: 관리자라면 누구나 삭제 가능)
-	private String dogName; // A.DOG_NAME
-	private String dogBreed; // A.DOG_BREED
-	private String dogGender; // A.DOG_GENDER (F/M -> 화면에선 '암컷'/'수컷')
-	private String dogAge; // A.DOG_AGE
-	private double dogWeight; // A.DOG_WEIGHT
-	private String dogSafeDate; // A.DOG_SAFE_DATE (보호소 들어온 날)
-	private String dogDetail; // A.DOG_DETAIL (자유 작성 텍스트)
+	private int dogNumber;
+	private int userNumber;
+	private Integer adminNumber;
+	private String dogName;
+	private String dogBreed;
+	private String dogGender;
+	private String dogAge;
+	private double dogWeight;
+	private LocalDateTime dogSafeDate;
+	private String dogDetail;
 
 	// 성향 점수
-	private int dogActivity; // S.DOG_ACTIVITY
-	private int dogSociality; // S.DOG_SOCIALITY
-	private int dogIndependence; // S.DOG_INDEPENDENCE
-	private int dogBarking; // S.DOG_BARKING
-	private int dogGrooming; // S.DOG_GROOMING
+	private int dogActivity;
+	private int dogSociality;
+	private int dogIndependence;
+	private int dogBarking;
+	private int dogGrooming;
 
 	// 추가 - JOIN
-	private String archiveImgPath; // AI.ARCHIVE_IMG_PATH (보여줄 이미지)
-	private String shelterName; // US.SHELTER_NAME (보호소 바로가기 버튼용)
+	private String archiveImgPath;
+	private String shelterName;
 
 	// ===== Getter,Setter =====
 	public int getDogNumber() {
@@ -118,10 +121,12 @@ public class ArchiveReadDTO {
 	}
 
 	public String getDogSafeDate() {
-		return dogSafeDate;
+		if (dogSafeDate == null)
+			return "";
+		return dogSafeDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 	}
 
-	public void setDogSafeDate(String dogSafeDate) {
+	public void setDogSafeDate(LocalDateTime dogSafeDate) {
 		this.dogSafeDate = dogSafeDate;
 	}
 

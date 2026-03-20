@@ -9,8 +9,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>멍! 카이브 전체목록</title>
 <link rel="stylesheet"
-	href="../../assets/css/dogarchive/dogarchive_list.css">
-<script defer src="../../assets/js/dogarchive/dogarchive_list.js"></script>
+	href="${pageContext.request.contextPath}/assets/css/dogarchive/dogarchive_list.css">
+<script defer src="${pageContext.request.contextPath}/assets/js/dogarchive/dogarchive_list.js"></script>
 </head>
 
 <body>
@@ -27,7 +27,7 @@
 
 				<!-- 카드 -->
 				<div class="dogarchive-card">
-					<a href="dogarchive_detail.html" class="dogarchive-link">
+					<a href="dogarchive_detail.jsp" class="dogarchive-link">
 						<div class="dogarchive-image">이미지</div>
 
 						<div class="dogarchive-content">
@@ -47,7 +47,7 @@
 				</div>
 				<!-- 카드 -->
 				<div class="dogarchive-card">
-					<a href="dogarchive_detail.html" class="dogarchive-link">
+					<a href="dogarchive_detail.jsp" class="dogarchive-link">
 						<div class="dogarchive-image">이미지</div>
 
 						<div class="dogarchive-content">
@@ -67,7 +67,7 @@
 				</div>
 				<!-- 카드 -->
 				<div class="dogarchive-card">
-					<a href="dogarchive_detail.html" class="dogarchive-link">
+					<a href="dogarchive_detail.jsp" class="dogarchive-link">
 						<div class="dogarchive-image">이미지</div>
 
 						<div class="dogarchive-content">
@@ -87,7 +87,7 @@
 				</div>
 				<!-- 카드 -->
 				<div class="dogarchive-card">
-					<a href="dogarchive_detail.html" class="dogarchive-link">
+					<a href="dogarchive_detail.jsp" class="dogarchive-link">
 						<div class="dogarchive-image">이미지</div>
 
 						<div class="dogarchive-content">
@@ -107,7 +107,7 @@
 				</div>
 				<!-- 카드 -->
 				<div class="dogarchive-card">
-					<a href="dogarchive_detail.html" class="dogarchive-link">
+					<a href="dogarchive_detail.jsp" class="dogarchive-link">
 						<div class="dogarchive-image">이미지</div>
 
 						<div class="dogarchive-content">
@@ -127,7 +127,7 @@
 				</div>
 				<!-- 카드 -->
 				<div class="dogarchive-card">
-					<a href="dogarchive_detail.html" class="dogarchive-link">
+					<a href="dogarchive_detail.jsp" class="dogarchive-link">
 						<div class="dogarchive-image">이미지</div>
 
 						<div class="dogarchive-content">
@@ -147,7 +147,7 @@
 				</div>
 				<!-- 카드 -->
 				<div class="dogarchive-card">
-					<a href="dogarchive_detail.html" class="dogarchive-link">
+					<a href="dogarchive_detail.jsp" class="dogarchive-link">
 						<div class="dogarchive-image">이미지</div>
 
 						<div class="dogarchive-content">
@@ -167,7 +167,7 @@
 				</div>
 				<!-- 카드 -->
 				<div class="dogarchive-card">
-					<a href="dogarchive_detail.html" class="dogarchive-link">
+					<a href="dogarchive_detail.jsp" class="dogarchive-link">
 						<div class="dogarchive-image">이미지</div>
 
 						<div class="dogarchive-content">
@@ -187,7 +187,7 @@
 				</div>
 				<!-- 카드 -->
 				<div class="dogarchive-card">
-					<a href="dogarchive_detail.html" class="dogarchive-link">
+					<a href="dogarchive_detail.jsp" class="dogarchive-link">
 						<div class="dogarchive-image">이미지</div>
 
 						<div class="dogarchive-content">
@@ -207,7 +207,7 @@
 				</div>
 				<!-- 카드 -->
 				<div class="dogarchive-card">
-					<a href="dogarchive_detail.html" class="dogarchive-link">
+					<a href="dogarchive_detail.jsp" class="dogarchive-link">
 						<div class="dogarchive-image">이미지</div>
 
 						<div class="dogarchive-content">
@@ -227,7 +227,7 @@
 				</div>
 				<!-- 카드 -->
 				<div class="dogarchive-card">
-					<a href="dogarchive_detail.html" class="dogarchive-link">
+					<a href="dogarchive_detail.jsp" class="dogarchive-link">
 						<div class="dogarchive-image">이미지</div>
 
 						<div class="dogarchive-content">
@@ -247,7 +247,7 @@
 				</div>
 				<!-- 카드 -->
 				<div class="dogarchive-card">
-					<a href="dogarchive_detail.html" class="dogarchive-link">
+					<a href="dogarchive_detail.jsp" class="dogarchive-link">
 						<div class="dogarchive-image">이미지</div>
 
 						<div class="dogarchive-content">
@@ -264,10 +264,10 @@
 
 						</div>
 					</a>
-				</div>
+				</div>-
 				<!-- 카드 -->
 				<div class="dogarchive-card">
-					<a href="dogarchive_detail.html" class="dogarchive-link">
+					<a href="dogarchive_detail.jsp" class="dogarchive-link">
 						<div class="dogarchive-image">이미지</div>
 
 						<div class="dogarchive-content">
@@ -287,7 +287,7 @@
 				</div>
 				<!-- 카드 -->
 				<div class="dogarchive-card">
-					<a href="dogarchive_detail.html" class="dogarchive-link">
+					<a href="dogarchive_detail.jsp" class="dogarchive-link">
 						<div class="dogarchive-image">이미지</div>
 
 						<div class="dogarchive-content">
@@ -307,7 +307,7 @@
 				</div>
 				<!-- 카드 -->
 				<div class="dogarchive-card">
-					<a href="dogarchive_detail.html" class="dogarchive-link">
+					<a href="dogarchive_detail.jsp" class="dogarchive-link">
 						<div class="dogarchive-image">이미지</div>
 
 						<div class="dogarchive-content">
@@ -327,7 +327,7 @@
 				</div>
 				<!-- 카드 -->
 				<div class="dogarchive-card">
-					<a href="dogarchive_detail.html" class="dogarchive-link">
+					<a href="dogarchive_detail.jsp" class="dogarchive-link">
 						<div class="dogarchive-image">이미지</div>
 
 						<div class="dogarchive-content">
@@ -347,7 +347,7 @@
 				</div>
 				<!-- 카드 -->
 				<div class="dogarchive-card">
-					<a href="dogarchive_detail.html" class="dogarchive-link">
+					<a href="dogarchive_detail.jsp" class="dogarchive-link">
 						<div class="dogarchive-image">이미지</div>
 
 						<div class="dogarchive-content">
@@ -367,7 +367,7 @@
 				</div>
 				<!-- 카드 -->
 				<div class="dogarchive-card">
-					<a href="dogarchive_detail.html" class="dogarchive-link">
+					<a href="dogarchive_detail.jsp" class="dogarchive-link">
 						<div class="dogarchive-image">이미지</div>
 
 						<div class="dogarchive-content">
@@ -387,7 +387,7 @@
 				</div>
 				<!-- 카드 -->
 				<div class="dogarchive-card">
-					<a href="dogarchive_detail.html" class="dogarchive-link">
+					<a href="dogarchive_detail.jsp" class="dogarchive-link">
 						<div class="dogarchive-image">이미지</div>
 
 						<div class="dogarchive-content">
@@ -407,7 +407,7 @@
 				</div>
 				<!-- 카드 -->
 				<div class="dogarchive-card">
-					<a href="dogarchive_detail.html" class="dogarchive-link">
+					<a href="dogarchive_detail.jspl" class="dogarchive-link">
 						<div class="dogarchive-image">이미지</div>
 
 						<div class="dogarchive-content">
@@ -427,7 +427,7 @@
 				</div>
 				<!-- 카드 -->
 				<div class="dogarchive-card">
-					<a href="dogarchive_detail.html" class="dogarchive-link">
+					<a href="dogarchive_detail.jsp" class="dogarchive-link">
 						<div class="dogarchive-image">이미지</div>
 
 						<div class="dogarchive-content">
@@ -447,7 +447,7 @@
 				</div>
 				<!-- 카드 -->
 				<div class="dogarchive-card">
-					<a href="dogarchive_detail.html" class="dogarchive-link">
+					<a href="dogarchive_detail.jsp" class="dogarchive-link">
 						<div class="dogarchive-image">이미지</div>
 
 						<div class="dogarchive-content">
@@ -467,7 +467,7 @@
 				</div>
 				<!-- 카드 -->
 				<div class="dogarchive-card">
-					<a href="dogarchive_detail.html" class="dogarchive-link">
+					<a href="dogarchive_detail.jsp" class="dogarchive-link">
 						<div class="dogarchive-image">이미지</div>
 
 						<div class="dogarchive-content">
@@ -487,7 +487,7 @@
 				</div>
 				<!-- 카드 -->
 				<div class="dogarchive-card">
-					<a href="dogarchive_detail.html" class="dogarchive-link">
+					<a href="dogarchive_detail.jsp" class="dogarchive-link">
 						<div class="dogarchive-image">이미지</div>
 
 						<div class="dogarchive-content">
@@ -507,7 +507,7 @@
 				</div>
 				<!-- 카드 -->
 				<div class="dogarchive-card">
-					<a href="dogarchive_detail.html" class="dogarchive-link">
+					<a href="dogarchive_detail.jsp" class="dogarchive-link">
 						<div class="dogarchive-image">이미지</div>
 
 						<div class="dogarchive-content">
@@ -527,7 +527,7 @@
 				</div>
 				<!-- 카드 -->
 				<div class="dogarchive-card">
-					<a href="dogarchive_detail.html" class="dogarchive-link">
+					<a href="dogarchive_detail.jspl" class="dogarchive-link">
 						<div class="dogarchive-image">이미지</div>
 
 						<div class="dogarchive-content">
@@ -593,7 +593,7 @@
 				</ul>
 			</div>
 			<button class="btn-write"
-				onclick="location.href = 'dogarchive_write.html'">유기견 등록하기
+				onclick="location" href = "dogarchive_write.jsp">유기견 등록하기
 			</button>
 		</div>
 		<!-- footer -->

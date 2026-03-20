@@ -33,8 +33,8 @@ public class ArchiveUpdateController implements Execute {
 		// ===== 수정 페이지로 전달 =====
 		request.setAttribute("archive", detail);
 
-		// ===== archiveUpdate.jsp로 이동 =====
-		result.setPath("/app/dogarchive/archiveUpdate.jsp");
+		// ===== archive_edit.jsp로 이동 =====
+		result.setPath("/app/dogarchive/dogarchive_edit.jsp");
 		result.setRedirect(false);
 
 		return result;

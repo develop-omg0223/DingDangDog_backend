@@ -50,8 +50,8 @@ public class ArchiveFrontController extends HttpServlet {
 		// ===== archive_write.jsp 페이지 이동 =====
 		case "/archive/write.ar":
 			result = new Result();
-			result.setPath("/app/dogarchive/archive_write.jsp");
-			result.setRedirect(false); // JSP로 이동할 땐 주로 forward(false)
+			result.setPath("/app/dogarchive/dogarchive_write.jsp");
+			result.setRedirect(false);
 			break;
 
 		// ===== 등록 처리 =====
@@ -61,7 +61,7 @@ public class ArchiveFrontController extends HttpServlet {
 
 		// ===== 수정 페이지 이동 =====
 		case "/archive/update.ar":
-			result = new ArchiveReadController().execute(request, response);
+			result = new ArchiveUpdateController().execute(request, response);
 			break;
 
 		// ===== 수정 처리 =====

@@ -1,11 +1,14 @@
 package com.ddd.app.dogarchive.dto;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 // ===== 멍! 카이브 수정 DTO ===== 
 public class ArchiveUpdateDTO {
 	/**
 	 * @author 윤철민
 	 * 
-	 * 유기견 점수 수정, 이미지 수정
+	 *         유기견 점수 수정, 이미지 수정
 	 */
 
 //	   dog_number NUMBER,	// int
@@ -36,8 +39,8 @@ public class ArchiveUpdateDTO {
 	private String dogBreed;
 	private String dogGender;
 	private String dogAge;
-	private int dogWeight;
-	private String dogSafeDate;
+	private double dogWeight;
+	private LocalDateTime dogSafeDate;
 	private String dogDetail;
 
 	// 성향 정보 수정
@@ -100,19 +103,21 @@ public class ArchiveUpdateDTO {
 		this.dogAge = dogAge;
 	}
 
-	public int getDogWeight() {
+	public double getDogWeight() {
 		return dogWeight;
 	}
 
-	public void setDogWeight(int dogWeight) {
+	public void setDogWeight(double dogWeight) {
 		this.dogWeight = dogWeight;
 	}
 
 	public String getDogSafeDate() {
-		return dogSafeDate;
+		if (dogSafeDate == null)
+			return "";
+		return dogSafeDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 	}
 
-	public void setDogSafeDate(String dogSafeDate) {
+	public void setDogSafeDate(LocalDateTime dogSafeDate) {
 		this.dogSafeDate = dogSafeDate;
 	}
 
