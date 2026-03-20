@@ -52,12 +52,12 @@ public class AdminFrontController extends HttpServlet {
 
 		Result result = null;
 		
-//		HttpSession session = request.getSession();
+		HttpSession session = request.getSession();
 
-//		// 테스트용 관리자 세션 강제 주입
-//		session.setAttribute("adminNumber", 1);
-//		session.setAttribute("adminId", "admin1");
-//		session.setAttribute("userType", "A");
+		// 테스트용 관리자 세션 강제 주입
+		session.setAttribute("adminNumber", 1);
+		session.setAttribute("adminId", "admin1");
+		session.setAttribute("userType", "A");
 
 		switch (target) {
 		case "/admin/adminLogin.ad":
