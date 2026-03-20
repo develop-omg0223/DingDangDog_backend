@@ -14,7 +14,7 @@ public class ArchiveWriteController implements Execute {
 	@Override
 	public Result execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
 		// 객체
 		Result result = new Result();
 

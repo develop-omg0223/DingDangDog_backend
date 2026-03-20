@@ -8,7 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>멍! 매칭 결과</title>
   <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/dogmatching/dogmatching_result.css" />
-  <script defer src="/assets/js/dogmatching/dogmatching_result.js"></script>
+  <script defer src="${pageContext.request.contextPath}/assets/js/dogmatching/dogmatching_result.js"></script>
 </head>
 
 <body>
@@ -31,7 +31,7 @@
 
         <div class="card-wrapper">
           <div class="dogarchive-card">
-            <a href="../dogarchive/dogarchive_detail.html" class="dogarchive-link">
+            <a href="../dogarchive/dogarchive_detail.jsp" class="dogarchive-link">
               <div class="dogarchive-image">이미지</div>
 
               <div class="dogarchive-content">
@@ -50,7 +50,7 @@
             </a>
           </div>
           <div class="dogarchive-card">
-            <a href="../dogarchive/dogarchive_detail.html" class="dogarchive-link">
+            <a href="../dogarchive/dogarchive_detail.jsp" class="dogarchive-link">
               <div class="dogarchive-image">이미지</div>
 
               <div class="dogarchive-content">
@@ -69,7 +69,7 @@
             </a>
           </div>
           <div class="dogarchive-card">
-            <a href="../dogarchive/dogarchive_detail.html" class="dogarchive-link">
+            <a href="../dogarchive/dogarchive_detail.jsp" class="dogarchive-link">
               <div class="dogarchive-image">이미지</div>
 
               <div class="dogarchive-content">
@@ -88,7 +88,7 @@
             </a>
           </div>
           <div class="dogarchive-card">
-            <a href="../dogarchive/dogarchive_detail.html" class="dogarchive-link">
+            <a href="../dogarchive/dogarchive_detail.jsp" class="dogarchive-link">
               <div class="dogarchive-image">이미지</div>
 
               <div class="dogarchive-content">
@@ -107,7 +107,7 @@
             </a>
           </div>
           <div class="dogarchive-card">
-            <a href="../dogarchive/dogarchive_detail.html" class="dogarchive-link">
+            <a href="../dogarchive/dogarchive_detail.jsp" class="dogarchive-link">
               <div class="dogarchive-image">이미지</div>
 
               <div class="dogarchive-content">
@@ -126,7 +126,7 @@
             </a>
           </div>
           <div class="dogarchive-card">
-            <a href="../dogarchive/dogarchive_detail.html" class="dogarchive-link">
+            <a href="../dogarchive/dogarchive_detail.jsp" class="dogarchive-link">
               <div class="dogarchive-image">이미지</div>
 
               <div class="dogarchive-content">
@@ -145,7 +145,7 @@
             </a>
           </div>
           <div class="dogarchive-card">
-            <a href="../dogarchive/dogarchive_detail.html" class="dogarchive-link">
+            <a href="../dogarchive/dogarchive_detail.jsp" class="dogarchive-link">
               <div class="dogarchive-image">이미지</div>
 
               <div class="dogarchive-content">
@@ -164,7 +164,7 @@
             </a>
           </div>
           <div class="dogarchive-card">
-            <a href="../dogarchive/dogarchive_detail.html" class="dogarchive-link">
+            <a href="../dogarchive/dogarchive_detail.jsp" class="dogarchive-link">
               <div class="dogarchive-image">이미지</div>
 
               <div class="dogarchive-content">

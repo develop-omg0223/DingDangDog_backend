@@ -1,14 +1,14 @@
 package com.ddd.app.dogarchive.dto;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 // ===== 멍! 카이브 리스트 DTO =====
 public class ArchiveListDTO {
 	/**
 	 * @author 윤철민
 	 * 
-	 * 전체 리스트
-	 * 검색 조건 : 보호소명, 견종
-	 * 정렬 : 보호시작일 오래된 순
-	 * 카드 대표 이미지
+	 *         전체 리스트 검색 조건 : 보호소명, 견종 정렬 : 보호시작일 오래된 순 카드 대표 이미지
 	 */
 
 //	   dog_number NUMBER,	// int
@@ -16,14 +16,14 @@ public class ArchiveListDTO {
 //	   dog_breed varchar2(50),	// String
 //	   shelter_name varchar2(100) NOT NULL	// String
 //	   dog_safe_date DATE,	// String
-//	   archive_img_path VARCHAR2(200),	// Sting
+//	   archive_img_path VARCHAR2(200),	// String
 
 	// ===== 필드 =====
 	private int dogNumber;
 	private String dogName;
 	private String dogBreed;
 	private String shelterName;
-	private String dogSafeDate;
+	private LocalDateTime dogSafeDate;
 	private String archiveImgPath;
 
 	// ===== Getter,Setter =====
@@ -60,10 +60,12 @@ public class ArchiveListDTO {
 	}
 
 	public String getDogSafeDate() {
-		return dogSafeDate;
+		if (dogSafeDate == null)
+			return "";
+		return dogSafeDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 	}
 
-	public void setDogSafeDate(String dogSafeDate) {
+	public void setDogSafeDate(LocalDateTime dogSafeDate) {
 		this.dogSafeDate = dogSafeDate;
 	}
 

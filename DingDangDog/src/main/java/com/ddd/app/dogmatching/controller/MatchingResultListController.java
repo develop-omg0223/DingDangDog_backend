@@ -35,7 +35,7 @@ public class MatchingResultListController implements Execute {
 		request.setAttribute("myResults", myResults);
 
 		// ===== 리스트 페이지로 이동 =====
-		result.setPath("/app/dogmatching/matchingList.jsp");
+		result.setPath("/app/dogmatching/dogmatching_List.jsp");
 		result.setRedirect(false);
 
 		return result;

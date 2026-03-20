@@ -50,13 +50,15 @@ public class ArchiveUpdateOkController implements Execute {
 			updateDTO.setDogGender(dogGender);
 			updateDTO.setDogAge(dogAge);
 			updateDTO.setDogWeight(dogWeight);
-			updateDTO.setDogSafeDate(dogSafeDate);
+//			updateDTO.setDogSafeDate(dogSafeDate);
 			updateDTO.setDogDetail(dogDetail);
 			updateDTO.setDogActivity(dogActivity);
 			updateDTO.setDogSociality(dogSociality);
 			updateDTO.setDogIndependence(dogIndependence);
 			updateDTO.setDogBarking(dogBarking);
 			updateDTO.setDogGrooming(dogGrooming);
+
+			String DogSafeDateStr = request.getParameter("DogSafeDate");
 
 			// ===== 이미지 수정 =====
 			updateDTO.setArchiveImgName(request.getParameter("archiveImgName"));

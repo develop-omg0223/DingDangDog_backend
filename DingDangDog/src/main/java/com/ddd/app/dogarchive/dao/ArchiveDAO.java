@@ -41,25 +41,25 @@ public class ArchiveDAO {
 	// ===== 정보 삭제 =====
 	// adminNumber, userNumber(보호소)
 	public void delete(ArchiveDeleteDTO deleteDTO) {
-		sqlSession.delete("archiveDelete.delete", deleteDTO);
+		sqlSession.delete("archive.delete", deleteDTO);
 	}
 
 	// ===== 전체목록 & 검색 =====
 	// 메인 이미지 카드 리스트
 	// 정렬 조건(보호일순)
 	public List<ArchiveListDTO> selectList(ArchiveListDTO listDTO) {
-		return sqlSession.selectList("archiveList.selectList", listDTO);
+		return sqlSession.selectList("archive.selectList", listDTO);
 	}
 
 	// 페이징 - 페이지네이션 1~5를 구현하기 위한 전체 게시글 개수 조회
 	public int getTotalCount(ArchiveListDTO listDTO) {
-		return sqlSession.selectOne("archiveList.getTotalCount", listDTO);
+		return sqlSession.selectOne("archive.getTotalCount", listDTO);
 	}
 
 	// ===== 상세 내역 조회 =====
 	// 이름, 품종, 성별, 점수 등 모든 상세 내역 조회
 	public ArchiveReadDTO selectDetail(int dogNumber) {
-		return sqlSession.selectOne("archiveRead.selectDetail", dogNumber);
+		return sqlSession.selectOne("archive.selectDetail", dogNumber);
 	}
 
 }

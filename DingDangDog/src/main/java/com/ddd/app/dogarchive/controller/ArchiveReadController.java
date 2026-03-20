@@ -35,8 +35,8 @@ public class ArchiveReadController implements Execute {
 			request.setAttribute("archive", archive);
 		}
 
-		// ===== archive_detail.jsp로 이동 =====
-		result.setPath("/app/dogarchive/archive_list.jsp");
+		// ===== dogarchive_detail.jsp로 이동 =====
+		result.setPath("/app/dogarchive/dogarchive_detail.jsp");
 		result.setRedirect(false);
 
 		return result;

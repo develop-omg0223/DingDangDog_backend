@@ -5,7 +5,7 @@ public class ArchiveDeleteDTO {
 	/**
 	 * @author 윤철민
 	 * 
-	 * 유기견 삭제 보호소 회원(본인), 관리자(admin)만 삭제 가능
+	 *         유기견 삭제 보호소 회원(본인), 관리자(admin)만 삭제 가능
 	 */
 
 //		DOG_NUMBER (삭제할 게시글 번호 - PK)
