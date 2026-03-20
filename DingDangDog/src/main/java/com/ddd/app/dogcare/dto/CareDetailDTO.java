@@ -58,10 +58,8 @@ public class CareDetailDTO {
 		this.careTitle = careTitle;
 	}
 
-	public String getPostDate() {
-		if (careDate == null)
-			return "";
-		return careDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+	public String getCarePost() {
+		return carePost;
 	}
 
 	public void setCarePost(String carePost) {
@@ -94,10 +92,10 @@ public class CareDetailDTO {
 		this.userNickname = userNickname;
 	}
 
-	public String getWriteDate() {
-		if (careDate == null)
+	public String getCareWriteDate() {
+		if (careWriteDate == null)
 			return "";
-		return careDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+		return careWriteDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 	}
 
 	public void setCareWriteDate(LocalDateTime careWriteDate) {
@@ -120,19 +118,6 @@ public class CareDetailDTO {
 		this.userNumber = userNumber;
 	}
 
-	private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-
-	public String getCareDateStr() {
-		if (careDate == null)
-			return "";
-		return careDate.format(DATE_FORMAT);
-	}
-
-	public String getCareWriteDateStr() {
-		if (careWriteDate == null)
-			return "";
-		return careWriteDate.format(DATE_FORMAT);
-	}
 
 	@Override
 	public String toString() {

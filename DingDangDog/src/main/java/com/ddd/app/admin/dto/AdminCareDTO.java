@@ -18,7 +18,14 @@ public class AdminCareDTO {
 	private String userPhone;
 	private int applyNumber;
 	private String applyStatus;
+	private int applyCount;
 	
+	public int getApplyCount() {
+		return applyCount;
+	}
+	public void setApplyCount(int applyCount) {
+		this.applyCount = applyCount;
+	}
 	public String getApplyStatus() {
 		return applyStatus;
 	}
@@ -63,7 +70,7 @@ public class AdminCareDTO {
 	public void setCareRecruit(int careRecruit) {
 		this.careRecruit = careRecruit;
 	}
-	public String getWriteDate() {
+	public String getCareWriteDate() {
 		if (careWriteDate == null)
 			return "";
 		return careWriteDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));

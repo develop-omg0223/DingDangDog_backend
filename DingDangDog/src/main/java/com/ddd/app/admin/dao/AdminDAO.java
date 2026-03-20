@@ -141,7 +141,7 @@ public class AdminDAO {
     }
 
     // 멍! 케어 신청자 현황
-    public AdminCareDTO selectApplyStatus(int careNumber){
+    public AdminCareDTO selectApplyStatus(Integer careNumber) {
         return sqlSession.selectOne("adminCare.selectApplyStatus", careNumber);
     }
 
