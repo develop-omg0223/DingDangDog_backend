@@ -5,7 +5,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.ddd.app.Result;
 
@@ -51,13 +50,6 @@ public class AdminFrontController extends HttpServlet {
 		System.out.println("현재경로 : " + target);
 
 		Result result = null;
-		
-//		HttpSession session = request.getSession();
-//
-//		// 테스트용 관리자 세션 강제 주입
-//		session.setAttribute("adminNumber", 1);
-//		session.setAttribute("adminId", "admin1");
-//		session.setAttribute("userType", "A");
 
 		switch (target) {
 		case "/admin/adminLogin.ad":
@@ -81,9 +73,6 @@ public class AdminFrontController extends HttpServlet {
 		// 대시보드 페이지 추후 컨트롤러로 작성
 		case "/admin/dashboard.ad":
 			System.out.println("관리자 대시보드 페이지 요청");
-//			result = new Result();
-//			result.setPath("/app/admin/dashboard/admin_dashboard.jsp");
-//			result.setRedirect(false);
 			result = new AdminDashBoardOkController().execute(request, response);
 			System.out.println("관리자 대시보드 페이지 이동");
 			break;

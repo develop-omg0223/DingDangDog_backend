@@ -30,22 +30,27 @@
 	<!-- 멍! 케어 상세페이지 조회 -->
 	<select id="getDetail" parameterType="int"
 		resultType="CareDetailDTO">
-		SELECT c.care_number, c.care_title, c.care_post,
+		SELECT c.care_number, c.user_number, c.care_title,
+		c.care_post,
 		c.care_date,
-		c.care_recruit, u.user_nickname, c.care_write_date,
+		c.care_recruit, u.user_nickname,
+		c.care_write_date,
 		c.care_status,
 		COUNT(a.apply_number) AS apply_count
 		FROM DDD_CARE c
 		JOIN
 		DDD_USER u ON c.user_number = u.user_number
-		LEFT JOIN DDD_CARE_APPLY a
+		LEFT
+		JOIN DDD_CARE_APPLY a
 		ON c.care_number = a.care_number
-		WHERE c.care_number = #{careNumber}
+		WHERE
+		c.care_number = #{careNumber}
 		AND c.care_status IN ('open','close')
 		GROUP BY c.care_number,
 		c.care_title, c.care_post, c.care_date,
 		c.care_recruit,
-		u.user_nickname, c.care_write_date, c.care_status
+		u.user_nickname, c.care_write_date, c.care_status,
+		c.user_number
 	</select>
 
 	<!-- 멍! 케어 등록 -->
@@ -73,10 +78,8 @@
 	<!-- 멍! 케어 삭제 (soft delete) -->
 	<update id="deleteCare" parameterType="int">
 		UPDATE DDD_CARE
-		SET
-		care_status = 'deleted'
-		WHERE care_number = #{careNumber} AND
-		user_number = #{userNumber}
+		SET care_status = 'deleted'
+		WHERE care_number = #{careNumber}
 	</update>
 
 	<!-- 멍! 케어 신청 -->
@@ -147,6 +150,15 @@ AND (SELECT COUNT(*) FROM ddd_care_apply a WHERE a.care_number = c.care_number) 
 		WHERE c.care_number = #{careNumber}
 		GROUP BY
 		c.care_recruit
+	</select>
+
+	<!-- 게시글 작성자 확인 -->
+	<select id="checkCareOwner" parameterType="CareDetailDTO"
+		resultType="int">
+		SELECT user_number, care_number
+		FROM DDD_CARE
+		WHERE
+		care_number = #{careNumber} AND user_number = #{userNumber}
 	</select>
 
 </mapper>

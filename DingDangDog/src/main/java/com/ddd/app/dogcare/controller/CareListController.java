@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.ddd.app.Execute;
 import com.ddd.app.Result;
@@ -16,63 +17,76 @@ import com.ddd.app.dogcare.dto.CareListDTO;
 
 public class CareListController implements Execute {
 
-	@Override
-	public Result execute(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		System.out.println("=== CareListController 실행 ===");
-		CareDAO careDAO = new CareDAO();
-		Result result = new Result();
+    @Override
+    public Result execute(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        System.out.println("=== CareListController 실행 ===");
 
-		// 페이징 처리
-		String temp = request.getParameter("page");
-		int page = (temp == null) ? 1 : Integer.valueOf(temp);
+        CareDAO careDAO = new CareDAO();
+        Result result = new Result();
 
-		int rowCount = 15;
-		int pageCount = 5;
+        // 세션에서 userNumber 가져오기
+        HttpSession session = request.getSession();
+        int userNumber = (Integer) session.getAttribute("userNumber"); // 세션에서 userNumber 가져오기
+        System.out.println("userNumber : " + userNumber);
 
-		int startRow = (page - 1) * rowCount + 1;
-		int endRow = startRow + rowCount - 1;
+        // 기본 페이지를 1로 고정 (페이지가 없으면 1로 설정)
+        String temp = request.getParameter("page");
+        int page = (temp == null) ? 1 : Integer.valueOf(temp); // 기본 페이지 1로 설정
 
-		// 검색어 받기
-		String keyword = request.getParameter("keyword");
+        // 한 페이지당 표시할 게시글 수
+        int rowCount = 15;
+        // 한 번에 표시할 페이지 번호 수 (예: 5페이지씩 표시)
+        int pageCount = 5;
 
-		// Map 하나로 통합
-		Map<String, Object> pageMap = new HashMap<>();
-		pageMap.put("startRow", startRow);
-		pageMap.put("endRow", endRow);
+        // startRow, endRow 계산
+        int startRow = (page - 1) * rowCount; // 시작 행 (0부터 시작)
+        int endRow = startRow + rowCount - 1;  // 끝 행 (0부터 시작)
 
-		if (keyword != null && !keyword.trim().isEmpty()) {
-			pageMap.put("keyword", keyword);
-		}
+        // 검색어 받기
+        String keyword = request.getParameter("keyword");
 
-		System.out.println("페이지 + 검색 조건 : " + pageMap);
+        // Map 하나로 통합 (startRow, endRow, keyword)
+        Map<String, Object> pageMap = new HashMap<>();
+        pageMap.put("startRow", startRow);
+        pageMap.put("endRow", endRow);
 
-		// DAO 호출
-		List<CareListDTO> careList = careDAO.selectCareList(pageMap);
-		request.setAttribute("careList", careList);
+        if (keyword != null && !keyword.trim().isEmpty()) {
+            pageMap.put("keyword", keyword);
+        }
 
-		// 검색어 유지
-		request.setAttribute("keyword", keyword);
+        System.out.println("페이지 + 검색 조건 : " + pageMap);
 
-		// 페이징
-		int total = careDAO.getTotal();
-		int realEndPage = (int) Math.ceil(total / (double) rowCount);
-		int endPage = (int) (Math.ceil(page / (double) pageCount) * pageCount);
-		int startPage = endPage - (pageCount - 1);
+        // DAO 호출: 게시글 목록 가져오기
+        List<CareListDTO> careList = careDAO.selectCareList(pageMap);
+        request.setAttribute("careList", careList);
 
-		endPage = Math.min(endPage, realEndPage);
+        // 검색어 유지
+        request.setAttribute("keyword", keyword);
 
-		boolean prev = startPage > 1;
-		boolean next = endPage < realEndPage;
+        // 페이징 처리
+        int total = careDAO.getTotal(); // 전체 게시글 수
+        int realEndPage = (int) Math.ceil(total / (double) rowCount); // 실제 마지막 페이지 번호 계산
+        int endPage = (int) (Math.ceil(page / (double) pageCount) * pageCount); // 끝 페이지 번호 계산
+        int startPage = endPage - (pageCount - 1); // 시작 페이지 번호 계산
 
-		request.setAttribute("page", page);
-		request.setAttribute("startpage", startPage);
-		request.setAttribute("endpage", endPage);
-		request.setAttribute("prev", prev);
-		request.setAttribute("next", next);
+        // 마지막 페이지는 realEndPage를 넘지 않도록 제한
+        endPage = Math.min(endPage, realEndPage);
 
-		result.setPath("/app/dogcare/dogcare_list_shelter.jsp");
-		result.setRedirect(false);
-		return result;
-	}
+        boolean prev = startPage > 1; // 이전 페이지로 이동할 수 있는지 확인
+        boolean next = endPage < realEndPage; // 다음 페이지로 이동할 수 있는지 확인
+
+        // 페이징 정보를 request에 추가
+        request.setAttribute("page", page); // 현재 페이지
+        request.setAttribute("startpage", startPage); // 시작 페이지
+        request.setAttribute("endpage", endPage); // 끝 페이지
+        request.setAttribute("prev", prev); // 이전 페이지 버튼 활성화 여부
+        request.setAttribute("next", next); // 다음 페이지 버튼 활성화 여부
+
+        // 페이지네이션 결과를 담고 있는 JSP 경로 설정
+        result.setPath("/app/dogcare/dogcare_list_shelter.jsp");
+        result.setRedirect(false); // 포워드 방식으로 이동
+
+        return result;
+    }
 }
