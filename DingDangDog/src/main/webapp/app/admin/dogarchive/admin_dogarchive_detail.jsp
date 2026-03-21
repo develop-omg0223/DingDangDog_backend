@@ -27,7 +27,7 @@
 </head>
 <body>
     <main class="admin-main-container">
-      <aside class="admin-sidebar"></aside>
+      <aside class="admin-sidebar"><jsp:include page="/app/admin/admin_sidebar.jsp" /></aside>
 
       <section class="admin-main-section">
         <div class="admin-main-section-header">
