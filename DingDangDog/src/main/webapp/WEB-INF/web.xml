@@ -54,7 +54,7 @@
 		<servlet-name>admin</servlet-name>
 		<url-pattern>*.ad</url-pattern>
 	</servlet-mapping>
-	
+
 	<!-- 멍! 카이브 매핑 -->
 	<servlet>
 		<servlet-name>archive</servlet-name>
@@ -64,7 +64,7 @@
 		<servlet-name>archive</servlet-name>
 		<url-pattern>*.ar</url-pattern>
 	</servlet-mapping>
-	
+
 	<!-- 헤더 매핑 -->
 	<servlet>
 		<servlet-name>header</servlet-name>
@@ -84,7 +84,7 @@
 		<servlet-name>main</servlet-name>
 		<url-pattern>*.main</url-pattern>
 	</servlet-mapping>
-	
+
 	<!-- 마이페이지 매핑 -->
 	<servlet>
 		<servlet-name>myPage</servlet-name>
@@ -94,7 +94,7 @@
 		<servlet-name>myPage</servlet-name>
 		<url-pattern>*.mp</url-pattern>
 	</servlet-mapping>
-	
+
 	<!-- 문의 매핑 -->
 	<servlet>
 		<servlet-name>inquiry</servlet-name>
@@ -104,5 +104,15 @@
 		<servlet-name>inquiry</servlet-name>
 		<url-pattern>*.in</url-pattern>
 	</servlet-mapping>
-	
+
+	<!-- 멍! 매칭 매핑 -->
+	<servlet>
+		<servlet-name>matching</servlet-name>
+		<servlet-class>com.ddd.app.dogmatching.controller.MatchingResultFrontController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>matching</servlet-name>
+		<url-pattern>*.ma</url-pattern>
+	</servlet-mapping>
+
 </web-app>
