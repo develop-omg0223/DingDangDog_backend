@@ -44,6 +44,9 @@ public class ArchiveWriteOkController implements Execute {
 			writeDTO.setArchiveImgName(request.getParameter("archiveImgName"));
 			writeDTO.setArchiveImgPath(request.getParameter("archiveImgPath"));
 
+			// ===== 임시 회원정보 =====
+//			writeDTO.setUserNumber(8);
+			
 			// ===== DB에 저장 =====
 			dao.insert(writeDTO);
 

@@ -1,66 +1,69 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="dogMatching">
+<mapper namespace="matching">
 
-	<insert id="insertMatchingResult" parameterType="MatchingResultDTO">
-	
-		INSERT INTO DDD_MATCH_RESULT (
-		RESULT_NUMBER,
-		USER_NUMBER,
-		DOG_ACTIVITY,
-		DOG_SOCIALITY,
-		DOG_INDEPENDENCE,
-		DOG_BARKING,
-		DOG_GROOMING,
+	<insert id="insertResult" parameterType="MatchingResultDTO">
+		INSERT INTO
+		DDD_MATCH_RESULT (
+		RESULT_NUMBER, USER_NUMBER,
+		DOG_ACTIVITY, DOG_SOCIALITY, DOG_INDEPENDENCE, DOG_BARKING, DOG_GROOMING,
 		RESULT_CREATED_DATE
 		) VALUES (
-		SEQ_MATCH_RESULT.NEXTVAL,
-		#{userNumber},
-		#{dogActivity},
-		#{dogSociality},
-		#{dogIndependence},
-		#{dogBarking},
-		#{dogGrooming},
+		SEQ_MATCH_RESULT.NEXTVAL, #{userNumber},
+		#{dogActivity}, #{dogSociality}, #{dogIndependence}, #{dogBarking}, #{dogGrooming},
 		SYSDATE
 		)
 	</insert>
 
-	<select id="selectLatestResult" parameterType="int"
-		resultType="MatchingResultDTO"> 
-		
+	<select id="selectTop8" parameterType="int"
+		resultType="ArchiveReadDTO">
+		SELECT * FROM (
 		SELECT
-		RESULT_NUMBER,
-		USER_NUMBER,
-		DOG_ACTIVITY,
-		DOG_SOCIALITY,
-		DOG_INDEPENDENCE,
-		DOG_BARKING,
-		DOG_GROOMING,
-		TO_CHAR(RESULT_CREATED_DATE, 'YYYY-MM-DD HH24:MI:SS') AS
-		RESULT_CREATED_DATE
-		FROM (
-		SELECT * FROM DDD_MATCH_RESULT
-		WHERE USER_NUMBER = #{userNumber}
-		ORDER BY RESULT_CREATED_DATE DESC
+		d.DOG_NUMBER, d.DOG_NAME, d.DOG_BREED, d.DOG_IMG_PATH,
+		/* ABS(사용자 점수 - 유기견 점수)의 합계가 낮을수록 나랑 잘 맞는 강아지 */
+		(ABS(m.DOG_ACTIVITY - d.DOG_ACTIVITY) +
+		ABS(m.DOG_SOCIALITY - d.DOG_SOCIALITY) +
+		ABS(m.DOG_INDEPENDENCE - d.DOG_INDEPENDENCE) +
+		ABS(m.DOG_BARKING - d.DOG_BARKING) +
+		ABS(m.DOG_GROOMING - d.DOG_GROOMING)) AS DISTANCE
+		FROM TBL_DOG_ARCHIVE d, DDD_MATCH_RESULT m
+		WHERE m.USER_NUMBER = #{userNumber}
+		/* 사용자가 방금 진행한 가장 최근 설문 결과를 기준으로 비교 */
+		AND m.RESULT_NUMBER = (
+		SELECT MAX(RESULT_NUMBER) FROM DDD_MATCH_RESULT WHERE USER_NUMBER =
+		#{userNumber}
 		)
-		WHERE ROWNUM = 1
+		ORDER BY DISTANCE ASC, d.DOG_NUMBER DESC
+		)
+		WHERE ROWNUM &lt;= 8
 	</select>
 
-	<select id="selectAllResults" parameterType="int"
+	<select id="countSavedResults" parameterType="int"
+		resultType="int">
+		SELECT COUNT(*) FROM DDD_MATCH_RESULT WHERE USER_NUMBER =
+		#{userNumber}
+	</select>
+
+	<delete id="deleteOldestResult" parameterType="int">
+		DELETE FROM
+		DDD_MATCH_RESULT
+		WHERE RESULT_NUMBER = (
+		SELECT MIN(RESULT_NUMBER) FROM DDD_MATCH_RESULT WHERE USER_NUMBER =
+		#{userNumber}
+		)
+	</delete>
+
+	<select id="selectMyResults" parameterType="int"
 		resultType="MatchingResultDTO">
-		
 		SELECT
-		RESULT_NUMBER,
-		USER_NUMBER,
-		DOG_ACTIVITY,
-		DOG_SOCIALITY,
-		DOG_INDEPENDENCE,
-		DOG_BARKING,
-		DOG_GROOMING,
+		RESULT_NUMBER, USER_NUMBER,
+		DOG_ACTIVITY, DOG_SOCIALITY, DOG_INDEPENDENCE, DOG_BARKING, DOG_GROOMING,
 		TO_CHAR(RESULT_CREATED_DATE, 'YYYY.MM.DD') AS RESULT_CREATED_DATE
-		FROM DDD_MATCH_RESULT
+		FROM
+		DDD_MATCH_RESULT
 		WHERE USER_NUMBER = #{userNumber}
-		ORDER BY RESULT_NUMBER DESC
+		ORDER BY
+		RESULT_NUMBER DESC
 	</select>
 
 </mapper>

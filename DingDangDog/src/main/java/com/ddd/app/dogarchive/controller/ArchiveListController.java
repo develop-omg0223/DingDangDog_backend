@@ -18,6 +18,8 @@ public class ArchiveListController implements Execute {
 	@Override
 	public Result execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
+		System.out.println("===== ArchiveListController 진입 성공! =====");
 
 		// 객체
 		Result result = new Result();
@@ -26,6 +28,8 @@ public class ArchiveListController implements Execute {
 
 		// ===== 전체 목록 조회 =====
 		List<ArchiveListDTO> archiveList = dao.selectList(listDTO);
+		
+		System.out.println("===== 가져온 리스트 개수: " + (archiveList != null ? archiveList.size() : "null"));
 
 		request.setAttribute("archiveList", archiveList);
 

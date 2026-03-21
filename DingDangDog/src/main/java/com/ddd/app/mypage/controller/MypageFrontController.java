@@ -1,6 +1,7 @@
 package com.ddd.app.mypage.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -8,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.ddd.app.Result;
+import com.ddd.app.dogarchive.controller.ArchiveListController;
+import com.ddd.app.dogmatching.controller.MatchingResultListController;
 
 /**
  * Servlet implementation class mypageController
@@ -110,7 +113,7 @@ public class MypageFrontController extends HttpServlet {
 			System.out.println("마이페이지 파일 업로드 처리 요청");
 			result = new profileSFileOKController().execute(request, response);
 			System.out.println("마이페이지 파일 업로드 처리 완료");
-			break; 
+			break;
 		case "/mypage/applyCareList.mp":
 			System.out.println("일반회원 내가 신청한 멍! 케어 목록 페이지 이동 요청");
 			result = new ApplyCareListController().execute(request, response);
@@ -121,6 +124,17 @@ public class MypageFrontController extends HttpServlet {
 			result = new WriteCareListController().execute(request, response);
 			System.out.println("일반회원 내가 신청한 멍! 케어 목록 페이지 이동 완료");
 			break;
+		case "/mypage/matchingResult.mp":
+			System.out.println("일반회원 내가 작성한 멍! 매칭 목록 페이지 이동 요청");
+			result = new MatchingResultListController().execute(request, response);
+			System.out.println("일반회원 내가 작성한 멍! 매칭 목록 페이지 이동 완료");
+			break;
+		case "/mypage/archiveList.mp":
+			System.out.println("보호소회원 내가 등록한 멍! 카이브 목록 페이지 이동 요청");
+			result = new ArchiveListController().execute(request, response);
+			System.out.println("보호소회원 내가 등록한 멍! 카이브 목록 페이지 이동 완료");
+			break;
+
 		}
 
 		if (result != null && result.getPath() != null) {

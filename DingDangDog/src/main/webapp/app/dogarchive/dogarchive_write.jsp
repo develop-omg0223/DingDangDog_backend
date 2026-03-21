@@ -152,8 +152,7 @@
 
 			<div class="container-footer">
 				<div class="footer-btn-wrap">
-					<button type="button" class="btn btn-save" id="btnEditSave">수정
-						완료</button>
+					<button type="button" class="btn btn-save" id="btnEditSave">등록</button>
 					<button type="button" class="btn btn-cancel" id="btnCancle"
 						onclick="location.href='${pageContext.request.contextPath}/archive/list.ar'">
 						취소</button>
