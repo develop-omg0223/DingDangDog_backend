@@ -52,7 +52,7 @@ WHERE rownum <= 5
     SELECT * FROM (
         SELECT ROWNUM AS rnum, subquery.* FROM (
             SELECT 
-                user_number, user_id, user_name, user_nickname, user_phone, user_email
+                user_number, user_id, user_name, user_nickname, user_phone, user_email, user_status
             FROM ddd_user
             WHERE user_type = 'C'
             ORDER BY user_number DESC
@@ -67,7 +67,7 @@ WHERE rownum <= 5
 <![CDATA[
     SELECT * FROM (
         SELECT ROWNUM AS rnum, subquery.* FROM (
-            SELECT user_number, user_id, user_name, user_nickname, user_phone, user_email
+            SELECT user_number, user_id, user_name, user_nickname, user_phone, user_email, user_status
             FROM ddd_user
             WHERE user_type = 'C' AND user_id LIKE '%' || #{keyword} || '%'
             ORDER BY user_number DESC
@@ -81,7 +81,7 @@ WHERE rownum <= 5
 <![CDATA[
     SELECT * FROM (
         SELECT ROWNUM AS rnum, subquery.* FROM (
-            SELECT user_number, user_id, user_name, user_nickname, user_phone, user_email
+            SELECT user_number, user_id, user_name, user_nickname, user_phone, user_email, user_status
             FROM ddd_user
             WHERE user_type = 'C' AND user_nickname LIKE '%' || #{keyword} || '%'
             ORDER BY user_number DESC
@@ -98,12 +98,14 @@ WHERE rownum <= 5
 		resultType="AdminUserDTO">
 		SELECT
 		u.user_id, u.user_nickname, u.user_name,
-		u.user_phone,u.user_birth,u.user_email, c.common_report_count
+		u.user_phone,u.user_birth,u.user_email, c.common_report_count,
+		user_status
 		FROM
 		ddd_user u
 		JOIN
 		ddd_user_common c ON
-		u.user_number = c.user_number
+		u.user_number =
+		c.user_number
 		WHERE
 		u.user_number
 		= #{userNumber}

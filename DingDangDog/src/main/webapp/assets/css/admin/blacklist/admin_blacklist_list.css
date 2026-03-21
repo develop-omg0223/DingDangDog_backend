@@ -1,37 +1,45 @@
 .admin-main-content {
-  background-color: white;
-  border-radius: 5px;
+	background-color: white;
+	border-radius: 5px;
 }
 
 .blacklist-list-row {
-  line-height: 35px;
-  display: flex;
-  text-align: center;
-  align-items: center;
-  border-bottom: 1px solid #b6b6b6;
+	line-height: 35px;
+	display: flex;
+	text-align: center;
+	align-items: center;
+	border-bottom: 1px solid #b6b6b6;
 }
 
 .black-user-number {
-  flex: 0.5;
+	flex: 0.5;
 }
+
 .black-user-id {
-  flex: 1;
+	flex: 1.2;
 }
+
 .black-user-name {
-  flex: 1;
+	flex: 1;
 }
+
 .black-user-nickname {
-  flex: 1;
+	flex: 2;
 }
-.black-reason {
-  flex: 3;
+
+.black-user-phone {
+	flex: 1.2;
+}
+
+.black-user-email {
+	flex: 1.5;
 }
 
 .blacklist-list-row:first-child {
-  height: 40px;
-  font-weight: bold;
+	height: 40px;
+	font-weight: bold;
 }
 
 .blacklist-list-row:last-child {
-  border-bottom: none;
+	border-bottom: none;
 }

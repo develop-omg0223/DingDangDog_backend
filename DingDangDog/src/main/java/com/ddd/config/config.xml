@@ -77,6 +77,8 @@
 			alias="ReportDTO" />
 		<typeAlias type="com.ddd.app.file.dto.FileDTO"
 			alias="FileDTO" />
+		<typeAlias type="com.ddd.app.admin.dto.AdminBlackDTO"
+			alias="AdminBlackDTO" />
 	</typeAliases>
 
 	<environments default="oracle">
@@ -115,6 +117,7 @@
 		<mapper resource="com/ddd/mapper/CareMapper.xml" />
 		<mapper resource="com/ddd/mapper/AdminUserMapper.xml" />
 		<mapper resource="com/ddd/mapper/FileMapper.xml" />
+		<mapper resource="com/ddd/mapper/AdminBlackMapper.xml" />
 	</mappers>
 
 

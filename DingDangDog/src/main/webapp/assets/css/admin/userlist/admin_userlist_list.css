@@ -48,6 +48,10 @@
 	flex: 1.5;
 }
 
+.user-status {
+	flex: 0.6;
+}
+
 .user-shelter-name {
 	flex: 2;
 }
@@ -89,4 +93,8 @@
 .confirm-wait {
 	color: red;
 	font-weight: bold;
+}
+
+.withdraw-user {
+	color: red;
 }

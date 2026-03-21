@@ -16,7 +16,7 @@
 	<!-- 전체화면 -->
 	<main class="admin-main-container">
 		<!-- 사이드바 -->
-		<%@ include file="/app/admin/admin_sidebar.jsp" %>
+		<%@ include file="/app/admin/admin_sidebar.jsp"%>
 		<!-- 메인 화면 -->
 		<section class="admin-main-section">
 			<!-- 페이지 상단 (제목, 버튼) -->
@@ -41,6 +41,7 @@
 							<div class="user-nickname">닉네임</div>
 							<div class="user-phone">전화번호</div>
 							<div class="user-email">이메일</div>
+							<div class="user-status">상태</div>
 						</div>
 
 						<c:forEach var="user" items="${userList}">
@@ -52,7 +53,12 @@
 								<div class="user-name">${user.userName}</div>
 								<div class="user-nickname">${user.userNickname}</div>
 								<div class="user-phone">${user.userPhone}</div>
-								<div class="user-email">${user.userEmail}</div>
+								<div class="user-email">${user.userEmail}</div> <c:if
+									test="${user.userStatus eq 'kind'}">
+									<div class="user-status">활성 계정</div>
+								</c:if> <c:if test="${user.userStatus eq 'withdraw'}">
+									<div class="user-status withdraw-user">탈퇴 계정</div>
+								</c:if>
 							</a>
 						</c:forEach>
 					</c:when>

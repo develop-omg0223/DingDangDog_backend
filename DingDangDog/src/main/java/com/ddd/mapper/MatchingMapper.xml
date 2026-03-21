@@ -66,7 +66,7 @@
 		RESULT_NUMBER DESC
 	</select>
 	
-	<select id="selectAllDogScore" resultType="">
+	<select id="selectAllDogScore" resultType="MatchingResultDTO">
 		SELECT
 	   	DOG_NUMBER,
 	   	DOG_ACTIVITY,

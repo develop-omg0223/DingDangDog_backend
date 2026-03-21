@@ -63,9 +63,9 @@ public class profileSFileOKController implements Execute {
 		if (fileCount > 0) {
 			// 드라이버 경로 사용시
 			FileDTO realFile = fileDAO.selectFile(userNumber);
-			String realFileOriginalName = realFile.getFileOriginalName();
+			String realFileSystemName = realFile.getFileSystemName();
 
-			File file = new File(UPLOAD_PATH + realFileOriginalName);
+			File file = new File(UPLOAD_PATH + realFileSystemName);
 			if (file.exists()) {
 				if (file.delete()) {
 					fileDAO.deleteFile(userNumber);

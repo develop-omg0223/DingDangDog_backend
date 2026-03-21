@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
+import com.ddd.app.admin.dto.AdminBlackDTO;
 import com.ddd.app.admin.dto.AdminCareDTO;
 import com.ddd.app.admin.dto.AdminDTO;
 import com.ddd.app.admin.dto.AdminUserDTO;
@@ -119,41 +120,91 @@ public class AdminDAO {
 	}
 
 	// 멍! 케어 전체 목록 조회
-    public List<AdminCareDTO> selectCareList(Map<String, Object> pageMap){
-    	System.out.println("멍케어 전체 리스트 조회");    	
-        return sqlSession.selectList("adminCare.selectCareList", pageMap);
-    }
-    
-    // 멍! 케어 게시글 총 개수
-    public int getCareTotal() {
-        System.out.println("멍! 케어 게시글 총 개수 조회 - getCareTotal 실행 : ");
-        return sqlSession.selectOne("adminCare.getCareTotal");
-    }
+	public List<AdminCareDTO> selectCareList(Map<String, Object> pageMap) {
+		System.out.println("멍케어 전체 리스트 조회");
+		return sqlSession.selectList("adminCare.selectCareList", pageMap);
+	}
 
-    // 멍! 케어 검색
-    public List<AdminCareDTO> searchCareList(Map<String, Object> searchMap){
-        return sqlSession.selectList("adminCare.searchCareList", searchMap);
-    }
+	// 멍! 케어 게시글 총 개수
+	public int getCareTotal() {
+		System.out.println("멍! 케어 게시글 총 개수 조회 - getCareTotal 실행 : ");
+		return sqlSession.selectOne("adminCare.getCareTotal");
+	}
 
-    // 멍! 케어 상세정보 조회
-    public AdminCareDTO selectCareDetail(int careNumber){
-        return sqlSession.selectOne("adminCare.selectCareDetail", careNumber);
-    }
+	// 멍! 케어 검색
+	public List<AdminCareDTO> searchCareList(Map<String, Object> searchMap) {
+		return sqlSession.selectList("adminCare.searchCareList", searchMap);
+	}
 
-    // 멍! 케어 신청자 현황
-    public AdminCareDTO selectApplyStatus(Integer careNumber) {
-        return sqlSession.selectOne("adminCare.selectApplyStatus", careNumber);
-    }
+	// 멍! 케어 상세정보 조회
+	public AdminCareDTO selectCareDetail(int careNumber) {
+		return sqlSession.selectOne("adminCare.selectCareDetail", careNumber);
+	}
 
-    // 멍! 케어 신청자 목록
-    public List<AdminCareDTO> selectApplyList(int careNumber){
-        return sqlSession.selectList("adminCare.selectApplyList", careNumber);
-    }
+	// 멍! 케어 신청자 현황
+	public AdminCareDTO selectApplyStatus(Integer careNumber) {
+		return sqlSession.selectOne("adminCare.selectApplyStatus", careNumber);
+	}
 
-    // 멍! 케어 게시글 삭제 (status 변경)
-    public void deleteCare(int careNumber){
-        sqlSession.update("adminCare.deleteCare", careNumber);
-    }
+	// 멍! 케어 신청자 목록
+	public List<AdminCareDTO> selectApplyList(int careNumber) {
+		return sqlSession.selectList("adminCare.selectApplyList", careNumber);
+	}
 
+	// 멍! 케어 게시글 삭제 (status 변경)
+	public void deleteCare(int careNumber) {
+		sqlSession.update("adminCare.deleteCare", careNumber);
+	}
+
+	// 대시보드용 블랙리스트
+	public List<AdminBlackDTO> getDashboardBlackList() {
+		System.out.println("대시보드용 블랙리스트 호출");
+		return sqlSession.selectList("adminBlack.getDashboardBlackList");
+	}
+
+	// 블랙리스트 총 인원수 조회
+	public int getTotalBlack() {
+		System.out.println("블랙리스트 총 인원수 조회");
+		return sqlSession.selectOne("adminBlack.getTotalBlack");
+	}
+
+	// 블랙리스트 검색후 인원수 조회
+//	public int getTotalBlackSearch(String searchType, String keyword) {
+//		System.out.println("블랙리스트 검색후 인원수 조회");
+//		if ("id".equals(searchType)) {
+//			return sqlSession.selectOne("adminUser.getTotalCommonByUserId", keyword);
+//		} else if ("nickname".equals(searchType)) {
+//			return sqlSession.selectOne("adminUser.getTotalCommonByUserNickname", keyword);
+//		}
+//		return getTotalCommon();
+//	}
+
+	// 블랙리스트 전체 목록 조회
+//	public List<AdminUserDTO> selectCommonList(Map<String, Integer> pageMap) {
+//		System.out.println("일반회원 전체 목록 조회");
+//		return sqlSession.selectList("adminUser.selectCommonList", pageMap);
+//	}
+
+	// 블랙리스트 검색 목록 조회
+//	public List<AdminUserDTO> selectCommonSearchList(Map<String, Object> searchMap) {
+//		System.out.println("일반회원 검색 목록 조회");
+//		String searchType = (String) searchMap.get("searchType");
+//		if ("id".equals(searchType)) {
+//			return sqlSession.selectList("adminUser.selectCommonListByUserId", searchMap);
+//		} else if ("nickname".equals(searchType)) {
+//			return sqlSession.selectList("adminUser.selectCommonListByUserNickname", searchMap);
+//		}
+//		return sqlSession.selectList("adminUser.selectCommonList", searchMap);
+//	}
+
+	// 블랙리스트 상세 조회
+//	public AdminUserDTO selectCommonDetail(int userNumber) {
+//		System.out.println("일반회원 상세 조회 실행 : " + userNumber);
+//		return sqlSession.selectOne("adminUser.selectCommonDetail", userNumber);
+//	}
+
+	// 블랙리스트 신고횟수 초기화
+
+	// 블랙상태 해제
 
 }

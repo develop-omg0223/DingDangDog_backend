@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html lang="ko">
 <head>
 <meta charset="UTF-8" />
@@ -52,11 +53,22 @@
 					<div class="admin-detail-title">신고횟수</div>
 					<div class="admin-detail-info">${user.commonReportCount}</div>
 				</div>
+				<div class="admin-detail-row">
+					<div class="admin-detail-title">계정상태</div>
+					<c:if test="${user.userStatus eq 'kind'}">
+						<div class="admin-detail-info">활성 계정</div>
+					</c:if>
+					<c:if test="${user.userStatus eq 'withdraw'}">
+						<div class="admin-detail-info withdraw-user">탈퇴 계정</div>
+					</c:if>
+
+				</div>
 			</div>
 			<!-- 페이지 하단 (검색, 페이지네이션) -->
 			<div class="admin-main-section-footer">
 				<div class="btn-container">
-					<button onclick="location.href = '${pageContext.request.contextPath}/admin/userListOk.ad?userType=C'"
+					<button
+						onclick="location.href = '${pageContext.request.contextPath}/admin/userListOk.ad?userType=C'"
 						class="return-btn admin-box-shadow">목록으로</button>
 				</div>
 			</div>

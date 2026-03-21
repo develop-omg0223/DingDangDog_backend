@@ -6,8 +6,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.ddd.app.Result;
-
 public class FileFrontController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -33,22 +31,12 @@ public class FileFrontController extends HttpServlet {
 		String target = request.getRequestURI().substring(request.getContextPath().length());
 		System.out.println("파일 프론트 컨트롤러 현재 경로 : " + target);
 
-		Result result = null;
-
 		switch (target) {
 		case "/file/fileDownload.fi":
 			System.out.println("파일 다운로드 요청");
-			result = new FileDownloadController().execute(request, response);
+			new FileDownloadController().execute(request, response);
 			System.out.println("파일 다운로드 완료");
 			break;
-		}
-
-		if (result != null && result.getPath() != null) {
-			if (result.isRedirect()) {
-				response.sendRedirect(result.getPath());
-			} else {
-				request.getRequestDispatcher(result.getPath()).forward(request, response);
-			}
 		}
 
 	}

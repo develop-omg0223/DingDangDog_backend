@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="adminBlack">
+
+	<!-- 대시보드용 블랙리스트 조회 -->
+	<select id="getDashboardBlackList" resultType="AdminBlackDTO"> 
+	<![CDATA[ 
+	SELECT * FROM
+		(SELECT user_number, user_id, user_name, user_nickname, user_phone, user_email
+		FROM ddd_user
+		WHERE user_type = 'C' AND USER_STATUS = 'black'
+		ORDER BY user_number DESC )
+	WHERE rownum <= 5 ;
+	]]>
+	</select>
+
+	<!-- 관리자 블랙리스트 관리 -->
+
+	<!-- 전체 블랙리스트 회원 -->
+	<select id="getTotalBlack" resultType="int">
+		SELECT COUNT(user_number)
+		FROM ddd_user WHERE user_type = 'C'
+		AND USER_STATUS ='black'
+	</select>
+	<!-- 아이디 검색 블랙리스트총회원 -->
+	<select id="getTotalBlackByUserId" parameterType="string"
+		resultType="int">
+		SELECT COUNT(user_number) FROM ddd_user
+		WHERE user_type ='C'
+		AND USER_STATUS ='black'
+		AND user_id LIKE '%' || #{keyword} || '%'
+	</select>
+	<!-- 닉네임 검색 블랙리스트총회원 -->
+	<select id="getTotalBlackByUserNickname" parameterType="string"
+		resultType="int">
+		SELECT COUNT(user_number) FROM ddd_user
+		WHERE user_type =
+		'C'
+		AND USER_STATUS ='black'
+		AND user_nickname LIKE '%' || #{keyword} ||
+		'%'
+	</select>
+
+	<!-- 블랙리스트회원 전체조회 -->
+	<select id="selectBlackList" parameterType="map"
+		resultType="AdminBlackDTO">
+<![CDATA[
+    SELECT * FROM (
+        SELECT ROWNUM AS rnum, subquery.* FROM (
+            SELECT 
+				user_number, user_id, user_name, user_nickname, user_phone, user_email
+			FROM ddd_user
+			WHERE
+			user_type = 'C' AND USER_STATUS = 'black'
+			ORDER BY user_number DESC
+        ) subquery
+    ) 
+    WHERE rnum BETWEEN #{startRow} AND #{endRow}
+]]>
+	</select>
+	<!-- 블랙리스트 전체조회 + 아이ㅣ디검색 -->
+	<select id="selectBlackListByUserId" parameterType="map"
+		resultType="AdminBlackDTO">
+<![CDATA[
+    SELECT * FROM (
+        SELECT ROWNUM AS rnum, subquery.* FROM (
+            SELECT 
+				user_number, user_id, user_name, user_nickname, user_phone, user_email
+			FROM ddd_user
+			WHERE
+			user_type = 'C' AND USER_STATUS = 'black'
+			AND user_id LIKE '%' || #{keyword} || '%'
+			ORDER BY user_number DESC
+        ) subquery
+    ) 
+    WHERE rnum BETWEEN #{startRow} AND #{endRow}
+]]>
+	</select>
+	<!-- 블랙리스트 전체조회 + 닉네임검색 -->
+	<select id="selectBlackListByUserNickname" parameterType="map"
+		resultType="AdminBlackDTO">
+<![CDATA[
+    SELECT * FROM (
+        SELECT ROWNUM AS rnum, subquery.* FROM (
+            SELECT 
+				user_number, user_id, user_name, user_nickname, user_phone, user_email
+			FROM ddd_user
+			WHERE
+			user_type = 'C' AND USER_STATUS = 'black'
+			AND user_nickname LIKE '%' || #{keyword} || '%'
+			ORDER BY user_number DESC
+        ) subquery
+    ) 
+    WHERE rnum BETWEEN #{startRow} AND #{endRow}
+]]>
+	</select>
+
+
+	<!-- 블랙리스트회원 상세 -->
+	<select id="selectBlackDetail" parameterType="int"
+		resultType="AdminBlackDTO">
+		SELECT u.user_id, u.user_nickname, u.user_name,
+		u.user_birth, u.user_phone, u.user_email,
+		(SELECT
+		LISTAGG(report_reason, ', ') WITHIN GROUP (ORDER BY report_number)
+		FROM ddd_report ) AS report_reason
+		FROM ddd_user u
+		WHERE u.user_number =
+		#{userNumber}
+	</select>
+
+	<!-- 블랙리스트 해제 -->
+	<!-- 신고횟수 초기화 -->
+	<update id="resetReportCount">
+		UPDATE ddd_user_common
+		SET common_report_count = 0
+		WHERE user_number = #{userNumber}
+	</update>
+	<!-- 블랙리스트 상태 해제 -->
+	<update id="resetUserStatus">
+		UPDATE ddd_user
+		SET USER_STATUS = 'kind'
+		WHERE
+		USER_STATUS = 'black' AND
+		user_number = #{userNumber}
+	</update>
+
+</mapper>
