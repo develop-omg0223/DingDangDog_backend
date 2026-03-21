@@ -19,17 +19,15 @@ public class FileDownloadController implements Execute {
 			throws ServletException, IOException {
 
 		int userNumber = Integer.parseInt(request.getParameter("userNumber"));
-        FileDAO fileDAO = new FileDAO();
-        FileDTO fileDTO = fileDAO.selectFile(userNumber);
-        
-        String uploadPath = "C:/KDTProject/uploadFiles/";
-        String fileSystemName = fileDTO.getFileSystemName();
-        String fileOriginalName = fileDTO.getFileOriginalName();
-		
-//        File file = new File(uploadPath, fileOriginalName);
-        
-        
-		
+		FileDAO fileDAO = new FileDAO();
+		FileDTO fileDTO = fileDAO.selectFile(userNumber);
+
+		String uploadPath = "C:/KDTProject/uploadFiles/";
+		String fileSystemName = fileDTO.getFileSystemName();
+		String fileOriginalName = fileDTO.getFileOriginalName();
+
+//		File file = new File(uploadPath + "/" + fileOriginalName);
+
 		return null;
 	}
 

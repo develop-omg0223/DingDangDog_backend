@@ -50,17 +50,22 @@
 				<div class="admin-detail-row ">
 					<div class="admin-detail-title">첨부파일</div>
 					<div class="admin-detail-info file-info">
-						<c:choose>
-							<c:when test="${not empty user.fileOriginalName}">
-								<p>${user.fileOriginalName}</p>
-								<a
-									href="${pageContext.request.contextPath}/file/fileDownload.fi?userNumber=${user.userNumber}"
-									id="download-link" class="download-btn"> 다운로드 </a>
-							</c:when>
-							<c:otherwise>
+						<c:if test="${user.shelterCertification == 'N'}">
+							<c:choose>
+								<c:when test="${not empty user.fileOriginalName}">
+									<p>${user.fileOriginalName}</p>
+									<a
+										href="${pageContext.request.contextPath}/file/fileDownload.fi?userNumber=${user.userNumber}"
+										id="download-link" class="download-btn"> 다운로드 </a>
+								</c:when>
+								<c:otherwise>
                 					파일이 없습니다
             					</c:otherwise>
-						</c:choose>
+							</c:choose>
+						</c:if>
+						<c:if test="${user.shelterCertification == 'Y'}">
+							인증 완료된 회원입니다
+						</c:if>
 					</div>
 				</div>
 			</div>
