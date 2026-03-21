@@ -29,6 +29,7 @@ public class DogLogWriteOkController implements Execute {
 		Object userNumberObj = session.getAttribute("userNumber");
 
 		if (userNumberObj == null) {
+			System.out.println("세션에 userNumber 없음");
 			Result result = new Result();
 			result.setPath(request.getContextPath() + "/member/login.me");
 			result.setRedirect(true);
@@ -39,15 +40,19 @@ public class DogLogWriteOkController implements Execute {
 		String logTitle = request.getParameter("logTitle");
 		String logPost = request.getParameter("logPost");
 
+		System.out.println("userNumber = " + userNumber);
+		System.out.println("logTitle = " + logTitle);
+		System.out.println("logPost 길이 = " + (logPost == null ? 0 : logPost.length()));
+
 		if (logTitle == null || logTitle.trim().isEmpty()
 				|| logPost == null || logPost.trim().isEmpty()) {
+			System.out.println("제목 또는 내용 비어 있음");
 			Result result = new Result();
 			result.setPath(request.getContextPath() + "/log/write.lo");
 			result.setRedirect(true);
 			return result;
 		}
 
-		// 1. 게시글 저장
 		LogDTO logDTO = new LogDTO();
 		logDTO.setUserNumber(userNumber);
 		logDTO.setLogTitle(logTitle);
@@ -57,20 +62,27 @@ public class DogLogWriteOkController implements Execute {
 		logDAO.insert(logDTO);
 
 		int logNumber = logDTO.getLogNumber();
+		System.out.println("생성된 logNumber = " + logNumber);
 
-		// 2. 이미지 저장
 		LogImgDAO logImgDAO = new LogImgDAO();
 
 		String uploadPath = request.getServletContext().getRealPath("/upload/doglog");
-		File uploadDir = new File(uploadPath);
+		System.out.println("uploadPath = " + uploadPath);
 
+		File uploadDir = new File(uploadPath);
 		if (!uploadDir.exists()) {
-			uploadDir.mkdirs();
+			boolean made = uploadDir.mkdirs();
+			System.out.println("upload 폴더 생성 여부 = " + made);
 		}
 
 		Collection<Part> parts = request.getParts();
+		System.out.println("parts 개수 = " + parts.size());
 
 		for (Part part : parts) {
+			System.out.println("part name = " + part.getName());
+			System.out.println("submittedFileName = " + part.getSubmittedFileName());
+			System.out.println("size = " + part.getSize());
+
 			if (!"logImages".equals(part.getName())) continue;
 			if (part.getSize() == 0) continue;
 
@@ -79,13 +91,19 @@ public class DogLogWriteOkController implements Execute {
 
 			String savedFileName = System.currentTimeMillis() + "_" + submittedFileName;
 			File saveFile = new File(uploadDir, savedFileName);
+
+			System.out.println("저장 파일명 = " + savedFileName);
+			System.out.println("저장 전체경로 = " + saveFile.getAbsolutePath());
+
 			part.write(saveFile.getAbsolutePath());
 
 			LogImgDTO logImgDTO = new LogImgDTO();
 			logImgDTO.setLogNumber(logNumber);
+			logImgDTO.setLogImgName(savedFileName);
 			logImgDTO.setLogImgPath("/upload/doglog/" + savedFileName);
 
 			logImgDAO.insertImage(logImgDTO);
+			System.out.println("DB 이미지 저장 완료");
 		}
 
 		Result result = new Result();

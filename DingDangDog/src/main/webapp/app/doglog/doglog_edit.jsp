@@ -17,20 +17,19 @@
   <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/doglog/doglog_edit.css" />
   <script defer src="${pageContext.request.contextPath}/assets/js/doglog/doglog_edit.js"></script>
   <title>멍! 로그 수정</title>
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/header.css" />
-		<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/footer.css" />
-	</head>
-	
-	<body>
-		<!-- 유저 번호 확인 존재시 로그인 헤더 -->
-		<c:choose>
-		  <c:when test="${not empty sessionScope.userNumber}">
-		    <jsp:include page="/app/header_login.jsp" />
-		  </c:when>
-		  <c:otherwise>
-		    <jsp:include page="/app/header_logout.jsp" />
-		  </c:otherwise>
-		</c:choose>
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/header.css" />
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/footer.css" />
+</head>
+
+<body>
+  <c:choose>
+    <c:when test="${not empty sessionScope.userNumber}">
+      <jsp:include page="/app/header_login.jsp" />
+    </c:when>
+    <c:otherwise>
+      <jsp:include page="/app/header_logout.jsp" />
+    </c:otherwise>
+  </c:choose>
 
   <main class="doglog-detail">
     <div class="container">
@@ -51,7 +50,6 @@
         <div class="container-body">
           <div class="doglog-detail-container">
 
-            <!-- 제목 -->
             <input type="text"
                    class="detail-title edit-title"
                    id="editTitle"
@@ -59,7 +57,6 @@
                    placeholder="제목을 입력하세요"
                    value="${not empty log.logTitle ? log.logTitle : ''}" />
 
-            <!-- 작성자 / 날짜 -->
             <div class="detail-info-container">
               <div class="detail-info-name" id="editWriter">
                 <c:choose>
@@ -73,7 +70,7 @@
               </div>
 
               <div class="detail-info-date" id="editDate">
-                <c:if test="$not empty ${logDateStr}">
+                <c:if test="${not empty logDateStr}">
                   ${logDateStr}
                 </c:if>
               </div>
@@ -81,11 +78,10 @@
 
             <div class="detail-main-container">
 
-              <!-- 이미지 영역 -->
               <div class="detail-main-img">
                 <div class="img-preview-box">
                   <img id="editPreviewImg"
-                       src="${not empty firstImagePath ? pageContext.request.contextPath.concat(firstImagePath) : ''}"
+                       src="${not empty firstImagePath ? pageContext.request.contextPath : ''}${not empty firstImagePath ? firstImagePath : ''}"
                        alt="대표 이미지 미리보기"
                        style="${not empty firstImagePath ? 'display:block;' : 'display:none;'}" />
                   <span class="img-placeholder"
@@ -97,34 +93,10 @@
                 <input type="file"
                        id="editImg"
                        name="logImages"
-                       accept="image/*"
-                       multiple />
+                       accept="image/*" />
 
-                <!-- 기존 이미지 목록 -->
-                <div class="existing-image-list" id="existingImageList">
-                  <c:choose>
-                    <c:when test="${not empty imageList}">
-                      <c:forEach var="image" items="${imageList}">
-                        <div class="existing-image-item"
-                             data-image-id="${image.logImgNumber}"
-                             data-image-path="${image.logImgPath}">
-                          <img src="${pageContext.request.contextPath}${image.logImgPath}" alt="기존 이미지" />
-                          <button type="button"
-                                  class="btn-existing-image-delete"
-                                  data-action="delete-existing-image">
-                            ×
-                          </button>
-                        </div>
-                      </c:forEach>
-                    </c:when>
-                    <c:otherwise>
-                      <!-- 기존 이미지 없을 때 비워둠 -->
-                    </c:otherwise>
-                  </c:choose>
-                </div>
+                <div class="existing-image-list" id="existingImageList"></div>
               </div>
-
-              <!-- 내용 -->
               <div class="detail-main-post edit-content"
                    id="editContent"
                    contenteditable="true"
@@ -133,7 +105,6 @@
           </div>
         </div>
 
-        <!-- 버튼 -->
         <div class="container-footer">
           <div class="btn-container">
             <div class="btn-left">

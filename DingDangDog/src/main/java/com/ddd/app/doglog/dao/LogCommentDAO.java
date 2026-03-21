@@ -41,6 +41,6 @@ public class LogCommentDAO {
 
 	// 게시글 기준 댓글 전체 삭제
 	public int deleteByLogNumber(int logNumber) {
-		return sqlSession.delete("log.deleteCommentsByLogNumber", logNumber);
+		return sqlSession.delete("log.deleteByLogNumber", logNumber);
 	}
 }

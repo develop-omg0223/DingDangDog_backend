@@ -151,14 +151,8 @@ function syncPreviewFromExisting() {
     return;
   }
 
-  let firstExistingImage = null;
-
-  if (existingImageList) {
-    firstExistingImage = existingImageList.querySelector(".existing-image-item img");
-  }
-
-  if (firstExistingImage) {
-    editPreviewImg.src = firstExistingImage.src;
+  // JSP에서 이미 대표 이미지가 세팅되어 있으면 유지
+  if (editPreviewImg && editPreviewImg.getAttribute("src")) {
     editPreviewImg.style.display = "block";
     if (imgPlaceholder) {
       imgPlaceholder.style.display = "none";

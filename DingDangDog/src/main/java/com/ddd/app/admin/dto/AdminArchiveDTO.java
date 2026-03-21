@@ -1,6 +1,6 @@
 package com.ddd.app.admin.dto;
 
-import java.sql.Date;
+import java.time.LocalDate;
 
 public class AdminArchiveDTO {
 //			   dog_number NUMBER,
@@ -26,7 +26,7 @@ public class AdminArchiveDTO {
 //			   dog_number NUMBER,
 //			   archive_img_name VARCHAR2(200)
 //			   archive_img_path VARCHAR2
-	
+
 	private int dogNumber;
 	private int userNumber;
 	private String dogName;
@@ -34,9 +34,9 @@ public class AdminArchiveDTO {
 	private char dogGender;
 	private String dogAge;
 	private int dogWeight;
-	private Date dogSafeDate;
-	private Date dogArchiveDate;
-	private Date archiveModifyDate;
+	private LocalDate dogSafeDate;
+	private LocalDate dogArchiveDate;
+	private LocalDate archiveModifyDate;
 	private String dogDetail;
 	private int dogActivity;
 	private int dogSociality;
@@ -46,7 +46,8 @@ public class AdminArchiveDTO {
 	private int archiveImgNumber;
 	private String archiveImgName;
 	private String archiveImgPath;
-	
+	private String shelterName;
+
 	public int getDogNumber() {
 		return dogNumber;
 	}
@@ -89,22 +90,22 @@ public class AdminArchiveDTO {
 	public void setDogWeight(int dogWeight) {
 		this.dogWeight = dogWeight;
 	}
-	public Date getDogSafeDate() {
+	public LocalDate getDogSafeDate() {
 		return dogSafeDate;
 	}
-	public void setDogSafeDate(Date dogSafeDate) {
+	public void setDogSafeDate(LocalDate dogSafeDate) {
 		this.dogSafeDate = dogSafeDate;
 	}
-	public Date getDogArchiveDate() {
+	public LocalDate getDogArchiveDate() {
 		return dogArchiveDate;
 	}
-	public void setDogArchiveDate(Date dogArchiveDate) {
+	public void setDogArchiveDate(LocalDate dogArchiveDate) {
 		this.dogArchiveDate = dogArchiveDate;
 	}
-	public Date getArchiveModifyDate() {
+	public LocalDate getArchiveModifyDate() {
 		return archiveModifyDate;
 	}
-	public void setArchiveModifyDate(Date archiveModifyDate) {
+	public void setArchiveModifyDate(LocalDate archiveModifyDate) {
 		this.archiveModifyDate = archiveModifyDate;
 	}
 	public String getDogDetail() {
@@ -162,6 +163,14 @@ public class AdminArchiveDTO {
 		this.archiveImgPath = archiveImgPath;
 	}
 	
+	public String getShelterName() {
+		return shelterName;
+	}
+
+	public void setShelterName(String shelterName) {
+		this.shelterName = shelterName;
+	}
+
 	@Override
 	public String toString() {
 		return "AdminArchiveDTO [dogNumber=" + dogNumber + ", userNumber=" + userNumber + ", dogName=" + dogName
@@ -170,7 +179,6 @@ public class AdminArchiveDTO {
 				+ ", archiveModifyDate=" + archiveModifyDate + ", dogDetail=" + dogDetail + ", dogActivity="
 				+ dogActivity + ", dogSociality=" + dogSociality + ", dogIndependence=" + dogIndependence
 				+ ", dogBarking=" + dogBarking + ", dogGrooming=" + dogGrooming + ", archiveImgNumber="
-				+ archiveImgNumber + ", archiveImgName=" + archiveImgName + ", archiveImgPath=" + archiveImgPath + "]";
+				+ archiveImgNumber + ", archiveImgName=" + archiveImgName + ", archiveImgPath=" + archiveImgPath + ", shelterName="+ shelterName + "]";
 	}
-	
 }

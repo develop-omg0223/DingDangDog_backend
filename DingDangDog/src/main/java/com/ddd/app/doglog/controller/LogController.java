@@ -11,10 +11,12 @@ import javax.servlet.http.HttpServletResponse;
 import com.ddd.app.Result;
 
 @MultipartConfig(
-	fileSizeThreshold = 1024 * 1024,
-	maxFileSize = 1024 * 1024 * 10,
-	maxRequestSize = 1024 * 1024 * 50
-)
+		fileSizeThreshold = 1024 * 1024,
+		maxFileSize = 1024 * 1024 * 10,
+		maxRequestSize = 1024 * 1024 * 50
+	)
+
+
 public class LogController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -47,8 +49,8 @@ public class LogController extends HttpServlet {
 
 		Result result = null;
 
-//		// 테스트용 하드코딩 세션
-//		request.getSession().setAttribute("userNumber", 10001);
+		// 테스트용 하드코딩 세션
+		request.getSession().setAttribute("userNumber", 10001);
 
 		switch (target) {
 
@@ -103,10 +105,6 @@ public class LogController extends HttpServlet {
 			result = new DogLogCommentWriteOkController().execute(request, response);
 			break;
 
-//		case "/comment/edit.lo":
-//			System.out.println("댓글 수정 페이지 요청");
-//			result = new DogLogCommentEditController().execute(request, response);
-//			break;
 
 		case "/comment/editOk.lo":
 			System.out.println("댓글 수정 처리 요청");

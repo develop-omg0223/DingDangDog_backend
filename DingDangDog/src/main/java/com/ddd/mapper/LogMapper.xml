@@ -31,7 +31,7 @@
 			) AS representative_img_path
 		FROM ddd_log l
 		JOIN ddd_user u ON l.user_number = u.user_number
-		ORDER BY l.log_date ASC
+		ORDER BY l.log_date DESC
 	</select>
 
 	<!-- 게시글 상세 조회 -->
@@ -199,6 +199,12 @@
 		DELETE FROM ddd_log_comment
 		WHERE comment_number = #{commentNumber}
 		  AND user_number = #{userNumber}
+	</delete>
+	
+	<!-- 댓글 전체 삭제 -->
+	<delete id="deleteByLogNumber" parameterType="int">
+	    DELETE FROM ddd_log_comment
+	    WHERE log_number = #{value}
 	</delete>
 
 

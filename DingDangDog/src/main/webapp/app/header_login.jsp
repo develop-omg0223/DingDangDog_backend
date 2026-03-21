@@ -17,7 +17,7 @@
       <ul>
         <li><a href="#" class="h-centent-menu-item">소개</a></li>
         <li><a href="${pageContext.request.contextPath}/matching/test.matching" class="h-centent-menu-item">멍! 매칭</a></li>
-        <li><a href="${pageContext.request.contextPath}/log/listSearch.lo" class="h-centent-menu-item">멍! 로그</a></li>
+        <li><a href="${pageContext.request.contextPath}/log/list.lo" class="h-centent-menu-item">멍! 로그</a></li>
         <li><a href="${pageContext.request.contextPath}/care/list.ca" class="h-centent-menu-item">멍! 케어</a></li>
         <li><a href="${pageContext.request.contextPath}/archive/list.ar" class="h-centent-menu-item">멍! 카이브</a></li>
       </ul>

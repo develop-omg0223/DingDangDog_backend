@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -13,9 +13,13 @@
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/header.css" />
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/footer.css" />
 </head>
+
+	
 	
 	<body>
-		<!-- 유저 번호 확인 존재시 로그인 헤더 -->
+	
+	
+	<!-- 유저 번호 확인 존재시 로그인 헤더 -->
 		<c:choose>
 		  <c:when test="${not empty sessionScope.userNumber}">
 		    <jsp:include page="/app/header_login.jsp" />
@@ -24,6 +28,7 @@
 		    <jsp:include page="/app/header_logout.jsp" />
 		  </c:otherwise>
 		</c:choose>
+		
 
   <main class="doglog-write">
     <div class="container">

@@ -5,7 +5,7 @@ const writeContentEditor = document.getElementById("writeContentEditor");
 const imgPlaceholder = document.querySelector(".img-placeholder");
 const titleInput = document.querySelector(".write-title input");
 const hiddenPostInput = document.getElementById("logPostHidden");
-
+console.log("doglog_write.js 최신본 실행됨");
 let uploadedImages = [];
 
 if (
@@ -61,7 +61,6 @@ function handleImageUpload(event) {
       if (loadedCount === imageFiles.length) {
         renderThumbnail();
         syncEditorToHidden();
-        imageUpload.value = "";
       }
     };
 
@@ -107,6 +106,8 @@ function handleSubmit(event) {
     writeContentEditor.focus();
     return;
   }
+
+  console.log("전송 직전 file 개수 =", imageUpload.files.length);
 
   const submitData = {
     title: titleValue,

@@ -13,8 +13,7 @@
 }
 
 body{
-  width:1440px;
-  margin:0 auto;
+  width:100%;
   background:#fff;
   font-family:"HannaPro", sans-serif;
 }
@@ -22,18 +21,25 @@ body{
 
 
 .doglog-detail{
-  width:1440px;
+  width:100%;
   min-height:804px;
   background:#fff;
 }
 
+.container-header,
+.container-body,
+.container-footer{
+  width:100%;
+  max-width:1440px;
+  margin:0 auto;
+}
+
 .container{
-  width:1440px;
+  width:100%;
   min-height:804px;
   padding:0 50px 40px;
   display:flex;
   flex-direction:column;
-  align-items:flex-start;
 }
 
 .container-header{

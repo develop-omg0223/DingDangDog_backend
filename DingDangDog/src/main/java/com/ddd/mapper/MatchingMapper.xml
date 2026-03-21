@@ -65,5 +65,18 @@
 		ORDER BY
 		RESULT_NUMBER DESC
 	</select>
+	
+	<select id="selectAllDogScore" resultType="">
+		SELECT
+	   	DOG_NUMBER,
+	   	DOG_ACTIVITY,
+	  	DOG_SOCIALITY,
+	  	DOG_INDEPENDENCE,
+	  	DOG_BARKING,
+	  	DOG_GROMMING
+	  	FROM DDD_ARCHIVE_SCORE
+	</select>
+	
+	
 
 </mapper>
