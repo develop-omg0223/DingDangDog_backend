@@ -30,21 +30,24 @@ document.addEventListener("DOMContentLoaded", () => {
 	
 	function renderCareList() {
 	  const careList = document.getElementById("care-list");
+	  // 데이터가 없거나 배열이 아니면 실행 중단
 	  if (!careList || !Array.isArray(mainCareData)) return;
-	
+
 	  const visibleCares = mainCareData.slice(0, 5);
 	  careList.innerHTML = "";
-	
+
 	  visibleCares.forEach((care) => {
 	    const li = document.createElement("li");
-	
+	    // 리스트 아이템에 클래스 추가 (스타일 잡기 편함)
+	    li.className = "care-item";
+
 	    li.innerHTML = `
-	      <a href="${contextPath}/care/detail.ca?careNumber=${care.careNumber}">
-	        <span class="title">${escapeHtml(care.careTitle || "")}</span>
-	        <span class="title">${formatDate(care.careDate)}</span>
+	      <a href="${contextPath}/care/detail.ca?careNumber=${care.careNumber}" class="care-link">
+	        <span class="care-title">${escapeHtml(care.careTitle || "")}</span>
+	        <span class="care-date">${formatDate(care.careDate)}</span>
 	      </a>
 	    `;
-	
+
 	    careList.appendChild(li);
 	  });
 	}
