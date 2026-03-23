@@ -34,7 +34,7 @@
 
 	<main class="profile-edit">
 		<div class="container">
-			<<!-- 사이드바 -->
+			<!-- 사이드바 -->
 			<jsp:include page="/app/mypage/sidebar.jsp" />
 
 			<section class="content">

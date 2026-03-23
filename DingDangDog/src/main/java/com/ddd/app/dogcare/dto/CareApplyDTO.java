@@ -15,7 +15,21 @@ public class CareApplyDTO {
 	private String userNickname;
 	private int userNumber;
 	private LocalDateTime applyDate;
-	
+	private String userName;
+	private String userPhone;
+
+	public String getUserPhone() {
+		return userPhone;
+	}
+	public void setUserPhone(String userPhone) {
+		this.userPhone = userPhone;
+	}
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
 	public int getApplyNumber() {
 		return applyNumber;
 	}

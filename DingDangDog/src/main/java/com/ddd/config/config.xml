@@ -113,6 +113,7 @@
 		<mapper resource="com/ddd/mapper/MypageCInfoMapper.xml" />
 		<mapper resource="com/ddd/mapper/MypageSInfoMapper.xml" />
 		<mapper resource="com/ddd/mapper/MypageLogMapper.xml" />
+		<mapper resource="com/ddd/mapper/MypageArchiveMapper.xml"/>
 		<!-- <mapper resource="com/ddd/mapper/InquiryMapper.xml" /> -->
 		<mapper resource="com/ddd/mapper/mainMapper.xml" />
 		<mapper resource="com/ddd/mapper/ReportMapper.xml" />

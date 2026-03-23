@@ -40,21 +40,8 @@
 	</div>
 	<main class="profile-edit">
 		<div class="container">
-			<aside class="sidebar">
-				<nav class="side-menu">
-					<a class="btn-side-link" href="./profile_edit_common.html">내 정보
-						변경</a>
-					<hr>
-					<a class="btn-side-link" href="./volunteer_status_list_common.html">멍!
-						케어 신청 확인</a>
-					<hr>
-					<a class="btn-side-link" href="./review_list.html">내가 작성한 멍! 로그
-						목록</a>
-					<hr>
-					<a class="btn-side-link" href="./support_list_common.html">1 :
-						1 문의</a>
-				</nav>
-			</aside>
+			<!-- 사이드바 -->
+			<jsp:include page="/app/mypage/sidebar.jsp" />
 
 			<section class="content">
 				<div class="content-box">

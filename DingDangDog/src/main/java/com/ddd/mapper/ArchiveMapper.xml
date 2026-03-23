@@ -60,7 +60,7 @@
 
 <insert id="insertArchive" parameterType="ArchiveWriteDTO">
     <selectKey keyProperty="dogNumber" resultType="int" order="BEFORE">
-        SELECT SEQ_DDD_ARCHIVE.NEXTVAL FROM DUAL
+        SELECT SEQ_ARCHIVE.NEXTVAL FROM DUAL
     </selectKey>
 
     INSERT INTO DDD_ARCHIVE (

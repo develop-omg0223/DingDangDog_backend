@@ -89,8 +89,7 @@
 									수정하기</button>
 
 								<button type="button" class="btn-list" id="deleteBtn"
-									onclick="location.href='${pageContext.request.contextPath}/care/delete.ca?careNumber=${care.careNumber}'">
-									삭제</button>
+									onclick="confirmDelete('${care.careNumber}')">삭제</button>
 							</form>
 						</c:when>
 						<c:otherwise>
@@ -126,7 +125,7 @@
 						<div>이름</div>
 						<div>휴대폰 번호</div>
 
-						<c:if test="${care.careStatus eq 'close'}">
+						<c:if test="${care.careStatus eq 'closed'}">
 							<div>신고 사유</div>
 						</c:if>
 					</div>
@@ -140,17 +139,17 @@
 							<div>${user.userPhone}</div>
 
 							<!-- 신고 form -->
-							<c:if test="${care.careStatus eq 'close'}">
+							<c:if test="${care.careStatus eq 'closed'}">
 
 								<form
-									action="${pageContext.request.contextPath}/care/report.care"
+									action="${pageContext.request.contextPath}/care/reportOk.ca"
 									method="post">
 
 									<!-- 신고 대상 -->
 									<input type="hidden" name="userNumber"
 										value="${user.userNumber}"> <input type="hidden"
 										name="careNumber" value="${care.careNumber}">
-
+									<input type="hidden" name="applyNumber" value="${user.applyNumber}">
 									<div class="report-reason">
 
 										<label> <input type="radio" name="reason" value="노쇼"

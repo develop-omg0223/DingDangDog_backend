@@ -55,14 +55,15 @@
 	</insert>
 
 	<!-- 로그인 -->
-	<select id="login" parameterType="UserDTO" resultType="UserDTO">
+	<select id="login" parameterType="com.ddd.app.user.dto.UserDTO"
+		resultType="com.ddd.app.user.dto.UserDTO">
 		SELECT
-		user_number, user_nickname, user_type
-		FROM ddd_user
-		WHERE user_id =
-		#{userId} AND user_password = #{userPassword}
-		AND user_type =
-		#{userType} AND user_status= 'kind'
+		user_number AS userNumber,
+		user_nickname AS userNickname,
+		user_type AS userType,
+		user_status AS userStatus FROM ddd_user
+		WHERE user_id = #{userId}
+		AND user_password = #{userPassword}
 	</select>
 
 	<!-- id 중복검사 -->

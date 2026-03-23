@@ -2,6 +2,7 @@ package com.ddd.app.dogcare.controller;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.ddd.app.Execute;
 import com.ddd.app.Result;
 import com.ddd.app.dogcare.dao.CareDAO;
+import com.ddd.app.dogcare.dto.CareApplyDTO;
 import com.ddd.app.dogcare.dto.CareDetailDTO;
 
 public class CareDetailController implements Execute{
@@ -24,6 +26,9 @@ public class CareDetailController implements Execute{
 		Result result = new Result();
 		CareDetailDTO careDetailDTO = new CareDetailDTO();
 		
+		// 상세 정보를 보기 전, 날짜 지난 모든 글의 상태를 'close'로 먼저 업데이트
+	    careDAO.updateExpiredStatus();
+	    
 //		// 세션에서 userNumber 가져오기
 //        HttpSession session = request.getSession();
 //        int userNumber = (Integer) session.getAttribute("userNumber");  // 세션에서 userNumber 가져오기
@@ -42,7 +47,8 @@ public class CareDetailController implements Execute{
 		    LocalDateTime careDate = LocalDateTime.parse(careDateStr + "T00:00:00");
 		    careDetailDTO.setCareDate(careDate);
 		}
-		
+		List<CareApplyDTO> applyList = careDAO.selectApplyUsers(careNumber); 
+		request.setAttribute("applyList", applyList);
 		// 신청현황 따로 조회
 		String applyStatus = careDAO.getApplyStatus(careNumber);
 		// care 객체에 넣기

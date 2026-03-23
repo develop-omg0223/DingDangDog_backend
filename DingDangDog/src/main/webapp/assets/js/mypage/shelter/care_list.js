@@ -22,32 +22,51 @@
   { number: 1, title: "보호소 운영 도우미 모집", date: "2026-02-16", member: "15/20" }
 ];*/
 
-const careTableBody = document.getElementById("careTableBody");
+/*const careTableBody = document.getElementById("careTableBody");
 const pagination = document.getElementById("pagination");
 
 function renderTable(page) {
 	const start = (page - 1) * rowsPerPage;
 	const end = start + rowsPerPage;
-	const currentData = careData.slice(start, end);
+	const currentData = careData.slice(start, end);*/
 
-	careTableBody.innerHTML = "";
+	function renderTable(page) {
+	    const careTableBody = document.getElementById("careTableBody");
+	    if (!careTableBody) return;
 
-	currentData.forEach((item) => {
-		const row = document.createElement("div");
-		row.classList.add("review-table-row");
+	    // 데이터가 아예 없을 경우 예외 처리
+	    if (careData.length === 0) {
+	        careTableBody.innerHTML = `
+	            <div class="review-table-row no-data" style="text-align:center; padding: 20px;">
+	                등록된 멍! 케어가 없습니다.
+	            </div>`;
+	        return;
+	    }
 
-		row.innerHTML = `
-      <div class="col-number">${item.number}</div>
-      <div class="col-title">
-	  <a href="${contextPath}/care/detail.ca?careNumber=${item.careNumber}">
-	  ${item.title}</a></div>
-      <div class="col-date">${item.date}</div>
-      <div class="col-member">${item.member}</div>
-    `;
+	    const start = (page - 1) * rowsPerPage;
+	    const end = start + rowsPerPage;
+	    const currentData = careData.slice(start, end);
 
-		careTableBody.appendChild(row);
-	});
-}
+	    careTableBody.innerHTML = "";
+
+	    currentData.forEach((item) => {
+	        const row = document.createElement("div");
+	        row.classList.add("review-table-row");
+
+	        row.innerHTML = `
+	            <div class="col-number">${item.number}</div>
+	            <div class="col-title">
+	                <a href="${contextPath}/care/detail.ca?careNumber=${item.careNumber}">
+	                    ${item.title}
+	                </a>
+	            </div>
+	            <div class="col-date">${item.date}</div>
+	            <div class="col-member">${item.member}</div>
+	        `;
+
+	        careTableBody.appendChild(row);
+	    });
+	}
 
 //페이지네이션 동작 코드
 //reviewData 부분만 맞춰서 수정하면 됨

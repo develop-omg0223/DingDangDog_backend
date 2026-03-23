@@ -75,16 +75,22 @@
 <script>
 
     // 1. 서버에서 보낸 careList를 JS가 쓸 수 있는 careData 배열로 변환
+    const contextPath = "${pageContext.request.contextPath}";
+    
+    // 서버(Controller)에서 보낸 'careList'를 JS 배열 'careData'로 변환
     const careData = [
-        <c:forEach var="item" items="${careList}" varStatus="status">
-        {
-        	careNumber: ${item.careNumber},
-        	careTitle: "${item.careTitle}",
-        	careDate: "${item.careDate}", 
-        	applyStatus: "${item.applyStatus}"
-        }<c:if test="${!status.last}">,</c:if>
+        <c:forEach var="care" items="${careList}" varStatus="status">
+            {
+                number: "${care.careNumber}",    // 화면에 표시될 번호
+                title: "${care.careTitle}",      // 제목
+                date: "${care.careDate}",        // 날짜
+                member: "${care.applyStatus}",   // 신청현황 (예: 5/20)
+                careNumber: "${care.careNumber}" // 상세페이지 이동용 고유번호
+            }${!status.last ? ',' : ''}
         </c:forEach>
     ];
+
+    console.log("전달된 멍케어 데이터:", careData); // 브라우저 콘솔에서 확인용
 
     // 2. 데이터가 잘 들어왔는지 브라우저 콘솔(F12)에서 확인용
     console.log("보호소 등록 목록:", careData);

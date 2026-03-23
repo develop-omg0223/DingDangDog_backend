@@ -1,249 +1,254 @@
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
-
-header{
-  background-color:#F47C2A;
-  width:1440px;
-  height:110px;
-}
-
-footer{
-  background-color:black;
-  width:1440px;
-  height:110px;
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
 }
 
 @font-face {
-  font-family: "HannaPro";
-  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_seven@1.0/BMHANNAPro.woff")
-    format("woff");
-  font-weight: normal;
-  font-display: swap;
+	font-family: "HannaPro";
+	src:
+		url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_seven@1.0/BMHANNAPro.woff")
+		format("woff");
+	font-weight: normal;
+	font-display: swap;
 }
 
-body{
-  width:1440px;
-  margin:0 auto;
-  background:#fff;
-  font-family:"HannaPro", sans-serif;
+body {
+	/* width:1440px; */
+	width: 100%;
+	/* margin:0 auto; */
+	margin: 0;
+	/* background:#fff; */
+	font-family: "HannaPro", sans-serif;
 }
 
-.mypage-shelter{
-  width:1440px;
-  height:804px;
-  background:#fff;
+header {
+	/* background-color: #F47C2A; */
+	/* width: 1440px; */
+	width: 100%;
+	/* height: 110px; */
+	height: 100%;
 }
 
-.container{
-  width:1440px;
-  height:804px;
-  padding:0 50px;
-  display:flex;
-  gap:40px;
-  align-items:flex-start;
+footer {
+	/* background-color: black; */
+	/* width: 1440px; */
+	width: 100%;
+	/* height: 110px; */
+	height: 100%;
 }
 
-hr{
-  border:0;
-  background-color:#F47C2A;
-  color:#F47C2A;
-  height:1px;
+.archive-list {
+	margin: 0 auto; /* 철민 코드 추가 */
+	width: 1440px;
+	height: 804px;
+	background: #ffff;
 }
 
-.sidebar{
-  width:350px;
-  height:804px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
+.container {
+	width: 1440px;
+	height: 804px;
+	padding: 0 50px;
+	display: flex;
+	gap: 40px;
+	align-items: flex-start;
 }
 
-.side-menu{
-  width:100%;
-  display:flex;
-  flex-direction:column;
-  gap:20px;
+.sidebar {
+	width: 350px;
+	height: 804px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
-.btn-side-link{
-  display:block;
-  height:72px;
-  line-height:72px;
-  text-align:center;
-  text-decoration:none;
-  color:#F47C2A;
-  font-weight:700;
-  font-size:24px;
-  border-radius:23px;
-  background-color:#fff;
-  border:2px solid #fff;
+.side-menu {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
 }
 
-.btn-side-link:hover{
-  background-color:#F47C2A;
-  color:#fff;
+.btn-side-link {
+	display: block;
+	height: 72px;
+	line-height: 72px;
+	text-align: center;
+	text-decoration: none;
+	color: #F47C2A;
+	font-weight: 700;
+	font-size: 24px;
+	border-radius: 23px;
+	background-color: #ffff;
+	border-color: #F47C2A;
+	border: 2px solid #ffff;
 }
 
-.content{
-  width:1000px;
-  height:804px;
-  display:flex;
-  justify-content:center;
-  align-items:center;
+.btn-side-link:hover {
+	background-color: #F47C2A;
+	color: #ffff;
 }
 
-.content-box{
-  width:1000px;
-  height:760px;
-  display:flex;
-  gap:20px;
-  background:#fff;
-  margin:0;
+hr {
+	border: 0px;
+	background-color: #F47C2A;
+	color: #F47C2A;
+	height: 1px;
 }
 
-.panel{
-  width:100%;
-  height:760px;
-  background:#fff;
-  display:flex;
-  flex-direction:column;
+.content {
+	width: 1000px;
+	height: 804px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
-.panel-center{
-  width:100%;
+.content-box {
+	width: 1000px;
+	height: 760px;
+	display: flex;
+	gap: 20px;
+	background: #fff;
+	margin: 0;
 }
 
-.panel-head{
-  height:70px;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  background:#FDE5D4;
-  border:2px solid #F47C2A;
+.no-data-msg{
+	text-align: center;
 }
 
-.panel-title{
-  font-size:24px;
-  font-weight:800;
-  color:#111;
+.panel {
+	height: 760px;
+	width: 1000px;
+	background: #fff;
+	display: flex;
+	flex-direction: column;
 }
 
-.panel-body{
-  flex:1;
-  padding:22px 24px;
-  display:flex;
-  flex-direction:column;
-  border-left:2px solid #F47C2A;
-  border-right:2px solid #F47C2A;
+.panel-head {
+	height: 80px;
+	width: 1000px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background: #FDE5D4;
+	border: 2px solid #F47C2A;
 }
 
-.panel-left .panel-body{
-  justify-content:center;
-  align-items:flex-start;
+.panel-title {
+	font-size: 32px;
+	font-weight: 800;
+	color: #111;
 }
 
-.archive-list{
-  display:flex;
-  flex-wrap:wrap;
-  justify-content:flex-start;
-  gap:20px;
-  width:100%;
-  list-style:none;
-  padding:0;
-  margin:0;
+.panel-body {
+	padding: 20px;
+	display: block;
+	min-height: auto;
+	border-left: 2px solid #F47C2A;
+	border-right: 2px solid #F47C2A;
+	border-bottom: 2px solid #F47C2A;
 }
 
-.archive-card{
-  width:220px;
-  height:250px;
-  flex:0 0 220px;
-  border:2px solid #b7b7b7;
-  border-radius:30px;
-  overflow:hidden;
-  background:#fff;
-  box-shadow:0 2px 4px #161616;
+.panel-footer {
+	margin-top: 10px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 20px;
 }
 
-.archive-card-link{
-  display:block;
-  width:100%;
-  height:100%;
-  text-decoration:none;
+/* 2. 카드 그리드 설정 */
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4열 고정 */
+    gap: 20px;              /* 카드 사이 간격 */
+    margin: 0;              /* 바깥 여백 제거 */
+    padding: 0;             /* 내부 여백 제거 */
+    width: 100%;            /* 박스 가로폭에 꽉 채우기 */
 }
 
-.archive-card-img{
-  width:100%;
-  height:190px;
-  background:#fff;
-  border-bottom:2px solid black;
+/* 3. 개별 카드 아이템 */
+.card-item {
+    width: 100%;            /* 그리드 칸에 꽉 채우기 */
+    box-sizing: border-box; /* 테두리 포함 크기 계산 */
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;           /* 내용물 높이에 맞춤 */
+}
+/* 상단 이미지 영역 (회색 배경) */
+.card-image-wrapper {
+    background-color: #f7f7f7;
+    height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid #eee;
+    font-weight: bold;
+    color: #000;
 }
 
-.archive-card-info{
-  width:100%;
-  height:60px;
-  padding-left:3px;
-  background:#fff;
-  color:black;
+.card-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
-.panel-footer{
-  margin-top:auto;
-  display:flex;
-  justify-content:center;
-  border-left:2px solid #F47C2A;
-  border-right:2px solid #F47C2A;
-  border-bottom:2px solid #F47C2A;
+/* 하단 텍스트 영역 */
+.card-info {
+    padding: 15px 10px;
+    background: #fff;
+    text-align: center;
+    font-size: 13px;
+    font-weight: 600;
 }
 
+/* 링크 기본 스타일 제거 */
+.card-link {
+    text-decoration: none;
+    color: inherit;
+    display: block; /* 영역 전체 클릭 가능하게 */
+    transition: transform 0.2s;
+}
 
+/* 마우스 올렸을 때 살짝 커지는 효과 (선택사항) */
+.card-link:hover {
+    transform: translateY(-5px);
+}
 
+.card-item {
+    cursor: pointer;
+    /* 기존 스타일 유지 */
+}
 
+/* 페이지네이션 버튼 정렬 */
 .page-list {
-  list-style: none;
-  margin: 20px 0px 20px;
-  display: flex;
-  justify-content: center;
-  gap: 4px;
+    display: flex; /* 가로로 나열 */
+    justify-content: center; /* 중앙 정렬 */
+    align-items: center;
+    list-style: none;
+    gap: 8px;
+    padding: 20px 0;
 }
+
 .page-list button {
-  width: 30px;
-  height: 30px;
-  margin: 2px 0;
-
-  box-shadow: 2px 2px 5px #b6b6b6;
-}
-.page-list button {
-  cursor: pointer;
-}
-
-.prev-btn,
-.next-btn {
-  background-color: white;
-  border: 1px solid #f47c2a;
+    width: 35px;
+    height: 35px;
+    border: 1px solid #f47c2a;
+    background: #fff;
+    color: #f47c2a;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
 }
 
-.prev-btn span,
-.next-btn span {
-  color: #f47c2a;
-}
-.page-item {
-  background-color: white;
-  border-style: none;
-  border-radius: 5px;
-}
-.current-page {
-  background-color: #f47c2a !important;
-  color: white;
+/* 현재 페이지 버튼 강조 */
+.page-list .current-page {
+    background-color: #f47c2a;
+    color: #fff;
 }
 
-.prev-btn {
-  border-top-left-radius: 5px;
-  border-bottom-left-radius: 5px;
-}
-.next-btn {
-  border-top-right-radius: 5px;
-  border-bottom-right-radius: 5px;
-}
+.card-link { text-decoration: none; color: inherit; }
+.dog-name { font-size: 18px; font-weight: bold; margin-bottom: 5px; }

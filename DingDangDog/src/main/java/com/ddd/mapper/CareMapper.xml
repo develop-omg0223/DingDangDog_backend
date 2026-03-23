@@ -5,13 +5,16 @@
 	<select id="getTotal" parameterType="map" resultType="int">
 		SELECT COUNT(*)
 		FROM ddd_care c
-		LEFT JOIN ddd_user u ON c.user_number = u.user_number
-		LEFT JOIN ddd_user_shelter s ON c.user_number = s.user_number
+		LEFT JOIN ddd_user u ON c.user_number =
+		u.user_number
+		LEFT JOIN ddd_user_shelter s ON c.user_number =
+		s.user_number
 		WHERE c.care_status = 'open'
 		<if test="keyword != null and keyword != ''">
 			<choose>
 				<when test="type == 'shelter'">
-					AND (s.shelter_name LIKE '%' || #{keyword} || '%' OR u.user_nickname
+					AND (s.shelter_name LIKE '%' || #{keyword} || '%' OR
+					u.user_nickname
 					LIKE '%' || #{keyword} || '%')
 				</when>
 				<when test="type == 'title'">
@@ -21,7 +24,7 @@
 		</if>
 	</select>
 
-	
+
 
 	<!-- 멍! 케어 전체목록 및 검색 -->
 	<select id="selectCareList" parameterType="map"
@@ -47,8 +50,7 @@
 		c.user_number = s.user_number
 		WHERE c.care_status = 'open'
 
-		/* 검색 로직:
-		type이 'shelter'면 보호소명/닉네임 모두 검색 */
+		
 		<if test="keyword != null and keyword != ''">
 			<choose>
 				<when test="type == 'shelter'">
@@ -86,7 +88,7 @@
 		ON c.care_number = a.care_number
 		WHERE
 		c.care_number = #{careNumber}
-		AND c.care_status IN ('open','close')
+		AND c.care_status IN ('open','closed')
 		GROUP BY c.care_number,
 		c.care_title, c.care_post, c.care_date,
 		c.care_recruit,
@@ -166,7 +168,7 @@
 	<update id="closeCare" parameterType="int">
 		UPDATE ddd_care c
 		SET
-		c.care_status = 'close'
+		c.care_status = 'closed'
 		WHERE c.care_number = #{careNumber}
 		AND (SELECT
 		COUNT(*)
@@ -194,7 +196,7 @@ AND (SELECT COUNT(*) FROM ddd_care_apply a WHERE a.care_number = c.care_number) 
 	</update>
 
 	<!-- 신청회원 목록 조회 -->
-	<select id="getApplyUsers" parameterType="int"
+	<select id="selectApplyUsers" parameterType="int"
 		resultType="CareApplyDTO">
 		SELECT a.apply_number, u.user_number, u.user_name,
 		u.user_nickname,
@@ -226,5 +228,13 @@ AND (SELECT COUNT(*) FROM ddd_care_apply a WHERE a.care_number = c.care_number) 
 		WHERE
 		care_number = #{careNumber} AND user_number = #{userNumber}
 	</select>
+
+	<!-- 날짜 마감 -->
+	<update id="updateExpiredStatus">
+		UPDATE ddd_care
+		SET care_status = 'closed'
+		WHERE care_date &lt; SYSDATE
+		AND care_status = 'open'
+	</update>
 
 </mapper>

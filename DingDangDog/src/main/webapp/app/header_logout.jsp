@@ -4,7 +4,7 @@
 <header class="header">
   <div class="h-container">
     <div class="h-left-menu">
-      <a href="${pageContext.request.contextPath}/main.ma" class="h-logo-link">
+      <a href="${pageContext.request.contextPath}/mainpage/Main.main" class="h-logo-link">
         <img src="${pageContext.request.contextPath}/assets/img/header, footer_logo.svg" alt="DingDongDOG! logo" class="h-logo-img">
       </a>
 

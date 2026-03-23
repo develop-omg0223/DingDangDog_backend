@@ -146,4 +146,8 @@ public class CareDAO {
 	    return ownerUserNumber != null && ownerUserNumber.equals(userNumber);
 	}
 
+	// 날짜 마감
+	public void updateExpiredStatus() {
+	    sqlSession.update("care.updateExpiredStatus");
+	}
 }

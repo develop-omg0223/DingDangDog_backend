@@ -1,6 +1,8 @@
 package com.ddd.app.report.dto;
 
-import java.sql.Date;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class ReportDTO {
 //	CREATE TABLE ddd_report(
@@ -16,7 +18,16 @@ public class ReportDTO {
 	private int reportedUserNumber;
 	private int applyNumber;
 	private String reportReason;
-	private Date reportDate;
+	private LocalDateTime reportDate;
+	private int careNumber;
+
+	public int getCareNumber() {
+		return careNumber;
+	}
+
+	public void setCareNumber(int careNumber) {
+		this.careNumber = careNumber;
+	}
 
 	public int getReportNumber() {
 		return reportNumber;
@@ -58,11 +69,13 @@ public class ReportDTO {
 		this.reportReason = reportReason;
 	}
 
-	public Date getReportDate() {
-		return reportDate;
+	public String getReportDate() {
+		if (reportDate == null)
+			return "";
+		return reportDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 	}
 
-	public void setReportDate(Date reportDate) {
+	public void setReportDate(LocalDateTime reportDate) {
 		this.reportDate = reportDate;
 	}
 

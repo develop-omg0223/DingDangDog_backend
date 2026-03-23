@@ -44,20 +44,8 @@
 	</div>
 	<main class="profile-edit">
 		<div class="container">
-			<aside class="sidebar">
-				<nav class="side-menu">
-					<a class="btn-side-link" href="./profile_edit_shelter.html">보호소
-						정보 변경</a>
-					<hr>
-					<a class="btn-side-link" href="./care_list.html">멍! 케어 목록 및 현황</a>
-					<hr>
-					<a class="btn-side-link" href="./archive_list.html">멍! 카이브 등록
-						정보</a>
-					<hr>
-					<a class="btn-side-link" href="./support_list_shelter.html">1 :
-						1 문의</a>
-				</nav>
-			</aside>
+			<!-- 사이드바 -->
+			<jsp:include page="/app/mypage/sidebar.jsp" />
 
 			<section class="content">
 				<div class="content-box">

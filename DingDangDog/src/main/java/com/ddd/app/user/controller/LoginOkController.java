@@ -43,16 +43,21 @@ public class LoginOkController implements Execute {
 		System.out.println(loginUser);
 
 		if (loginUser != null) {
-			path = request.getContextPath() + "/mainpage/Main.main";
-
-			session.setAttribute("userNumber", loginUser.getUserNumber());
-			session.setAttribute("userNickname", loginUser.getUserNickname());
-			session.setAttribute("userType", loginUser.getUserType());
-			System.out.println("로그인유저번호 : " + loginUser.getUserNumber());
-		} else {
-			path = request.getContextPath() + "/user/login.us?login=fail";
-
-		}
+	        // [체크] 블랙리스트 회원인 경우
+	        if ("black".equals(loginUser.getUserStatus())) {
+	            // 주소 뒤에 login=black을 붙여서 다시 로그인 페이지로 보냄
+	            path = request.getContextPath() + "/user/login.us?login=black";
+	        } else {
+	            // 정상 회원
+	            session.setAttribute("userNumber", loginUser.getUserNumber());
+	            session.setAttribute("userNickname", loginUser.getUserNickname());
+	            session.setAttribute("userType", loginUser.getUserType());
+	            path = request.getContextPath() + "/mainpage/Main.main";
+	        }
+	    } else {
+	        // 아이디/비번 틀림
+	        path = request.getContextPath() + "/user/login.us?login=fail";
+	    }
 		result.setRedirect(true); // 세션에 저장된 값은 유지
 		result.setPath(path);
 

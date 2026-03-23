@@ -23,6 +23,8 @@ public class ArchiveListDTO {
 	private int dogNumber;
 	private String dogName;
 	private String dogBreed;
+	private int dogAge;
+	private String dogGender;
 	private String shelterName;
 	private LocalDateTime dogSafeDate;
 	private String archiveImgPath;
@@ -30,6 +32,21 @@ public class ArchiveListDTO {
 
 
 	// ===== Getter,Setter =====
+	public String getDogGender() {
+		return dogGender;
+	}
+	
+	public void setDogGender(String dogGender) {
+		this.dogGender = dogGender;
+	}
+	
+	public int getDogAge() {
+		return dogAge;
+	}
+	
+	public void setDogAge(int dogAge) {
+		this.dogAge = dogAge;
+	}
 	public int getDogNumber() {
 		return dogNumber;
 	}

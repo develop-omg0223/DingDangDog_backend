@@ -17,4 +17,7 @@ document.addEventListener("DOMContentLoaded", function() {
 		commonBtn.classList.remove("selected-login");
 	});
 	commonBtn.click();
+
 });
+
+

@@ -83,5 +83,16 @@
 	</main>
 	<!-- footer -->
 	<%@ include file="/app/footer.jsp"%>
+	<script>
+        // 페이지가 로드될 때 URL의 파라미터를 확인합니다.
+        window.onload = function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const loginStatus = urlParams.get('login');
+
+            if (loginStatus === 'black') {
+                alert("⚠️ 해당 계정은 신고 누적으로 인해 활동이 정지되었습니다.\n관리자에게 문의하세요.");
+            }
+        };
+    </script>
 </body>
 </html>

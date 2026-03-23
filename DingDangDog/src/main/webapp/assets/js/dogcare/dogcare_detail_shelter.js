@@ -18,3 +18,12 @@ function applyClick(careNumber) {
 			+ careNumber + "&userNumber=" + userNumber;
 	}
 }
+function confirmDelete(careNumber) {
+    if (confirm("정말 삭제하시겠습니까?")) {
+        alert("삭제되었습니다.");
+        // 확인 클릭 시 해당 경로로 이동
+        location.href = window.location.origin + "/care/delete.ca?careNumber=" + careNumber;
+    } else {
+        alert("취소되었습니다.");
+    }
+}
