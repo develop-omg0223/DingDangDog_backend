@@ -35,6 +35,12 @@ public class ArchiveReadController implements Execute {
 			request.setAttribute("archive", archive);
 		}
 
+		
+		//윈도우 확인후 안되면 파일 불러오는 코드 작성 
+		
+		
+		
+		
 		// ===== dogarchive_detail.jsp로 이동 =====
 		result.setPath("/app/dogarchive/dogarchive_detail.jsp");
 		result.setRedirect(false);

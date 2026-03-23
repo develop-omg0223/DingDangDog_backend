@@ -1,246 +1,256 @@
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
 }
 
 @font-face {
-  font-family: "HannaPro";
-  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_seven@1.0/BMHANNAPro.woff") format("woff");
-  font-weight: normal;
-  font-display: swap;
+	font-family: "HannaPro";
+	src:
+		url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_seven@1.0/BMHANNAPro.woff")
+		format("woff");
+	font-weight: normal;
+	font-display: swap;
 }
 
 body {
-  width: 1440px;
-  margin: 0 auto;
-  background: #fff;
-  font-family: "HannaPro", sans-serif;
+	width: 100%;
+	margin: 0;
+	background: #fff;
+	font-family: "HannaPro", sans-serif;
 }
 
 header {
-  width: 1440px;
-  height: 110px;
-  background-color: #F47C2A;
+	/*   width: 1440px; */
+	height: 110px;
+	background-color: #F47C2A;
 }
 
 footer {
-  width: 1440px;
-  height: 110px;
-  background-color: #000;
+	/*  width: 1440px; */
+	height: 110px;
+	background-color: #000;
 }
 
 .archive-detail {
-  width: 1440px;
-  min-height: 804px;
-  background: #fff;
+	width: 1440px;
+	min-height: 804px;
+	width: 100%;
+	min-height: 804px;
+	background: #fff;
+	display: flex;
+	justify-content: center;
+	background: #fff;
+	display: flex;
+	justify-content: center;
 }
 
 .container {
-  width: 1440px;
-  min-height: 804px;
-  padding: 0 50px 40px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+	width: 1440px;
+	min-height: 804px;
+	padding: 0 50px 40px;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	margin: 0 auto;
 }
 
 .container-header {
-  width: 100%;
-  height: 170px;
-  display: flex;
-  align-items: center;
+	width: 100%;
+	height: 170px;
+	display: flex;
+	align-items: center;
 }
 
 #main-title {
-  font-size: 32px;
-  color: #f47c2a;
-  margin: 37px 27px 37px 0;
-  display: inline-block;
-  padding: 20px;
-  padding-bottom: 15px;
-  border-bottom: 4px solid #f47c2a;
+	font-size: 32px;
+	color: #f47c2a;
+	margin: 37px 27px 37px 0;
+	display: inline-block;
+	padding: 20px;
+	padding-bottom: 15px;
+	border-bottom: 4px solid #f47c2a;
 }
 
 .container-body {
-  width: 100%;
+	width: 100%;
 }
 
 .archive-detail-top {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 40px;
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+	gap: 40px;
 }
 
 /* 왼쪽 대표 이미지 */
 .archive-image-section {
-  width: 320px;
-  flex-shrink: 0;
+	width: 320px;
+	flex-shrink: 0;
 }
 
 .archive-image-box {
-  width: 320px;
-  height: 500px;
-  border-radius: 20px;
-  overflow: hidden;
-  background: #d9d9d9;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+	width: 320px;
+	height: 500px;
+	border-radius: 20px;
+	overflow: hidden;
+	background: #d9d9d9;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .archive-image-box img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	display: block;
 }
 
 /* 오른쪽 정보 박스 */
 .archive-info-section {
-  flex: 1;
-  min-width: 0;
-  height: 500px;
-  border: 3px solid #111;
-  padding: 28px 28px 24px;
-  overflow: hidden;
+	flex: 1;
+	min-width: 0;
+	height: 500px;
+	border: 3px solid #111;
+	padding: 28px 28px 24px;
+	overflow: hidden;
 }
 
 /* 이름 : 초코 (밀착 수정) */
 .dog-name-row {
-  width: 100%;
-  display: flex;
-  justify-content: flex-start; /* 왼쪽 정렬로 변경 */
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 24px;
+	width: 100%;
+	display: flex;
+	justify-content: flex-start; /* 왼쪽 정렬로 변경 */
+	align-items: center;
+	gap: 12px;
+	margin-bottom: 24px;
 }
 
 .dog-name-label {
-  font-size: 30px;
-  flex-shrink: 0;
+	font-size: 30px;
+	flex-shrink: 0;
 }
 
 .dog-name-value {
-  font-size: 30px;
-  text-align: left;
+	font-size: 30px;
+	text-align: left;
 }
 
 /* 품종, 성별 정보 (밀착 수정) */
 .dog-info-grid {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin-bottom: 20px;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	margin-bottom: 20px;
 }
 
 .info-item {
-  width: 100%;
-  display: flex; /* Grid에서 Flex로 변경하여 간격 밀착 */
-  align-items: center;
-  gap: 12px;
+	width: 100%;
+	display: flex; /* Grid에서 Flex로 변경하여 간격 밀착 */
+	align-items: center;
+	gap: 12px;
 }
 
 .info-label {
-  font-size: 20px;
-  white-space: nowrap;
+	font-size: 20px;
+	white-space: nowrap;
 }
 
 .info-value {
-  min-height: 28px;
-  font-size: 20px;
-  word-break: break-word;
+	min-height: 28px;
+	font-size: 20px;
+	word-break: break-word;
 }
 
 /* 성향 및 점수 별점 (밀착 수정) */
 .dog-trait-list {
-  width: 100%;
-  margin-top: 8px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+	width: 100%;
+	margin-top: 8px;
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
 }
 
 .trait-row {
-  width: 100%;
-  display: flex; /* Grid에서 Flex로 변경 */
-  align-items: center;
-  gap: 10px;
+	width: 100%;
+	display: flex; /* Grid에서 Flex로 변경 */
+	align-items: center;
+	gap: 10px;
 }
 
 .trait-label {
-  font-size: 18px;
-  min-width: 75px; /* 라벨 정렬을 위해 최소폭 유지 */
+	font-size: 18px;
+	min-width: 75px; /* 라벨 정렬을 위해 최소폭 유지 */
 }
 
 .trait-text {
-  flex: 1; /* 중간 텍스트가 남은 공간 차지 */
-  font-size: 18px;
-  word-break: break-word;
+	flex: 1; /* 중간 텍스트가 남은 공간 차지 */
+	font-size: 18px;
+	word-break: break-word;
 }
 
 .trait-score-label {
-  font-size: 18px;
-  margin-left: 10px;
+	font-size: 18px;
+	margin-left: 10px;
 }
 
 /* 별점 표시 (기존 사진처럼 촘촘하게) */
 .trait-score-value {
-  font-size: 24px;
-  color: #f2b321;
-  letter-spacing: -1px; /* 별 사이 간격 좁힘 */
-  line-height: 1;
-  white-space: nowrap;
-  font-family: "Arial", sans-serif;
+	font-size: 24px;
+	color: #f2b321;
+	letter-spacing: -1px; /* 별 사이 간격 좁힘 */
+	line-height: 1;
+	white-space: nowrap;
+	font-family: "Arial", sans-serif;
 }
 
 /* 버튼 영역 */
 .archive-action-section {
-  width: 100%;
-  margin-top: 24px;
-  display: flex;
-  justify-content: center;
-  gap: 15px;
+	width: 100%;
+	margin-top: 24px;
+	display: flex;
+	justify-content: center;
+	gap: 15px;
 }
 
 .btn {
-  min-width: 104px;
-  height: 46px;
-  padding: 0 18px;
-  background-color: #f47c2a;
-  border-radius: 10px;
-  color: #fff;
-  border: none;
-  box-shadow: 2px 2px 5px #b6b6b6;
-  text-align: center;
-  line-height: 46px;
-  text-decoration: none;
-  font-size: 18px;
-  font-family: "HannaPro", sans-serif;
-  cursor: pointer;
+	min-width: 104px;
+	height: 46px;
+	padding: 0 18px;
+	background-color: #f47c2a;
+	border-radius: 10px;
+	color: #fff;
+	border: none;
+	box-shadow: 2px 2px 5px #b6b6b6;
+	text-align: center;
+	line-height: 46px;
+	text-decoration: none;
+	font-size: 18px;
+	font-family: "HannaPro", sans-serif;
+	cursor: pointer;
 }
 
 .btn:hover {
-  opacity: 0.9;
+	opacity: 0.9;
 }
 
 /* 하단 본문 */
 .archive-content-section {
-  width: 100%;
-  margin-top: 34px;
+	width: 100%;
+	margin-top: 34px;
 }
 
 .archive-content-viewer {
-  width: 100%;
-  min-height: 260px;
-  padding: 20px 28px;
-  font-size: 22px;
-  color: #111;
-  line-height: 1.5;
-  word-break: break-word;
-  white-space: pre-wrap;
-  border: 3px solid black;
+	width: 100%;
+	min-height: 260px;
+	padding: 20px 28px;
+	font-size: 22px;
+	color: #111;
+	line-height: 1.5;
+	word-break: break-word;
+	white-space: pre-wrap;
+	border: 3px solid black;
 }
