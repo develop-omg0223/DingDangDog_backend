@@ -9,6 +9,16 @@
 	text-align: center;
 	align-items: center;
 	border-bottom: 1px solid #b6b6b6;
+	color: black;
+}
+
+.no-data {
+	width: 100%;
+	text-align: center;
+}
+
+.no-data div {
+	margin: 0 auto;
 }
 
 .black-user-number {

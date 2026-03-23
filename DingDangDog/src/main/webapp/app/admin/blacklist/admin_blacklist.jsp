@@ -36,59 +36,95 @@
 					<div class="black-user-phone">휴대폰번호</div>
 					<div class="black-user-email">이메일주소</div>
 				</div>
+				<c:choose>
+					<c:when test="${not empty blackList}">
+						<c:forEach var="black" items="${blackList}">
+							<a class="blacklist-list-row"
+								href="${pageContext.request.contextPath}/admin/blackListDetailOk.ad?userNumber=${black.userNumber}">
+								<div class="black-user-number">${ black.userNumber}</div>
+								<div class="black-user-id">${black.userId }</div>
+								<div class="black-user-name">${ black.userName}</div>
+								<div class="black-user-nickname">${black.userNickname }</div>
+								<div class="black-user-phone">${black.userPhone }</div>
+								<div class="black-user-email">${black.userEmail }</div>
+							</a>
 
-				<div class="blacklist-list-row">
-					<div class="black-user-number">23</div>
-					<div class="black-user-id">
-						<a href="admin_blacklist_detail.html">samks202</a>
-					</div>
-					<div class="black-user-name">김철수</div>
-					<div class="black-user-nickname">steel202</div>
-					<div class="black-user-phone">노쇼</div>
-					<div class="black-user-email">노쇼</div>
-				</div>
+						</c:forEach>
+					</c:when>
+					<c:otherwise>
+						<div class="blacklist-list-row no-data ">
+							<div>현재 블랙리스트로 등록된 회원이 없습니다</div>
+						</div>
+					</c:otherwise>
+				</c:choose>
 			</div>
 			<!-- 페이지 하단 (검색, 페이지네이션) -->
 			<div class="admin-main-section-footer">
-				<div class="search-box">
-					<select class="search-select admin-box-shadow">
-						<option>아이디</option>
-						<option>닉네임</option>
-					</select> <input type="text" class="search-input admin-box-shadow" />
-					<button class="btn-search admin-box-shadow">검색</button>
-				</div>
+				<form
+					action="${pageContext.request.contextPath}/admin/blackListOk.ad"
+					method="get">
+
+					<div class="search-box">
+						<select name="searchType" class="search-select admin-box-shadow">
+							<option value="id" ${searchType == 'id' ? 'selected' : ''}>아이디</option>
+							<option value="nickname"
+								${searchType == 'nickname' ? 'selected' : ''}>닉네임</option>
+						</select> <input type="text" name="keyword"
+							class="search-input admin-box-shadow" value="${keyword}" />
+
+
+						<button type="submit" class="btn-search admin-box-shadow">검색</button>
+					</div>
+				</form>
 
 				<!-- 페이지네이션 -->
 
 				<div class="pagination">
 					<ul class="page-list">
-						<li>
-							<button class="prev-btn">
-								<span>&lt;</span>
-							</button>
-						</li>
-						<li>
-							<button class="page-item current-page">1</button>
-						</li>
-						<li>
-							<button class="page-item">2</button>
-						</li>
-						<li>
-							<button class="page-item">3</button>
-						</li>
-						<li>
-							<button class="page-item">4</button>
-						</li>
-						<li>
-							<button class="page-item">5</button>
-						</li>
-						<li>
-							<button class="next-btn">
-								<span>&gt;</span>
-							</button>
-						</li>
+
+						<c:if test="${prev}">
+							<li>
+								<button class="prev-btn"
+									onclick="location.href='${pageContext.request.contextPath}/admin/blackListOk.ad?page=${startPage - 1}'">
+									<span>&lt;</span>
+								</button>
+							</li>
+						</c:if>
+
+						<c:set var="realStartPage"
+							value="${startPage < 0 ? 0 : startPage}" />
+						<c:forEach var="i" begin="${realStartPage}" end="${endPage}">
+							<c:choose>
+								<c:when test="${!(i == page)}">
+									<li>
+										<button class="page-item"
+											onclick="location.href='${pageContext.request.contextPath}/admin/blackListOk.ad?page=${i}&searchType=${searchType}&keyword=${keyword}'">
+											<c:out value="${i}" />
+										</button>
+									</li>
+								</c:when>
+								<c:otherwise>
+									<li>
+										<button class="page-item current-page">
+											<c:out value="${i}" />
+										</button>
+									</li>
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>
+
+						<c:if test="${next}">
+							<li>
+								<button class="next-btn"
+									onclick="location.href='${pageContext.request.contextPath}/admin/blackListOk.ad?page=${endPage + 1}'">
+									<span>&gt;</span>
+								</button>
+							</li>
+						</c:if>
 					</ul>
 				</div>
+
+
 			</div>
 		</section>
 	</main>

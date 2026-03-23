@@ -116,37 +116,6 @@
 				</form>
 
 				<!-- 페이지네이션 -->
-				<!-- 페이지네이션 정리 -->
-				<!-- 
-				<div class="pagination">
-					<ul class="page-list">
-						<li>
-							<button class="prev-btn">
-								<span>&lt;</span>
-							</button>
-						</li>
-						<li>
-							<button class="page-item current-page">1</button>
-						</li>
-						<li>
-							<button class="page-item">2</button>
-						</li>
-						<li>
-							<button class="page-item">3</button>
-						</li>
-						<li>
-							<button class="page-item">4</button>
-						</li>
-						<li>
-							<button class="page-item">5</button>
-						</li>
-						<li>
-							<button class="next-btn">
-								<span>&gt;</span>
-							</button>
-						</li>
-					</ul>
-				</div> -->
 
 				<div class="pagination">
 					<ul class="page-list">
@@ -154,7 +123,7 @@
 						<c:if test="${prev}">
 							<li>
 								<button class="prev-btn"
-									onclick="location.href='${pageContext.request.contextPath}/admin/userListOk.ad?page=${startPage - 1}&userType=${userType}'">
+									onclick="location.href='${pageContext.request.contextPath}/admin/userListOk.ad?page=${startPage - 1}&userType=${userType}&searchType=${searchType}&keyword=${keyword}'">
 									<span>&lt;</span>
 								</button>
 							</li>
@@ -167,7 +136,7 @@
 								<c:when test="${!(i == page)}">
 									<li>
 										<button class="page-item"
-											onclick="location.href='${pageContext.request.contextPath}/admin/userListOk.ad?page=${i}&userType=${userType}'">
+											onclick="location.href='${pageContext.request.contextPath}/admin/userListOk.ad?page=${i}&userType=${userType}&searchType=${searchType}&keyword=${keyword}'">
 											<c:out value="${i}" />
 										</button>
 									</li>
@@ -185,7 +154,7 @@
 						<c:if test="${next}">
 							<li>
 								<button class="next-btn"
-									onclick="location.href='${pageContext.request.contextPath}/admin/userListOk.ad?page=${endPage + 1}&userType=${userType}'">
+									onclick="location.href='${pageContext.request.contextPath}/admin/userListOk.ad?page=${endPage + 1}&userType=${userType}&searchType=${searchType}&keyword=${keyword}'">
 									<span>&gt;</span>
 								</button>
 							</li>

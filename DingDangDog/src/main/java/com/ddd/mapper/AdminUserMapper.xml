@@ -28,21 +28,26 @@ WHERE rownum <= 5
 	<!-- 전체 일반회원 -->
 	<select id="getTotalCommon" resultType="int">
 		SELECT COUNT(user_number)
-		FROM ddd_user WHERE user_type = 'C'
+		FROM ddd_user WHERE user_type = 'C' AND USER_STATUS IN ('kind',
+		'withdraw')
 	</select>
 	<!-- 아이디 검색 총회원 -->
 	<select id="getTotalCommonByUserId" parameterType="string"
 		resultType="int">
 		SELECT COUNT(user_number) FROM ddd_user
-		WHERE user_type =
-		'C' AND user_id LIKE '%' || #{keyword} || '%'
+		WHERE user_type ='C'
+		AND USER_STATUS IN ('kind', 'withdraw')
+		AND user_id LIKE '%' || #{keyword} || '%'
 	</select>
 	<!-- 닉네임 검색 총회원 -->
 	<select id="getTotalCommonByUserNickname" parameterType="string"
 		resultType="int">
 		SELECT COUNT(user_number) FROM ddd_user
 		WHERE user_type =
-		'C' AND user_nickname LIKE '%' || #{keyword} || '%'
+		'C'
+		AND USER_STATUS IN ('kind', 'withdraw')
+		AND user_nickname LIKE '%' ||
+		#{keyword} || '%'
 	</select>
 
 	<!-- 일반회원 전체조회 -->
@@ -54,7 +59,8 @@ WHERE rownum <= 5
             SELECT 
                 user_number, user_id, user_name, user_nickname, user_phone, user_email, user_status
             FROM ddd_user
-            WHERE user_type = 'C'
+            WHERE user_type = 'C' 
+            AND USER_STATUS IN ('kind', 'withdraw')
             ORDER BY user_number DESC
         ) subquery
     ) 
@@ -70,6 +76,7 @@ WHERE rownum <= 5
             SELECT user_number, user_id, user_name, user_nickname, user_phone, user_email, user_status
             FROM ddd_user
             WHERE user_type = 'C' AND user_id LIKE '%' || #{keyword} || '%'
+            AND USER_STATUS IN ('kind', 'withdraw')
             ORDER BY user_number DESC
         ) subquery
     ) WHERE rnum BETWEEN #{startRow} AND #{endRow}
@@ -84,6 +91,7 @@ WHERE rownum <= 5
             SELECT user_number, user_id, user_name, user_nickname, user_phone, user_email, user_status
             FROM ddd_user
             WHERE user_type = 'C' AND user_nickname LIKE '%' || #{keyword} || '%'
+            AND USER_STATUS IN ('kind', 'withdraw')
             ORDER BY user_number DESC
         ) subquery
     ) WHERE rnum BETWEEN #{startRow} AND #{endRow}

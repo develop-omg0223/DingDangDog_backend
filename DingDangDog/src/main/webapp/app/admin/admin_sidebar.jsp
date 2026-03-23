@@ -20,7 +20,7 @@
 			</li>
 			<li class="admin-nav-list">
 				<!-- 블랙리스트 페이지로 이동 --> <a
-				href="${pageContext.request.contextPath}/admin/"> 블랙리스트</a>
+				href="${pageContext.request.contextPath}/admin/blackListOk.ad"> 블랙리스트</a>
 			</li>
 			<li class="admin-nav-list">
 				<!-- 멍! 카이브 목록 페이지로 이동 --> <a

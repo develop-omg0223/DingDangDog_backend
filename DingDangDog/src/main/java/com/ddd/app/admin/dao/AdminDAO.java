@@ -169,42 +169,47 @@ public class AdminDAO {
 	}
 
 	// 블랙리스트 검색후 인원수 조회
-//	public int getTotalBlackSearch(String searchType, String keyword) {
-//		System.out.println("블랙리스트 검색후 인원수 조회");
-//		if ("id".equals(searchType)) {
-//			return sqlSession.selectOne("adminUser.getTotalCommonByUserId", keyword);
-//		} else if ("nickname".equals(searchType)) {
-//			return sqlSession.selectOne("adminUser.getTotalCommonByUserNickname", keyword);
-//		}
-//		return getTotalCommon();
-//	}
+	public int getTotalBlackSearch(String searchType, String keyword) {
+		System.out.println("블랙리스트 검색후 인원수 조회");
+		if ("id".equals(searchType)) {
+			return sqlSession.selectOne("adminBlack.getTotalBlackByUserId", keyword);
+		} else if ("nickname".equals(searchType)) {
+			return sqlSession.selectOne("adminBlack.getTotalBlackByUserNickname", keyword);
+		}
+		return getTotalBlack();
+	}
 
 	// 블랙리스트 전체 목록 조회
-//	public List<AdminUserDTO> selectCommonList(Map<String, Integer> pageMap) {
-//		System.out.println("일반회원 전체 목록 조회");
-//		return sqlSession.selectList("adminUser.selectCommonList", pageMap);
-//	}
+	public List<AdminBlackDTO> selectBlackList(Map<String, Object> pageMap) {
+		System.out.println("블랙리스트 전체 목록 조회");
+		return sqlSession.selectList("adminBlack.selectBlackList", pageMap);
+	}
 
 	// 블랙리스트 검색 목록 조회
-//	public List<AdminUserDTO> selectCommonSearchList(Map<String, Object> searchMap) {
-//		System.out.println("일반회원 검색 목록 조회");
-//		String searchType = (String) searchMap.get("searchType");
-//		if ("id".equals(searchType)) {
-//			return sqlSession.selectList("adminUser.selectCommonListByUserId", searchMap);
-//		} else if ("nickname".equals(searchType)) {
-//			return sqlSession.selectList("adminUser.selectCommonListByUserNickname", searchMap);
-//		}
-//		return sqlSession.selectList("adminUser.selectCommonList", searchMap);
-//	}
+	public List<AdminBlackDTO> selectBlackSearchList(Map<String, Object> searchMap) {
+		System.out.println("블랙리스트 검색 목록 조회");
+		String searchType = (String) searchMap.get("searchType");
+		if ("id".equals(searchType)) {
+			return sqlSession.selectList("adminBlack.selectBlackListByUserId", searchMap);
+		} else if ("nickname".equals(searchType)) {
+			return sqlSession.selectList("adminBlack.selectBlackListByUserNickname", searchMap);
+		}
+		return sqlSession.selectList("adminBlack.selectBlackList", searchMap);
+	}
 
 	// 블랙리스트 상세 조회
-//	public AdminUserDTO selectCommonDetail(int userNumber) {
-//		System.out.println("일반회원 상세 조회 실행 : " + userNumber);
-//		return sqlSession.selectOne("adminUser.selectCommonDetail", userNumber);
-//	}
+	public AdminBlackDTO selectBlackDetail(int userNumber) {
+		System.out.println("블랙리스트 상세 조회 실행 : " + userNumber);
+		return sqlSession.selectOne("adminBlack.selectBlackDetail", userNumber);
+	}
 
 	// 블랙리스트 신고횟수 초기화
-
 	// 블랙상태 해제
+	public void removeBlackList(int userNumber) {
+		sqlSession.update("adminBlack.resetReportCount", userNumber);
+		System.out.println("신고횟수 초기화");
+		sqlSession.update("adminBlack.resetUserStatus", userNumber);
+		System.out.println("블랙리스트 해제");
+	}
 
 }

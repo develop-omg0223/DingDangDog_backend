@@ -61,7 +61,7 @@
 						<article class="dashboard-box admin-box-shadow">
 							<div class="box-header">
 								<span class="box-title">블랙리스트</span> <a
-									href="${pageContext.request.contextPath}/admin/"
+									href="${pageContext.request.contextPath}/admin/blackListOk.ad"
 									class="link-btn">+</a>
 							</div>
 							<div class="box-content">
@@ -70,44 +70,26 @@
 									<div class="black-user-id">아이디</div>
 									<div class="black-user-name">이름</div>
 									<div class="black-user-nickname">닉네임</div>
-									<div class="black-reason">사유</div>
+									<div class="black-user-email">이메일</div>
 								</div>
-
-								<div class="dashboard-list-row blacklist">
-									<div class="black-user-number">23</div>
-									<div class="black-user-id">samks202</div>
-									<div class="black-user-name">김철수</div>
-									<div class="black-user-nickname">steel202</div>
-									<div class="black-reason">노쇼</div>
-								</div>
-								<div class="dashboard-list-row blacklist">
-									<div class="black-user-number">23</div>
-									<div class="black-user-id">samks202</div>
-									<div class="black-user-name">김철수</div>
-									<div class="black-user-nickname">steel202</div>
-									<div class="black-reason">노쇼</div>
-								</div>
-								<div class="dashboard-list-row blacklist">
-									<div class="black-user-number">23</div>
-									<div class="black-user-id">samks202</div>
-									<div class="black-user-name">김철수</div>
-									<div class="black-user-nickname">steel202</div>
-									<div class="black-reason">노쇼</div>
-								</div>
-								<div class="dashboard-list-row blacklist">
-									<div class="black-user-number">23</div>
-									<div class="black-user-id">samks202</div>
-									<div class="black-user-name">김철수</div>
-									<div class="black-user-nickname">steel202</div>
-									<div class="black-reason">노쇼</div>
-								</div>
-								<div class="dashboard-list-row blacklist">
-									<div class="black-user-number">23</div>
-									<div class="black-user-id">samks202</div>
-									<div class="black-user-name">김철수</div>
-									<div class="black-user-nickname">steel202</div>
-									<div class="black-reason">노쇼</div>
-								</div>
+								<c:choose>
+									<c:when test="${not empty blackList}">
+										<c:forEach var="black" items="${blackList}">
+											<div class="dashboard-list-row blacklist">
+												<div class="black-user-number">${black.userNumber}</div>
+												<div class="black-user-id">${black.userId}</div>
+												<div class="black-user-name">${black.userName}</div>
+												<div class="black-user-nickname">${black.userNickname}</div>
+												<div class="black-user-email">${black.userEmail }</div>
+											</div>
+										</c:forEach>
+									</c:when>
+									<c:otherwise>
+										<div class="dashboard-list-row no-data">
+											<div>현재 블랙리스트로 등록된 회원이 없습니다</div>
+										</div>
+									</c:otherwise>
+								</c:choose>
 							</div>
 						</article>
 					</li>

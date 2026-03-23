@@ -123,7 +123,7 @@
 							<label for="user-common-birth">생년월일</label>
 						</div>
 						<input type="text" id="user-common-birth" name="userBirth"
-							placeholder="생년월일 8자를 입력해주세요 예) 20000101" maxlength="10" required>
+							placeholder="생년월일 8자를 입력해주세요 예) 2000-01-01" maxlength="10" required>
 
 					</div>
 				</div>
@@ -134,7 +134,7 @@
 						<div class="main-phone-common-writing">
 							<label for="user-common-phone">휴대폰 번호</label>
 						</div>
-						<input type="text" id="user-common-phone" name="userPhone"
+						<input type="text" id="user-common-phone" name="userPhone" placeholder="010-0000-0000"
 							required>
 						<div class="phone-common-btn">
 							<button type="button">인증번호 전송</button>

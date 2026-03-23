@@ -11,7 +11,7 @@
 		FROM ddd_user
 		WHERE user_type = 'C' AND USER_STATUS = 'black'
 		ORDER BY user_number DESC )
-	WHERE rownum <= 5 ;
+	WHERE rownum <= 5 
 	]]>
 	</select>
 
@@ -100,11 +100,13 @@
 	<!-- 블랙리스트회원 상세 -->
 	<select id="selectBlackDetail" parameterType="int"
 		resultType="AdminBlackDTO">
-		SELECT u.user_id, u.user_nickname, u.user_name,
+		SELECT u.user_number ,u.user_id, u.user_nickname, u.user_name,
 		u.user_birth, u.user_phone, u.user_email,
 		(SELECT
 		LISTAGG(report_reason, ', ') WITHIN GROUP (ORDER BY report_number)
-		FROM ddd_report ) AS report_reason
+		FROM ddd_report 
+		WHERE reported_user_number = u.user_number
+		) AS report_reason
 		FROM ddd_user u
 		WHERE u.user_number =
 		#{userNumber}

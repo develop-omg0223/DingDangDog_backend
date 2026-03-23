@@ -134,6 +134,16 @@ public class UserFrontController extends HttpServlet {
 			result = new CheckEmailOkController().execute(request, response);
 			System.out.println("이메일 중복확인 완료");
 			break;
+		case "/user/sendSMS.us":
+			System.out.println("문자인증 요청");
+			result = new SendSMSController().execute(request, response);
+			System.out.println("문자인증 요청 완료");
+			break;
+		case "/user/verifyCode.us":
+			System.out.println("인증번호 확인 요청");
+			result = new VerifyCodeController().execute(request, response);
+			System.out.println("인증번호 확인 완료");
+			break;
 		}
 
 		if (result != null && result.getPath() != null) {
