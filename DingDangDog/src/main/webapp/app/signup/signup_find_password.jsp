@@ -13,6 +13,8 @@
 	href="${pageContext.request.contextPath}/assets/css/header.css" />
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/assets/css/footer.css" />
+<script defer
+	src="${pageContext.request.contextPath}/assets/js/signup/signup_phone_check.js"></script>
 </head>
 <body>
 	<c:choose>
@@ -33,8 +35,11 @@
 					<div class="password-text">아이디를 입력해주세요</div>
 				</div>
 				<div class="form-container">
-					<form action="${pageContext.request.contextPath}/user/findPwOk.us"
-						method="post">
+					<form id="find-pw-form"
+						action="${pageContext.request.contextPath}/user/findPwOk.us"
+						method="post"
+						data-context-path="${pageContext.request.contextPath}">
+
 						<div class="password-main-id">
 							<div class="password-main-id-detail">
 								<div class="password-main-passwordwriting">
@@ -48,36 +53,42 @@
 								</c:if>
 							</div>
 						</div>
+
 						<div class="password-main-phoneNumber">
 							<div class="password-main-phoneNumber-input">
 								<div class="password-main-phoneNumber-detail">
 									<div class="password-main-phoneNumberwriting">
-										<label for="user-phoneNumber">휴대폰번호</label>
+										<label for="user-common-phone">휴대폰번호</label>
 									</div>
-									<input type="text" id="user-phoneNumber" name="userPhone">
+									<input type="text" id="user-common-phone" name="userPhone">
 								</div>
-								<button type="button" class="btn-transfer">인증번호 전송</button>
+								<div class="phone-common-btn">
+									<button type="button" class="btn-transfer">인증번호 전송</button>
+								</div>
 							</div>
-							<div class="password-main-phoneNumber-message">
-								<p>인증번호 발송에 실패했습니다. 정보를 다시 확인해주세요.</p>
+							<div class="main-phone-common-message">
+								<p></p>
 							</div>
 						</div>
-						<div class=" password-main-verification">
+
+						<div class="password-main-verification">
 							<div class="password-main-verification-input">
 								<div class="password-main-verification-detail">
 									<div class="password-main-verificationwriting">
-										<label for="user-verification">인증번호 입력</label>
+										<label for="user-common-verification">인증번호 입력</label>
 									</div>
-									<input id="user-verification" name="user-verification"
-										type="password">
+									<input id="user-common-verification" name="user-verification"
+										type="text" disabled>
 								</div>
-								<button type="button" class="btn-check">번호확인</button>
+								<div class="verification-common-btn">
+									<button type="button" class="btn-check">번호확인</button>
+								</div>
 							</div>
-							<div class="password-main-verification-message">
-								<p>인증번호가 일치하지 않습니다</p>
+							<div class="main-verification-common-message">
+								<p></p>
 							</div>
-
 						</div>
+
 						<div class="btn-container">
 							<button type="submit" class="btn-next">다음</button>
 						</div>

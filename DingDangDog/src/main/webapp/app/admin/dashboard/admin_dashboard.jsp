@@ -227,15 +227,24 @@
 									<div class="doglog-date">작성 날짜</div>
 								</div>
 
-
-								<c:forEach var="log" items="${logList}">
-									<div class="dashboard-list-row doglog">
-										<div class="doglog-number">${log.logNumber }</div>
-										<div class="doglog-title">${log.logTitle }</div>
-										<div class="doglog-nickname">${log.userNickname }</div>
-										<div class="doglog-date">${log.logDate }</div>
-									</div>
-								</c:forEach>
+								<c:choose>
+									<c:when test="${not empty logList}">
+										<c:forEach var="log" items="${logList}">
+											<div class="dashboard-list-row doglog">
+												<div class="doglog-number">${log.logNumber }</div>
+												<div class="doglog-title">${log.logTitle }</div>
+												<div class="doglog-nickname">${log.userNickname }</div>
+												<div class="doglog-date">${log.logDate }</div>
+											</div>
+										</c:forEach>
+									</c:when>
+									<c:otherwise>
+										<div class="dashboard-list-row no-data">
+											<div style="width: 100%; text-align: center;">작성된 로그가
+												없습니다.</div>
+										</div>
+									</c:otherwise>
+								</c:choose>
 							</div>
 						</article>
 					</li>
@@ -243,7 +252,7 @@
 						<article class="dashboard-box admin-box-shadow">
 							<div class="box-header">
 								<span class="box-title">문의 목록</span> <a
-									href="${pageContext.request.contextPath}/admin/InquiryListOk"
+									href="${pageContext.request.contextPath}/admin/InquiryListOk.ad"
 									class="link-btn">+</a>
 							</div>
 							<div class="box-content">
@@ -254,38 +263,32 @@
 									<div class="inquiry-response">답변상태</div>
 								</div>
 
-								<div class="dashboard-list-row inquiry">
-									<div class="inquiry-number">33</div>
-									<div class="inquiry-title">글이 안 써집니다</div>
-									<div class="inquiry-nickname">z123z</div>
-									<div class="inquiry-response response-wait">답변대기</div>
-								</div>
-								<div class="dashboard-list-row inquiry">
-									<div class="inquiry-number">33</div>
-									<div class="inquiry-title">글이 안 써집니다</div>
-									<div class="inquiry-nickname">z123z</div>
-									<div class="inquiry-response response-wait">답변대기</div>
-								</div>
-								<div class="dashboard-list-row inquiry">
-									<div class="inquiry-number">33</div>
-									<div class="inquiry-title">글이 안 써집니다</div>
-									<div class="inquiry-nickname">z123z</div>
-									<div class="inquiry-response response-wait">답변대기</div>
-								</div>
-								<div class="dashboard-list-row inquiry">
-									<div class="inquiry-number">24</div>
-									<div class="inquiry-title">문의드리고싶은게 있습니다</div>
-									<div class="inquiry-nickname">drking</div>
-									<div class="inquiry-response response-wait">답변대기</div>
-								</div>
-								<div class="dashboard-list-row inquiry">
-									<div class="inquiry-number">25</div>
-									<div class="inquiry-title">사진이 안올라가요</div>
-									<div class="inquiry-nickname">rals212</div>
-									<div class="inquiry-response">
-										<span class="response-complete"> 답변완료 </span>
-									</div>
-								</div>
+
+								<c:choose>
+									<c:when test="${not empty inquiryList}">
+										<c:forEach var="inq" items="${inquiryList}">
+											<div class="dashboard-list-row inquiry">
+												<div class="inquiry-number">${inq.inquiryNumber}</div>
+												<div class="inquiry-title">${inq.inquiryTitle}</div>
+												<div class="inquiry-nickname">${inq.userNickname}</div>
+
+												<c:choose>
+													<c:when test="${inq.answerStatus eq 'N'}">
+														<div class="inquiry-response response-wait">답변대기</div>
+													</c:when>
+													<c:otherwise>
+														<div class="inquiry-response">답변완료</div>
+													</c:otherwise>
+												</c:choose>
+											</div>
+										</c:forEach>
+									</c:when>
+									<c:otherwise>
+										<div class="dashboard-list-row no-data">
+											<div>접수된 문의사항이 없습니다.</div>
+										</div>
+									</c:otherwise>
+								</c:choose>
 							</div>
 						</article>
 					</li>

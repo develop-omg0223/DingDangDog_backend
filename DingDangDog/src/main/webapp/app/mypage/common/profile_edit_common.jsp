@@ -125,8 +125,7 @@
 											<div class="edit-control">
 												<input type="text" id="verify-code" class="edit-input"
 													value="">
-												<p id="verify-message" class="guide-text info-text">번호가
-													일치 합니다.</p>
+												<p id="verify-message" class="guide-text info-text"></p>
 											</div>
 											<button type="button" id="verify-code-btn" class="action-btn">인증
 												번호 확인</button>

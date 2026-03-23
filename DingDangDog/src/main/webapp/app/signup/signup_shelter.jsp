@@ -184,7 +184,7 @@
 							<label for="user-common-phone">휴대폰 번호</label>
 						</div>
 						<input type="text" id="user-common-phone" name="userPhone"
-							required>
+							placeholder="010-0000-0000" required>
 						<div class="phone-common-btn">
 							<button type="button">인증번호 전송</button>
 						</div>
@@ -200,7 +200,8 @@
 							<div class="main-verification-common-writing">
 								<label for="user-common-verification">인증번호</label>
 							</div>
-							<input type="text" id="user-common-verification">
+							<input type="text" id="user-common-verification"
+								name="verificationCode">
 						</div>
 						<div class="verification-common-btn">
 							<button type="button">인증번호 확인</button>

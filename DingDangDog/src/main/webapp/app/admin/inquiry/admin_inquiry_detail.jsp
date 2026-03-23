@@ -28,7 +28,13 @@
 				<!-- 테이블등 정보 -->
 				<div class="inquiry-row">
 					<div class="inquiry-title">${inquiry.inquiryTitle}</div>
-					<div class="inquiry-response response-wait">${inquiry.answerStatus}</div>
+
+					<c:if test="${inquiry.answerStatus eq 'N'}">
+						<div class="inquiry-response response-wait">답변대기</div>
+					</c:if>
+					<c:if test="${inquiry.answerStatus  eq 'Y'}">
+						<div class="inquiry-response">답변완료</div>
+					</c:if>
 				</div>
 
 				<div class="inquiry-row">
@@ -38,26 +44,38 @@
 				<div class="inquiry-content-section">
 					<div class="inquiry-content">${inquiry.inquiryPost}</div>
 				</div>
-				<div id="answer-write" class="inquiry-answer-section answer-write">
-					<form id="aswer-form" class="answer-container" action=""
-						method="get" name="answerPost">
-						<input type="hidden" value="${inquiry.inquiryNumber} ">
-						<textarea placeholder="답변 입력" spellcheck="false"></textarea>
-						<div class="answer-btn-container">
-							<button type="submit" id="answer-submit-btn"
-								class="answer-submit-btn">답변</button>
+				<c:choose>
+					<c:when test="${inquiry.answerStatus eq 'N'}">
+						<div id="answer-write" class="inquiry-answer-section answer-write">
+							<form id="answer-form" class="answer-container"
+								action="${pageContext.request.contextPath}/admin/InquiryAnswerOk.ad"
+								method="post">
+								<input type="hidden" name="inquiryNumber"
+									value="${inquiry.inquiryNumber}">
+								<textarea name="answerPost" placeholder="답변 입력" id="answerPost"
+									spellcheck="false"></textarea>
+								<div class="answer-btn-container">
+									<button type="button" id="answer-submit-btn"
+										class="answer-submit-btn">답변</button>
+								</div>
+							</form>
 						</div>
-					</form>
-				</div>
-				<div id="answer-complete"
-					class="inquiry-answer-section answer-complete">
-					<div class="answer-header">
-						<div class="answer-admin-answer">관리자 답변</div>
-						<div class="answer-date"></div>
-					</div>
-					<div class="answer-content-box"></div>
-				</div>
+					</c:when>
+					<c:otherwise>
+						<div id="answer-complete"
+							class="inquiry-answer-section answer-complete">
+							<div class="answer-header">
+								<div class="answer-admin-answer">관리자 답변</div>
+								<div class="answer-date">${inquiry.answerDate}</div>
+							</div>
+							<div class="answer-content-box">${inquiry.answerPost}</div>
+						</div>
+					</c:otherwise>
+				</c:choose>
+
 			</div>
+
+
 			<!-- 페이지 하단 (검색, 페이지네이션) -->
 			<div class="admin-main-section-footer">
 				<div class="btn-container">
@@ -70,15 +88,19 @@
 	</main>
 </body>
 <script>
-	/* const answerForm = document.getElementById("aswer-form");
-	const writeSection = document.getElementById("answer-write");
-	const completeSection = document.getElementById("answer-complete");
+	const answerBtn = document.getElementById("answer-submit-btn");
+	const answerForm = document.getElementById("answer-form");
+	const answerPost = document.getElementById("answerPost");
 
-	answerForm.addEventListener("submit", (e) => {
-	  e.preventDefault();
-	  alert("답변 등록이 완료되었습니다.");
-	  writeSection.style.display = "none";
-	  completeSection.style.display = "flex";
-	}); */
+	answerBtn.addEventListener("click", function() {
+		if (!answerPost.value.trim()) {
+			alert("답변 내용을 입력해주세요.");
+			answerPost.focus();
+			return;
+		}
+
+		alert("답변 등록이 완료되었습니다.");
+		answerForm.submit();
+	});
 </script>
 </html>

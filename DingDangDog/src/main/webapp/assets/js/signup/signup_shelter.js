@@ -286,53 +286,56 @@ document.addEventListener("DOMContentLoaded", function() {
 	});
 
 
+
 	/*-------------------문자인증-------------------*/
 	// ===== SMS 발송 =====
-
 	const phoneNumberInput = document.getElementById("user-common-phone");
 	const sendSMSBtn = document.querySelector(".phone-common-btn button");
 	const phoneStatus = document.querySelector(".main-phone-common-message p");
 
-	const verificationCodeInput = document.getElementById("user-common-verification");
 	const verificationBtn = document.querySelector(".verification-common-btn button");
-	const verificationStatus = document.querySelector(".main-verification-common-message p");
-
+	const verificationCodeInput = document.getElementById("user-common-verification");
+	const verificationStatus = document.querySelector(".main-verification-common-message p"); // 인증번호 관련 메시지
 
 	const phoneRegex = /^01([0|1|6|7|8|9])-([0-9]{3,4})-([0-9]{4})$/;
+
+
 
 	sendSMSBtn.addEventListener("click", function() {
 		const phoneNumber = phoneNumberInput.value.trim();
 		const realPhoneNumber = phoneNumber.replace(/[^0-9]/g, '');
-
+		console.log(phoneNumber);
+		console.log(realPhoneNumber);
 		if (!phoneNumber) {
 			alert("핸드폰 번호를 입력해주세요.");
 			return;
 		}
+
 		if (!phoneRegex.test(phoneNumber)) {
 			phoneStatus.textContent = "올바른 형식이 아닙니다. (예: 010-1234-5678)";
 			phoneStatus.style.color = "red";
 			phoneNumberInput.focus();
 			return;
+
 		}
 
-		fetch(`${base}/user/sendSMS.us`, {
-			method: "POST",
-			headers: { "Content-Type": "application/json; charset=utf-8" },
-			body: JSON.stringify({ realPhoneNumber })
+		fetch(`${base}/user/sendSMS.us?realPhoneNumber=${realPhoneNumber}`, {
+			method: "GET",
+			headers: {
+				"X-Requested-With": "XMLHttpRequest"
+			}
 		})
 			.then(r => {
 				if (!r.ok) throw new Error(r.status);
-				const ct = r.headers.get("Content-Type") || "";
-				return ct.includes("application/json") ? r.json() : { ok: true };
+				return r.json();
 			})
 			.then(data => {
-				const ok = typeof data.ok === "boolean" ? data.ok : true;
-				if (ok) {
+				if (data.ok) {
 					verificationCodeInput.disabled = false;
 					phoneStatus.textContent = "인증번호가 발송되었습니다.";
 					phoneStatus.style.color = "green";
 				} else {
-					phoneStatus.textContent = "발송 실패. 잠시 후 다시 시도하세요.";
+					phoneStatus.textContent = "발송 실패: " + (data.message || "");
 					phoneStatus.style.color = "red";
 				}
 			})
@@ -347,6 +350,8 @@ document.addEventListener("DOMContentLoaded", function() {
 		const phoneNumber = phoneNumberInput.value.trim();
 		const realPhoneNumber = phoneNumber.replace(/[^0-9]/g, '');
 		const code = verificationCodeInput.value.trim();
+		console.log(phoneNumber);
+		console.log(realPhoneNumber);
 		if (!code) {
 			verificationStatus.textContent = "인증번호를 입력해주세요.";
 			verificationStatus.style.color = "red";
@@ -354,7 +359,7 @@ document.addEventListener("DOMContentLoaded", function() {
 		}
 		fetch(`${base}/user/verifyCode.us`, {
 			method: "POST",
-			headers: { "Content-Type": "application/json; charset=utf-8" },
+			headers: { "Content-Type": "application/json; charset=utf-8", "Accept": "application/json" },
 			body: JSON.stringify({ code, realPhoneNumber })
 		})
 			.then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
@@ -455,7 +460,6 @@ document.addEventListener("DOMContentLoaded", function() {
 			e.preventDefault();
 			return;
 		}
-
 
 		alert("회원가입을 완료했습니다!");
 	});

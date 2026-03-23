@@ -216,6 +216,10 @@ public class AdminDAO {
 	// 문의
 
 	// 대시보드용 문의리스트
+	public List<AdminInquiryDTO> getDashboardInquiryList() {
+		System.out.println("대시보드용 문의 호출");
+		return sqlSession.selectList("adminInq.getDashboardInquiryList");
+	}
 
 	// 문의 전체 개수
 	public int getTotalInq() {

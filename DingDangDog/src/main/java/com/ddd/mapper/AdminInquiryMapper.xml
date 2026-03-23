@@ -3,7 +3,17 @@
 <mapper namespace="adminInq">
 
 	<!-- 대시보드용 문의 조회 -->
-
+	<select id="getDashboardInquiryList"
+		resultType="AdminInquiryDTO">
+	<![CDATA[
+	SELECT * FROM
+	(SELECT i.inquiry_number, i.inquiry_title, u.user_nickname, i.answer_status
+	FROM ddd_inquiry i JOIN ddd_user u 
+	ON i.user_number = u.user_number
+	ORDER BY i.answer_status ASC)
+	WHERE rownum <= 5
+	]]>
+	</select>
 
 	<!-- 관리자 문의관리 -->
 	<!-- 문의 전체 개수 -->
@@ -56,11 +66,13 @@
 	<select id="selectInquiryDetail" parameterType="int"
 		resultType="AdminInquiryDTO">
 		SELECT i.inquiry_title, i.answer_status, u.user_nickname,
-		i.inquiry_date,
-		i.inquiry_post, i.answer_date, i.answer_post
+		i.inquiry_date, i.inquiry_number,
+		i.inquiry_post, i.answer_date,
+		i.answer_post
 		FROM
 		ddd_inquiry i JOIN ddd_user u
-		ON i.user_number = u.user_number
+		ON i.user_number =
+		u.user_number
 		WHERE
 		i.inquiry_number = #{inquiryNumber}
 	</select>
@@ -69,7 +81,8 @@
 		UPDATE DDD_INQUIRY
 		SET
 		ANSWER_POST = #{answerPost}
-		,ANSWER_DATE = sysdate , ANSWER_STATUS = 'Y'
+		,ANSWER_DATE = sysdate , ANSWER_STATUS =
+		'Y'
 		WHERE INQUIRY_NUMBER = #{inquiryNumber}
 	</update>
 

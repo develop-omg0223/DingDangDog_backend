@@ -59,6 +59,12 @@ public class mainController extends HttpServlet {
 			System.out.println("메인 페이지 요청");
 			result = new mainOkController().execute(request, response);
 			break;
+		case "/mainpage/introduce.main":
+			System.out.println("소개 페이지 요청");
+			result = new Result();
+			result.setPath("/app/introduce.jsp");
+			result.setRedirect(false);
+			System.out.println("소개 페이지 이동");
 		}
 		
 		if (result != null) {

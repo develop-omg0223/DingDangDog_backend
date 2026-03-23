@@ -1,0 +1,58 @@
+@font-face {
+	font-family: 'BMHANNAAir';
+	src:
+		url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.0/BMHANNAAir.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+
+
+main {
+	width: 100%;
+	height: 800px;
+	/* border: 1px solid black; */
+	font-weight: bold;
+	font-size: 20px;
+	margin: 100px 0px;
+}
+
+.brandname {
+	color: #F47C2A;
+}
+
+
+.introduce-img {
+	width: 1800px;
+	height: 500px;
+	display: block;
+	object-fit: cover
+}
+
+
+.intro-section{
+	
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+	margin-top:30px;
+}
+
+.intro-container{
+	display:flex;
+	gap: 60px;
+}
+
+
+.img-container{
+	display: flex;
+	justify-content: center;
+	
+}

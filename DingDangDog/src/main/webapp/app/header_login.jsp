@@ -15,7 +15,7 @@
 
     <nav class="h-centent-menu">
       <ul>
-        <li><a href="#" class="h-centent-menu-item">소개</a></li>
+        <li><a href="${pageContext.request.contextPath}/mainpage/introduce.main" class="h-centent-menu-item">소개</a></li>
         <li><a href="${pageContext.request.contextPath}/matching/test.ma" class="h-centent-menu-item">멍! 매칭</a></li>
         <li><a href="${pageContext.request.contextPath}/log/list.lo" class="h-centent-menu-item">멍! 로그</a></li>
         <li><a href="${pageContext.request.contextPath}/care/list.ca" class="h-centent-menu-item">멍! 케어</a></li>
