@@ -69,5 +69,22 @@
 	<!-- js -->
 	<script src="/assets/js/header-footer.js"></script>
 </body>
+<script>
+    // 1. Context Path 전역 변수 설정
+    const contextPath = "${pageContext.request.contextPath}";
+
+    // 2. Java의 리스트를 JavaScript 배열로 변환
+    const volunteerData = [
+        <c:forEach var="care" items="${applyList}" varStatus="status">
+            {
+                id: ${care.applyNumber},          
+                careNumber: ${care.careNumber},   
+                date: "${care.careDate}",         
+                title: "${care.careTitle}",       
+                shelter: "${care.shelterName}"    
+            }${!status.last ? ',' : ''}           
+        </c:forEach>
+    ];
+</script>
 
 </html>

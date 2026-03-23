@@ -20,18 +20,14 @@ public class CareDAO {
 		sqlSession = MyBatisConfig.getSqlSessionFactory().openSession(true);
 	}
 
-	// 멍! 케어 게시글 총 개수
-	public int getTotal() {
-		System.out.println("멍! 케어 게시글 총 개수 조회 - getTotal 실행");
-		return sqlSession.selectOne("care.getTotal");
+	// 멍! 케어 게시글 총 개수 (검색 조건 포함)
+	public int getTotal(Map<String, Object> params) {
+	    return sqlSession.selectOne("care.getTotal", params);
 	}
 
-	// 멍! 케어 목록 조회
-	public List<CareListDTO> selectCareList(Map<String, Integer> pageMap) {
-		System.out.println("멍! 케어 목록 조회 실행 : " + pageMap);
-		List<CareListDTO> list = sqlSession.selectList("care.selectCareList", pageMap);
-		System.out.println("조회된 멍! 케어 게시글 수 : " + list);
-		return list;
+	// 멍! 케어 목록 조회 (Map<String, Integer> -> Map<String, Object>)
+	public List<CareListDTO> selectCareList(Map<String, Object> params) {
+	    return sqlSession.selectList("care.selectCareList", params);
 	}
 
 	// 멍! 케어 상세 조회

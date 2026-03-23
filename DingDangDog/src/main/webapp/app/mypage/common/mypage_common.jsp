@@ -18,6 +18,25 @@
 	href="${pageContext.request.contextPath}/assets/css/footer.css" />
 
 </head>
+<script>
+    const serverUserData = {
+        userName: "${user.userName}",
+        userNickname: "${user.userNickname}",
+        userBirth: "${user.userBirth}",
+        userPhone: "${user.userPhone}",
+        userEmail: "${user.userEmail}"
+    };
+
+    const serverMatchData = [
+        <c:forEach var="match" items="${matchingList}" varStatus="status">
+            { 
+                // MatchingResultDTO의 실제 필드명 확인 필요 (예: matchingTitle, matchingDate)
+                title: "${match.matchingTitle}", 
+                date: "${match.matchingDate}" 
+            }${!status.last ? ',' : ''}
+        </c:forEach>
+    ];
+</script>
 <body>
 	<!-- header -->
 	<!-- 유저 번호 확인 존재시 로그인 헤더 -->
@@ -41,34 +60,29 @@
 
 					<article class="panel panel-left">
 						<div class="panel-head">
-							<h2 class="panel-title">000님의 멍! 매칭 결과</h2>
+							<h2 class="panel-title">${sessionScope.userName}님의멍!매칭 결과</h2>
 						</div>
 
 						<div class="panel-body">
 							<ul class="match-list">
-								<li class="match-row">
-									<div class="match-title"></div>
-									<div class="match-date"></div>
-								</li>
-								<li class="match-row">
-									<div class="match-title"></div>
-									<div class="match-date"></div>
-								</li>
-								<li class="match-row">
-									<div class="match-title"></div>
-									<div class="match-date"></div>
-								</li>
-								<li class="match-row">
-									<div class="match-title"></div>
-									<div class="match-date"></div>
-								</li>
-								<li class="match-row">
-									<div class="match-title"></div>
-									<div class="match-date"></div>
-								</li>
+								<c:choose>
+									<c:when test="${not empty matchingList}">
+										<c:forEach var="match" items="${matchingList}">
+											<li class="match-row">
+												<div class="match-title">${match.title}</div>
+												<div class="match-date">${match.date}</div>
+											</li>
+										</c:forEach>
+									</c:when>
+									<c:otherwise>
+										<li class="match-row">매칭 결과가 없습니다.</li>
+									</c:otherwise>
+								</c:choose>
 							</ul>
 							<div class="panel-footer">
-								<a class="btn-outline" href="">멍! 매칭 하러가기</a>
+								<a class="btn-outline"
+									href="${pageContext.request.contextPath}/matching/main.mc">멍!
+									매칭 하러가기</a>
 							</div>
 						</div>
 					</article>
@@ -82,28 +96,29 @@
 							<dl class="info-table">
 								<div class="info-row">
 									<dt>이름</dt>
-									<dd id="userName_common"></dd>
+									<dd id="userName_common">${sessionScope.userName}</dd>
 								</div>
 								<div class="info-row">
 									<dt>닉네임</dt>
-									<dd id="userNickname_common"></dd>
+									<dd id="userNickname_common">${sessionScope.userNickname}</dd>
 								</div>
 								<div class="info-row">
 									<dt>생년월일</dt>
-									<dd id="userBirth_common"></dd>
+									<dd id="userBirth_common">${sessionScope.userBirth}</dd>
 								</div>
 								<div class="info-row">
 									<dt>핸드폰 번호</dt>
-									<dd id="userPhonenumber_common"></dd>
+									<dd id="userPhonenumber_common">${sessionScope.userPhone}</dd>
 								</div>
 								<div class="info-row">
 									<dt>이메일 주소</dt>
-									<dd id="userEmail_common"></dd>
+									<dd id="userEmail_common">${sessionScope.userEmail}</dd>
 								</div>
 							</dl>
 
 							<div class="panel-footer panel-footer-right">
-								<a class="btn-outline" href="./profile_edit_common.html">내
+								<a class="btn-outline"
+									href="${pageContext.request.contextPath}/mypage/checkPw.mp">내
 									정보 변경</a>
 							</div>
 						</div>

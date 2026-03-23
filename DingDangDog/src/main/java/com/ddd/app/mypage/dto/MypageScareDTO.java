@@ -25,7 +25,14 @@ public class MypageScareDTO {
 	private String careTitle;
 	private LocalDateTime careDate;
 	private int careRecruit;
+	private String applyStatus;
 	
+	public String getApplyStatus() {
+		return applyStatus;
+	}
+	public void setApplyStatus(String applyStatus) {
+		this.applyStatus = applyStatus;
+	}
 	public int getCareNumber() {
 		return careNumber;
 	}

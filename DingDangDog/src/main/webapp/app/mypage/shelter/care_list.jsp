@@ -72,5 +72,29 @@
 	<!-- js -->
 	<script src="/assets/js/header-footer.js"></script>
 </body>
+<script>
 
+    // 1. 서버에서 보낸 careList를 JS가 쓸 수 있는 careData 배열로 변환
+    const careData = [
+        <c:forEach var="item" items="${careList}" varStatus="status">
+        {
+        	careNumber: ${item.careNumber},
+        	careTitle: "${item.careTitle}",
+        	careDate: "${item.careDate}", 
+        	applyStatus: "${item.applyStatus}"
+        }<c:if test="${!status.last}">,</c:if>
+        </c:forEach>
+    ];
+
+    // 2. 데이터가 잘 들어왔는지 브라우저 콘솔(F12)에서 확인용
+    console.log("보호소 등록 목록:", careData);
+
+    // 3. 테이블 그리기 실행 (renderTable 함수가 포함된 updatePage 호출)
+    if(careData.length > 0) {
+        updatePage();
+    } else {
+        document.getElementById("careTableBody").innerHTML = 
+            "<div class='review-table-row' style='justify-content:center;'>등록한 내역이 없습니다.</div>";
+    }
+</script>
 </html>

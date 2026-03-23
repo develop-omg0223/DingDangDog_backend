@@ -29,7 +29,7 @@
           <img src="${pageContext.request.contextPath}/assets/img/1.png" alt="user-icon" class="h-user-section-img">
           <div class="h-user-text-stack">
             <span class="h-user-nickname">${sessionScope.userNickname}</span>
-            <a href="${pageContext.request.contextPath}/mypage/main.mp" class="h-mypage-btn">마이페이지</a>
+            <a href="${pageContext.request.contextPath}/mypage/mypageMain.mp" class="h-mypage-btn">마이페이지</a>
           </div>
         </div>
         <a href="${pageContext.request.contextPath}/header/logoutOk.he" class="h-logout-btn">로그아웃</a>

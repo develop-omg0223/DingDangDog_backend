@@ -7,7 +7,7 @@ public class CareListDTO {
 	private int careNumber;
 	private String careTitle;
 	private LocalDateTime careDate;
-	private String userNickname;
+	private String shelterName;
 	private LocalDateTime careWriteDate;
 	private String applyStatus;
 	
@@ -37,11 +37,11 @@ public class CareListDTO {
 	public void setCareDate(LocalDateTime careDate) {
 		this.careDate = careDate;
 	}
-	public String getUserNickname() {
-		return userNickname;
+	public String getShelterName() {
+		return shelterName;
 	}
-	public void setUserNickname(String userNickname) {
-		this.userNickname = userNickname;
+	public void setShelterName(String shelterName) {
+		this.shelterName = shelterName;
 	}
 	public String getCareWriteDate() {
 		if (careWriteDate == null)
@@ -54,7 +54,7 @@ public class CareListDTO {
 	@Override
 	public String toString() {
 		return "CareListDTO [careNumber=" + careNumber + ", careTitle=" + careTitle + ", careDate=" + careDate
-				+ ", userNickname=" + userNickname + ", careWriteDate=" + careWriteDate + ", applyStatus=" + applyStatus
+				+ ", shelterName=" + shelterName + ", careWriteDate=" + careWriteDate + ", applyStatus=" + applyStatus
 				+ "]";
 	}
 	

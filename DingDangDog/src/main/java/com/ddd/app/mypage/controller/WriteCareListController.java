@@ -26,7 +26,7 @@ public class WriteCareListController implements Execute {
 
         // 세션에서 userNumber 가져오기
         Integer userNumber = (Integer) session.getAttribute("userNumber");
-		
+        System.out.println("조회하려는 유저 번호: " + userNumber);
         
         List<MypageScareDTO> careList = mypageCareDAO.selectMyCareList(userNumber);
 

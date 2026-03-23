@@ -3,27 +3,32 @@
 
 <mapper namespace="mypageCcare">
 
-    <!-- 멍케어 신청 목록 조회 -->
-    <select id="selectApplyList" parameterType="int" resultType="com.ddd.app.mypage.dto.MypageCcareDTO">
-        SELECT
-            CA.APPLY_NUMBER AS applyNumber,
-            C.CARE_NUMBER AS careNumber,
-            C.CARE_DATE AS careDate,
-            US.SHELTER_NAME AS shelterName,
-            CA.USER_NUMBER AS userNumber
-        FROM DDD_CARE_APPLY CA
-        JOIN DDD_CARE C ON CA.CARE_NUMBER = C.CARE_NUMBER
-        JOIN DDD_USER_SHELTER US ON C.USER_NUMBER = US.USER_NUMBER
-        WHERE CA.USER_NUMBER = #{userNumber}
-        ORDER BY CA.APPLY_NUMBER DESC
-    </select>
+	<!-- 멍케어 신청 목록 조회 -->
+	<select id="selectApplyList" parameterType="int"
+		resultType="com.ddd.app.mypage.dto.MypageCcareDTO">
+		SELECT
+		ca.apply_number AS applyNumber,
+		c.care_number AS careNumber,
+		c.care_title AS careTitle,
+		c.care_post AS careContent,
+		c.care_date AS careDate,
+		NVL(s.shelter_name, u.user_nickname) AS shelterName
+		FROM ddd_care_apply ca
+		JOIN ddd_care c ON ca.care_number = c.care_number
+		JOIN ddd_user u ON c.user_number = u.user_number
+		LEFT JOIN ddd_user_shelter s ON c.user_number = s.user_number
+		WHERE ca.user_number = #{userNumber}
+		ORDER BY ca.apply_number DESC
+	</select>
 
 
-    <!-- 봉사 신청 취소 -->
-    <delete id="deleteApply" parameterType="map">
-        DELETE FROM DDD_CARE_APPLY
-        WHERE APPLY_NUMBER = #{applyNumber}
-          AND USER_NUMBER = #{userNumber}
-    </delete>
+	<!-- 봉사 신청 취소 -->
+	<delete id="deleteApply" parameterType="map">
+		DELETE FROM
+		DDD_CARE_APPLY
+		WHERE APPLY_NUMBER = #{applyNumber}
+		AND USER_NUMBER =
+		#{userNumber}
+	</delete>
 
 </mapper>

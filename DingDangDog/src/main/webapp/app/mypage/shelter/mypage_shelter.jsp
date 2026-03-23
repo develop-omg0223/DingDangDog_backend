@@ -19,7 +19,26 @@
 	href="${pageContext.request.contextPath}/assets/css/footer.css" />
 
 </head>
+<script>
+    // 보호소 정보 데이터
+    const serverShelterData = {
+        shelterName: "${user.shelterName}",
+        userNickname: "${user.userNickname}",
+        certification: "${user.shelterCertification}",
+        userPhone: "${user.userPhone}",
+        userEmail: "${user.userEmail}"
+    };
 
+    // 멍! 카이브 리스트 데이터
+    const serverArchiveData = [
+        <c:forEach var="archive" items="${archiveList}" varStatus="status">
+            { 
+                name: "${archive.dogName}", 
+                info: "${archive.dogBreed} | ${archive.dogAge} | ${archive.dogGender}" 
+            }${!status.last ? ',' : ''}
+        </c:forEach>
+    ];
+</script>
 <body>
 	<!-- header -->
 	<!-- 유저 번호 확인 존재시 로그인 헤더 -->
@@ -62,28 +81,28 @@
 							<dl class="info-table">
 								<div class="info-row">
 									<dt>보호소 명</dt>
-									<dd>행복 보호소</dd>
+									<dd>${user.shelterName}</dd>
 								</div>
 								<div class="info-row">
 									<dt>닉네임</dt>
-									<dd>happy01</dd>
+									<dd>${user.userNickname}</dd>
 								</div>
 								<div class="info-row">
 									<dt>보호소 인증</dt>
-									<dd>인증 안됨</dd>
+									<dd>${user.shelterCertification == 'Y' ? '인증 완료' : '인증 대기'}</dd>
 								</div>
 								<div class="info-row">
 									<dt>보호소 번호</dt>
-									<dd>010-xxxx-xxxx</dd>
+									<dd>${user.userPhone}</dd>
 								</div>
 								<div class="info-row">
 									<dt>이메일 주소</dt>
-									<dd>lucas1144@naver.com</dd>
+									<dd>${user.userEmail}</dd>
 								</div>
 							</dl>
-
 							<div class="panel-footer panel-footer-right">
-								<a class="btn-outline" href="./profile_edit_shelter.html">보호소
+								<a class="btn-outline"
+									href="${pageContext.request.contextPath}/mypage/checkPw.mp">보호소
 									정보 변경</a>
 							</div>
 						</div>

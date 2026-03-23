@@ -1,4 +1,4 @@
-const careData = [
+/*const careData = [
   { number: 21, title: "주말 산책 봉사 모집", date: "2026-03-08", member: "5/20" },
   { number: 20, title: "견사 청소 봉사자 구합니다", date: "2026-03-07", member: "8/20" },
   { number: 19, title: "사료 배급 도와주세요", date: "2026-03-06", member: "12/20" },
@@ -20,31 +20,33 @@ const careData = [
   { number: 3, title: "강아지 건강 체크 보조", date: "2026-02-18", member: "1/6" },
   { number: 2, title: "입양 행사 진행 보조", date: "2026-02-17", member: "4/8" },
   { number: 1, title: "보호소 운영 도우미 모집", date: "2026-02-16", member: "15/20" }
-];
+];*/
 
 const careTableBody = document.getElementById("careTableBody");
 const pagination = document.getElementById("pagination");
 
 function renderTable(page) {
-  const start = (page - 1) * rowsPerPage;
-  const end = start + rowsPerPage;
-  const currentData = careData.slice(start, end);
+	const start = (page - 1) * rowsPerPage;
+	const end = start + rowsPerPage;
+	const currentData = careData.slice(start, end);
 
-  careTableBody.innerHTML = "";
+	careTableBody.innerHTML = "";
 
-  currentData.forEach((item) => {
-    const row = document.createElement("div");
-    row.classList.add("review-table-row");
+	currentData.forEach((item) => {
+		const row = document.createElement("div");
+		row.classList.add("review-table-row");
 
-    row.innerHTML = `
+		row.innerHTML = `
       <div class="col-number">${item.number}</div>
-      <div class="col-title"><a href="#">${item.title}</a></div>
+      <div class="col-title">
+	  <a href="${contextPath}/care/detail.ca?careNumber=${item.careNumber}">
+	  ${item.title}</a></div>
       <div class="col-date">${item.date}</div>
       <div class="col-member">${item.member}</div>
     `;
 
-    careTableBody.appendChild(row);
-  });
+		careTableBody.appendChild(row);
+	});
 }
 
 //페이지네이션 동작 코드
@@ -54,80 +56,80 @@ let currentPage = 1;
 const maxVisiblePages = 5; //페이지네이션 버튼 개수
 
 function renderPagination() {
-  const totalPages = Math.ceil(careData.length / rowsPerPage);
-  pagination.innerHTML = "";
+	const totalPages = Math.ceil(careData.length / rowsPerPage);
+	pagination.innerHTML = "";
 
-  const maxVisiblePages = 5;
+	const maxVisiblePages = 5;
 
-  let startPage = currentPage - Math.floor(maxVisiblePages / 2);
-  let endPage = currentPage + Math.floor(maxVisiblePages / 2);
+	let startPage = currentPage - Math.floor(maxVisiblePages / 2);
+	let endPage = currentPage + Math.floor(maxVisiblePages / 2);
 
-  if (startPage < 1) {
-    startPage = 1;
-    endPage = Math.min(maxVisiblePages, totalPages);
-  }
+	if (startPage < 1) {
+		startPage = 1;
+		endPage = Math.min(maxVisiblePages, totalPages);
+	}
 
-  if (endPage > totalPages) {
-    endPage = totalPages;
-    startPage = Math.max(1, totalPages - maxVisiblePages + 1);
-  }
+	if (endPage > totalPages) {
+		endPage = totalPages;
+		startPage = Math.max(1, totalPages - maxVisiblePages + 1);
+	}
 
-  const prevLi = document.createElement("li");
-  const prevBtn = document.createElement("button");
-  prevBtn.classList.add("prev-btn");
-  prevBtn.innerHTML = "<span>&lt;</span>";
-  prevBtn.disabled = currentPage === 1;
+	const prevLi = document.createElement("li");
+	const prevBtn = document.createElement("button");
+	prevBtn.classList.add("prev-btn");
+	prevBtn.innerHTML = "<span>&lt;</span>";
+	prevBtn.disabled = currentPage === 1;
 
-  prevBtn.addEventListener("click", () => {
-    if (currentPage > 1) {
-      currentPage--;
-      updatePage();
-    }
-  });
+	prevBtn.addEventListener("click", () => {
+		if (currentPage > 1) {
+			currentPage--;
+			updatePage();
+		}
+	});
 
-  prevLi.appendChild(prevBtn);
-  pagination.appendChild(prevLi);
+	prevLi.appendChild(prevBtn);
+	pagination.appendChild(prevLi);
 
-  for (let i = startPage; i <= endPage; i++) {
-    const li = document.createElement("li");
-    const btn = document.createElement("button");
+	for (let i = startPage; i <= endPage; i++) {
+		const li = document.createElement("li");
+		const btn = document.createElement("button");
 
-    btn.classList.add("page-item");
-    if (i === currentPage) {
-      btn.classList.add("current-page");
-    }
+		btn.classList.add("page-item");
+		if (i === currentPage) {
+			btn.classList.add("current-page");
+		}
 
-    btn.textContent = i;
+		btn.textContent = i;
 
-    btn.addEventListener("click", () => {
-      currentPage = i;
-      updatePage();
-    });
+		btn.addEventListener("click", () => {
+			currentPage = i;
+			updatePage();
+		});
 
-    li.appendChild(btn);
-    pagination.appendChild(li);
-  }
+		li.appendChild(btn);
+		pagination.appendChild(li);
+	}
 
-  const nextLi = document.createElement("li");
-  const nextBtn = document.createElement("button");
-  nextBtn.classList.add("next-btn");
-  nextBtn.innerHTML = "<span>&gt;</span>";
-  nextBtn.disabled = currentPage === totalPages;
+	const nextLi = document.createElement("li");
+	const nextBtn = document.createElement("button");
+	nextBtn.classList.add("next-btn");
+	nextBtn.innerHTML = "<span>&gt;</span>";
+	nextBtn.disabled = currentPage === totalPages;
 
-  nextBtn.addEventListener("click", () => {
-    if (currentPage < totalPages) {
-      currentPage++;
-      updatePage();
-    }
-  });
+	nextBtn.addEventListener("click", () => {
+		if (currentPage < totalPages) {
+			currentPage++;
+			updatePage();
+		}
+	});
 
-  nextLi.appendChild(nextBtn);
-  pagination.appendChild(nextLi);
+	nextLi.appendChild(nextBtn);
+	pagination.appendChild(nextLi);
 }
 
 function updatePage() {
-  renderTable(currentPage);
-  renderPagination();
+	renderTable(currentPage);
+	renderPagination();
 }
 
 updatePage();

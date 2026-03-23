@@ -29,7 +29,7 @@ public class AdminCareDeleteOkController implements Execute {
 		System.out.println("삭제 완료");
 
 		// 목록으로 이동 (redirect)
-		result.setPath(request.getContextPath() + "/admin/admin/adminCareDeleteOk.ad");
+		result.setPath(request.getContextPath() + "/admin/adminCareListOk.ad");
 		result.setRedirect(true);
 
 		return result;

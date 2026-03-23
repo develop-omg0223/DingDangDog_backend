@@ -2,37 +2,54 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="adminCare">
 
-	<!-- 전체 글 개수 -->
-	<select id="getCareTotal" resultType="int">
-		SELECT COUNT(*) FROM
-		DDD_CARE
-		WHERE care_status = 'open'
+	<select id="getCareTotal" parameterType="map" resultType="int">
+		SELECT COUNT(*)
+		FROM DDD_CARE c
+		JOIN DDD_USER u ON c.user_number = u.user_number
+		WHERE c.care_status = 'open'
+		<if test="keyword != null and keyword != ''">
+			<choose>
+				<when test="type == 'nickname'">
+					AND u.user_nickname LIKE '%' || #{keyword} || '%'
+				</when>
+				<when test="type == 'title'">
+					AND c.care_title LIKE '%' || #{keyword} || '%'
+				</when>
+				<otherwise>
+					AND (c.care_title LIKE '%' || #{keyword} || '%' OR u.user_nickname
+					LIKE '%' || #{keyword} || '%')
+				</otherwise>
+			</choose>
+		</if>
 	</select>
 
-	<!-- 멍케어 목록 -->
 	<select id="selectCareList" parameterType="map"
 		resultType="AdminCareDTO">
-		<![CDATA[
-		select * from (
-        select rownum as rnum, subquery.*
-        from (
-            SELECT 
-                c.care_number,
-                c.care_title,
-                c.care_date,
-                u.user_nickname,
-                c.care_write_date,
-                COUNT(a.apply_number) || '/' || c.care_recruit AS apply_status
-            FROM ddd_care c
-            JOIN ddd_user u ON c.user_number = u.user_number
-            LEFT JOIN ddd_care_apply a ON c.care_number = a.care_number
-            WHERE c.care_status = 'open'
-            -- GROUP BY 추가
-            GROUP BY c.care_number, c.care_title, c.care_date, u.user_nickname, c.care_write_date, c.care_recruit
-            ORDER BY c.care_date ASC
-        ) subquery
-    ) 
-    WHERE rnum BETWEEN #{startRow} AND #{endRow}]]>
+		SELECT * FROM (
+		SELECT rownum AS rnum, subquery.*
+		FROM (
+		SELECT
+		c.care_number, c.care_title, c.care_date,
+		u.user_nickname, c.care_write_date,
+		(SELECT COUNT(*) FROM ddd_care_apply a WHERE a.care_number = c.care_number)
+		|| '/' || c.care_recruit AS apply_status
+		FROM ddd_care c
+		JOIN ddd_user u ON c.user_number = u.user_number
+		WHERE c.care_status = 'open'
+		<if test="keyword != null and keyword != ''">
+			<choose>
+				<when test="type == 'nickname'">
+					AND u.user_nickname LIKE '%' || #{keyword} || '%'
+				</when>
+				<when test="type == 'title'">
+					AND c.care_title LIKE '%' || #{keyword} || '%'
+				</when>
+			</choose>
+		</if>
+		ORDER BY c.care_date ASC
+		) subquery
+		)
+		WHERE rnum BETWEEN #{startRow} AND #{endRow}
 	</select>
 
 	<!-- 멍케어 목록 검색 -->

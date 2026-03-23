@@ -26,7 +26,14 @@ public class MypageCcareDTO {
 	private LocalDateTime careDate;
 	private String shelterName;
 	private int userNumber;
+	private String careTitle;
 	
+	public String getCareTitle() {
+		return careTitle;
+	}
+	public void setCareTitle(String careTitle) {
+		this.careTitle = careTitle;
+	}
 	public int getApplyNumber() {
 		return applyNumber;
 	}

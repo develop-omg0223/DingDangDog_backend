@@ -24,7 +24,7 @@ public class ApplyCareListController implements Execute {
 		Result result = new Result();
 		 // 세션에서 userNumber 가져오기
         int userNumber = (Integer) session.getAttribute("userNumber");
-
+        System.out.println("조회하려는 유저 번호: " + userNumber);
         // 멍케어 신청 목록 조회
         MypageCareDAO mypageCcareDAO = new MypageCareDAO();
         List<MypageCcareDTO> applyList = mypageCcareDAO.selectApplyList(userNumber);

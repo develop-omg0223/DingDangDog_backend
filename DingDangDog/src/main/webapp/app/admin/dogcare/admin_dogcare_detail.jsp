@@ -51,7 +51,7 @@
 					<!-- 신청 현황 -->
 					<div class="detail-footer-container">
 						<button class="apply-status" id="applyStatusBtn">
-							신청현황 <br>${Status.applyCount}/${Status.careRecruit}
+							신청현황 <br> ${Status.applyStatus}
 						</button>
 					</div>
 
@@ -68,8 +68,8 @@
 						목록으로</button>
 
 					<!-- 삭제 -->
-					<button class="btn-doglog-delete btn"
-						onclick="location.href='${pageContext.request.contextPath}/admin/adminCareDeleteOk.ad?careNumber=${care.careNumber}'">
+					<button class="btn-doglog-delete btn" id="deleteBtn"
+						onclick="location.href='${pageContext.request.contextPath}/admin/adminCareDeleteOk.ad?careNumber=${Detail.careNumber}'">
 						게시글 삭제</button>
 
 				</div>

@@ -59,6 +59,7 @@ public class MypageFrontController extends HttpServlet {
 		Result result = null;
 
 		switch (target) {
+			
 		case "/mypage/checkPw.mp":
 			System.out.println("비밀번호 검사 페이지 요청");
 			result = new Result();
@@ -120,9 +121,9 @@ public class MypageFrontController extends HttpServlet {
 			System.out.println("일반회원 내가 신청한 멍! 케어 목록 페이지 이동 완료");
 			break;
 		case "/mypage/writeCareList.mp":
-			System.out.println("일반회원 내가 신청한 멍! 케어 목록 페이지 이동 요청");
+			System.out.println("보호소회원 내가 등록한 멍! 케어 목록 페이지 이동 요청");
 			result = new WriteCareListController().execute(request, response);
-			System.out.println("일반회원 내가 신청한 멍! 케어 목록 페이지 이동 완료");
+			System.out.println("보호소회원 내가 등록한 멍! 케어 목록 페이지 이동 완료");
 			break;
 		case "/mypage/matchingResult.mp":
 			System.out.println("일반회원 내가 작성한 멍! 매칭 목록 페이지 이동 요청");
@@ -134,6 +135,24 @@ public class MypageFrontController extends HttpServlet {
 			result = new ArchiveListController().execute(request, response);
 			System.out.println("보호소회원 내가 등록한 멍! 카이브 목록 페이지 이동 완료");
 			break;
+		case "/mypage/mypageMain.mp":
+		    System.out.println("마이페이지 이동 요청");
+		    String userType = (String)request.getSession().getAttribute("userType");
+		    
+		    if("C".equals(userType)) {
+		        // 일반회원용 컨트롤러
+		        result = new MypageCMainController().execute(request, response);
+		    } else if("S".equals(userType)) {
+		        // 보호소회원용 컨트롤러
+		        result = new MypageSMainController().execute(request, response);
+		    } else {
+		        // 로그인 정보가 없거나 타입이 이상할 경우 로그인 페이지로
+		        result = new Result();
+		        result.setPath(request.getContextPath() + "/member/login.me");
+		        result.setRedirect(true);
+		    }
+		    System.out.println("마이페이지 이동 처리 완료");
+		    break;
 
 		}
 

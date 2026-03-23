@@ -3,23 +3,19 @@
 
 <mapper namespace="mypageScare">
 
-<!-- 내가 등록한 멍! 케어 리스트 -->
-<select id="selectMyCareList" parameterType="int" resultType="MypageScareDTO">
-    SELECT
-        C.CARE_NUMBER,
-        C.CARE_TITLE,
-        TO_CHAR(C.CARE_WRITE_DATE, 'YYYY-MM-DD') AS CARE_WRITE_DATE,
-        NVL(A.APPLY_COUNT, 0) AS APPLY_COUNT,
-        C.CARE_RECRUIT
-    FROM DDD_CARE C
-    LEFT JOIN (
-        SELECT 
-            CA.CARE_NUMBER, 
-            COUNT(*) AS APPLY_COUNT
-        FROM DDD_CARE_APPLY CA
-        GROUP BY CA.CARE_NUMBER
-    ) A ON C.CARE_NUMBER = A.CARE_NUMBER
-    WHERE C.USER_NUMBER = #{userNumber}
-    ORDER BY C.CARE_NUMBER DESC
-</select>
+	<!-- 내가 등록한 멍! 케어 리스트 -->
+	<select id="selectMyCareList" parameterType="int"
+		resultType="MypageScareDTO">
+		SELECT
+		C.CARE_NUMBER AS careNumber,
+		C.CARE_TITLE AS careTitle,
+		C.CARE_WRITE_DATE AS careDate,
+		(SELECT COUNT(*) FROM ddd_care_apply a WHERE a.care_number = c.care_number)
+		|| '/' || c.care_recruit AS applyStatus,
+		C.CARE_RECRUIT AS careRecruit
+		FROM DDD_CARE C
+		WHERE C.USER_NUMBER = #{userNumber}
+		AND C.CARE_STATUS != 'deleted'
+		ORDER BY C.CARE_NUMBER DESC
+	</select>
 </mapper>

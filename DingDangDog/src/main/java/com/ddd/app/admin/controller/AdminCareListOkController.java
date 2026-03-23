@@ -54,6 +54,7 @@ public class AdminCareListOkController implements Execute {
 		Map<String, Object> pageMap = new HashMap<>();
 		pageMap.put("startRow", startRow);
 		pageMap.put("endRow", endRow);
+		pageMap.put("type", type);
 		System.out.println("페이징 확인 : " + pageMap);
 
 		if (keyword != null && !keyword.trim().isEmpty()) {
@@ -69,7 +70,7 @@ public class AdminCareListOkController implements Execute {
 		request.setAttribute("type", type);
 
 		// 전체 게시글 수 조회
-		int total = adminDAO.getCareTotal();
+		int total = adminDAO.getCareTotal(pageMap);
 
 		// 전체 페이지 수 계산
 		int realEndPage = (int) (Math.ceil(total / (double) rowCount));
