@@ -37,7 +37,8 @@ WHERE rownum <= 5
 		SELECT COUNT(user_number) FROM ddd_user
 		WHERE user_type ='C'
 		AND USER_STATUS IN ('kind', 'withdraw')
-		AND user_id LIKE '%' || #{keyword} || '%'
+		AND user_id LIKE '%' ||
+		#{keyword} || '%'
 	</select>
 	<!-- 닉네임 검색 총회원 -->
 	<select id="getTotalCommonByUserNickname" parameterType="string"
@@ -46,7 +47,8 @@ WHERE rownum <= 5
 		WHERE user_type =
 		'C'
 		AND USER_STATUS IN ('kind', 'withdraw')
-		AND user_nickname LIKE '%' ||
+		AND user_nickname LIKE '%'
+		||
 		#{keyword} || '%'
 	</select>
 
@@ -196,7 +198,8 @@ WHERE rownum <= 5
 		resultType="AdminUserDTO">
 		<!-- 파일 추가 필요 -->
 		SELECT
-		u.user_number, u.user_id, s.shelter_name, u.user_nickname,
+		u.user_number, u.user_id,u.user_name, s.shelter_name,
+		u.user_nickname,
 		s.shelter_address, s.shelter_address_detail,
 		s.shelter_business_number, s.shelter_certification,
 		f.file_system_name

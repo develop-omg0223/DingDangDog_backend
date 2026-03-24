@@ -98,7 +98,7 @@ public class AdminFrontController extends HttpServlet {
 			result = new AdminUserSDetailOkController().execute(request, response);
 			System.out.println("보호소 회원 상세 페이지 이동");
 			break;
-		case "/admin/userShelterConfirmlOk.ad":
+		case "/admin/userShelterConfirmOk.ad":
 			System.out.println("보호소 회원 상세 페이지 요청");
 			result = new AdminUserShelterConfirmOkController().execute(request, response);
 			System.out.println("보호소 회원 상세 페이지 이동");
