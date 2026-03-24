@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.ddd.app.Result;
-import com.ddd.app.dogmatching.controller.MatchingResultListController;
+//import com.ddd.app.dogmatching.controller.MatchingResultListController;
 
 public class MyPageDogMatchingController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -47,10 +47,10 @@ public class MyPageDogMatchingController extends HttpServlet {
 
 		// ===== 2. 매칭 리스트 + 내 정보 불러오기 
 		// ===== 마이 페이지 메인 =====
-		case "/matching/list.ma":
-			System.out.println("마이페이지 메인 리스트 호출");
-			result = new MatchingResultListController().execute(request, response);
-			break;
+//		case "/matching/list.ma":
+//			System.out.println("마이페이지 메인 리스트 호출");
+//			result = new MatchingResultListController().execute(request, response);
+//			break;
 
 		// ===== 3. 매칭 상세 보기 =====
 		// ===== 리스트에 있는 게시글 클릭 시 =====
