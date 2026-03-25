@@ -1,20 +1,14 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="ko">
-
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/assets/css/header.css" />
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/assets/css/footer.css" />
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/assets/css/dogarchive/dogarchive_write.css" />
-<script defer
-	src="${pageContext.request.contextPath}/assets/js/dogarchive/dogarchive_write.js"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/header.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/footer.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/dogarchive/dogarchive_write.css?v=1.2" />
+<script defer src="${pageContext.request.contextPath}/assets/js/dogarchive/dogarchive_write.js?v=1.2"></script>
 <title>멍! 카이브 작성</title>
 </head>
 
@@ -29,9 +23,7 @@
 	</c:choose>
 
 	<main class="archive-write">
-		<form id="archiveForm"
-			action="${pageContext.request.contextPath}/archive/writeOk.ar"
-			method="post" enctype="multipart/form-data">
+		<form id="writeForm" enctype="multipart/form-data" method="post" action="${pageContext.request.contextPath}/archive/writeOk.ar">
 			<div class="container">
 				<div class="container-header">
 					<h2 id="main-title">멍! 카이브 작성</h2>
@@ -41,125 +33,83 @@
 					<div class="archive-write-top">
 						<div class="archive-image-section">
 							<div class="archive-image-box">
-								<img id="thumbnailPreview" src="" alt="대표 이미지 미리보기" /> <span
-									class="img-placeholder">대표 이미지 첨부하기</span>
+								<img id="previewImage" src="${pageContext.request.contextPath}/assets/img/dogarchive/default_dog.png" alt="대표 이미지" />
 							</div>
-
-							<input type="file" id="imageUpload" name="dogImage"
-								accept="image/*" multiple hidden /> <label for="imageUpload"
-								class="btn btn-upload">이미지 첨부</label>
+							<input type="file" id="dogImage" name="dogImage" accept="image/*" hidden /> 
+							<label for="dogImage" class="btn btn-upload">이미지 첨부</label>
 						</div>
 
 						<div class="archive-info-section">
 							<div class="dog-name-row">
-								<label for="dogName" class="dog-name-label">이름 :</label> <input
-									type="text" id="dogName" name="dogName" class="dog-name-input" />
+								<label for="dogName" class="dog-name-label">이름 :</label> 
+								<input type="text" id="dogName" name="dogName" class="dog-name-input" placeholder="강아지 이름 입력" />
 							</div>
 
 							<div class="dog-info-grid">
 								<div class="info-item">
-									<label for="dogBreed">품종 :</label> <input type="text"
-										id="dogBreed" name="dogBreed" />
-								</div>
-
-								<div class="info-item">
-									<label for="dogGender">성별 :</label> <input type="text"
-										id="dogGender" name="dogGender" placeholder="M 또는 F를 입력해주세요"
-										class="info-input" />
-								</div>
-
-								<div class="info-item">
-									<label for="dogAge">나이 :</label> <input type="text" id="dogAge"
-										name="dogAge" />
-								</div>
-
-								<div class="info-item">
-									<label for="dogWeight">몸무게 :</label> <input type="text"
-										id="dogWeight" name="dogWeight" />
+									<label for="dogBreed">품종 :</label> 
+									<input type="text" id="dogBreed" name="dogBreed" placeholder="품종 입력" />
 								</div>
 								<div class="info-item">
-									<label for="shelterName">보호소 :</label> <input type="text"
-										id="shelterName" name="shelterName"
-										value="${sessionScope.shelterName}" readonly />
+									<span class="info-label">성별 :</span> 
+									<select class="info-input" id="dogGender" name="dogGender">
+										<option value="M">M</option>
+										<option value="F">F</option>
+									</select>
 								</div>
-
 								<div class="info-item">
-									<label for="dogRescueDate">보호소에 들어온 날 :</label> <input
-										type="date" id="dogRescueDate" name="dogRescueDate" />
+									<label for="dogAge">나이 :</label> 
+									<input type="text" id="dogAge" name="dogAge" placeholder="나이(숫자만) 입력" />
+								</div>
+								<div class="info-item">
+									<label for="dogWeight">몸무게 :</label> 
+									<input type="text" id="dogWeight" name="dogWeight" placeholder="몸무게(kg) 입력" />
+								</div>
+								<div class="info-item">
+									<label for="dogSafeDate">보호소 들어온 날 :</label> 
+									<input type="date" id="dogSafeDate" name="dogSafeDate" />
 								</div>
 							</div>
 
 							<div class="dog-trait-list">
 								<div class="trait-row">
-									<label for="scoreActivity">활동성 :</label> <input type="text"
-										id="traitActivity" name="traitActivity"
-										class="trait-text-input" /> <span class="trait-score-label">점수:</span>
-									<select id="scoreActivity" name="scoreActivity"
-										class="trait-score-select">
-										<option value="">선택</option>
-										<option value="1">1점</option>
-										<option value="2">2점</option>
-										<option value="3">3점</option>
-										<option value="4">4점</option>
-										<option value="5">5점</option>
+									<label for="dogActivityDetail">활동성 :</label> 
+									<input type="text" id="dogActivityDetail" name="dogActivityDetail" class="trait-text-input" placeholder="활동성 설명 입력" /> 
+									<span class="trait-score-label">점수:</span>
+									<select name="dogActivity" class="trait-score-select">
+										<option value="1">1점</option><option value="2">2점</option><option value="3" selected>3점</option><option value="4">4점</option><option value="5">5점</option>
 									</select>
 								</div>
-
 								<div class="trait-row">
-									<label for="scoreSocial">사회성 :</label> <input type="text"
-										id="traitSocial" name="traitSocial" class="trait-text-input" />
-									<span class="trait-score-label">점수:</span> <select
-										id="scoreSocial" name="scoreSocial" class="trait-score-select">
-										<option value="">선택</option>
-										<option value="1">1점</option>
-										<option value="2">2점</option>
-										<option value="3">3점</option>
-										<option value="4">4점</option>
-										<option value="5">5점</option>
+									<label for="dogSocialityDetail">사회성 :</label> 
+									<input type="text" id="dogSocialityDetail" name="dogSocialityDetail" class="trait-text-input" placeholder="사회성 설명 입력" /> 
+									<span class="trait-score-label">점수:</span>
+									<select name="dogSociality" class="trait-score-select">
+										<option value="1">1점</option><option value="2">2점</option><option value="3" selected>3점</option><option value="4">4점</option><option value="5">5점</option>
 									</select>
 								</div>
-
 								<div class="trait-row">
-									<label for="scoreIndependence">독립성 :</label> <input type="text"
-										id="traitIndependence" name="traitIndependence"
-										class="trait-text-input" /> <span class="trait-score-label">점수:</span>
-									<select id="scoreIndependence" name="scoreIndependence"
-										class="trait-score-select">
-										<option value="">선택</option>
-										<option value="1">1점</option>
-										<option value="2">2점</option>
-										<option value="3">3점</option>
-										<option value="4">4점</option>
-										<option value="5">5점</option>
+									<label for="dogIndependenceDetail">독립성 :</label> 
+									<input type="text" id="dogIndependenceDetail" name="dogIndependenceDetail" class="trait-text-input" placeholder="독립성 설명 입력" /> 
+									<span class="trait-score-label">점수:</span>
+									<select name="dogIndependence" class="trait-score-select">
+										<option value="1">1점</option><option value="2">2점</option><option value="3" selected>3점</option><option value="4">4점</option><option value="5">5점</option>
 									</select>
 								</div>
-
 								<div class="trait-row">
-									<label for="scoreBark">짖음수준 :</label> <input type="text"
-										id="traitBark" name="traitBark" class="trait-text-input" /> <span
-										class="trait-score-label">점수:</span> <select id="scoreBark"
-										name="scoreBark" class="trait-score-select">
-										<option value="">선택</option>
-										<option value="1">1점</option>
-										<option value="2">2점</option>
-										<option value="3">3점</option>
-										<option value="4">4점</option>
-										<option value="5">5점</option>
+									<label for="dogBarkingDetail">짖음수준 :</label> 
+									<input type="text" id="dogBarkingDetail" name="dogBarkingDetail" class="trait-text-input" placeholder="짖음수준 설명 입력" /> 
+									<span class="trait-score-label">점수:</span>
+									<select name="dogBarking" class="trait-score-select">
+										<option value="1">1점</option><option value="2">2점</option><option value="3" selected>3점</option><option value="4">4점</option><option value="5">5점</option>
 									</select>
 								</div>
-
 								<div class="trait-row">
-									<label for="scoreGrooming">털관리 :</label> <input type="text"
-										id="traitGrooming" name="traitGrooming"
-										class="trait-text-input" /> <span class="trait-score-label">점수:</span>
-									<select id="scoreGrooming" name="scoreGrooming"
-										class="trait-score-select">
-										<option value="">선택</option>
-										<option value="1">1점</option>
-										<option value="2">2점</option>
-										<option value="3">3점</option>
-										<option value="4">4점</option>
-										<option value="5">5점</option>
+									<label for="dogGroomingDetail">털관리 :</label> 
+									<input type="text" id="dogGroomingDetail" name="dogGroomingDetail" class="trait-text-input" placeholder="털관리 설명 입력" /> 
+									<span class="trait-score-label">점수:</span>
+									<select name="dogGrooming" class="trait-score-select">
+										<option value="1">1점</option><option value="2">2점</option><option value="3" selected>3점</option><option value="4">4점</option><option value="5">5점</option>
 									</select>
 								</div>
 							</div>
@@ -167,18 +117,15 @@
 					</div>
 
 					<div class="archive-content-section">
-						<input type="hidden" name="dogContent" id="dogContentHidden">
-						<div id="archiveContentEditor" class="archive-content-editor"
-							contenteditable="true" data-placeholder="보호소가 자유롭게 작성 가능한 텍스트란"></div>
+						<input type="hidden" id="dogDetailHidden" name="dogDetail" />
+						<div class="archive-content-editor" id="archiveContentEditor" contenteditable="true" placeholder="상세 내용을 입력하세요"></div>
 					</div>
 				</div>
 
 				<div class="container-footer">
 					<div class="footer-btn-wrap">
-						<button type="button" class="btn btn-save" id="btnEditSave">등록</button>
-						<button type="button" class="btn btn-cancel" id="btnCancle"
-							onclick="location.href='${pageContext.request.contextPath}/archive/list.ar'">
-							취소</button>
+						<button type="button" class="btn btn-save" id="btnWriteSave">등록</button>
+						<button type="button" class="btn btn-cancel" id="btnCancel">취소</button>
 					</div>
 				</div>
 			</div>
@@ -186,9 +133,6 @@
 	</main>
 
 	<jsp:include page="/app/footer.jsp" />
-
-	<script
-		src="${pageContext.request.contextPath}/assets/js/header-footer.js"></script>
+	<script src="${pageContext.request.contextPath}/assets/js/header-footer.js"></script>
 </body>
-
 </html>

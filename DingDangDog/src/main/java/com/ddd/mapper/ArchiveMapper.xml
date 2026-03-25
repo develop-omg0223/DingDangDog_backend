@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="archive">
-
-<select id="selectList" parameterType="ArchiveListDTO" resultType="ArchiveListDTO">
+<select id="selectList" parameterType="com.ddd.app.dogarchive.dto.ArchiveListDTO" resultType="com.ddd.app.dogarchive.dto.ArchiveListDTO">
 		SELECT
-		A.DOG_NUMBER, A.DOG_NAME, A.DOG_BREED, US.SHELTER_NAME, A.DOG_SAFE_DATE,
+		A.DOG_NUMBER,
+		A.DOG_NAME,
+		A.DOG_BREED,
+		NVL(US.SHELTER_NAME, U.USER_NAME) AS SHELTER_NAME,
+		A.DOG_SAFE_DATE,
 		AI.ARCHIVE_IMG_PATH
-		FROM DDD_ARCHIVE A
+		FROM DDD_ARCHIVE A LEFT JOIN DDD_USER U ON A.USER_NUMBER = U.USER_NUMBER
 		LEFT JOIN DDD_USER_SHELTER US ON A.USER_NUMBER = US.USER_NUMBER
 		LEFT JOIN (
 		SELECT DOG_NUMBER, MIN(ARCHIVE_IMG_NUMBER) AS MIN_IMG_NUMBER
@@ -17,126 +20,139 @@
 		ORDER BY A.DOG_NUMBER DESC
 </select>
 
-	<select id="getTotalCount" parameterType="ArchiveListDTO" resultType="int">
+	<select id="getTotalCount" parameterType="com.ddd.app.dogarchive.dto.ArchiveListDTO" resultType="int">
 		SELECT COUNT(*) FROM DDD_ARCHIVE
 	</select>
 
-<select id="selectDetail" parameterType="int" resultType="ArchiveReadDTO">
+	<select id="selectDetail" parameterType="int" resultType="com.ddd.app.dogarchive.dto.ArchiveReadDTO">
 		SELECT
-		A.DOG_NUMBER,
-		A.USER_NUMBER,
-		A.DOG_NAME,
-		A.DOG_BREED,
-		CASE
-		WHEN A.DOG_GENDER = 'M' THEN '남아'
-		WHEN A.DOG_GENDER = 'F' THEN '여아'
-		ELSE '미지정'
-		END AS DOG_GENDER,
-		A.DOG_AGE,
-		A.DOG_WEIGHT,
-		A.DOG_SAFE_DATE,
-		S.DOG_ACTIVITY,
-		S.DOG_SOCIALITY,
-		A.DOG_DETAIL, S.DOG_INDEPENDENCE,
-		S.DOG_BARKING,
-		S.DOG_GROOMING,
-		AI.ARCHIVE_IMG_PATH
+			A.DOG_NUMBER,
+			A.USER_NUMBER,
+			A.DOG_NAME,
+			A.DOG_BREED,
+			A.DOG_GENDER,
+			A.DOG_AGE,
+			A.DOG_WEIGHT,
+			A.DOG_SAFE_DATE,
+			S.DOG_ACTIVITY,
+			S.DOG_SOCIALITY,
+			S.DOG_INDEPENDENCE,
+			S.DOG_BARKING,
+			S.DOG_GROOMING,
+			S.DOG_ACTIVITY_DETAIL,   
+			S.DOG_SOCIALITY_DETAIL,  
+			S.DOG_INDEPENDENCE_DETAIL,
+			S.DOG_BARKING_DETAIL,     
+			S.DOG_GROOMING_DETAIL,    
+			A.DOG_DETAIL, 
+			AI.ARCHIVE_IMG_PATH
 		FROM DDD_ARCHIVE A
 		LEFT JOIN DDD_ARCHIVE_SCORE S ON A.DOG_NUMBER = S.DOG_NUMBER
 		LEFT JOIN (
-		SELECT DOG_NUMBER, ARCHIVE_IMG_PATH
-		FROM (
-		SELECT
-		DOG_NUMBER,
-		ARCHIVE_IMG_PATH,
-		ROW_NUMBER() OVER (PARTITION BY DOG_NUMBER ORDER BY ARCHIVE_IMG_NUMBER
-		ASC) as RN
-		FROM DDD_ARCHIVE_IMG
-		)
-		WHERE RN = 1
+			SELECT DOG_NUMBER, ARCHIVE_IMG_PATH
+			FROM (
+				SELECT
+					DOG_NUMBER,
+					ARCHIVE_IMG_PATH,
+					ROW_NUMBER() OVER (PARTITION BY DOG_NUMBER ORDER BY ARCHIVE_IMG_NUMBER ASC) as RN
+				FROM DDD_ARCHIVE_IMG
+			)
+			WHERE RN = 1
 		) AI ON A.DOG_NUMBER = AI.DOG_NUMBER
 		WHERE A.DOG_NUMBER = #{dogNumber}
-</select>
+	</select>
 
-<insert id="insertArchive" parameterType="ArchiveWriteDTO">
-    <selectKey keyProperty="dogNumber" resultType="int" order="BEFORE">
-        SELECT SEQ_ARCHIVE.NEXTVAL FROM DUAL
-    </selectKey>
-
-    INSERT INTO DDD_ARCHIVE (
-        DOG_NUMBER, USER_NUMBER, DOG_NAME, DOG_BREED, DOG_GENDER,
-        DOG_AGE, DOG_WEIGHT, DOG_SAFE_DATE, DOG_ARCHIVE_DATE, DOG_DETAIL
-    ) VALUES (
-        #{dogNumber}, 
-        #{userNumber}, 
-        #{dogName}, 
-        #{dogBreed}, 
-        #{dogGender},
-        #{dogAge}, 
-        #{dogWeight}, 
-        TO_DATE(SUBSTR(#{dogSafeDate, jdbcType=VARCHAR}, 1, 10), 'YYYY-MM-DD'),
-        SYSDATE,
-        #{dogDetail}
-    )
-</insert>
-
-	<insert id="insertScore" parameterType="ArchiveWriteDTO">
-		INSERT INTO DDD_ARCHIVE_SCORE (
-			DOG_NUMBER, DOG_ACTIVITY, DOG_SOCIALITY, DOG_INDEPENDENCE, DOG_BARKING, DOG_GROOMING
-		) VALUES ( 
-			#{dogNumber}, #{dogActivity}, #{dogSociality}, #{dogIndependence}, #{dogBarking}, #{dogGrooming} 
+	<insert id="insertArchive" parameterType="com.ddd.app.dogarchive.dto.ArchiveWriteDTO">
+		<selectKey keyProperty="dogNumber" resultType="int" order="BEFORE">
+			SELECT SEQ_DDD_ARCHIVE.NEXTVAL FROM DUAL
+		</selectKey>
+		INSERT INTO DDD_ARCHIVE (
+			DOG_NUMBER, USER_NUMBER, DOG_NAME, DOG_BREED, DOG_GENDER,
+			DOG_AGE, DOG_WEIGHT, DOG_SAFE_DATE, DOG_ARCHIVE_DATE, DOG_DETAIL
+		) VALUES (
+			#{dogNumber}, #{userNumber}, #{dogName}, #{dogBreed}, #{dogGender},
+			#{dogAge}, #{dogWeight}, 
+			TO_DATE(REPLACE(SUBSTR(#{dogSafeDate}, 1, 10), 'T', ''), 'YYYY-MM-DD'),
+			SYSDATE, #{dogDetail}
 		)
 	</insert>
 
-<insert id="insertImg" parameterType="ArchiveWriteDTO">
-    INSERT INTO DDD_ARCHIVE_IMG (
-        ARCHIVE_IMG_NUMBER, 
-        DOG_NUMBER, 
-        ARCHIVE_IMG_NAME, 
-        ARCHIVE_IMG_PATH
-    ) VALUES (
-        SEQ_ARCHIVE_IMG.NEXTVAL,  #{dogNumber}, 
-        #{archiveImgName},
-        #{archiveImgPath} 
-    )
-</insert>
+	<insert id="insertScore" parameterType="com.ddd.app.dogarchive.dto.ArchiveWriteDTO">
+		INSERT INTO DDD_ARCHIVE_SCORE (
+			DOG_NUMBER, DOG_ACTIVITY, DOG_SOCIALITY, DOG_INDEPENDENCE, DOG_BARKING, DOG_GROOMING,
+			DOG_ACTIVITY_DETAIL, DOG_SOCIALITY_DETAIL, DOG_INDEPENDENCE_DETAIL, DOG_BARKING_DETAIL, DOG_GROOMING_DETAIL
+		) VALUES ( 
+			#{dogNumber}, #{dogActivity}, #{dogSociality}, #{dogIndependence}, #{dogBarking}, #{dogGrooming},
+			#{dogActivityDetail}, #{dogSocialityDetail}, #{dogIndependenceDetail}, #{dogBarkingDetail}, #{dogGroomingDetail}
+		)
+	</insert>
 
-	<update id="updateArchive" parameterType="ArchiveUpdateDTO">
+	<insert id="insertImg" parameterType="com.ddd.app.dogarchive.dto.ArchiveWriteDTO">
+		<choose>
+			<when test="archiveImgName != null">
+				INSERT INTO DDD_ARCHIVE_IMG (
+					ARCHIVE_IMG_NUMBER, 
+					DOG_NUMBER, 
+					ARCHIVE_IMG_NAME, 
+					ARCHIVE_IMG_PATH
+				) VALUES (
+					SEQ_ARCHIVE_IMG.NEXTVAL, #{dogNumber}, 
+					#{archiveImgName},
+					#{archiveImgPath} 
+				)
+			</when>
+			<otherwise>
+				SELECT 1 FROM DUAL WHERE 1=0
+			</otherwise>
+		</choose>
+	</insert>
+
+	<update id="updateArchive" parameterType="com.ddd.app.dogarchive.dto.ArchiveUpdateDTO">
 		UPDATE DDD_ARCHIVE
 		SET
-			DOG_NAME = #{dogName}, DOG_BREED = #{dogBreed}, DOG_GENDER = #{dogGender},
-			DOG_AGE = #{dogAge}, DOG_WEIGHT = #{dogWeight},
-			DOG_SAFE_DATE = #{dogSafeDate, jdbcType=TIMESTAMP}, 
-			DOG_DETAIL = #{dogDetail}, ARCHIVE_MODIFY_DATE = SYSDATE
+			DOG_NAME = #{dogName}, 
+			DOG_BREED = #{dogBreed}, 
+			DOG_GENDER = #{dogGender},
+			DOG_AGE = #{dogAge}, 
+			DOG_WEIGHT = #{dogWeight},
+			DOG_SAFE_DATE = TO_DATE(REPLACE(SUBSTR(#{dogSafeDate}, 1, 10), 'T', ''), 'YYYY-MM-DD'), 
+			DOG_DETAIL = #{dogDetail}, 
+			ARCHIVE_MODIFY_DATE = SYSDATE
 		WHERE DOG_NUMBER = #{dogNumber}
 	</update>
 	
-	<update id="updateScore" parameterType="ArchiveUpdateDTO">
-    UPDATE DDD_ARCHIVE_SCORE
-    SET 
-        DOG_ACTIVITY = #{dogActivity},
-        DOG_SOCIALITY = #{dogSociality},
-        DOG_INDEPENDENCE = #{dogIndependence},
-        DOG_BARKING = #{dogBarking},
-        DOG_GROOMING = #{dogGrooming}
-    WHERE DOG_NUMBER = #{dogNumber}
-</update>
+	<update id="updateScore" parameterType="com.ddd.app.dogarchive.dto.ArchiveUpdateDTO">
+		UPDATE DDD_ARCHIVE_SCORE
+		SET 
+			DOG_ACTIVITY = #{dogActivity},
+			DOG_SOCIALITY = #{dogSociality},
+			DOG_INDEPENDENCE = #{dogIndependence},
+			DOG_BARKING = #{dogBarking},
+			DOG_GROOMING = #{dogGrooming},
+			DOG_ACTIVITY_DETAIL = #{dogActivityDetail},
+			DOG_SOCIALITY_DETAIL = #{dogSocialityDetail},
+			DOG_INDEPENDENCE_DETAIL = #{dogIndependenceDetail},
+			DOG_BARKING_DETAIL = #{dogBarkingDetail},
+			DOG_GROOMING_DETAIL = #{dogGroomingDetail}
+		WHERE DOG_NUMBER = #{dogNumber}
+	</update>
 
-<update id="updateImg" parameterType="ArchiveUpdateDTO">
-    <choose>
-        <when test="archiveImgPath != null">
-            UPDATE DDD_ARCHIVE_IMG
-            SET ARCHIVE_IMG_NAME = #{archiveImgName}, ARCHIVE_IMG_PATH = #{archiveImgPath}
-            WHERE DOG_NUMBER = #{dogNumber}
-        </when>
-        <otherwise>
-            SELECT 1 FROM DUAL
-        </otherwise>
-    </choose>
-</update>
+	<update id="updateImg" parameterType="com.ddd.app.dogarchive.dto.ArchiveUpdateDTO">
+		MERGE INTO DDD_ARCHIVE_IMG AI
+		USING DUAL
+		ON (AI.DOG_NUMBER = #{dogNumber})
+		WHEN MATCHED THEN
+		UPDATE SET 
+		ARCHIVE_IMG_NAME = #{archiveImgName}, 
+		ARCHIVE_IMG_PATH = #{archiveImgPath}
+		WHEN NOT MATCHED THEN
+	 	INSERT (ARCHIVE_IMG_NUMBER, DOG_NUMBER, ARCHIVE_IMG_NAME, ARCHIVE_IMG_PATH)
+		VALUES (SEQ_ARCHIVE_IMG.NEXTVAL, #{dogNumber}, #{archiveImgName}, #{archiveImgPath})
+	</update>
 
-	<delete id="delete" parameterType="ArchiveDeleteDTO">
-		DELETE FROM DDD_ARCHIVE WHERE DOG_NUMBER = #{dogNumber}
+	<delete id="delete" parameterType="com.ddd.app.dogarchive.dto.ArchiveDeleteDTO">
+		DELETE FROM DDD_ARCHIVE 
+		WHERE DOG_NUMBER = #{dogNumber}
 		AND (USER_NUMBER = #{userNumber} OR #{adminNumber} IS NOT NULL)
 	</delete>
 

@@ -29,36 +29,34 @@ public class ArchiveWriteDTO {
 //	   archive_img_name VARCHAR2(200) NOT NULL,	// String
 //	   archive_img_path VARCHAR2(200),	// Sting
 
-	// ===== 필드 =====
-	private int userNumber;
 	private int dogNumber;
+	private int userNumber;
 	private String dogName;
 	private String dogBreed;
 	private String dogGender;
 	private String dogAge;
 	private double dogWeight;
-	private LocalDateTime dogSafeDate;
+	private String dogSafeDate;
 	private String dogDetail;
 
-	// 성향 정보 등록
+	// 성향 점수 필드
 	private int dogActivity;
 	private int dogSociality;
 	private int dogIndependence;
 	private int dogBarking;
 	private int dogGrooming;
 
-	// 이미지 정보 (최소 1개 필수 제약조건)
+	// 새로 추가한 상세 설명 필드
+	private String dogActivityDetail;
+	private String dogSocialityDetail;
+	private String dogIndependenceDetail;
+	private String dogBarkingDetail;
+	private String dogGroomingDetail;
+
 	private String archiveImgName;
 	private String archiveImgPath;
 
-	// ===== Getter,Setter =====
-	public int getUserNumber() {
-		return userNumber;
-	}
-
-	public void setUserNumber(int userNumber) {
-		this.userNumber = userNumber;
-	}
+	// ===== Getter / Setter (직접 늘려 쓰는 방식) =====
 
 	public int getDogNumber() {
 		return dogNumber;
@@ -66,6 +64,14 @@ public class ArchiveWriteDTO {
 
 	public void setDogNumber(int dogNumber) {
 		this.dogNumber = dogNumber;
+	}
+
+	public int getUserNumber() {
+		return userNumber;
+	}
+
+	public void setUserNumber(int userNumber) {
+		this.userNumber = userNumber;
 	}
 
 	public String getDogName() {
@@ -109,12 +115,10 @@ public class ArchiveWriteDTO {
 	}
 
 	public String getDogSafeDate() {
-		if (dogSafeDate == null)
-			return "";
-		return dogSafeDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+		return dogSafeDate;
 	}
 
-	public void setDogSafeDate(LocalDateTime dogSafeDate) {
+	public void setDogSafeDate(String dogSafeDate) {
 		this.dogSafeDate = dogSafeDate;
 	}
 
@@ -166,6 +170,46 @@ public class ArchiveWriteDTO {
 		this.dogGrooming = dogGrooming;
 	}
 
+	public String getDogActivityDetail() {
+		return dogActivityDetail;
+	}
+
+	public void setDogActivityDetail(String dogActivityDetail) {
+		this.dogActivityDetail = dogActivityDetail;
+	}
+
+	public String getDogSocialityDetail() {
+		return dogSocialityDetail;
+	}
+
+	public void setDogSocialityDetail(String dogSocialityDetail) {
+		this.dogSocialityDetail = dogSocialityDetail;
+	}
+
+	public String getDogIndependenceDetail() {
+		return dogIndependenceDetail;
+	}
+
+	public void setDogIndependenceDetail(String dogIndependenceDetail) {
+		this.dogIndependenceDetail = dogIndependenceDetail;
+	}
+
+	public String getDogBarkingDetail() {
+		return dogBarkingDetail;
+	}
+
+	public void setDogBarkingDetail(String dogBarkingDetail) {
+		this.dogBarkingDetail = dogBarkingDetail;
+	}
+
+	public String getDogGroomingDetail() {
+		return dogGroomingDetail;
+	}
+
+	public void setDogGroomingDetail(String dogGroomingDetail) {
+		this.dogGroomingDetail = dogGroomingDetail;
+	}
+
 	public String getArchiveImgName() {
 		return archiveImgName;
 	}
@@ -182,15 +226,16 @@ public class ArchiveWriteDTO {
 		this.archiveImgPath = archiveImgPath;
 	}
 
-	// ===== Overried =====
 	@Override
 	public String toString() {
-		return "ArchiveWriteDTO [userNumber=" + userNumber + ", dogName=" + dogName + ", dogBreed=" + dogBreed
-				+ ", dogGender=" + dogGender + ", dogAge=" + dogAge + ", dogWeight=" + dogWeight + ", dogSafeDate="
-				+ dogSafeDate + ", dogDetail=" + dogDetail + ", dogActivity=" + dogActivity + ", dogSociality="
-				+ dogSociality + ", dogIndependence=" + dogIndependence + ", dogBarking=" + dogBarking
-				+ ", dogGrooming=" + dogGrooming + ", archiveImgName=" + archiveImgName + ", archiveImgPath="
-				+ archiveImgPath + "]";
+		return "ArchiveWriteDTO [dogNumber=" + dogNumber + ", userNumber=" + userNumber + ", dogName=" + dogName
+				+ ", dogBreed=" + dogBreed + ", dogGender=" + dogGender + ", dogAge=" + dogAge + ", dogWeight="
+				+ dogWeight + ", dogSafeDate=" + dogSafeDate + ", dogDetail=" + dogDetail + ", dogActivity="
+				+ dogActivity + ", dogSociality=" + dogSociality + ", dogIndependence=" + dogIndependence
+				+ ", dogBarking=" + dogBarking + ", dogGrooming=" + dogGrooming + ", dogActivityDetail="
+				+ dogActivityDetail + ", dogSocialityDetail=" + dogSocialityDetail + ", dogIndependenceDetail="
+				+ dogIndependenceDetail + ", dogBarkingDetail=" + dogBarkingDetail + ", dogGroomingDetail="
+				+ dogGroomingDetail + ", archiveImgName=" + archiveImgName + ", archiveImgPath=" + archiveImgPath + "]";
 	}
 
 }

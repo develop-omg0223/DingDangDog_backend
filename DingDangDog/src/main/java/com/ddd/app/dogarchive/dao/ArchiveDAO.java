@@ -61,5 +61,11 @@ public class ArchiveDAO {
 	public ArchiveReadDTO selectDetail(int dogNumber) {
 		return sqlSession.selectOne("archive.selectDetail", dogNumber);
 	}
+	
+	public void updateScore(ArchiveUpdateDTO updateDTO) {
+	    sqlSession.update("archive.updateScore", updateDTO);
+	}
+	
+	
 
 }

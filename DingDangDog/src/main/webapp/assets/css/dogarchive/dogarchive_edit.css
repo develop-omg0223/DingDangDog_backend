@@ -1,256 +1,288 @@
-/* [기존 유지] 기본 초기화 */
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
+/* dogarchive_edit.css - 작성 페이지 기준으로 전체 동기화 */
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
 }
 
 @font-face {
-  font-family:"HannaPro";
-  src:url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_seven@1.0/BMHANNAPro.woff")
-    format("woff");
-  font-weight:normal;
-  font-display:swap;
+	font-family: "HannaPro";
+	src:
+		url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_seven@1.0/BMHANNAPro.woff")
+		format("woff");
+	font-weight: normal;
+	font-display: swap;
 }
 
-/* [수정] body는 100%여야 배경이 꽉 찹니다 */
-body{
-  width: 100%;
-  margin: 0;
-  background: #fff;
-  font-family: "HannaPro", sans-serif;
+body {
+	width: 100%;
+	margin: 0;
+	background: #fff;
+	font-family: "HannaPro", sans-serif;
 }
 
-/* --------------------------------------------------
-   [수정] 헤더 & 푸터 : 배경은 100%, 내용은 중앙 정렬
-   -------------------------------------------------- */
-header {
-  width: 100%;
-  height: 110px;
-  background-color: #F47C2A; /* 주황색 배경 100% */
-  display: flex;
-  justify-content: center;
+.archive-write {
+	width: 100%;
+	min-height: 804px;
+	background: #fff;
+	display: flex;
+	justify-content: center;
 }
 
-footer {
-  width: 100%;
-  height: 110px;
-  background-color: #000;    /* 검은색 배경 100% */
-  display: flex;
-  justify-content: center;
+.container {
+	width: 1440px;
+	min-height: 804px;
+	padding: 0 50px 40px;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	margin: 0 auto;
 }
 
-/* 헤더/푸터 내부의 실제 컨텐츠가 들어갈 자리 */
-.header-inner, .footer-inner {
-  width: 1440px;
-  height: 100%;
-  margin: 0 auto;
+.container-header {
+	width: 100%;
+	height: 170px;
+	display: flex;
+	align-items: center;
 }
 
-/* --------------------------------------------------
-   [기존 유지] 본문 디자인 (수정 절대 없음)
-   -------------------------------------------------- */
-.archive-detail{
-  width: 100%;
-  min-height: 804px;
-  display: flex;
-  justify-content: center;
+#main-title {
+	font-size: 32px;
+	color: #f47c2a;
+	margin: 37px 27px 37px 0;
+	display: inline-block;
+	padding: 20px;
+	padding-bottom: 15px;
+	border-bottom: 4px solid #f47c2a;
 }
 
-.container{
-  width: 1440px;
-  padding: 0 50px 40px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  margin: 0 auto; /* 본문 중앙 정렬 */
+.container-body {
+	width: 100%;
 }
 
-.container-header{
-  width:100%;
-  height:170px;
-  display:flex;
-  align-items:center;
+.archive-write-top {
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+	gap: 40px;
 }
 
-#main-title{
-  font-size:32px;
-  color:#f47c2a;
-  margin:37px 27px 37px 0;
-  display:inline-block;
-  padding:20px;
-  padding-bottom:15px;
-  border-bottom:4px solid #f47c2a;
+/* 왼쪽 이미지 영역 */
+.archive-image-section {
+	width: 320px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	flex-shrink: 0;
 }
 
-.container-body{
-  width:100%;
+.archive-image-box {
+	width: 320px;
+	height: 500px;
+	border-radius: 20px;
+	overflow: hidden;
+	position: relative;
+	background: #d9d9d9;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
-.archive-detail-top{
-  width:100%;
-  display:flex;
-  justify-content:space-between;
-  align-items:flex-start;
-  gap:40px;
+.archive-image-box img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	display: block;
 }
 
-/* --- 이미지 영역 --- */
-.archive-image-section{
-  width:320px;
-  flex-shrink:0;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
+.btn {
+	min-width: 104px;
+	height: 46px;
+	padding: 0 18px;
+	background-color: #f47c2a;
+	border-radius: 10px;
+	color: #fff;
+	border: none;
+	box-shadow: 2px 2px 5px #b6b6b6;
+	text-align: center;
+	line-height: 46px;
+	text-decoration: none;
+	font-size: 18px;
+	font-family: "HannaPro", sans-serif;
+	cursor: pointer;
 }
 
-.archive-image-box{
-  width:320px;
-  height:500px;
-  border-radius:20px;
-  overflow:hidden;
-  background:#d9d9d9;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  margin-bottom:15px;
-}
-
-.archive-image-box img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  display:block;
+.btn:hover {
+	opacity: 0.9;
 }
 
 .btn-upload {
-  display: block !important;
-  width: 140px !important;
-  height: 45px !important;
-  background-color: #f47c2a !important;
-  border-radius: 10px !important;
-  color: #fff !important;
-  font-size: 18px !important;
-  text-align: center !important;
-  line-height: 45px !important;
-  cursor: pointer !important;
-  box-shadow: 2px 2px 5px #b6b6b6 !important;
-  font-family: "HannaPro", sans-serif !important;
-  border: none !important;
-  margin: 0 auto !important;
-  padding: 0 !important;
-  text-decoration: none !important;
+	margin-top: 16px;
+	display: inline-block;
 }
 
-.btn-upload:hover {
-  opacity: 0.9 !important;
+/* 오른쪽 정보 입력 영역 */
+.archive-info-section {
+	flex: 1;
+	min-width: 0;
+	min-height: 500px;
+	border: 3px solid #111;
+	padding: 28px 28px 24px;
+	overflow: hidden;
 }
 
-#editImage {
-  display: none !important;
+.dog-name-row {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 12px;
+	margin-bottom: 24px;
 }
 
-/* --- 오른쪽 정보 입력 --- */
-.archive-info-section{
-  flex:1;
-  min-width:0;
-  height:500px;
-  border:3px solid #111;
-  padding:28px 28px 24px;
+.dog-name-label {
+	font-size: 30px;
+	flex-shrink: 0;
 }
 
-.dog-name-row{
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  gap:12px;
-  margin-bottom:24px;
+.dog-name-input {
+	width: 240px;
+	max-width: 100%;
+	height: 44px;
+	border: none;
+	border-bottom: 2px solid #999;
+	outline: none;
+	background: transparent;
+	font-family: "HannaPro", sans-serif;
+	font-size: 28px;
+	text-align: center;
 }
 
-.dog-name-input{
-  width:200px;
-  font-size:30px;
-  text-align:center;
-  border:none;
-  border-bottom:2px solid #ccc;
-  outline:none;
-  font-family:"HannaPro", sans-serif;
+.dog-info-grid {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	margin-bottom: 20px;
 }
 
-.dog-info-grid{
-  display:flex;
-  flex-direction:column;
-  gap:10px;
-  margin-bottom:20px;
+.info-item {
+	width: 100%;
+	display: grid;
+	grid-template-columns: 170px minmax(0, 1fr);
+	align-items: center;
+	column-gap: 12px;
 }
 
-.info-item{
-  display:grid;
-  grid-template-columns:170px 1fr;
-  align-items:center;
-  column-gap:12px;
+.info-item label, .info-label {
+	font-size: 20px;
 }
 
-.info-input{
-  font-size:20px;
-  border:none;
-  border-bottom:1px solid #ccc;
-  outline:none;
-  font-family:"HannaPro", sans-serif;
+.info-item input, .info-input {
+	width: 100%;
+	min-width: 0;
+	height: 38px;
+	border: none;
+	border-bottom: 1px solid #bbb;
+	outline: none;
+	background: transparent;
+	font-family: "HannaPro", sans-serif;
+	font-size: 18px;
 }
 
-.dog-trait-list{
-  margin-top:8px;
-  display:flex;
-  flex-direction:column;
-  gap:12px;
+/* 트레이트 리스트 */
+.dog-trait-list {
+	width: 100%;
+	margin-top: 8px;
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
 }
 
-.trait-row{
-  display:grid;
-  grid-template-columns:90px 1fr 50px 130px;
-  align-items:center;
-  column-gap:10px;
+.trait-row {
+	width: 100%;
+	display: grid;
+	grid-template-columns: 90px minmax(0, 1fr) 50px 90px;
+	align-items: center;
+	column-gap: 10px;
 }
 
-.trait-input, .trait-score-input{
-  border:none;
-  border-bottom:1px solid #ccc;
-  outline:none;
-  font-family:"HannaPro", sans-serif;
+.trait-row label {
+	font-size: 18px;
 }
 
-/* 하단 버튼 */
-.archive-action-section{
-  margin-top:24px;
-  display:flex;
-  justify-content:center;
-  gap:20px;
+.trait-text-input {
+	width: 100%;
+	min-width: 0;
+	height: 36px;
+	border: none;
+	border-bottom: 1px solid #bbb;
+	outline: none;
+	background: transparent;
+	font-family: "HannaPro", sans-serif;
+	font-size: 17px;
 }
 
-.btn{
-  min-width:104px;
-  height:46px;
-  background-color:#f47c2a;
-  border-radius:10px;
-  color:#fff;
-  border:none;
-  font-size:18px;
-  font-family:"HannaPro", sans-serif;
-  cursor:pointer;
+.trait-score-label {
+	text-align: right;
+	font-size: 18px;
 }
 
-/* 본문 */
-.archive-content-section{
-  margin-top:34px;
+.trait-score-select {
+	width: 100%;
+	min-width: 0;
+	height: 36px;
+	border: 1px solid #bbb;
+	border-radius: 6px;
+	font-family: "HannaPro", sans-serif;
+	font-size: 16px;
+	padding: 0 8px;
+	outline: none;
+	background: #fff;
 }
 
-.archive-content-editor{
-  width:100%;
-  min-height:260px;
-  padding:20px;
-  font-size:22px;
-  border:3px solid black;
-  outline:none;
-  font-family:"HannaPro", sans-serif;
+/* 하단 에디터 영역 */
+.archive-content-section {
+	width: 100%;
+	margin-top: 26px;
+}
+
+.archive-content-editor {
+	width: 100%;
+	min-height: 360px;
+	border: 1px solid #888;
+	padding: 28px;
+	outline: none;
+	background: #fff;
+	font-family: "HannaPro", sans-serif;
+	font-size: 24px;
+	color: #111;
+	line-height: 1.5;
+	resize: vertical;
+}
+
+/* 하단 버튼 정렬 (우측 하단 배치 유지) */
+.container-footer {
+	width: 100%;
+	margin-top: 20px;
+}
+
+.footer-btn-wrap {
+	width: 100%;
+	display: flex;
+	justify-content: flex-end;
+	gap: 36px;
+}
+
+/* placeholder 색상을 좀 더 진하게 설정 (지웠을 때 잘 보이도록) */
+.trait-text-input::placeholder, .archive-content-editor::placeholder {
+	color: #aaa !important;
+	opacity: 1 !important; /* 투명도 제거 */
+}
+
+/* IE, Edge를 위한 설정 */
+.trait-text-input:-ms-input-placeholder, .archive-content-editor:-ms-input-placeholder
+	{
+	color: #aaa !important;
 }

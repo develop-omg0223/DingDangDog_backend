@@ -54,6 +54,12 @@ public class ArchiveUpdateDTO {
 	private String archiveImgName;
 	private String archiveImgPath;
 
+	private String dogActivityDetail;
+	private String dogSocialityDetail;
+	private String dogIndependenceDetail;
+	private String dogBarkingDetail;
+	private String dogGroomingDetail;
+
 	// ===== Getter,Setter =====
 	public int getDogNumber() {
 		return dogNumber;
@@ -185,6 +191,46 @@ public class ArchiveUpdateDTO {
 		this.archiveImgPath = archiveImgPath;
 	}
 
+	public String getDogActivityDetail() {
+		return dogActivityDetail;
+	}
+
+	public void setDogActivityDetail(String dogActivityDetail) {
+		this.dogActivityDetail = dogActivityDetail;
+	}
+
+	public String getDogSocialityDetail() {
+		return dogSocialityDetail;
+	}
+
+	public void setDogSocialityDetail(String dogSocialityDetail) {
+		this.dogSocialityDetail = dogSocialityDetail;
+	}
+
+	public String getDogIndependenceDetail() {
+		return dogIndependenceDetail;
+	}
+
+	public void setDogIndependenceDetail(String dogIndependenceDetail) {
+		this.dogIndependenceDetail = dogIndependenceDetail;
+	}
+
+	public String getDogBarkingDetail() {
+		return dogBarkingDetail;
+	}
+
+	public void setDogBarkingDetail(String dogBarkingDetail) {
+		this.dogBarkingDetail = dogBarkingDetail;
+	}
+
+	public String getDogGroomingDetail() {
+		return dogGroomingDetail;
+	}
+
+	public void setDogGroomingDetail(String dogGroomingDetail) {
+		this.dogGroomingDetail = dogGroomingDetail;
+	}
+
 	// ===== Overried =====
 	@Override
 	public String toString() {
@@ -193,7 +239,9 @@ public class ArchiveUpdateDTO {
 				+ dogWeight + ", dogSafeDate=" + dogSafeDate + ", dogDetail=" + dogDetail + ", dogActivity="
 				+ dogActivity + ", dogSociality=" + dogSociality + ", dogIndependence=" + dogIndependence
 				+ ", dogBarking=" + dogBarking + ", dogGrooming=" + dogGrooming + ", archiveImgName=" + archiveImgName
-				+ ", archiveImgPath=" + archiveImgPath + "]";
+				+ ", archiveImgPath=" + archiveImgPath + ", dogActivityDetail=" + dogActivityDetail
+				+ ", dogSocialityDetail=" + dogSocialityDetail + ", dogIndependenceDetail=" + dogIndependenceDetail
+				+ ", dogBarkingDetail=" + dogBarkingDetail + ", dogGroomingDetail=" + dogGroomingDetail + "]";
 	}
 
 }

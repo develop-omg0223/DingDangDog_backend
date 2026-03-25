@@ -1,47 +1,14 @@
 package com.ddd.app.dogarchive.dto;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
-// ===== 멍! 카이브 조회 DTO ===== 
 public class ArchiveReadDTO {
-	/**
-	 * @author 윤철민
-	 * 
-	 *         유기견 점수 수정, 이미지 수정
-	 */
-
-//	   dog_number NUMBER,	// int
-//	   user_number NUMBER,	// int
-//	   admin_number Number,	// int
-//	   dog_name varchar2(50) NOT NULL,	// String
-//	   dog_breed varchar2(50),	// String
-//	   dog_gender char(1) NOT NULL,	// String
-//	   dog_age varchar2(20),	// String
-//	   dog_weight NUMBER,	// int
-//	   dog_safe_date DATE,	// String
-//	   dog_detail varchar2(4000),	// String
-
-//	   dog_activity number NOT NULL,	// int
-//	   dog_sociality number NOT NULL,	// int
-//	   dog_independence NUMBER NOT NULL,	//int
-//	   dog_barking NUMBER NOT NULL,	// int
-//	   dog_grooming NUMBER NOT NULL,	// int
-
-//	   archive_img_name VARCHAR2(200) NOT NULL,	// String
-//	   archive_img_path VARCHAR2(200),	// Sting
-
-	// ===== 필드 =====
-	// 기본 정보
 	private int dogNumber;
 	private int userNumber;
-	private Integer adminNumber;
 	private String dogName;
 	private String dogBreed;
 	private String dogGender;
 	private String dogAge;
 	private double dogWeight;
-	private LocalDateTime dogSafeDate;
+	private String dogSafeDate;
 	private String dogDetail;
 
 	// 성향 점수
@@ -51,11 +18,17 @@ public class ArchiveReadDTO {
 	private int dogBarking;
 	private int dogGrooming;
 
-	// 추가 - JOIN
-	private String archiveImgPath;
-	private String shelterName;
+	// [핵심 추가] 성향 상세 설명 (이게 없으면 상세페이지가 안 나옵니다!)
+	private String dogActivityDetail;
+	private String dogSocialityDetail;
+	private String dogIndependenceDetail;
+	private String dogBarkingDetail;
+	private String dogGroomingDetail;
 
-	// ===== Getter,Setter =====
+	private String archiveImgPath;
+
+	// ===== Getter, Setter (중괄호 정석) =====
+
 	public int getDogNumber() {
 		return dogNumber;
 	}
@@ -70,14 +43,6 @@ public class ArchiveReadDTO {
 
 	public void setUserNumber(int userNumber) {
 		this.userNumber = userNumber;
-	}
-
-	public Integer getAdminNumber() {
-		return adminNumber;
-	}
-
-	public void setAdminNumber(Integer adminNumber) {
-		this.adminNumber = adminNumber;
 	}
 
 	public String getDogName() {
@@ -121,12 +86,10 @@ public class ArchiveReadDTO {
 	}
 
 	public String getDogSafeDate() {
-		if (dogSafeDate == null)
-			return "";
-		return dogSafeDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+		return dogSafeDate;
 	}
 
-	public void setDogSafeDate(LocalDateTime dogSafeDate) {
+	public void setDogSafeDate(String dogSafeDate) {
 		this.dogSafeDate = dogSafeDate;
 	}
 
@@ -178,6 +141,47 @@ public class ArchiveReadDTO {
 		this.dogGrooming = dogGrooming;
 	}
 
+	// [추가된 Getter/Setter]
+	public String getDogActivityDetail() {
+		return dogActivityDetail;
+	}
+
+	public void setDogActivityDetail(String dogActivityDetail) {
+		this.dogActivityDetail = dogActivityDetail;
+	}
+
+	public String getDogSocialityDetail() {
+		return dogSocialityDetail;
+	}
+
+	public void setDogSocialityDetail(String dogSocialityDetail) {
+		this.dogSocialityDetail = dogSocialityDetail;
+	}
+
+	public String getDogIndependenceDetail() {
+		return dogIndependenceDetail;
+	}
+
+	public void setDogIndependenceDetail(String dogIndependenceDetail) {
+		this.dogIndependenceDetail = dogIndependenceDetail;
+	}
+
+	public String getDogBarkingDetail() {
+		return dogBarkingDetail;
+	}
+
+	public void setDogBarkingDetail(String dogBarkingDetail) {
+		this.dogBarkingDetail = dogBarkingDetail;
+	}
+
+	public String getDogGroomingDetail() {
+		return dogGroomingDetail;
+	}
+
+	public void setDogGroomingDetail(String dogGroomingDetail) {
+		this.dogGroomingDetail = dogGroomingDetail;
+	}
+
 	public String getArchiveImgPath() {
 		return archiveImgPath;
 	}
@@ -186,23 +190,16 @@ public class ArchiveReadDTO {
 		this.archiveImgPath = archiveImgPath;
 	}
 
-	public String getShelterName() {
-		return shelterName;
-	}
-
-	public void setShelterName(String shelterName) {
-		this.shelterName = shelterName;
-	}
-
-	// ===== Overried =====
 	@Override
 	public String toString() {
-		return "ArchiveReadDTO [dogNumber=" + dogNumber + ", userNumber=" + userNumber + ", adminNumber=" + adminNumber
-				+ ", dogName=" + dogName + ", dogBreed=" + dogBreed + ", dogGender=" + dogGender + ", dogAge=" + dogAge
-				+ ", dogWeight=" + dogWeight + ", dogSafeDate=" + dogSafeDate + ", dogDetail=" + dogDetail
-				+ ", dogActivity=" + dogActivity + ", dogSociality=" + dogSociality + ", dogIndependence="
-				+ dogIndependence + ", dogBarking=" + dogBarking + ", dogGrooming=" + dogGrooming + ", archiveImgPath="
-				+ archiveImgPath + ", shelterName=" + shelterName + "]";
+		return "ArchiveReadDTO [dogNumber=" + dogNumber + ", userNumber=" + userNumber + ", dogName=" + dogName
+				+ ", dogBreed=" + dogBreed + ", dogGender=" + dogGender + ", dogAge=" + dogAge + ", dogWeight="
+				+ dogWeight + ", dogSafeDate=" + dogSafeDate + ", dogDetail=" + dogDetail + ", dogActivity="
+				+ dogActivity + ", dogSociality=" + dogSociality + ", dogIndependence=" + dogIndependence
+				+ ", dogBarking=" + dogBarking + ", dogGrooming=" + dogGrooming + ", dogActivityDetail="
+				+ dogActivityDetail + ", dogSocialityDetail=" + dogSocialityDetail + ", dogIndependenceDetail="
+				+ dogIndependenceDetail + ", dogBarkingDetail=" + dogBarkingDetail + ", dogGroomingDetail="
+				+ dogGroomingDetail + ", archiveImgPath=" + archiveImgPath + "]";
 	}
 
 }
