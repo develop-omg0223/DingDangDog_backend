@@ -31,6 +31,10 @@
 					<div class="admin-detail-info">${user.userId}</div>
 				</div>
 				<div class="admin-detail-row">
+					<div class="admin-detail-title">이름</div>
+					<div class="admin-detail-info">${user.userName}</div>
+				</div>
+				<div class="admin-detail-row">
 					<div class="admin-detail-title">보호소명</div>
 					<div class="admin-detail-info">${user.shelterName}</div>
 				</div>
@@ -75,9 +79,18 @@
 					<button
 						onclick="location.href = '${pageContext.request.contextPath}/admin/userListOk.ad?userType=S'"
 						class="return-btn admin-box-shadow">목록으로</button>
-					<c:if test="${user.shelterCertification == 'N'}">
+					<c:if
+						test="${user.shelterCertification == 'N' and not empty user.fileOriginalName}">
+						<form id="confirm-form"
+							action="${pageContext.request.contextPath}/admin/userShelterConfirmOk.ad"
+							method="POST">
+							<input type="hidden" name="userNumber" value="${user.userNumber}">
+						</form>
+
 						<button id="confirm-btn" class="confirm-btn admin-box-shadow">
 							보호소 인증</button>
+
+
 					</c:if>
 				</div>
 			</div>
@@ -85,10 +98,13 @@
 	</main>
 </body>
 <script>
-    confirmBtn = document.getElementById("confirm-btn");
+    
+    const confirmBtn = document.getElementById("confirm-btn");
+    const confirmForm = document.getElementById("confirm-form");
+
     confirmBtn.addEventListener("click", () => {
-    	if(confirm("인증을 승인하시겠습니까?")) {
-            location.href = "${pageContext.request.contextPath}/admin/userShelterConfirmlOk.ad?userNumber=${user.userNumber}";
+        if(confirm("인증을 승인하시겠습니까?")) {
+            confirmForm.submit();
         }
     });
   </script>

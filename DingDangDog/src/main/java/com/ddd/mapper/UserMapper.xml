@@ -59,11 +59,14 @@
 		resultType="com.ddd.app.user.dto.UserDTO">
 		SELECT
 		user_number AS userNumber,
-		user_nickname AS userNickname,
+		user_nickname AS
+		userNickname,
 		user_type AS userType,
-		user_status AS userStatus FROM ddd_user
+		user_status AS userStatus FROM
+		ddd_user
 		WHERE user_id = #{userId}
 		AND user_password = #{userPassword}
+		AND user_type = #{userType}
 	</select>
 
 	<!-- id 중복검사 -->
