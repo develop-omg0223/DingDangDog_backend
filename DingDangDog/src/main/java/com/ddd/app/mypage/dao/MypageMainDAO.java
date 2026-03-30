@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 
 import com.ddd.app.dogarchive.dto.ArchiveListDTO;
 import com.ddd.app.dogmatching.dto.MatchingResultDTO; // 정확한 경로로 추가
+import com.ddd.app.mypage.dto.MypageSInfoDTO;
 import com.ddd.app.user.dto.UserDTO;
 import com.ddd.config.MyBatisConfig;
 
@@ -22,6 +23,11 @@ public class MypageMainDAO {
 	public UserDTO selectMyPageInfo(int userNumber) {
 		return sqlSession.selectOne("MPCInfo.selectMyPageInfo", userNumber);
 	}
+	
+	// 보호소 회원 정보 조회
+	public MypageSInfoDTO selectMyPageSInfo(int userNumber) {
+		return sqlSession.selectOne("MPSInfo.selectMyPageInfo", userNumber);
+	}
 
 	// 2. 매칭 결과 리스트 조회
 	public List<MatchingResultDTO> selectMyResults(int userNumber) {
@@ -32,6 +38,6 @@ public class MypageMainDAO {
 	public List<ArchiveListDTO> selectRecentArchives(int userNumber) {
 		// MyBatis의 selectList를 호출하되, 필요하다면 필터링 로직을 쿼리에 추가하거나
 		// 여기서는 전체 리스트 중 상위 4개만 추출하는 방식으로 예시를 듭니다.
-		return sqlSession.selectList("archive.selectList", userNumber);
+		return sqlSession.selectList("MPSInfo.selectRecentArchives", userNumber);
 	}
 }

@@ -7,7 +7,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>멍! 케어 리스트</title>
-<link rel="stylesheet" href="/assets/css/admin/admin.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/admin/admin.css" />
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/assets/css/admin/dogcare/admin_dogcare_list.css" />
 <script

@@ -20,7 +20,31 @@
 		WHERE u.user_number
 		= #{userNumber}
 	</select>
-
+	
+	<select id="selectRecentArchives" parameterType="int" resultType="com.ddd.app.dogarchive.dto.ArchiveListDTO">
+        SELECT * FROM (
+            SELECT
+                A.DOG_NUMBER AS dogNumber,
+                A.DOG_NAME AS dogName,
+                A.DOG_BREED AS dogBreed,
+                <!-- A.DOG_AGE AS dogAge, -->
+                A.DOG_GENDER AS dogGender,
+                AI.ARCHIVE_IMG_PATH AS archiveImgPath
+            FROM DDD_ARCHIVE A 
+            LEFT JOIN (
+                SELECT DOG_NUMBER, ARCHIVE_IMG_PATH
+                FROM (
+                    SELECT DOG_NUMBER, ARCHIVE_IMG_PATH,
+                           ROW_NUMBER() OVER (PARTITION BY DOG_NUMBER ORDER BY ARCHIVE_IMG_NUMBER ASC) as RN
+                    FROM DDD_ARCHIVE_IMG
+                ) WHERE RN = 1
+            ) AI ON A.DOG_NUMBER = AI.DOG_NUMBER
+            WHERE A.USER_NUMBER = #{userNumber} 
+            ORDER BY A.DOG_NUMBER DESC
+        )
+        WHERE ROWNUM &lt;= 4 
+    </select>
+    
 	<!-- 변경 -->
 	<update id="updateMyPageInfo" parameterType="map">
 		UPDATE ddd_user

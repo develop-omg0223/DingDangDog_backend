@@ -32,7 +32,7 @@ public class InquiryDeleteOkController implements Execute{
 	    String inquiryNumberStr = request.getParameter("inquiryNumber");
 
 	    if (inquiryNumberStr == null || inquiryNumberStr.trim().isEmpty()) {
-	        result.setPath(request.getContextPath() + "/inquiry/inquirylistOk.in");
+	        result.setPath(request.getContextPath() + "/inquiry/inquiryListOk.in");
 	        result.setRedirect(true);
 	        return result;
 	    }
@@ -44,8 +44,8 @@ public class InquiryDeleteOkController implements Execute{
 
 	    inquiryDAO.deleteInquiry(dto);
 
-	    result.setPath("/app/mypage/common/support_list_common.jsp");
-	    result.setRedirect(false);
+	    result.setPath(request.getContextPath() + "/inquiry/inquiryListOk.in");
+	    result.setRedirect(true);
 
 	    return result;
 	}

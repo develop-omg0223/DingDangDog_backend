@@ -292,12 +292,6 @@ function updateDeletedImageIdsInput() {
 }
 
 function syncPreview() {
-  if (uploadedImages.length > 0) {
-    editPreviewImg.src = uploadedImages[0].previewUrl;
-    editPreviewImg.style.display = "block";
-    imgPlaceholder.style.display = "none";
-    return;
-  }
 
   const firstExisting = existingImages.find((image) => !image.isDeleted);
 
@@ -308,6 +302,12 @@ function syncPreview() {
     return;
   }
 
+  if (uploadedImages.length > 0) {
+    editPreviewImg.src = uploadedImages[0].previewUrl;
+    editPreviewImg.style.display = "block";
+    imgPlaceholder.style.display = "none";
+    return;
+  }
   editPreviewImg.src = "";
   editPreviewImg.style.display = "none";
   imgPlaceholder.style.display = "block";

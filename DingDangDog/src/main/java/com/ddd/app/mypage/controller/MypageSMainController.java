@@ -12,7 +12,7 @@ import com.ddd.app.Execute;
 import com.ddd.app.Result;
 import com.ddd.app.dogarchive.dto.ArchiveListDTO;
 import com.ddd.app.mypage.dao.MypageMainDAO;
-import com.ddd.app.user.dto.UserDTO;
+import com.ddd.app.mypage.dto.MypageSInfoDTO;
 
 public class MypageSMainController implements Execute {
 
@@ -33,7 +33,7 @@ public class MypageSMainController implements Execute {
 		}
 
 		// 1. 보호소 회원 정보 조회 (UserDTO 활용)
-		UserDTO userDTO = dao.selectMyPageInfo(userNumber);
+		MypageSInfoDTO userDTO = dao.selectMyPageSInfo(userNumber);
 
 		// 2. 최근 등록한 멍! 카이브 조회 (DAO에 메서드 추가 필요)
 		List<ArchiveListDTO> archiveList = dao.selectRecentArchives(userNumber);

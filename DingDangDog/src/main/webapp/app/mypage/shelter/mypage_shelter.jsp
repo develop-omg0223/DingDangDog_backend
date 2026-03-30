@@ -32,12 +32,15 @@
     // 멍! 카이브 리스트 데이터
     const serverArchiveData = [
         <c:forEach var="archive" items="${archiveList}" varStatus="status">
-            { 
+            { dogNumber: "${archive.dogNumber}",
                 name: "${archive.dogName}", 
-                info: "${archive.dogBreed} | ${archive.dogAge} | ${archive.dogGender}" 
+                imagePath: "${archive.archiveImgPath}",
+                info: "${archive.dogBreed} | ${archive.dogAge}살 | ${archive.dogGender}" 
             }${!status.last ? ',' : ''}
         </c:forEach>
     ];
+    
+    const currentUserId = ${sessionScope.userNumber};
 </script>
 <body>
 	<!-- header -->

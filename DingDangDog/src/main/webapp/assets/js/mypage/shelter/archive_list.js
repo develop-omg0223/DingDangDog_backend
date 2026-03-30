@@ -5,22 +5,29 @@ function renderCards(page) {
     const archiveList = document.getElementById("archiveList");
     if (!archiveList) return;
 
-    // 리스트 비우기
     archiveList.innerHTML = ""; 
 
     const start = (page - 1) * itemsPerPage;
     const end = start + itemsPerPage;
     const currentItems = archiveData.slice(start, end);
 
+    // 기본 이미지 경로 (contextPath 변수 활용)
+    const defaultImg = `${contextPath}/assets/img/dogarchive/default_dog.png`;
+
     currentItems.forEach((item) => {
         const cardLink = document.createElement("a");
+        // 상세 페이지 이동 경로 (read.ar 사용)
         cardLink.href = `${contextPath}/archive/read.ar?dogNumber=${item.dogNumber}`;
         cardLink.className = "card-link";
 
-        // 이미지 경로 처리
-        const imgTag = item.archiveImgPath 
-            ? `<img src="${contextPath}/upload/${item.archiveImgPath}" alt="강아지 이미지">`
-            : `<span class="no-image">이미지 없음</span>`;
+        // ★ 핵심: DB에 담긴 전체 경로(archiveImgPath)를 그대로 사용합니다.
+        // JSP 데이터 구조가 { archiveImgPath: "..." } 이므로 item.archiveImgPath로 접근합니다.
+        const imgTag = `
+            <img src="${item.archiveImgPath}" 
+                 alt="${item.dogName}" 
+                 style="width: 100%; height: 100%; object-fit: cover;"
+                 onerror="this.onerror=null; this.src='${defaultImg}';">
+        `;
 
         cardLink.innerHTML = `
             <div class="card-item">
@@ -36,7 +43,6 @@ function renderCards(page) {
         archiveList.appendChild(cardLink);
     });
 }
-
 
 function renderPagination() {
     const pagination = document.getElementById("pagination");
