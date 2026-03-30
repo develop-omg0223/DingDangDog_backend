@@ -60,8 +60,10 @@ public class AdminDAO {
 		System.out.println("보호소회원 검색후 인원수 조회");
 		if ("id".equals(searchType)) {
 			return sqlSession.selectOne("adminUser.getTotalShelterByUserId", keyword);
-		} else if ("nickname".equals(searchType)) {
-			return sqlSession.selectOne("adminUser.getTotalShelterByUserNickname", keyword);
+//		} else if ("nickname".equals(searchType)) {
+//			return sqlSession.selectOne("adminUser.getTotalShelterByUserNickname", keyword);
+		} else if ("shelterName".equals(searchType)) {
+			return sqlSession.selectOne("adminUser.getTotalShelterByShelterName", keyword);
 		}
 		return getTotalShelter();
 	}
@@ -96,8 +98,11 @@ public class AdminDAO {
 		String searchType = (String) searchMap.get("searchType");
 		if ("id".equals(searchType)) {
 			return sqlSession.selectList("adminUser.selectShelterListByUserId", searchMap);
-		} else if ("nickname".equals(searchType)) {
-			return sqlSession.selectList("adminUser.selectShelterListByUserNickname", searchMap);
+//		} else if ("nickname".equals(searchType)) {
+//			return sqlSession.selectList("adminUser.selectShelterListByUserNickname", searchMap);
+//		}
+		} else if ("shelterName".equals(searchType)) {
+			return sqlSession.selectList("adminUser.selectShelterListByShelterName", searchMap);
 		}
 		return sqlSession.selectList("adminUser.selectShelterList", searchMap);
 	}
@@ -113,14 +118,12 @@ public class AdminDAO {
 		System.out.println("보호소회원 상세 조회 실행 : " + userNumber);
 		return sqlSession.selectOne("adminUser.selectShelterDetail", userNumber);
 	}
-	
 
 	// 대시보드용 케아리스트
 	public List<AdminCareDTO> getDashboardCareList() {
 		System.out.println("대시보드용 케어리스트 호출");
 		return sqlSession.selectList("adminCare.getDashboardCareList");
 	}
-	
 
 	// 보호소 승인 업데이트
 	public void updateShelterCertification(int userNumber) {

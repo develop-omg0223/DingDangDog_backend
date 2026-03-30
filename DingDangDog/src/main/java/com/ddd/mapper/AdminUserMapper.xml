@@ -142,6 +142,16 @@ WHERE rownum <= 5
 		AND user_nickname LIKE '%' || #{keyword}
 		|| '%'
 	</select>
+	<select id="getTotalShelterByShelterName" parameterType="string"
+		resultType="int">
+		SELECT COUNT(u.user_number)
+		FROM ddd_user u
+		JOIN ddd_user_shelter s ON u.user_number = s.user_number
+		WHERE user_type =
+		'S'
+		AND s.SHELTER_NAME LIKE '%' || #{keyword}
+		|| '%'
+	</select>
 
 	<!-- 보호소회원 전체조회 -->
 	<select id="selectShelterList" parameterType="map"
@@ -185,6 +195,20 @@ WHERE rownum <= 5
             FROM ddd_user u
             JOIN ddd_user_shelter s ON u.user_number = s.user_number
             WHERE u.user_type = 'S' AND u.user_nickname LIKE '%' || #{keyword} || '%'
+            ORDER BY s.shelter_certification ASC, u.user_number DESC
+        ) subquery
+    ) WHERE rnum BETWEEN #{startRow} AND #{endRow}
+]]>
+	</select>
+	<select id="selectShelterListByShelterName" parameterType="map"
+		resultType="AdminUserDTO">
+<![CDATA[
+    SELECT * FROM (
+        SELECT ROWNUM AS rnum, subquery.* FROM (
+            SELECT u.user_number, u.user_id, s.shelter_name, u.user_phone, u.user_email, s.shelter_certification
+            FROM ddd_user u
+            JOIN ddd_user_shelter s ON u.user_number = s.user_number
+            WHERE u.user_type = 'S' AND s.SHELTER_NAME LIKE '%' || #{keyword} || '%'
             ORDER BY s.shelter_certification ASC, u.user_number DESC
         ) subquery
     ) WHERE rnum BETWEEN #{startRow} AND #{endRow}

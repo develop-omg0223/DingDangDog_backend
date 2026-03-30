@@ -105,8 +105,17 @@
 					<div class="search-box">
 						<select name="searchType" class="search-select admin-box-shadow">
 							<option value="id" ${searchType == 'id' ? 'selected' : ''}>아이디</option>
-							<option value="nickname"
-								${searchType == 'nickname' ? 'selected' : ''}>닉네임</option>
+							<c:choose>
+								<c:when test="${userType == 'C'}">
+									<option value="nickname"
+										${searchType == 'nickname' ? 'selected' : ''}>닉네임</option>
+								</c:when>
+								<c:when test="${userType == 'S'}">
+									<option value="shelterName"
+										${searchType == 'nickname' ? 'selected' : ''}>보호소명</option>
+								</c:when>
+							</c:choose>
+
 						</select> <input type="text" name="keyword"
 							class="search-input admin-box-shadow" value="${keyword}" />
 
